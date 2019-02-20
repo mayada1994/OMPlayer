@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MusicPlayerDemo</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="reset">Reset</string>
+    <string name="previous"><![CDATA[<<]]></string>
+    <string name="next"><![CDATA[>>]]></string>
+</resources>
