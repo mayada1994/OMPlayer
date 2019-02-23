@@ -1,4 +1,3 @@
 package com.example.android.musicplayerdemo.entities
 
-class TrackMetadata {
-}
+data class TrackMetadata(val duration: Int)
