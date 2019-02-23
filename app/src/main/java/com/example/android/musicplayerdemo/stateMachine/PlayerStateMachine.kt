@@ -2,45 +2,56 @@ package com.example.android.musicplayerdemo.stateMachine
 
 import android.content.Context
 import android.media.MediaPlayer
+import android.os.Handler
+import android.os.Looper
+import androidx.annotation.MainThread
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.android.musicplayerdemo.entities.TrackMetadata
 import com.example.android.musicplayerdemo.stateMachine.states.IdleState
 import com.example.android.musicplayerdemo.stateMachine.states.State
+import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 
-class PlayerStateMachine(override val context: Context, override val callback: SeekbarCallback) : PlayerContext {
+class PlayerStateMachine(override val context: Context) : PlayerContext {
 
-    companion object {
-        const val PLAYBACK_POSITION_REFRESH_INTERVAL_MS = 1000
-    }
-
-    override var mediaPlayer: MediaPlayer? = null
+    override var mediaPlayer: MediaPlayer? = null//TODO: not null
     override val playlist: MutableList<Int> = ArrayList()
-    override var executor: ScheduledExecutorService? = null
-    override var seekbarPositionUpdateTask: Runnable? = null
 
-    var currState: State = IdleState(this)
+    //region LiveData
 
+    private val _currState = MutableLiveData<State>().apply {
+        value = IdleState(this@PlayerStateMachine)
+    }
+    val currState: LiveData<State> = _currState
+
+    private val _metadata = MutableLiveData<TrackMetadata>()
+    val metadata: LiveData<TrackMetadata> = _metadata
+    //endregion
+
+    @MainThread
     fun performAction(action: Action) {
-        currState = currState.handleAction(action)
+        _currState.value = currState.value!!.handleAction(action)
     }
 
+    @MainThread
     fun setPlaylist(playlist: MutableList<Int>, action: Action? = Action.Play()) {
         mediaPlayer = MediaPlayer()
         mediaPlayer!!.setOnCompletionListener {
-            currState.handleAction(Action.Next())
+            performAction(Action.Next())
         }
 
-        currState.handleAction(Action.Stop())
+        performAction(Action.Stop())
         this.playlist.clear()
         this.playlist.addAll(playlist)
+
         action?.let {
-            currState.handleAction(action)
+            performAction(action)
         }
     }
 
     fun seekTo(position: Int) {
-        if (mediaPlayer != null) {
-            mediaPlayer!!.seekTo(position)
-        }
+        mediaPlayer?.seekTo(position)
     }
 
     fun release() {
@@ -48,5 +59,10 @@ class PlayerStateMachine(override val context: Context, override val callback: S
             mediaPlayer!!.release()
             mediaPlayer = null
         }
+    }
+
+    @MainThread
+    override fun updateMetadata(metadata: TrackMetadata) {
+        _metadata.value = metadata
     }
 }

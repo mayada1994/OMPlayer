@@ -1,5 +1,6 @@
 package com.example.android.musicplayerdemo.stateMachine.states
 
+import com.example.android.musicplayerdemo.entities.TrackMetadata
 import com.example.android.musicplayerdemo.stateMachine.Action
 import com.example.android.musicplayerdemo.stateMachine.PlayerContext
 
@@ -14,12 +15,6 @@ class PausedState(context: PlayerContext, private var currentSong: Int) : State(
             is Action.Pause -> this
             is Action.Stop -> {
                 context.mediaPlayer?.reset()
-                if (context.executor != null) {
-                    context.executor!!.shutdownNow()
-                    context.executor = null
-                    context.seekbarPositionUpdateTask = null
-                    context.callback.updateSeekbarPosition(0)
-                }
                 IdleState(context)
             }
             is Action.Next -> {
@@ -35,8 +30,7 @@ class PausedState(context: PlayerContext, private var currentSong: Int) : State(
                     context.mediaPlayer?.prepare()
                 } catch (e: Exception) {
                 }
-                val duration = context.mediaPlayer!!.duration
-                context.callback.updateSeekbarDuration(duration)
+                context.updateMetadata(TrackMetadata(context.mediaPlayer!!.duration))
                 PausedState(context,currentSong)
             }
             is Action.Prev -> {
@@ -52,8 +46,7 @@ class PausedState(context: PlayerContext, private var currentSong: Int) : State(
                     context.mediaPlayer?.prepare()
                 } catch (e: Exception) {
                 }
-                val duration = context.mediaPlayer!!.duration
-                context.callback.updateSeekbarDuration(duration)
+                context.updateMetadata(TrackMetadata(context.mediaPlayer!!.duration))
                 PausedState(context,currentSong)
             }
         }

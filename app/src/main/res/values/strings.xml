@@ -5,4 +5,10 @@
     <string name="reset">Reset</string>
     <string name="previous"><![CDATA[<<]]></string>
     <string name="next"><![CDATA[>>]]></string>
+    <string name="test_player">Test Player</string>
+    <string name="mo_player">MO Player</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="music_player">Music Player</string>
 </resources>
