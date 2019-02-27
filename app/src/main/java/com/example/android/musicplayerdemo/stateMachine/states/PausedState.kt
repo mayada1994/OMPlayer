@@ -9,16 +9,16 @@ class PausedState(context: PlayerContext, private var currentSong: Int) : State(
     override fun handleAction(action: Action): State {
         return when (action) {
             is Action.Play -> {
-                context.mediaPlayer?.start()
+                context.mediaPlayer.start()
                 PlayingState(context,currentSong)
             }
             is Action.Pause -> this
             is Action.Stop -> {
-                context.mediaPlayer?.reset()
+                context.mediaPlayer.reset()
                 IdleState(context)
             }
             is Action.Next -> {
-                context.mediaPlayer?.reset()
+                context.mediaPlayer.reset()
                 if (context.playlist.size -1 > currentSong) {
                     currentSong += 1
                 }else {
@@ -26,15 +26,15 @@ class PausedState(context: PlayerContext, private var currentSong: Int) : State(
                 }
                 val assetFileDescriptor = context.context.resources.openRawResourceFd(context.playlist[currentSong])
                 try {
-                    context.mediaPlayer?.setDataSource(assetFileDescriptor)
-                    context.mediaPlayer?.prepare()
+                    context.mediaPlayer.setDataSource(assetFileDescriptor)
+                    context.mediaPlayer.prepare()
                 } catch (e: Exception) {
                 }
-                context.updateMetadata(TrackMetadata(context.mediaPlayer!!.duration))
+                context.updateMetadata(TrackMetadata(context.mediaPlayer.duration))
                 PausedState(context,currentSong)
             }
             is Action.Prev -> {
-                context.mediaPlayer?.reset()
+                context.mediaPlayer.reset()
                 if (currentSong > 0) {
                     currentSong -= 1
                 }else {
@@ -42,11 +42,11 @@ class PausedState(context: PlayerContext, private var currentSong: Int) : State(
                 }
                 val assetFileDescriptor = context.context.resources.openRawResourceFd(context.playlist[currentSong])
                 try {
-                    context.mediaPlayer?.setDataSource(assetFileDescriptor)
-                    context.mediaPlayer?.prepare()
+                    context.mediaPlayer.setDataSource(assetFileDescriptor)
+                    context.mediaPlayer.prepare()
                 } catch (e: Exception) {
                 }
-                context.updateMetadata(TrackMetadata(context.mediaPlayer!!.duration))
+                context.updateMetadata(TrackMetadata(context.mediaPlayer.duration))
                 PausedState(context,currentSong)
             }
         }

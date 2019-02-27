@@ -10,12 +10,12 @@ class IdleState(context: PlayerContext) : State(context) {
         is Action.Play -> {
             val assetFileDescriptor = context.context.resources.openRawResourceFd(context.playlist[0])
             try {
-                context.mediaPlayer?.setDataSource(assetFileDescriptor)
-                context.mediaPlayer?.prepare()
+                context.mediaPlayer.setDataSource(assetFileDescriptor)
+                context.mediaPlayer.prepare()
             } catch (e: Exception) {
             }
-            context.updateMetadata(TrackMetadata(context.mediaPlayer!!.duration))
-            context.mediaPlayer?.start()
+            context.updateMetadata(TrackMetadata(context.mediaPlayer.duration))
+            context.mediaPlayer.start()
             PlayingState(context, 0)
         }
         else -> this
