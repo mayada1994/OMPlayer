@@ -1,5 +1,6 @@
 package com.example.android.musicplayerdemo.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,11 @@ import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.android.musicplayerdemo.services.playerService.PlayerService
 import com.example.android.musicplayerdemo.R
 import com.example.android.musicplayerdemo.activities.MainActivity
+import com.example.android.musicplayerdemo.di.SingletonHolder
+import com.example.android.musicplayerdemo.services.playerService.PlayerServiceManager
 import com.example.android.musicplayerdemo.viewmodels.PlayerViewModel
 import kotlinx.android.synthetic.main.fragment_player.*
 
@@ -84,5 +88,6 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     }
 
     //endregion
+
 
 }

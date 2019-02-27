@@ -1,6 +1,8 @@
 package com.example.android.musicplayerdemo.stateMachine
 
-sealed class Action {
+import java.io.Serializable
+
+sealed class Action : Serializable {
     class Play : Action()
     class Pause : Action()
     class Stop : Action()

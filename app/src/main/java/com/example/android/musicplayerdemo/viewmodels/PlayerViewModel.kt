@@ -5,11 +5,12 @@ import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.*
 import com.example.android.musicplayerdemo.R
+import com.example.android.musicplayerdemo.di.SingletonHolder
 import com.example.android.musicplayerdemo.entities.TrackMetadata
 import com.example.android.musicplayerdemo.extensions.foreverObserver
 import com.example.android.musicplayerdemo.livedata.ForeverObserver
 import com.example.android.musicplayerdemo.stateMachine.Action
-import com.example.android.musicplayerdemo.stateMachine.PlayerStateMachine
+import com.example.android.musicplayerdemo.stateMachine.PlayerManager
 import com.example.android.musicplayerdemo.stateMachine.states.IdleState
 import com.example.android.musicplayerdemo.stateMachine.states.PlayingState
 import java.util.concurrent.Executors
@@ -28,7 +29,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         MEDIA_RES_1,
         MEDIA_RES_2
     )
-    private val playerSM: PlayerStateMachine = PlayerStateMachine(application)
+    private val playerManager: PlayerManager = SingletonHolder.playerManager
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
 
@@ -38,7 +39,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     val currentPosition: LiveData<Int?> = _currentPosition
 
     private val _metadata = MediatorLiveData<TrackMetadata?>().apply {
-        addSource(playerSM.metadata) { value = it }
+        addSource(playerManager.metadata) { value = it }
     }
     val metadata: LiveData<TrackMetadata?> = _metadata
     //endregion
@@ -46,31 +47,23 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
     private val seekbarPositionUpdateTask: () -> Unit = {
         Handler(Looper.getMainLooper()).post {
-            _currentPosition.value = playerSM.mediaPlayer!!.currentPosition
+            _currentPosition.value = playerManager.mediaPlayer.currentPosition
         }
     }
     private var scheduledTask: ScheduledFuture<*>? = null
 
     init {
         foreverObservers.add(
-            playerSM.currState.foreverObserver(Observer {
+            playerManager.currState.foreverObserver(Observer {
                 when (it) {
                     is PlayingState -> {
-                        if (scheduledTask == null) {
-                            scheduledTask = executor.scheduleAtFixedRate(
-                                seekbarPositionUpdateTask,
-                                0,
-                                1,
-                                TimeUnit.SECONDS
-                            )
-                        }
+                        startUpdateSeekbar()
                     }
                     is IdleState -> {
                         _currentPosition.value = 0
                     }
                     else -> {
-                        scheduledTask?.cancel(true)
-                        scheduledTask = null
+                        stopUpdateSeekbar()
                     }
                 }
             })
@@ -84,26 +77,43 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
-        playerSM.setPlaylist(playlist, Action.Pause())
+        playerManager.setPlaylist(playlist, Action.Pause())
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun onStop() {
-        playerSM.release()
+        stopUpdateSeekbar()
+    }
+
+    private fun startUpdateSeekbar() {
+        if (scheduledTask == null) {
+            scheduledTask = executor.scheduleAtFixedRate(
+                seekbarPositionUpdateTask,
+                0,
+                1,
+                TimeUnit.SECONDS
+            )
+        }
+    }
+
+    private fun stopUpdateSeekbar() {
+        scheduledTask?.cancel(true)
+        scheduledTask = null
     }
 
     //region View interaction
 
-    fun onPlayClicked() = playerSM.performAction(Action.Play())
+    fun onPlayClicked() = playerManager.performAction(Action.Play())
 
-    fun onPauseClicked() = playerSM.performAction(Action.Pause())
+    fun onPauseClicked() = playerManager.performAction(Action.Pause())
 
-    fun onNextClicked() = playerSM.performAction(Action.Next())
+    fun onNextClicked() = playerManager.performAction(Action.Next())
 
-    fun onPrevClicked() = playerSM.performAction(Action.Prev())
+    fun onPrevClicked() = playerManager.performAction(Action.Prev())
 
-    fun onStopClicked() = playerSM.performAction(Action.Stop())
+    fun onStopClicked() = playerManager.performAction(Action.Stop())
 
-    fun onSeek(position: Int) = playerSM.seekTo(position)
+    fun onSeek(position: Int) = playerManager.seekTo(position)
     //endregion
+
 }

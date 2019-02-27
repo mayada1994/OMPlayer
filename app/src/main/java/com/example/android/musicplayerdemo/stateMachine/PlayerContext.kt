@@ -8,7 +8,7 @@ import java.util.concurrent.ScheduledExecutorService
 
 interface PlayerContext {
     val context: Context
-    val mediaPlayer: MediaPlayer?
+    val mediaPlayer: MediaPlayer
     val playlist: MutableList<Int>
 
     fun updateMetadata(metadata: TrackMetadata)

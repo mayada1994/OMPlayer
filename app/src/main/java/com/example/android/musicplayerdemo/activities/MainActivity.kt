@@ -2,8 +2,8 @@ package com.example.android.musicplayerdemo.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.android.musicplayerdemo.fragments.MainFragment
 import com.example.android.musicplayerdemo.R
+import com.example.android.musicplayerdemo.fragments.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
