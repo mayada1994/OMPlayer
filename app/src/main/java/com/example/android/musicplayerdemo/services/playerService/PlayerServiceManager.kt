@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Build
 import com.example.android.musicplayerdemo.consts.Extra
 import com.example.android.musicplayerdemo.di.SingletonHolder
+import com.example.android.musicplayerdemo.stateMachine.Action
 import com.example.android.musicplayerdemo.stateMachine.PlayerManager
 import com.example.android.musicplayerdemo.stateMachine.states.IdleState
 import com.example.android.musicplayerdemo.stateMachine.states.PausedState
 import com.example.android.musicplayerdemo.stateMachine.states.PlayingState
+import java.io.Serializable
 
 class PlayerServiceManager(val context: Context) {
 
@@ -18,10 +20,10 @@ class PlayerServiceManager(val context: Context) {
         playerManager.currState.observeForever {
             when (it) {
                 is PlayingState -> {
-                    startService(Extra.PLAY)
+                    startService(Action.Play())
                 }
                 is PausedState -> {
-                    startService(Extra.PAUSE)
+                    startService(Action.Pause())
                 }
                 is IdleState -> {
                     stopService()
@@ -30,7 +32,7 @@ class PlayerServiceManager(val context: Context) {
         }
     }
 
-    private fun startService(action: String) {
+    fun startService(action: Action) {
         val intent = Intent(context, PlayerService::class.java)
         intent.putExtra(Extra.ACTION, action)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -38,10 +40,9 @@ class PlayerServiceManager(val context: Context) {
         } else {
             context.startService(intent)
         }
-
     }
 
-    private fun stopService() {
+    fun stopService() {
         val intent = Intent(context, PlayerService::class.java)
         context.stopService(intent)
     }

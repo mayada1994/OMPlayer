@@ -13,6 +13,9 @@ object SingletonHolder {
     val playerManager by lazy {
         PlayerManager(context)
     }
+    val playerServiceManager by lazy {
+        PlayerServiceManager(context)
+    }
 
     fun init(application: Application) {
         this.application = application

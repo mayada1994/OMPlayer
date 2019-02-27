@@ -3,7 +3,6 @@ package com.example.android.musicplayerdemo.services.playerService
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
-import android.content.BroadcastReceiver
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
@@ -11,10 +10,51 @@ import com.example.android.musicplayerdemo.App.Companion.CHANNEL_ID
 import com.example.android.musicplayerdemo.R
 import com.example.android.musicplayerdemo.consts.Extra
 import com.example.android.musicplayerdemo.di.SingletonHolder
+import com.example.android.musicplayerdemo.stateMachine.Action
 
 class PlayerService : Service() {
 
     val playerManager = SingletonHolder.playerManager
+
+    val stopPendingIntent by lazy {
+        PendingIntent.getBroadcast(
+            this,
+            Extra.STOP.hashCode(),
+            Intent(this, PlayerBroadcastReceiver::class.java)
+                .putExtra(Extra.ACTION, Action.Stop()),
+            PendingIntent.FLAG_CANCEL_CURRENT
+        )
+    }
+
+    val playPendingIntent by lazy {
+        PendingIntent.getBroadcast(
+            this,
+            1,
+            Intent(this, PlayerBroadcastReceiver::class.java)
+                .putExtra(Extra.ACTION, Action.Play()),
+            PendingIntent.FLAG_CANCEL_CURRENT
+        )
+    }
+
+    val pausePendingIntent by lazy {
+        PendingIntent.getBroadcast(
+            this,
+            2,
+            Intent(this, PlayerBroadcastReceiver::class.java)
+                .putExtra(Extra.ACTION, Action.Pause()),
+            PendingIntent.FLAG_CANCEL_CURRENT
+        )
+    }
+
+    val nextPendingIntent by lazy {
+        PendingIntent.getBroadcast(
+            this,
+            3,
+            Intent(this, PlayerBroadcastReceiver::class.java)
+                .putExtra(Extra.ACTION, Action.Next()),
+            PendingIntent.FLAG_CANCEL_CURRENT
+        )
+    }
 
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -23,62 +63,29 @@ class PlayerService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
-
-        val playPendingIntent = PendingIntent.getBroadcast(
-            this,
-            0,
-            Intent(this, PlayerBroadcastReciever::class.java)
-                    .putExtra(Extra.ACTION, Extra.PLAY),
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        val pausePendingIntent = PendingIntent.getBroadcast(
-            this,
-            0,
-            Intent(this, BroadcastReceiver::class.java)
-                .putExtra(Extra.ACTION,Extra.PAUSE),
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        val nextPendingIntent = PendingIntent.getBroadcast(
-            this,
-            0,
-            Intent(this, BroadcastReceiver::class.java)
-                .putExtra(Extra.ACTION,Extra.NEXT),
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        val stopPendingIntent = PendingIntent.getBroadcast(
-            this,
-            0,
-            Intent(this, BroadcastReceiver::class.java)
-                .putExtra(Extra.ACTION,Extra.STOP),
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
         val notification: Notification
 
-        when (intent?.getStringExtra(Extra.ACTION)) {
-            Extra.PLAY -> {
-                notification = NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.music_icon)
-                    .setContentTitle("Player Service")
-                    .setContentText("Yey! It works!")
-                    .addAction(R.drawable.play, "play", playPendingIntent)
-                    .addAction(R.drawable.next,"next",nextPendingIntent)
-                    .addAction(R.drawable.stop,"stop",stopPendingIntent)
-                    .build()!!
-                startForeground(1, notification)
-            }
-
-            Extra.PAUSE -> {
+        when (intent?.getSerializableExtra(Extra.ACTION)) {
+            is Action.Play -> {
                 notification = NotificationCompat.Builder(this, CHANNEL_ID)
                     .setSmallIcon(R.drawable.music_icon)
                     .setContentTitle("Player Service")
                     .setContentText("Yey! It works!")
                     .addAction(R.drawable.pause, "pause", pausePendingIntent)
-                    .addAction(R.drawable.next,"next",nextPendingIntent)
-                    .addAction(R.drawable.stop,"stop",stopPendingIntent)
+                    .addAction(R.drawable.next, "next", nextPendingIntent)
+                    .addAction(R.drawable.stop, "stop", stopPendingIntent)
+                    .build()!!
+                startForeground(1, notification)
+            }
+
+            is Action.Pause -> {
+                notification = NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.music_icon)
+                    .setContentTitle("Player Service")
+                    .setContentText("Yey! It works!")
+                    .addAction(R.drawable.play, "play", playPendingIntent)
+                    .addAction(R.drawable.next, "next", nextPendingIntent)
+                    .addAction(R.drawable.stop, "stop", stopPendingIntent)
                     .build()!!
                 startForeground(1, notification)
             }

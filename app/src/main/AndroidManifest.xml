@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <service android:name=".services.playerService.PlayerService" />
+        <receiver android:name=".services.playerService.PlayerBroadcastReceiver"/>
     </application>
 
 </manifest>
