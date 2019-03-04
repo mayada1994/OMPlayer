@@ -79,7 +79,6 @@ class TrackFragment : Fragment() {
             cursor = activity!!.contentResolver.query(uri, projection, selection, null, sortOrder)
             if (cursor != null) {
                 cursor.moveToFirst()
-                var i = 0
                 while (!cursor.isAfterLast) {
                     val title = cursor.getString(0)
                     val artist = cursor.getString(1)
@@ -88,7 +87,7 @@ class TrackFragment : Fragment() {
                     val songDuration = cursor.getString(4)
                     cursor.moveToNext()
                     if (path != null && path.endsWith(".mp3")) {
-                        mp3Files.add(Track(i++, title, "", songDuration.toInt(), 0, path))
+                        mp3Files.add(Track(title, "", songDuration.toInt(), 0, path))
                     }
                 }
 

@@ -79,7 +79,6 @@ class AlbumFragment : Fragment() {
             cursor = context!!.contentResolver.query(uri, columns, where, null, sortOrder)
             if (cursor != null) {
                 cursor.moveToFirst()
-                var i = 0
                 while (!cursor.isAfterLast) {
                     val title = if (cursor.getString(0) != null) cursor.getString(0) else "Unknown"
                     val artist = if (cursor.getString(1) != null) cursor.getString(1) else "Unknown"
@@ -89,7 +88,7 @@ class AlbumFragment : Fragment() {
                     cursor.moveToNext()
 
                     if (!containedAlbums.contains(AlbumTag(artist, title, year))) {
-                        albums.add(Album(i++, title, albumart, year.toInt(), 0, 0))
+                        albums.add(Album(title, albumart, year.toInt(), 0, 0))
                         containedAlbums.add(AlbumTag(artist, title, year))
                     }
 
@@ -99,7 +98,7 @@ class AlbumFragment : Fragment() {
 
             // print to see list of mp3 files
             for (file in albums) {
-                Log.i("TAG!!!", file.toString())
+                //Log.i("TAG!!!", file.toString())
             }
 
         } catch (e: Exception) {

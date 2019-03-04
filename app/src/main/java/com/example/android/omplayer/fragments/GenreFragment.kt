@@ -75,12 +75,11 @@ class GenreFragment : Fragment() {
             cursor = context!!.contentResolver.query(uri, columns, where, null, sortOrder)
             if (cursor != null) {
                 cursor.moveToFirst()
-                var i = 0
                 while (!cursor.isAfterLast) {
                     val name = if (cursor.getString(0) != null) cursor.getString(0) else "Unknown"
 
                     cursor.moveToNext()
-                    genres.add(Genre(-1, name))
+                    genres.add(Genre(name))
 
                 }
 
@@ -88,7 +87,7 @@ class GenreFragment : Fragment() {
 
             // print to see list of mp3 files
             for (file in genres) {
-                Log.i("TAG!!!", file.toString())
+                //Log.i("TAG!!!", file.toString())
             }
 
         } catch (e: Exception) {

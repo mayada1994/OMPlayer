@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 
 
 @Entity(
+    tableName = "albums",
     foreignKeys = [ForeignKey(
         entity = Artist::class,
         parentColumns = ["id"], childColumns = ["artistId"]
@@ -16,13 +17,14 @@ import androidx.room.PrimaryKey
     )]
 )
 data class Album(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = -1,
     var title: String = "",
-    val cover: String = "",
-    var year: Int = -1,
+    var cover: String = "",
+    var year: Int = 0,
     @ColumnInfo(name = "artist_id")
-    val artistId: Int = -1,
+    var artistId: Int = 0,
     @ColumnInfo(name = "genre_id")
-    val genreId: Int = -1
-)
+    var genreId: Int = 0
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+}

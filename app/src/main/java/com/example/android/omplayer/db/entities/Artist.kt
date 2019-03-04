@@ -4,12 +4,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity
+@Entity(tableName = "artists")
 data class Artist(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = -1,
     var name: String = "",
-    val country: String = "",
-    val description: String = "",
-    val image: String = ""
-)
+    var image: String = ""
+){
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+}
