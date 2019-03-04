@@ -7,7 +7,7 @@
     <ScrollView
             android:id="@+id/scroll_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_margin="8dp"
             android:layout_weight="1">
 
@@ -34,40 +34,29 @@
             android:layout_marginBottom="8dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
-        <Button
+
+        <ImageButton
                 android:id="@+id/button_previous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/previous"/>
-
-        <Button
+                android:src="@drawable/prev"
+                android:contentDescription="@string/previous"/>
+        <ImageButton
                 android:id="@+id/button_play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:drawableRight="@drawable/play"/>
+                android:layout_weight="1"
+                android:src="@drawable/play"
+                android:contentDescription="@string/play"/>
 
-        <Button
+        <ImageButton
                 android:id="@+id/button_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/next"/>
-
-        <Button
-                android:id="@+id/button_pause"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/pause"/>
-
-        <Button
-                android:id="@+id/button_reset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/reset"/>
+                android:src="@drawable/next"
+                android:contentDescription="@string/next"/>
 
     </LinearLayout>
 

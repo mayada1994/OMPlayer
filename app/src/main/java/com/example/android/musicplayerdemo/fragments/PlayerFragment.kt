@@ -20,6 +20,8 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         ViewModelProviders.of(this).get(PlayerViewModel::class.java)
     }
 
+    private var isPlaying = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
             .setActionBarTitle("Player Fragment")
@@ -35,8 +37,6 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
         button_previous.setOnClickListener(this)
         button_next.setOnClickListener(this)
-        button_reset.setOnClickListener(this)
-        button_pause.setOnClickListener(this)
         button_play.setOnClickListener(this)
 
         viewModel.metadata.observe(this, Observer {
@@ -52,11 +52,19 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.button_play -> viewModel.onPlayClicked()
-            R.id.button_pause -> viewModel.onPauseClicked()
+            R.id.button_play -> {
+                if (!isPlaying) {
+                    button_play.setImageResource(R.drawable.pause)
+                    viewModel.onPlayClicked()
+                    isPlaying = true
+                } else {
+                    button_play.setImageResource(R.drawable.play)
+                    viewModel.onPauseClicked()
+                    isPlaying = false
+                }
+            }
             R.id.button_next -> viewModel.onNextClicked()
             R.id.button_previous -> viewModel.onPrevClicked()
-            R.id.button_reset -> viewModel.onStopClicked()
         }
     }
 
