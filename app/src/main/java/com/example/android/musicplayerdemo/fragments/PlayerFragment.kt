@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.musicplayerdemo.R
 import com.example.android.musicplayerdemo.activities.MainActivity
+import com.example.android.musicplayerdemo.utils.FormatUtils
 import com.example.android.musicplayerdemo.viewmodels.PlayerViewModel
 import kotlinx.android.synthetic.main.fragment_player.*
 
@@ -19,6 +20,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     private val viewModel: PlayerViewModel by lazy {
         ViewModelProviders.of(this).get(PlayerViewModel::class.java)
     }
+
 
     private var isPlaying = false
 
@@ -42,10 +44,12 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
                 seekbar_audio.max = metadata.duration
+                timer_total.text = FormatUtils.millisecondsToString(metadata.duration.toLong())
             }
         })
         viewModel.currentPosition.observe(this, Observer {
             seekbar_audio.setProgress(it ?: 0, true)
+            timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
         })
 
     }
@@ -77,6 +81,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 var userSelectedPosition = 0
 
                 override fun onStartTrackingTouch(seekBar: SeekBar) {
+                    viewModel.stopUpdateSeekbar()
                 }
 
                 override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -87,7 +92,8 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
                 override fun onStopTrackingTouch(seekBar: SeekBar) {
                     viewModel.onSeek(userSelectedPosition)
-                }
+                    viewModel.startUpdateSeekbar()
+            }
             })
     }
 

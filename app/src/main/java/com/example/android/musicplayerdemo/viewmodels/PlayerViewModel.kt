@@ -85,7 +85,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         stopUpdateSeekbar()
     }
 
-    private fun startUpdateSeekbar() {
+    fun startUpdateSeekbar() {
         if (scheduledTask == null) {
             scheduledTask = executor.scheduleAtFixedRate(
                 seekbarPositionUpdateTask,
@@ -96,7 +96,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         }
     }
 
-    private fun stopUpdateSeekbar() {
+    fun stopUpdateSeekbar() {
         scheduledTask?.cancel(true)
         scheduledTask = null
     }
