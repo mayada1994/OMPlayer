@@ -10,7 +10,6 @@ import com.example.android.musicplayerdemo.stateMachine.PlayerManager
 import com.example.android.musicplayerdemo.stateMachine.states.IdleState
 import com.example.android.musicplayerdemo.stateMachine.states.PausedState
 import com.example.android.musicplayerdemo.stateMachine.states.PlayingState
-import java.io.Serializable
 
 class PlayerServiceManager(val context: Context) {
 

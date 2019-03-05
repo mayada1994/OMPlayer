@@ -1,6 +1,5 @@
 package com.example.android.musicplayerdemo.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +8,9 @@ import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.android.musicplayerdemo.services.playerService.PlayerService
 import com.example.android.musicplayerdemo.R
 import com.example.android.musicplayerdemo.activities.MainActivity
-import com.example.android.musicplayerdemo.di.SingletonHolder
-import com.example.android.musicplayerdemo.services.playerService.PlayerServiceManager
+import com.example.android.musicplayerdemo.utils.FormatUtils
 import com.example.android.musicplayerdemo.viewmodels.PlayerViewModel
 import kotlinx.android.synthetic.main.fragment_player.*
 
@@ -23,6 +20,9 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     private val viewModel: PlayerViewModel by lazy {
         ViewModelProviders.of(this).get(PlayerViewModel::class.java)
     }
+
+
+    private var isPlaying = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
@@ -39,28 +39,36 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
         button_previous.setOnClickListener(this)
         button_next.setOnClickListener(this)
-        button_reset.setOnClickListener(this)
-        button_pause.setOnClickListener(this)
         button_play.setOnClickListener(this)
 
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
                 seekbar_audio.max = metadata.duration
+                timer_total.text = FormatUtils.millisecondsToString(metadata.duration.toLong())
             }
         })
         viewModel.currentPosition.observe(this, Observer {
             seekbar_audio.setProgress(it ?: 0, true)
+            timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
         })
 
     }
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.button_play -> viewModel.onPlayClicked()
-            R.id.button_pause -> viewModel.onPauseClicked()
+            R.id.button_play -> {
+                if (!isPlaying) {
+                    button_play.setImageResource(R.drawable.pause)
+                    viewModel.onPlayClicked()
+                    isPlaying = true
+                } else {
+                    button_play.setImageResource(R.drawable.play)
+                    viewModel.onPauseClicked()
+                    isPlaying = false
+                }
+            }
             R.id.button_next -> viewModel.onNextClicked()
             R.id.button_previous -> viewModel.onPrevClicked()
-            R.id.button_reset -> viewModel.onStopClicked()
         }
     }
 
@@ -73,6 +81,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 var userSelectedPosition = 0
 
                 override fun onStartTrackingTouch(seekBar: SeekBar) {
+                    viewModel.stopUpdateSeekbar()
                 }
 
                 override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -83,7 +92,8 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
                 override fun onStopTrackingTouch(seekBar: SeekBar) {
                     viewModel.onSeek(userSelectedPosition)
-                }
+                    viewModel.startUpdateSeekbar()
+            }
             })
     }
 

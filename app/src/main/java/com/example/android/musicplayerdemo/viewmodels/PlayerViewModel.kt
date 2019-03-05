@@ -25,10 +25,6 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         const val MEDIA_RES_2 = R.raw.the_man_who
     }
 
-    private val playlist: MutableList<Int> = mutableListOf(
-        MEDIA_RES_1,
-        MEDIA_RES_2
-    )
     private val playerManager: PlayerManager = SingletonHolder.playerManager
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
@@ -77,7 +73,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
-        playerManager.setPlaylist(playlist, Action.Pause())
+        startUpdateSeekbar()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -85,7 +81,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         stopUpdateSeekbar()
     }
 
-    private fun startUpdateSeekbar() {
+    fun startUpdateSeekbar() {
         if (scheduledTask == null) {
             scheduledTask = executor.scheduleAtFixedRate(
                 seekbarPositionUpdateTask,
@@ -96,7 +92,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         }
     }
 
-    private fun stopUpdateSeekbar() {
+    fun stopUpdateSeekbar() {
         scheduledTask?.cancel(true)
         scheduledTask = null
     }
