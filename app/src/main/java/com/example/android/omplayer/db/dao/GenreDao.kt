@@ -15,7 +15,7 @@ interface GenreDao {
     @Delete
     fun delete(genre: Genre)
 
-    @Query("SELECT * from genres ORDER BY id ASC")
+    @Query("SELECT * from genres ORDER BY name ASC")
     fun getAllGenres(): LiveData<List<Genre>>
 
     @Query("SELECT * from genres WHERE id = :genreId")

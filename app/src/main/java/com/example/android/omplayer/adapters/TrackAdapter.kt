@@ -35,6 +35,7 @@ class TrackAdapter(val tracks: List<Track>) : RecyclerView.Adapter<TrackAdapter.
         init {
             itemView.setOnClickListener {
                 Log.i("TAG!!!", path)
+                LibraryUtil.selectedTrack = position
             }
         }
     }

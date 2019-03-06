@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
     tableName = "tracks",
     foreignKeys = [ForeignKey(
         entity = Album::class,
-        parentColumns = ["id"], childColumns = ["albumId"]
+        parentColumns = ["id"], childColumns = ["album_id"]
     )]
 )
 data class Track(

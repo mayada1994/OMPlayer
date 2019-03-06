@@ -1,12 +1,10 @@
 package com.example.android.omplayer.db.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.android.omplayer.db.entities.Track
 
+@Dao
 interface TrackDao {
     @Insert
     fun insert(track: Track)
@@ -17,12 +15,12 @@ interface TrackDao {
     @Delete
     fun delete(track: Track)
 
-    @Query("SELECT * from tracks ORDER BY id ASC")
+    @Query("SELECT * from tracks ORDER BY title ASC")
     fun getAllTracks(): LiveData<List<Track>>
 
     @Query("SELECT * from tracks WHERE id = :trackId")
     fun getTrackById(trackId: Int): Track
 
-    @Query("SELECT * from tracks WHERE album_id = :albumId")
-    fun getTrackByAlbumId(albumId: Int): Track
+    @Query("SELECT * from tracks WHERE album_id = :albumId ORDER BY position ASC")
+    fun getTracksByAlbumId(albumId: Int): LiveData<List<Track>>
 }

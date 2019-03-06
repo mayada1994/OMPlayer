@@ -1,12 +1,10 @@
 package com.example.android.omplayer.db.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.android.omplayer.db.entities.Artist
 
+@Dao
 interface ArtistDao {
     @Insert
     fun insert(artist: Artist)
@@ -17,9 +15,9 @@ interface ArtistDao {
     @Delete
     fun delete(artist: Artist)
 
-    @Query("SELECT * from artists ORDER BY id ASC")
+    @Query("SELECT * from artists ORDER BY name ASC")
     fun getAllArtists(): LiveData<List<Artist>>
 
-    @Query("SELECT * from genres WHERE id = :artistId")
+    @Query("SELECT * from artists WHERE id = :artistId")
     fun getArtistById(artistId: Int): Artist
 }
