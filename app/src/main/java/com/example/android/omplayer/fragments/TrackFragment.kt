@@ -26,7 +26,10 @@ import com.example.android.omplayer.db.entities.Track
 import com.example.android.omplayer.entities.LibraryUtil
 
 
+
+
 lateinit var tracks: List<Track>
+private val formats = arrayOf(".aac", ".mp3", ".wav", ".ogg", ".midi", ".3gp", ".mp4", ".m4a", ".amr", ".flac")
 
 class TrackFragment : Fragment() {
 
@@ -67,7 +70,8 @@ class TrackFragment : Fragment() {
             MediaStore.Audio.Media.ARTIST,
             MediaStore.Audio.Media.DATA,
             MediaStore.Audio.Media.DISPLAY_NAME,
-            MediaStore.Audio.Media.DURATION
+            MediaStore.Audio.Media.DURATION,
+            MediaStore.Audio.Media.TRACK
         )
         val sortOrder =
             MediaStore.Audio.AudioColumns.ARTIST + "," + MediaStore.Audio.AudioColumns.ALBUM + " COLLATE LOCALIZED ASC"
@@ -85,8 +89,9 @@ class TrackFragment : Fragment() {
                     val path = cursor.getString(2)
                     val displayName = cursor.getString(3)
                     val songDuration = cursor.getString(4)
+                    val position = cursor.getString(5)
                     cursor.moveToNext()
-                    if (path != null && path.endsWith(".mp3")) {
+                    if (path != null && supportedFormat(path)) {
                         mp3Files.add(Track(title, "", songDuration.toInt(), 0, path))
                     }
                 }
@@ -156,7 +161,8 @@ class TrackFragment : Fragment() {
         alertBuilder.setCancelable(true)
         alertBuilder.setTitle("Permission necessary")
         alertBuilder.setMessage("$msg permission is necessary")
-        alertBuilder.setPositiveButton(android.R.string.yes
+        alertBuilder.setPositiveButton(
+            android.R.string.yes
         ) { dialog, which ->
             ActivityCompat.requestPermissions(
                 context as Activity,
@@ -186,5 +192,15 @@ class TrackFragment : Fragment() {
                 grantResults
             )
         }
+    }
+
+    fun supportedFormat(path: String): Boolean {
+        for(format in formats)
+        {
+            if(path.endsWith(format)){
+                return true
+            }
+        }
+        return false
     }
 }
