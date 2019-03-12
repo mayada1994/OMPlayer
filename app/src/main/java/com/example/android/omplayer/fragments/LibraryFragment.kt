@@ -21,6 +21,7 @@ class LibraryFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_library, container, false)
+
         // Setting ViewPager for each Tabs
         val viewPager = view.findViewById(R.id.viewpager) as ViewPager
         setupViewPager(viewPager)

@@ -6,7 +6,7 @@ import com.example.android.omplayer.db.entities.Album
 
 @Dao
 interface AlbumDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(album: Album)
 
     @Update
@@ -20,9 +20,6 @@ interface AlbumDao {
 
     @Query("SELECT * from albums WHERE id = :albumId")
     fun getAlbumById(albumId: Int): Album
-
-    @Query("SELECT * from albums WHERE genre_id = :genreId ORDER BY artist_id, year ASC")
-    fun getAlbumsByGenreId(genreId: Int): LiveData<List<Album>>
 
     @Query("SELECT * from albums WHERE artist_id = :artistId ORDER BY year ASC")
     fun getAlbumsByArtistId(artistId: Int): LiveData<List<Album>>

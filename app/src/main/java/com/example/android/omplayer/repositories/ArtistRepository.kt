@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 class ArtistRepository(val context: Context) {
 
     private val TAG: String = this.javaClass.simpleName
-    private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    private val scope: CoroutineScope = CoroutineScope(Dispatchers.Main)
 
     fun insertArtist(artist: Artist) {
         try {

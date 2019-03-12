@@ -6,7 +6,7 @@ import com.example.android.omplayer.db.entities.Track
 
 @Dao
 interface TrackDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(track: Track)
 
     @Update
@@ -23,4 +23,7 @@ interface TrackDao {
 
     @Query("SELECT * from tracks WHERE album_id = :albumId ORDER BY position ASC")
     fun getTracksByAlbumId(albumId: Int): LiveData<List<Track>>
+
+    @Query("SELECT * from tracks WHERE genre_id = :genreId ORDER BY title ASC")
+    fun getTracksByGenreId(genreId: Int): LiveData<List<Track>>
 }

@@ -14,6 +14,7 @@ class TrackRepository(val context: Context) {
 
     private val TAG: String = this.javaClass.simpleName
     private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    lateinit var tracks: LiveData<List<Track>>
 
     fun insertTrack(track: Track) {
         try {
@@ -46,7 +47,6 @@ class TrackRepository(val context: Context) {
     }
 
     fun getAllTracks(): LiveData<List<Track>>? {
-        var tracks: LiveData<List<Track>>? = null
         try {
             scope.launch {
                 tracks = withContext(scope.coroutineContext) {
@@ -81,6 +81,21 @@ class TrackRepository(val context: Context) {
             scope.launch {
                 tracks = withContext(scope.coroutineContext) {
                     PlayerDatabase.getDatabase(context).trackDao().getTracksByAlbumId(id)
+                }
+            }
+
+        } catch (e: Exception) {
+            Log.d(TAG, e.message)
+        }
+        return tracks
+    }
+
+    fun getTracksByGenreId(id: Int): LiveData<List<Track>>? {
+        var tracks: LiveData<List<Track>>? = null
+        try {
+            scope.launch {
+                tracks = withContext(scope.coroutineContext) {
+                    PlayerDatabase.getDatabase(context).trackDao().getTracksByGenreId(id)
                 }
             }
 

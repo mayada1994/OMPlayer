@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.android.omplayer.db.dao.AlbumDao
 import com.example.android.omplayer.db.dao.ArtistDao
 import com.example.android.omplayer.db.dao.GenreDao
@@ -34,8 +35,8 @@ abstract class PlayerDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     PlayerDatabase::class.java,
-                    "omplayer_database"
-                ).build()
+                    "omplayer.db"
+                ).build().also { INSTANCE = it }
                 INSTANCE = instance
                 return instance
             }

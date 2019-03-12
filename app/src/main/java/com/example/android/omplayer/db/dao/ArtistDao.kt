@@ -6,7 +6,7 @@ import com.example.android.omplayer.db.entities.Artist
 
 @Dao
 interface ArtistDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(artist: Artist)
 
     @Update

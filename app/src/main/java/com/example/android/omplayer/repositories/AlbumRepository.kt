@@ -75,21 +75,6 @@ class AlbumRepository(val context: Context) {
         return album
     }
 
-    fun getAlbumsByGenreId(id: Int): LiveData<List<Album>>? {
-        var albums: LiveData<List<Album>>? = null
-        try {
-            scope.launch {
-                albums = withContext(scope.coroutineContext) {
-                    PlayerDatabase.getDatabase(context).albumDao().getAlbumsByGenreId(id)
-                }
-            }
-
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
-        return albums
-    }
-
     fun getAlbumsByArtistId(id: Int): LiveData<List<Album>>? {
         var albums: LiveData<List<Album>>? = null
         try {

@@ -6,7 +6,7 @@ import com.example.android.omplayer.db.entities.Genre
 
 @Dao
 interface GenreDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(genre: Genre)
 
     @Update
