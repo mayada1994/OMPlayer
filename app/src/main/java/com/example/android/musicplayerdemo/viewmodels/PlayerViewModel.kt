@@ -1,8 +1,12 @@
 package com.example.android.musicplayerdemo.viewmodels
 
 import android.app.Application
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.ResultReceiver
+import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import androidx.lifecycle.*
 import com.example.android.musicplayerdemo.R
 import com.example.android.musicplayerdemo.di.SingletonHolder
@@ -13,6 +17,7 @@ import com.example.android.musicplayerdemo.stateMachine.Action
 import com.example.android.musicplayerdemo.stateMachine.PlayerManager
 import com.example.android.musicplayerdemo.stateMachine.states.IdleState
 import com.example.android.musicplayerdemo.stateMachine.states.PlayingState
+import java.io.IOException
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.ScheduledFuture
@@ -23,11 +28,13 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     companion object {
         const val MEDIA_RES_1 = R.raw.funky_town
         const val MEDIA_RES_2 = R.raw.the_man_who
+        const val MEDIA_RES_3 = R.raw.country_roads
     }
 
     private val playerManager: PlayerManager = SingletonHolder.playerManager
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
+
 
     //region LiveData
 
@@ -70,6 +77,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         super.onCleared()
         foreverObservers.forEach { it.release() }
     }
+    
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
@@ -80,6 +88,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     fun onStop() {
         stopUpdateSeekbar()
     }
+
 
     fun startUpdateSeekbar() {
         if (scheduledTask == null) {
@@ -101,15 +110,16 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     fun onPlayClicked() = playerManager.performAction(Action.Play())
 
-    fun onPauseClicked() = playerManager.performAction(Action.Pause())
+    fun onPauseClicked() =  playerManager.performAction(Action.Pause())
 
-    fun onNextClicked() = playerManager.performAction(Action.Next())
+    fun onNextClicked() =  playerManager.performAction(Action.Next())
 
     fun onPrevClicked() = playerManager.performAction(Action.Prev())
 
     fun onStopClicked() = playerManager.performAction(Action.Stop())
 
     fun onSeek(position: Int) = playerManager.seekTo(position)
+
     //endregion
 
 }

@@ -23,10 +23,12 @@ object SingletonHolder {
 
         val playlist: MutableList<Int> = mutableListOf(
             PlayerViewModel.MEDIA_RES_1,
-            PlayerViewModel.MEDIA_RES_2
+            PlayerViewModel.MEDIA_RES_2,
+            PlayerViewModel.MEDIA_RES_3
         )
         this.application = application
         val playerServiceManager = PlayerServiceManager(context)
+        playerManager.initMediaSession()
         playerManager.setPlaylist(playlist, Action.Pause())
     }
 }
