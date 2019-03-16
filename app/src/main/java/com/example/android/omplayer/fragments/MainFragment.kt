@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -17,31 +18,38 @@ import androidx.fragment.app.Fragment
 import com.example.android.omplayer.R
 import com.example.android.omplayer.activities.MainActivity
 import com.example.android.omplayer.di.SingletonHolder
-import com.example.android.omplayer.entities.LibraryUtil
 import com.example.android.omplayer.viewmodels.LibraryViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment(), View.OnClickListener {
 
-    private val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123
+    private val EXTERNAL_STORAGE_PERMISSIONS_REQUEST = 123
+    lateinit var progressBar: ProgressBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
             .setActionBarTitle("OMPlayer")
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        val libraryViewModel = LibraryViewModel(SingletonHolder.application.applicationContext)
+        val view = inflater.inflate(R.layout.fragment_main, container, false)
+        progressBar = view.findViewById(R.id.library_to_db_progress)
+        val libraryViewModel = LibraryViewModel(SingletonHolder.application)
 
         if (checkPermissionREAD_EXTERNAL_STORAGE(context)) {
-            libraryViewModel.loadDataToDb()
+            if (libraryViewModel.emptyDb()) {
+                progressBar.visibility = View.VISIBLE
+                libraryViewModel.loadDataToDb(progressBar)
+            } else {
+                libraryViewModel.extractData()
+            }
         }
-        return inflater.inflate(R.layout.fragment_main, container, false)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btn_player.setOnClickListener(this)
         btn_library.setOnClickListener(this)
-
     }
 
     override fun onClick(view: View) {
@@ -59,17 +67,15 @@ class MainFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.btn_library -> {
-                if (LibraryUtil.tracks.isNotEmpty()) {
 
-                    fragmentManager?.apply {
-                        beginTransaction()
-                            .replace(
-                                R.id.fragment_placeholder,
-                                LibraryFragment()
-                            )
-                            .addToBackStack(null)
-                            .commit()
-                    }
+                fragmentManager?.apply {
+                    beginTransaction()
+                        .replace(
+                            R.id.fragment_placeholder,
+                            LibraryFragment()
+                        )
+                        .addToBackStack(null)
+                        .commit()
                 }
             }
         }
@@ -100,7 +106,7 @@ class MainFragment : Fragment(), View.OnClickListener {
                         .requestPermissions(
                             context,
                             arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                            MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
+                            EXTERNAL_STORAGE_PERMISSIONS_REQUEST
                         )
                 }
                 return false
@@ -127,7 +133,7 @@ class MainFragment : Fragment(), View.OnClickListener {
             ActivityCompat.requestPermissions(
                 context as Activity,
                 arrayOf(permission),
-                MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
+                EXTERNAL_STORAGE_PERMISSIONS_REQUEST
             )
         }
         val alert = alertBuilder.create()
@@ -139,7 +145,7 @@ class MainFragment : Fragment(), View.OnClickListener {
         permissions: Array<String>, grantResults: IntArray
     ) {
         when (requestCode) {
-            MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            EXTERNAL_STORAGE_PERMISSIONS_REQUEST -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // do your stuff
             } else {
                 Toast.makeText(

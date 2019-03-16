@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.omplayer.R
 import com.example.android.omplayer.db.entities.Track
-import com.example.android.omplayer.entities.LibraryUtil
+import com.example.android.omplayer.utils.LibraryUtil
 
 class TrackAdapter(val tracks: List<Track>) : RecyclerView.Adapter<TrackAdapter.ViewHolder>() {
 

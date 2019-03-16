@@ -6,7 +6,7 @@ import android.os.Looper
 import androidx.lifecycle.*
 import com.example.android.omplayer.di.SingletonHolder
 import com.example.android.omplayer.entities.TrackMetadata
-import com.example.android.omplayer.entities.LibraryUtil
+import com.example.android.omplayer.utils.LibraryUtil
 import com.example.android.omplayer.extensions.foreverObserver
 import com.example.android.omplayer.livedata.ForeverObserver
 import com.example.android.omplayer.stateMachine.Action
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
 
 class PlayerViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver {
 
-    private val playlist: MutableList<String> = LibraryUtil.tracklist
+    private val playlist: MutableList<String> = LibraryUtil.tracklist.map { it.path } as MutableList<String>
     private val playerManager: PlayerManager = SingletonHolder.playerManager
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()

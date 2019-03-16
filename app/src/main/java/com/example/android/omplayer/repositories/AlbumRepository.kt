@@ -1,92 +1,56 @@
 package com.example.android.omplayer.repositories
 
-import android.content.Context
-import android.util.Log
-import androidx.lifecycle.LiveData
-import com.example.android.omplayer.db.PlayerDatabase
+import androidx.annotation.WorkerThread
+import com.example.android.omplayer.db.dao.AlbumDao
 import com.example.android.omplayer.db.entities.Album
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class AlbumRepository(val context: Context) {
+class AlbumRepository(private val albumDao: AlbumDao) {
 
-    private val TAG: String = this.javaClass.simpleName
-    private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    @WorkerThread
+    suspend fun insertAlbum(album: Album) {
+        albumDao.insert(album)
+    }
 
-    fun insertAlbum(album: Album) {
+    @WorkerThread
+    suspend fun inserAllAlbums(album: ArrayList<Album>) {
+        albumDao.insertAll(*album.toTypedArray())
+    }
+
+    @WorkerThread
+    suspend fun updateAlbum(album: Album) {
+        albumDao.update(album)
+    }
+
+    @WorkerThread
+    suspend fun deleteAlbum(album: Album) {
+        albumDao.delete(album)
+    }
+
+    @WorkerThread
+    suspend fun deleteAllAlbums() {
         try {
-            scope.launch {
-                PlayerDatabase.getDatabase(context).albumDao().insert(album)
-            }
+            albumDao.deleteAll()
         } catch (e: Exception) {
-            Log.d(TAG, e.message)
         }
     }
 
-    fun updateAlbum(album: Album) {
-        try {
-            scope.launch {
-                PlayerDatabase.getDatabase(context).albumDao().update(album)
-            }
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
+    @WorkerThread
+    suspend fun getAllAlbums(): List<Album>? {
+        return albumDao.getAllAlbums()
     }
 
-    fun deleteAlbum(album: Album) {
-        try {
-            scope.launch {
-                PlayerDatabase.getDatabase(context).albumDao().delete(album)
-            }
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
+    @WorkerThread
+    suspend fun getAlbumById(id: Int): Album? {
+        return albumDao.getAlbumById(id)
     }
 
-    fun getAllAlbums(): LiveData<List<Album>>? {
-        var albums: LiveData<List<Album>>? = null
-        try {
-            scope.launch {
-                albums = withContext(scope.coroutineContext) {
-                    PlayerDatabase.getDatabase(context).albumDao().getAllAlbums()
-                }
-            }
-
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
-        return albums
+    @WorkerThread
+    suspend fun getAlbumsByArtistId(id: Int): List<Album>? {
+        return albumDao.getAlbumsByArtistId(id)
     }
 
-    fun getAlbumById(id: Int): Album? {
-        var album: Album? = null
-        try {
-            scope.launch {
-                album = withContext(scope.coroutineContext) {
-                    PlayerDatabase.getDatabase(context).albumDao().getAlbumById(id)
-                }
-            }
-
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
-        return album
-    }
-
-    fun getAlbumsByArtistId(id: Int): LiveData<List<Album>>? {
-        var albums: LiveData<List<Album>>? = null
-        try {
-            scope.launch {
-                albums = withContext(scope.coroutineContext) {
-                    PlayerDatabase.getDatabase(context).albumDao().getAlbumsByArtistId(id)
-                }
-            }
-
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
-        return albums
+    @WorkerThread
+    suspend fun getAlbumByTrack(artistId: Int, albumTitle: String, albumYear: String): Album {
+        return albumDao.getAlbumByTrack(artistId, albumTitle, albumYear)
     }
 }

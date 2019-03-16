@@ -1,7 +1,6 @@
 package com.example.android.omplayer.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.omplayer.R
 import com.example.android.omplayer.adapters.ArtistAdapter
-import com.example.android.omplayer.db.entities.Artist
-import com.example.android.omplayer.viewmodels.ArtistViewModel
+import com.example.android.omplayer.utils.LibraryUtil
 
-
-var artists = ArrayList<Artist>()
 
 class ArtistFragment : Fragment() {
+
+    var artists = LibraryUtil.artists
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,15 +29,8 @@ class ArtistFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val artistViewModel = ArtistViewModel(context!!)
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = RecyclerView.VERTICAL
-
-        try {
-            artists = artistViewModel.getArtistsFromDb().value as ArrayList<Artist>
-        } catch (e: Exception) {
-
-        }
 
         if (artists.isNotEmpty()) {
             val itemAdapter = ArtistAdapter(artists)

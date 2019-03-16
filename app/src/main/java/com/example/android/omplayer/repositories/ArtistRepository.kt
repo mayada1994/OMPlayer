@@ -1,77 +1,51 @@
 package com.example.android.omplayer.repositories
 
-import android.content.Context
-import android.util.Log
-import androidx.lifecycle.LiveData
-import com.example.android.omplayer.db.PlayerDatabase
+import androidx.annotation.WorkerThread
+import com.example.android.omplayer.db.dao.ArtistDao
 import com.example.android.omplayer.db.entities.Artist
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class ArtistRepository(val context: Context) {
+class ArtistRepository(private val artistDao: ArtistDao) {
 
-    private val TAG: String = this.javaClass.simpleName
-    private val scope: CoroutineScope = CoroutineScope(Dispatchers.Main)
+    @WorkerThread
+    suspend fun insertArtist(artist: Artist) {
+        artistDao.insert(artist)
+    }
 
-    fun insertArtist(artist: Artist) {
+    @WorkerThread
+    suspend fun insertAllArtists(artist: ArrayList<Artist>) {
+        artistDao.insertAll(*artist.toTypedArray())
+    }
+
+    @WorkerThread
+    suspend fun updateArtist(artist: Artist) {
+        artistDao.update(artist)
+    }
+
+    @WorkerThread
+    suspend fun deleteArtist(artist: Artist) {
+        artistDao.delete(artist)
+    }
+
+    @WorkerThread
+    suspend fun deleteAllArtists() {
         try {
-            scope.launch {
-                PlayerDatabase.getDatabase(context).artistDao().insert(artist)
-            }
+            artistDao.deleteAll()
         } catch (e: Exception) {
-            Log.d(TAG, e.message)
         }
     }
 
-    fun updateArtist(artist: Artist) {
-        try {
-            scope.launch {
-                PlayerDatabase.getDatabase(context).artistDao().update(artist)
-            }
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
+    @WorkerThread
+    suspend fun getAllArtists(): List<Artist>? {
+        return artistDao.getAllArtists()
     }
 
-    fun deleteArtist(artist: Artist) {
-        try {
-            scope.launch {
-                PlayerDatabase.getDatabase(context).artistDao().delete(artist)
-            }
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
+    @WorkerThread
+    suspend fun getArtistById(id: Int): Artist? {
+        return artistDao.getArtistById(id)
     }
 
-    fun getAllArtists(): LiveData<List<Artist>>? {
-        var artists: LiveData<List<Artist>>? = null
-        try {
-            scope.launch {
-                artists = withContext(scope.coroutineContext) {
-                    PlayerDatabase.getDatabase(context).artistDao().getAllArtists()
-                }
-            }
-
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
-        return artists
-    }
-
-    fun getArtist(id: Int): Artist? {
-        var artist: Artist? = null
-        try {
-            scope.launch {
-                artist = withContext(scope.coroutineContext) {
-                    PlayerDatabase.getDatabase(context).artistDao().getArtistById(id)
-                }
-            }
-
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
-        return artist
+    @WorkerThread
+    suspend fun getArtistByName(name: String): Artist? {
+        return artistDao.getArtistByName(name)
     }
 }

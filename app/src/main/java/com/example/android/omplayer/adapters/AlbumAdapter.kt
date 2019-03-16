@@ -11,6 +11,7 @@ import com.example.android.omplayer.db.entities.Album
 import com.bumptech.glide.Glide
 import android.net.Uri
 import android.widget.ImageView
+import com.bumptech.glide.request.RequestOptions
 import java.io.File
 
 
@@ -23,10 +24,9 @@ class AlbumAdapter(val albums: List<Album>) : RecyclerView.Adapter<AlbumAdapter.
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemName.text = albums[position].title
-        viewHolder.itemYear.text = if (albums[position].year != 0) albums[position].year.toString() else "Unknown"
+        viewHolder.itemYear.text = albums[position].year
         viewHolder.loadImage(albums[position].cover)
     }
-
 
     override fun getItemCount(): Int {
         return albums.size
@@ -45,14 +45,13 @@ class AlbumAdapter(val albums: List<Album>) : RecyclerView.Adapter<AlbumAdapter.
         }
 
         fun loadImage(albumArtUrl: String) {
-            if (albumArtUrl != "") {
-                val file = File(albumArtUrl)
-                val uri = Uri.fromFile(file)
+            val file = File(albumArtUrl)
+            val uri = Uri.fromFile(file)
 
-                Glide.with(itemView).load(uri).into(itemCover)
-            } else {
-                Glide.with(itemView).load(R.drawable.placeholder).into(itemCover)
-            }
+            Glide.with(itemView).load(uri)
+                .apply(RequestOptions().placeholder(R.drawable.placeholder).error(R.drawable.placeholder))
+                .into(itemCover)
+
         }
     }
 }

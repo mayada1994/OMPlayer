@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import com.example.android.omplayer.R
+import com.example.android.omplayer.activities.MainActivity
 import com.google.android.material.tabs.TabLayout
 import com.example.android.omplayer.adapters.LibraryAdapter
 
@@ -19,7 +20,9 @@ class LibraryFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
+        (activity as MainActivity)
+            .setActionBarTitle("Library")
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         val view = inflater.inflate(R.layout.fragment_library, container, false)
 
         // Setting ViewPager for each Tabs

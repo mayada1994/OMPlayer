@@ -4,61 +4,28 @@ import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import android.util.Log
+import androidx.annotation.WorkerThread
 import com.example.android.omplayer.db.entities.Album
 import com.example.android.omplayer.db.entities.Artist
 import com.example.android.omplayer.db.entities.Genre
 import com.example.android.omplayer.db.entities.Track
-import android.media.MediaMetadataRetriever
-import com.example.android.omplayer.db.PlayerDatabase
-import com.example.android.omplayer.entities.LibraryUtil
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.android.omplayer.di.SingletonHolder
 
 
 class LibraryRepository(val context: Context) {
 
     private val TAG: String = this.javaClass.simpleName
+    private val UNKNOWN: String = "Unknown"
+
     var genres = ArrayList<Genre>()
     var artists = ArrayList<Artist>()
     var albums = ArrayList<Album>()
     var tracks = ArrayList<Track>()
+    val db = SingletonHolder.db
     private val formats = arrayOf(".aac", ".mp3", ".wav", ".ogg", ".midi", ".3gp", ".mp4", ".m4a", ".amr", ".flac")
 
-    fun prepareDataForDb() {
-        try {
-            val genreRepository = GenreRepository(context)
-            CoroutineScope(Dispatchers.IO).launch {
-                withContext(coroutineContext) {
-                    genres = scanDeviceForGenres()
-                    LibraryUtil.genres = genres
-                    for (genre in LibraryUtil.genres) {
-                        genreRepository.insertGenre(genre)
-                    }
-                }
-
-                withContext(coroutineContext) {
-                    artists = scanDeviceForArtists()
-                    LibraryUtil.artists = artists
-                }
-
-                withContext(coroutineContext) {
-                    albums = scanDeviceForAlbums()
-                    LibraryUtil.albums = albums
-                }
-
-                withContext(coroutineContext) {
-                    tracks = scanDeviceForTracks()
-                    LibraryUtil.tracks = tracks
-                }
-            }
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
-    }
-
-    private fun scanDeviceForGenres(): ArrayList<Genre> {
+    @WorkerThread
+    suspend fun scanDeviceForGenres(): ArrayList<Genre> {
         val where: String? = null
 
         val columns = arrayOf(MediaStore.Audio.Genres.NAME)
@@ -71,11 +38,9 @@ class LibraryRepository(val context: Context) {
             if (cursor != null) {
                 cursor.moveToFirst()
                 while (!cursor.isAfterLast) {
-                    val name = if (cursor.getString(0) != null) cursor.getString(0) else "Unknown"
-
+                    val name = if (cursor.getString(0) != null) cursor.getString(0) else UNKNOWN
                     cursor.moveToNext()
                     genres.add(Genre(name))
-                    PlayerDatabase.getDatabase(context).genreDao().insert(Genre(name))
                 }
             }
 
@@ -86,10 +51,12 @@ class LibraryRepository(val context: Context) {
                 cursor.close()
             }
         }
+        genres.add(Genre(UNKNOWN))
         return genres
     }
 
-    private fun scanDeviceForArtists(): ArrayList<Artist> {
+    @WorkerThread
+    suspend fun scanDeviceForArtists(): ArrayList<Artist> {
         val where: String? = null
         val columns = arrayOf(
             MediaStore.Audio.Artists.ARTIST
@@ -104,7 +71,7 @@ class LibraryRepository(val context: Context) {
             if (cursor != null) {
                 cursor.moveToFirst()
                 while (!cursor.isAfterLast) {
-                    val name = if (cursor.getString(0) != null) cursor.getString(0) else "Unknown"
+                    val name = if (cursor.getString(0) != null) cursor.getString(0) else UNKNOWN
 
                     cursor.moveToNext()
                     artists.add(Artist(name))
@@ -121,9 +88,9 @@ class LibraryRepository(val context: Context) {
         return artists
     }
 
-    private fun scanDeviceForAlbums(): ArrayList<Album> {
+    @WorkerThread
+    suspend fun scanDeviceForAlbums(): ArrayList<Album> {
         val where: String? = null
-
         val columns = arrayOf(
             MediaStore.Audio.Albums.ALBUM,
             MediaStore.Audio.Albums.ARTIST,
@@ -141,15 +108,16 @@ class LibraryRepository(val context: Context) {
             if (cursor != null) {
                 cursor.moveToFirst()
                 while (!cursor.isAfterLast) {
-                    val title = if (cursor.getString(0) != null) cursor.getString(0) else "Unknown"
-                    val artist = if (cursor.getString(1) != null) cursor.getString(1) else "Unknown"
-                    val albumart = if (cursor.getString(2) != null) cursor.getString(2) else ""
-                    val year = if (cursor.getString(3) != null) cursor.getString(3) else "0"
+                    val title = if (cursor.getString(0) != null) cursor.getString(0) else UNKNOWN
+                    val artist = if (cursor.getString(1) != null) cursor.getString(1) else UNKNOWN
+                    val albumArt = if (cursor.getString(2) != null) cursor.getString(2) else ""
+                    val year = if (cursor.getString(3) != null) cursor.getString(3) else UNKNOWN
 
                     cursor.moveToNext()
 
                     if (!containedAlbums.contains(AlbumTag(artist, title, year))) {
-                        albums.add(Album(title, albumart, year.toInt(), getArtistId(artist)))
+                        val artistId = getArtistId(artist)
+                        albums.add(Album(title, albumArt, year, artistId))
                         containedAlbums.add(AlbumTag(artist, title, year))
                     }
                 }
@@ -165,7 +133,8 @@ class LibraryRepository(val context: Context) {
         return albums
     }
 
-    private fun scanDeviceForTracks(): ArrayList<Track> {
+    @WorkerThread
+    suspend fun scanDeviceForTracks(): ArrayList<Track> {
         val selection = MediaStore.Audio.Media.IS_MUSIC + " != 0"
         val projection = arrayOf(
             MediaStore.Audio.Media.TITLE,
@@ -174,14 +143,14 @@ class LibraryRepository(val context: Context) {
             MediaStore.Audio.Media.DURATION,
             MediaStore.Audio.Media.TRACK,
             MediaStore.Audio.Media.ALBUM,
-            MediaStore.Audio.Media.YEAR
+            MediaStore.Audio.Media.YEAR,
+            MediaStore.Audio.Media._ID
         )
         val sortOrder =
             MediaStore.Audio.AudioColumns.ARTIST + "," + MediaStore.Audio.AudioColumns.ALBUM + " COLLATE LOCALIZED ASC"
 
         var cursor: Cursor? = null
         try {
-            val media = MediaMetadataRetriever()
             val uri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
             cursor = context.contentResolver.query(uri, projection, selection, null, sortOrder)
             if (cursor != null) {
@@ -193,18 +162,41 @@ class LibraryRepository(val context: Context) {
                     val duration = cursor.getString(3)
                     val position = cursor.getString(4)
                     val album = cursor.getString(5)
-                    val year = cursor.getString(6)
-                    media.setDataSource(path)
-                    val genre = media.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE)
+                    val year = if (cursor.getString(6) != null) cursor.getString(6) else UNKNOWN
+                    val id = cursor.getString(7)
+                    var genre = ""
+
+                    val genreUri = MediaStore.Audio.Genres.getContentUriForAudioId("external", id.toInt())
+                    val genresCursor = context.contentResolver.query(
+                        genreUri,
+                        arrayOf(MediaStore.Audio.Genres.NAME), null, null, null
+                    )
+                    val genre_column_index = genresCursor.getColumnIndexOrThrow(MediaStore.Audio.Genres.NAME)
+
+                    if (genresCursor.moveToFirst()) {
+                        do {
+                            genre = genresCursor.getString(genre_column_index)
+                        } while (genresCursor.moveToNext())
+                    }
+                    if (genresCursor != null) {
+                        genresCursor.close()
+                    }
+
                     cursor.moveToNext()
                     if (path != null && supportedFormat(path)) {
+                        if (genre.isEmpty()) {
+                            genre = UNKNOWN
+                        }
+                        val genreId = getGenreId(genre)
+                        val albumId = getAlbumId(album, artist, year)
+
                         tracks.add(
                             Track(
                                 title,
                                 position,
                                 duration.toInt(),
-                                getAlbumId(album, getArtistId(artist), year.toInt()),
-                                getGenreId(genre),
+                                albumId,
+                                genreId,
                                 path
                             )
                         )
@@ -222,7 +214,8 @@ class LibraryRepository(val context: Context) {
         return tracks
     }
 
-    private fun supportedFormat(path: String): Boolean {
+    @WorkerThread
+    private suspend fun supportedFormat(path: String): Boolean {
         for (format in formats) {
             if (path.endsWith(format)) {
                 return true
@@ -231,33 +224,25 @@ class LibraryRepository(val context: Context) {
         return false
     }
 
-    private fun getGenreId(name: String): Int {
-        for (genre in genres) {
-            if (genre.name == name) {
-                return genre.id
-            }
-        }
-        return 0
+    @WorkerThread
+    private suspend fun getGenreId(name: String): Int {
+        return db.genreDao().getGenreByName(name).id
     }
 
-    private fun getArtistId(name: String): Int {
-        for (artist in artists) {
-            if (artist.name == name) {
-                return artist.id
-            }
-        }
-        return 0
+    @WorkerThread
+    private suspend fun getArtistId(name: String): Int {
+        return db.artistDao().getArtistByName(name).id
     }
 
-    private fun getAlbumId(title: String, artistId: Int, year: Int): Int {
-        for (album in albums) {
-            if (album.title == title && album.artistId == artistId && album.year == year) {
-                return album.id
-            }
+    @WorkerThread
+    private suspend fun getAlbumId(title: String, artist: String, year: String): Int {
+        val artistId = getArtistId(artist)
+        return try {
+            db.albumDao().getAlbumByTrack(artistId, title, year).id
+        } catch (e: Exception) {
+            db.albumDao().getAlbumByTitle(title).id
         }
-        return 0
     }
-
 }
 
 data class AlbumTag(

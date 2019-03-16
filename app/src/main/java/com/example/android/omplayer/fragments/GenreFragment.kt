@@ -10,14 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.example.android.omplayer.R
 import com.example.android.omplayer.adapters.GenreAdapter
-import com.example.android.omplayer.db.entities.Genre
-import com.example.android.omplayer.viewmodels.GenreViewModel
+import com.example.android.omplayer.utils.LibraryUtil
 
-
-var genres = ArrayList<Genre>()
 
 class GenreFragment : Fragment() {
 
+
+    var genres = LibraryUtil.genres
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -31,14 +30,9 @@ class GenreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val genreViewModel = GenreViewModel(context!!)
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = RecyclerView.VERTICAL
 
-        try {
-            genres = genreViewModel.getGenresFromDb().value as ArrayList<Genre>
-        } catch (e: Exception) {
-        }
         if (genres.isNotEmpty()) {
             val itemAdapter = GenreAdapter(genres)
 

@@ -1,77 +1,51 @@
 package com.example.android.omplayer.repositories
 
-import android.content.Context
-import android.util.Log
-import androidx.lifecycle.LiveData
-import com.example.android.omplayer.db.PlayerDatabase
+import androidx.annotation.WorkerThread
+import com.example.android.omplayer.db.dao.GenreDao
 import com.example.android.omplayer.db.entities.Genre
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class GenreRepository(val context: Context) {
+class GenreRepository(private val genreDao: GenreDao) {
 
-    private val TAG: String = this.javaClass.simpleName
-    private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    @WorkerThread
+    suspend fun insertGenre(genre: Genre) {
+        genreDao.insert(genre)
+    }
 
-    fun insertGenre(genre: Genre) {
+    @WorkerThread
+    suspend fun insertAllGenres(genre: ArrayList<Genre>) {
+        genreDao.insertAll(*genre.toTypedArray())
+    }
+
+    @WorkerThread
+    suspend fun updateGenre(genre: Genre) {
+        genreDao.update(genre)
+    }
+
+    @WorkerThread
+    suspend fun deleteGenre(genre: Genre) {
+        genreDao.delete(genre)
+    }
+
+    @WorkerThread
+    suspend fun deleteAllGenres() {
         try {
-            scope.launch {
-                PlayerDatabase.getDatabase(context).genreDao().insert(genre)
-            }
+            genreDao.deleteAll()
         } catch (e: Exception) {
-            Log.d(TAG, e.message)
         }
     }
 
-    fun updateGenre(genre: Genre) {
-        try {
-            scope.launch {
-                PlayerDatabase.getDatabase(context).genreDao().update(genre)
-            }
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
+    @WorkerThread
+    suspend fun getAllGenres(): List<Genre>? {
+        return genreDao.getAllGenres()
     }
 
-    fun deleteGenre(genre: Genre) {
-        try {
-            scope.launch {
-                PlayerDatabase.getDatabase(context).genreDao().delete(genre)
-            }
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
+    @WorkerThread
+    suspend fun getGenreById(id: Int): Genre? {
+        return genreDao.getGenreById(id)
     }
 
-    fun getAllGenres(): LiveData<List<Genre>>? {
-        var genres: LiveData<List<Genre>>? = null
-        try {
-            scope.launch {
-                genres = withContext(scope.coroutineContext) {
-                    PlayerDatabase.getDatabase(context).genreDao().getAllGenres()
-                }
-            }
-
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
-        return genres
-    }
-
-    fun getGenre(id: Int): Genre? {
-        var genre: Genre? = null
-        try {
-            scope.launch {
-                genre = withContext(scope.coroutineContext) {
-                    PlayerDatabase.getDatabase(context).genreDao().getGenreById(id)
-                }
-            }
-
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
-        return genre
+    @WorkerThread
+    suspend fun getGenreByName(name: String): Genre? {
+        return genreDao.getGenreByName(name)
     }
 }

@@ -2,6 +2,7 @@ package com.example.android.omplayer.di
 
 import android.app.Application
 import android.content.Context
+import com.example.android.omplayer.db.PlayerDatabase
 import com.example.android.omplayer.services.playerService.PlayerServiceManager
 import com.example.android.omplayer.stateMachine.PlayerManager
 
@@ -10,6 +11,7 @@ object SingletonHolder {
 
     lateinit var application: Application
     private val context: Context get() = application
+    lateinit var db:PlayerDatabase
 
     val playerManager by lazy {
         PlayerManager(context)
@@ -21,5 +23,6 @@ object SingletonHolder {
     fun init(application: Application) {
         this.application = application
         val playerServiceManager = PlayerServiceManager(context)
+        db = PlayerDatabase.getDatabase(context)
     }
 }

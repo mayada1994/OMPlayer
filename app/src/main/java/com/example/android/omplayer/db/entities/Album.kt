@@ -10,7 +10,8 @@ import androidx.room.PrimaryKey
     tableName = "albums",
     foreignKeys = [ForeignKey(
         entity = Artist::class,
-        parentColumns = ["id"], childColumns = ["artist_id"]
+        parentColumns = ["id"], childColumns = ["artist_id"],
+        onDelete = ForeignKey.CASCADE
     )]
 )
 data class Album(
@@ -19,7 +20,7 @@ data class Album(
     @ColumnInfo(name = "cover")
     var cover: String = "",
     @ColumnInfo(name = "year")
-    var year: Int = 0,
+    var year: String = "",
     @ColumnInfo(name = "artist_id")
     var artistId: Int = 0
 ) {
