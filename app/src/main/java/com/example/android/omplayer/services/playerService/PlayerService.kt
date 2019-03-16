@@ -6,7 +6,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import com.example.android.musicplayerdemo.consts.Extra
+import com.example.android.omplayer.consts.Extra
 import com.example.android.omplayer.App.Companion.CHANNEL_ID
 import com.example.android.omplayer.R
 import com.example.android.omplayer.di.SingletonHolder

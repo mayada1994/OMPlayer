@@ -1,4 +1,4 @@
-package com.example.android.musicplayerdemo.consts
+package com.example.android.omplayer.consts
 
 object Extra {
     const val ACTION = "Action"

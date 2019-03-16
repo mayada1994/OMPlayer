@@ -10,7 +10,7 @@ class IdleState(context: PlayerContext) : State(context) {
         is Action.Play -> {
 
             try {
-                context.mediaPlayer?.setDataSource(context.playlist[0])
+                context.mediaPlayer?.setDataSource(context.playlist[0].path)
                 context.mediaPlayer?.prepare()
             } catch (e: Exception) {
             }

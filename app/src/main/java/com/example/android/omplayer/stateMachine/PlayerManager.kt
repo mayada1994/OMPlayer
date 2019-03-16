@@ -5,6 +5,7 @@ import android.media.MediaPlayer
 import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.android.omplayer.db.entities.Track
 import com.example.android.omplayer.entities.TrackMetadata
 import com.example.android.omplayer.stateMachine.states.IdleState
 import com.example.android.omplayer.stateMachine.states.State
@@ -12,7 +13,7 @@ import com.example.android.omplayer.stateMachine.states.State
 class PlayerManager(override val context: Context) : PlayerContext {
 
     override var mediaPlayer: MediaPlayer = MediaPlayer()
-    override val playlist: MutableList<String> = ArrayList()
+    override val playlist: MutableList<Track> = ArrayList()
 
     //region LiveData
 
@@ -31,7 +32,7 @@ class PlayerManager(override val context: Context) : PlayerContext {
     }
 
     @MainThread
-    fun setPlaylist(playlist: MutableList<String>, action: Action? = Action.Play()) {
+    fun setPlaylist(playlist: MutableList<Track>, action: Action? = Action.Play()) {
         mediaPlayer.setOnCompletionListener {
             performAction(Action.Next())
         }

@@ -26,7 +26,7 @@ class PlayingState(context: PlayerContext, private var currentSong: Int) : State
             }
 
             try {
-                context.mediaPlayer?.setDataSource(context.playlist[currentSong])
+                context.mediaPlayer?.setDataSource(context.playlist[currentSong].path)
                 context.mediaPlayer?.prepare()
             } catch (e: Exception) {
             }
@@ -43,7 +43,7 @@ class PlayingState(context: PlayerContext, private var currentSong: Int) : State
             }
 
             try {
-                context.mediaPlayer?.setDataSource(context.playlist[currentSong])
+                context.mediaPlayer?.setDataSource(context.playlist[currentSong].path)
                 context.mediaPlayer?.prepare()
             } catch (e: Exception) {
             }
