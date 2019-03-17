@@ -6,7 +6,6 @@ import android.os.Looper
 import androidx.lifecycle.*
 import com.example.android.omplayer.db.entities.Track
 import com.example.android.omplayer.di.SingletonHolder
-import com.example.android.omplayer.entities.TrackMetadata
 import com.example.android.omplayer.utils.LibraryUtil
 import com.example.android.omplayer.extensions.foreverObserver
 import com.example.android.omplayer.livedata.ForeverObserver
@@ -31,10 +30,10 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     private val _currentPosition = MutableLiveData<Int?>()
     val currentPosition: LiveData<Int?> = _currentPosition
 
-    private val _metadata = MediatorLiveData<TrackMetadata?>().apply {
+    private val _metadata = MediatorLiveData<Track?>().apply {
         addSource(playerManager.metadata) { value = it }
     }
-    val metadata: LiveData<TrackMetadata?> = _metadata
+    val metadata: LiveData<Track?> = _metadata
     //endregion
 
     private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
@@ -70,7 +69,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
-        playerManager.setPlaylist(playlist, Action.Pause())
+        playerManager.setPlaylist(playlist, LibraryUtil.action)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

@@ -1,8 +1,8 @@
 package com.example.android.omplayer.stateMachine.states
 
-import com.example.android.omplayer.entities.TrackMetadata
 import com.example.android.omplayer.stateMachine.Action
 import com.example.android.omplayer.stateMachine.PlayerContext
+import com.example.android.omplayer.utils.LibraryUtil
 
 class IdleState(context: PlayerContext) : State(context) {
 
@@ -10,13 +10,13 @@ class IdleState(context: PlayerContext) : State(context) {
         is Action.Play -> {
 
             try {
-                context.mediaPlayer?.setDataSource(context.playlist[0].path)
+                context.mediaPlayer?.setDataSource(context.playlist[LibraryUtil.selectedTrack].path)
                 context.mediaPlayer?.prepare()
             } catch (e: Exception) {
             }
-            context.updateMetadata(TrackMetadata(context.mediaPlayer!!.duration))
+            context.updateMetadata(context.playlist[LibraryUtil.selectedTrack])
             context.mediaPlayer?.start()
-            PlayingState(context, 0)
+            PlayingState(context)
         }
         else -> this
     }

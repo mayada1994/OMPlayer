@@ -6,7 +6,6 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.android.omplayer.db.entities.Track
-import com.example.android.omplayer.entities.TrackMetadata
 import com.example.android.omplayer.stateMachine.states.IdleState
 import com.example.android.omplayer.stateMachine.states.State
 
@@ -22,8 +21,8 @@ class PlayerManager(override val context: Context) : PlayerContext {
     }
     val currState: LiveData<State> = _currState
 
-    private val _metadata = MutableLiveData<TrackMetadata>()
-    val metadata: LiveData<TrackMetadata> = _metadata
+    private val _metadata = MutableLiveData<Track>()
+    val metadata: LiveData<Track> = _metadata
     //endregion
 
     @MainThread
@@ -55,7 +54,7 @@ class PlayerManager(override val context: Context) : PlayerContext {
     }
 
     @MainThread
-    override fun updateMetadata(metadata: TrackMetadata) {
+    override fun updateMetadata(metadata: Track) {
         _metadata.value = metadata
     }
 }

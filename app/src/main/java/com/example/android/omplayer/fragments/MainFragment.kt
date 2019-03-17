@@ -18,6 +18,9 @@ import androidx.fragment.app.Fragment
 import com.example.android.omplayer.R
 import com.example.android.omplayer.activities.MainActivity
 import com.example.android.omplayer.di.SingletonHolder
+import com.example.android.omplayer.stateMachine.Action
+import com.example.android.omplayer.utils.LibraryUtil
+import com.example.android.omplayer.utils.PreferenceUtil
 import com.example.android.omplayer.viewmodels.LibraryViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -35,7 +38,7 @@ class MainFragment : Fragment(), View.OnClickListener {
         val libraryViewModel = LibraryViewModel(SingletonHolder.application)
 
         if (checkPermissionREAD_EXTERNAL_STORAGE(context)) {
-            if (libraryViewModel.emptyDb()) {
+            if (libraryViewModel.emptyDb() || PreferenceUtil.updateLibrary) {
                 progressBar.visibility = View.VISIBLE
                 libraryViewModel.loadDataToDb(progressBar)
             } else {
@@ -55,6 +58,7 @@ class MainFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_player -> {
+                LibraryUtil.action = Action.Pause()
                 fragmentManager?.apply {
                     beginTransaction()
                         .replace(

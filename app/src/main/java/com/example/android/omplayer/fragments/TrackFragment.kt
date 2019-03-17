@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.omplayer.R
+import com.example.android.omplayer.activities.MainActivity
 import com.example.android.omplayer.adapters.TrackAdapter
 import com.example.android.omplayer.utils.LibraryUtil
 
@@ -15,10 +16,6 @@ class TrackFragment : Fragment() {
 
 
     var tracks = LibraryUtil.tracks
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,11 +30,16 @@ class TrackFragment : Fragment() {
         layoutManager.orientation = RecyclerView.VERTICAL
 
         if (tracks.isNotEmpty()) {
-            val itemAdapter = TrackAdapter(tracks)
+            val itemAdapter = TrackAdapter(tracks, this@TrackFragment)
 
             val trackList = activity!!.findViewById<RecyclerView>(R.id.track_list_recycler_view)
             trackList.layoutManager = layoutManager
             trackList.adapter = itemAdapter
         }
+    }
+
+    fun openPlayer() {
+        val activity = activity as MainActivity
+        activity.openPlayerFragment()
     }
 }

@@ -1,16 +1,16 @@
 package com.example.android.omplayer.stateMachine.states
 
-import com.example.android.omplayer.entities.TrackMetadata
 import com.example.android.omplayer.stateMachine.Action
 import com.example.android.omplayer.stateMachine.PlayerContext
+import com.example.android.omplayer.utils.LibraryUtil
 
-class PausedState(context: PlayerContext, private var currentSong: Int) : State(context) {
+class PausedState(context: PlayerContext) : State(context) {
 
     override fun handleAction(action: Action): State {
         return when (action) {
             is Action.Play -> {
                 context.mediaPlayer?.start()
-                PlayingState(context,currentSong)
+                PlayingState(context)
             }
             is Action.Pause -> this
             is Action.Stop -> {
@@ -19,35 +19,35 @@ class PausedState(context: PlayerContext, private var currentSong: Int) : State(
             }
             is Action.Next -> {
                 context.mediaPlayer?.reset()
-                if (context.playlist.size -1 > currentSong) {
-                    currentSong += 1
+                if (context.playlist.size -1 > LibraryUtil.selectedTrack) {
+                    LibraryUtil.selectedTrack += 1
                 }else {
-                    currentSong = 0
+                    LibraryUtil.selectedTrack = 0
                 }
 
                 try {
-                    context.mediaPlayer?.setDataSource(context.playlist[currentSong].path)
+                    context.mediaPlayer?.setDataSource(context.playlist[LibraryUtil.selectedTrack].path)
                     context.mediaPlayer?.prepare()
                 } catch (e: Exception) {
                 }
-                context.updateMetadata(TrackMetadata(context.mediaPlayer!!.duration))
-                PausedState(context,currentSong)
+                context.updateMetadata(context.playlist[LibraryUtil.selectedTrack])
+                PausedState(context)
             }
             is Action.Prev -> {
                 context.mediaPlayer?.reset()
-                if (currentSong > 0) {
-                    currentSong -= 1
+                if (LibraryUtil.selectedTrack > 0) {
+                    LibraryUtil.selectedTrack -= 1
                 }else {
-                    currentSong = 0
+                    LibraryUtil.selectedTrack = 0
                 }
 
                 try {
-                    context.mediaPlayer?.setDataSource(context.playlist[currentSong].path)
+                    context.mediaPlayer?.setDataSource(context.playlist[LibraryUtil.selectedTrack].path)
                     context.mediaPlayer?.prepare()
                 } catch (e: Exception) {
                 }
-                context.updateMetadata(TrackMetadata(context.mediaPlayer!!.duration))
-                PausedState(context,currentSong)
+                context.updateMetadata(context.playlist[LibraryUtil.selectedTrack])
+                PausedState(context)
             }
         }
 
