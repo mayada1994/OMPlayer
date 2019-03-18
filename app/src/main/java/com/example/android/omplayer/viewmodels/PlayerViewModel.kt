@@ -1,9 +1,15 @@
 package com.example.android.omplayer.viewmodels
 
 import android.app.Application
+import android.content.Context
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
+import android.widget.TextView
 import androidx.lifecycle.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.android.omplayer.R
 import com.example.android.omplayer.db.entities.Track
 import com.example.android.omplayer.di.SingletonHolder
 import com.example.android.omplayer.utils.LibraryUtil
@@ -13,6 +19,12 @@ import com.example.android.omplayer.stateMachine.Action
 import com.example.android.omplayer.stateMachine.PlayerManager
 import com.example.android.omplayer.stateMachine.states.IdleState
 import com.example.android.omplayer.stateMachine.states.PlayingState
+import com.mikhaellopez.circularimageview.CircularImageView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.ScheduledFuture
@@ -91,6 +103,32 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     private fun stopUpdateSeekbar() {
         scheduledTask?.cancel(true)
         scheduledTask = null
+    }
+
+    fun loadTrackData(cover: CircularImageView, title: TextView, album: TextView, artist: TextView, context: Context) {
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(coroutineContext) {
+                val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+                val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId)
+                val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentAlbum.artistId)
+                withContext(Dispatchers.Main) {
+                    title.text = currentTrack.title
+                    album.text = currentAlbum.title
+                    artist.text = currentArtist.name
+                    loadImage(currentAlbum.cover, cover, context)
+                }
+            }
+        }
+
+    }
+
+    fun loadImage(albumArtUrl: String, cover: CircularImageView, context: Context) {
+        val file = File(albumArtUrl)
+        val uri = Uri.fromFile(file)
+
+        Glide.with(context).load(uri)
+            .apply(RequestOptions().placeholder(R.drawable.placeholder).error(R.drawable.placeholder))
+            .into(cover)
     }
 
     //region View interaction
