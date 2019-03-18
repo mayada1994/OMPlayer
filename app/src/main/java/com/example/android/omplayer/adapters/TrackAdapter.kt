@@ -8,9 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.omplayer.R
 import com.example.android.omplayer.db.entities.Track
+import com.example.android.omplayer.fragments.TrackFragment
+import com.example.android.omplayer.stateMachine.Action
 import com.example.android.omplayer.utils.LibraryUtil
 
-class TrackAdapter(val tracks: List<Track>) : RecyclerView.Adapter<TrackAdapter.ViewHolder>() {
+class TrackAdapter(val tracks: List<Track>, val fragment: TrackFragment) : RecyclerView.Adapter<TrackAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_track, viewGroup, false)
@@ -34,8 +36,9 @@ class TrackAdapter(val tracks: List<Track>) : RecyclerView.Adapter<TrackAdapter.
 
         init {
             itemView.setOnClickListener {
-                Log.i("TAG!!!", path)
                 LibraryUtil.selectedTrack = position
+                LibraryUtil.action = Action.Play()
+                fragment.openPlayer()
             }
         }
     }

@@ -12,7 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e44e90e-bc91-4cd4-84f0-b5d1f82cf137" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/PreferenceUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_mikhaellopez_circularimageview_3_2_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__me_tankery_lib_circularSeekBar_1_1_7_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -24,36 +25,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OMPlayer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OMPlayer.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/AlbumAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/AlbumAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/TrackAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/TrackAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/AlbumDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/AlbumDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/ArtistDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/ArtistDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/GenreDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/GenreDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/TrackDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/TrackDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/entities/Album.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/entities/Album.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/di/SingletonHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/di/SingletonHolder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/entities/LibraryUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/LibraryUtil.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/AlbumFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/AlbumFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/ArtistFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/ArtistFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/GenreFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/GenreFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/LibraryFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/LibraryFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/MainFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/MainFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/TrackFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/TrackFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/AlbumRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/AlbumRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/ArtistRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/ArtistRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/GenreRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/GenreRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/LibraryRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/LibraryRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/TrackRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/TrackRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/AlbumViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/AlbumViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/ArtistViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/ArtistViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/GenreViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/GenreViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/LibraryViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/LibraryViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/PlayerFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/PlayerFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/PlayerViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/PlayerViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/TrackViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/TrackViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,118 +71,71 @@
           <entry key="project.open.time.38" value="1" />
           <entry key="project.open.time.39" value="2" />
           <entry key="project.open.time.40" value="1" />
+          <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.49" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.84" value="1" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="db" value="3" />
-          <entry key="java" value="4" />
-          <entry key="kt" value="188" />
-          <entry key="xml" value="1" />
+          <entry key="java" value="5" />
+          <entry key="kt" value="237" />
+          <entry key="xml" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="4" />
-          <entry key="Kotlin" value="188" />
-          <entry key="XML" value="1" />
+          <entry key="JAVA" value="5" />
+          <entry key="Kotlin" value="237" />
+          <entry key="XML" value="6" />
           <entry key="YAML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="kt" value="6619" />
-          <entry key="xml" value="98" />
+          <entry key="gradle" value="7" />
+          <entry key="kt" value="8234" />
+          <entry key="xml" value="642" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Kotlin" value="6619" />
-          <entry key="XML" value="98" />
+          <entry key="Groovy" value="7" />
+          <entry key="Kotlin" value="8234" />
+          <entry key="XML" value="642" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/PlayerFragment.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret lean-forward="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/PlayerViewModel.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="143">
+              <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/LibraryViewModel.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml">
+          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
-              <folding>
-                <element signature="e#49#652#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/LibraryFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-93">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/LibraryRepository.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
-              <folding>
-                <element signature="e#51#537#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/di/SingletonHolder.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="25" column="27" lean-forward="true" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="27" />
-              <folding>
-                <element signature="e#41#245#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/MainFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-              <folding>
-                <element signature="e#48#806#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/AlbumAdapter.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/PreferenceUtil.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
-              <folding>
-                <element signature="e#44#183#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="191">
+              <caret line="45" column="71" selection-start-line="45" selection-start-column="71" selection-end-line="45" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -220,28 +151,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>genre.name</find>
-      <find>.value</find>
-      <find>GenreDao</find>
-      <find>genreRepository.insertGenre(genre)</find>
-      <find>insert</find>
-      <find>insertGenre(</find>
-      <find>TAG!!!</find>
-      <find>getAllGenres()</find>
-      <find>getGenresFromDb()</find>
-      <find>insertGenre(genre)</find>
-      <find>.insert</find>
-      <find>ArrayList</find>
-      <find>List&lt;Artist&gt;</find>
-      <find>CoroutineScope(Dispatchers.IO)</find>
-      <find>CoroutineScope(Dispatchers.IO).l</find>
-      <find>CoroutineScope(Dispatchers.IO).</find>
-      <find>genres</find>
       <find>getGenre</find>
       <find>Yey</find>
       <find>selectedTrack</find>
       <find>tracklist</find>
-      <find>playlist</find>
       <find>AlbumDa</find>
       <find>var i</find>
       <find>&quot;Unknown Genre&quot;</find>
@@ -250,9 +163,28 @@
       <find>mai</find>
       <find>PlayerDatabase.getDatabase(context)</find>
       <find>PlayerDatabase</find>
+      <find>dur</find>
+      <find>durati</find>
+      <find>playlist</find>
+      <find>MutableList&lt;String&gt;</find>
+      <find>TrackMetadata</find>
+      <find>updateMetadata</find>
+      <find>currentSo</find>
+      <find>currentSong</find>
+      <find>TrackAdapter</find>
+      <find>onStopTrackingTouch</find>
+      <find>activity</find>
+      <find>fragment_placeholder</find>
+      <find>state</find>
+      <find>State</find>
+      <find>currState</find>
+      <find>Action.P</find>
+      <find>PlayerViewModel</find>
+      <find>text_debug</find>
     </findStrings>
     <replaceStrings>
       <replace>UNKNOWN</replace>
+      <replace>LibraryUtil.selectedTrack</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -2729,15 +2661,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/entities/Album.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/GenreDao.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/GenreFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/TrackFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/ArtistFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/ArtistDao.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/entities/LibraryUtil.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/PlayerViewModel.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/AlbumViewModel.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/ArtistViewModel.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/GenreViewModel.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/TrackViewModel.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/GenreRepository.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/AlbumRepository.kt" />
@@ -2749,22 +2678,38 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/LibraryFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/PreferenceUtil.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/PermissionUtil.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/AlbumAdapter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/MainFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/di/SingletonHolder.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/LibraryRepository.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/PlayerContext.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/consts/Extra.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/PlayingState.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/PausedState.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/IdleState.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/TrackViewModel.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/TrackFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/activities/MainActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/LibraryViewModel.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/services/playerService/PlayerService.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/PlayerManager.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/TrackAdapter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/LibraryUtil.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/MainFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/AlbumAdapter.kt" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/PlayerViewModel.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/PlayerFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="67" />
     <option name="y" value="27" />
     <option name="width" value="1299" />
     <option name="height" value="741" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -2786,40 +2731,75 @@
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="omplayer" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
             <path>
-              <item name="OMPlayer" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="omplayer" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="omplayer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="omplayer" type="462c0819:PsiDirectoryNode" />
               <item name="adapters" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="OMPlayer" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="omplayer" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="di" type="462c0819:PsiDirectoryNode" />
+              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="omplayer" type="462c0819:PsiDirectoryNode" />
+              <item name="playerService" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="OMPlayer" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="omplayer" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="fragments" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OMPlayer" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="omplayer" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OMPlayer" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="omplayer" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="viewmodels" type="462c0819:PsiDirectoryNode" />
+              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -2827,12 +2807,11 @@
       </pane>
       <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
-    <property name="device.picker.selection" value="HKL2V91W" />
+    <property name="device.picker.selection" value="Nexus_5X_API_28" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
@@ -2934,25 +2913,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1299" height="743" extended-state="6" />
+    <frame x="67" y="25" width="1299" height="743" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.19872306" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.19233839" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
-      <window_info anchor="bottom" id="Run" order="0" visible="true" weight="0.3425775" />
-      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49960095" weight="0.39512196" />
+      <window_info anchor="bottom" id="Run" order="0" weight="0.3425775" />
+      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49960095" weight="0.39477977" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3289689" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32626426" />
-      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5011971" side_tool="true" weight="0.32626426" />
-      <window_info anchor="bottom" id="Version Control" order="6" weight="0.3284553" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49880287" weight="0.182708" />
-      <window_info anchor="bottom" id="Android Profiler" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5019952" side_tool="true" weight="0.25611746" />
+      <window_info anchor="bottom" id="Version Control" order="6" weight="0.32626426" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4980048" visible="true" weight="0.21533442" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32952693" />
       <window_info anchor="right" id="Device File Explorer" order="0" sideWeight="0.5033113" side_tool="true" weight="0.32960895" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -2960,143 +2940,17 @@
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info anchor="right" id="Assistant" order="5" weight="0.32960895" />
-      <window_info anchor="right" id="Preview" order="6" weight="0.32960895" />
+      <window_info active="true" anchor="right" id="Preview" order="6" visible="true" weight="0.2857143" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/TrackAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="41" column="1" lean-forward="true" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/LibraryAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/ArtistAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/activities/MainActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/tmp/kapt3/stubs/debug/com/example/android/omplayer/db/dao/GenreDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/GenreAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/kapt/debug/com/example/android/omplayer/db/dao/AlbumDao_Impl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="96" selection-start-line="96" selection-end-line="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-common/1.0.1/16382dce10af5c4159654272de71e8c0efe854c7/kotlinx-coroutines-core-common-1.0.1-sources.jar!/Builders.common.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="163" selection-start-line="163" selection-end-line="163" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AndroidStudio/DeviceExplorer/lenovo-lenovo_a2010_a-HKL2V91W/data/data/com.example.android.omplayer/databases/omplayer.db" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/entities/Artist.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core/1.0.1/b1cf01c9c43664298d84d9fd3342786142889538/kotlinx-coroutines-core-1.0.1-sources.jar!/scheduling/CoroutineScheduler.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/entities/Track.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/PlayerDatabase.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="16" column="91" selection-start-line="16" selection-start-column="90" selection-end-line="16" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/AlbumFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="e#48#458#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/GenreFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-84">
-          <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/ArtistFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
           <caret line="46" column="9" lean-forward="true" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
-          <folding>
-            <element signature="e#48#656#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/TrackFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/services/playerService/PlayerService.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="73" column="37" selection-start-line="73" selection-start-column="37" selection-end-line="73" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/PlayerViewModel.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="80" column="36" lean-forward="true" selection-start-line="80" selection-start-column="36" selection-end-line="80" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -3122,13 +2976,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/TrackViewModel.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/entities/Genre.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -3147,9 +2994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="307">
           <caret line="22" column="57" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="57" />
-          <folding>
-            <element signature="e#45#121#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3157,9 +3001,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="74">
           <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
-          <folding>
-            <element signature="e#45#122#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3167,23 +3008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
           <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-          <folding>
-            <element signature="e#45#121#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/IdleState.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/entities/TrackMetadata.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -3191,9 +3015,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
           <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#45#156#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3201,9 +3022,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
-          <folding>
-            <element signature="e#51#196#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3211,9 +3029,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-          <folding>
-            <element signature="e#51#231#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3221,27 +3036,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="19" column="8" lean-forward="true" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-          <folding>
-            <element signature="e#51#196#0" expanded="true" />
-          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/ArtistRepository.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
-          <folding>
-            <element signature="e#51#198#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3252,30 +3053,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/PlayerFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="25" column="86" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="25" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/PermissionUtil.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="58" column="4" lean-forward="true" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
-          <folding>
-            <element signature="e#44#399#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/AlbumAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/PermissionUtil.kt" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.room/room-runtime/2.1.0-alpha04/7b803990a0e97a0b4d717704219bc494d76fc794/room-runtime-2.1.0-alpha04-sources.jar!/androidx/room/util/DBUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-699">
@@ -3283,60 +3061,228 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/PreferenceUtil.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#44#183#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/LibraryFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-93">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/MainFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="e#48#806#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/LibraryRepository.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="e#51#537#0" expanded="true" />
-          </folding>
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/di/SingletonHolder.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="25" column="27" lean-forward="true" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="27" />
-          <folding>
-            <element signature="e#41#245#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="375">
+          <caret line="25" column="27" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/PreferenceUtil.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/consts/Extra.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="36" selection-start-column="36" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/services/playerService/PlayerBroadcastReciever.kt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/Action.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/PlayerContext.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Android/Sdk/sources/android-28/android/media/MediaPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="579" column="13" selection-start-line="579" selection-start-column="13" selection-end-line="579" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/PlayingState.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="56" column="1" selection-start-line="56" selection-start-column="1" selection-end-line="56" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/entities/TrackMetadata.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/LibraryFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/TrackViewModel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="42" lean-forward="true" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/PausedState.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/State.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/activities/MainActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="32" column="1" lean-forward="true" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/services/playerService/PlayerServiceManager.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-311">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/IdleState.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/LibraryViewModel.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
-          <folding>
-            <element signature="e#49#652#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-698">
+          <caret line="44" column="56" selection-start-line="44" selection-start-column="56" selection-end-line="44" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/PlayerManager.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="33" column="76" selection-start-line="33" selection-start-column="68" selection-end-line="33" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/TrackFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="41" column="47" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/LibraryUtil.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/MainFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="60" column="50" selection-start-line="60" selection-start-column="50" selection-end-line="60" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="52" column="61" selection-start-line="52" selection-start-column="61" selection-end-line="52" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/TrackAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/AlbumAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="47" column="40" selection-start-line="47" selection-start-column="40" selection-end-line="47" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/services/playerService/PlayerService.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="97" column="47" lean-forward="true" selection-start-line="97" selection-start-column="47" selection-end-line="97" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/PlayerViewModel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/PlayerFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="45" column="71" selection-start-line="45" selection-start-column="71" selection-end-line="45" selection-end-column="71" />
         </state>
       </provider>
     </entry>

@@ -3,7 +3,7 @@ package com.example.android.omplayer.services.playerService
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import com.example.android.musicplayerdemo.consts.Extra
+import com.example.android.omplayer.consts.Extra
 import com.example.android.omplayer.di.SingletonHolder
 import com.example.android.omplayer.stateMachine.Action
 import com.example.android.omplayer.stateMachine.PlayerManager
