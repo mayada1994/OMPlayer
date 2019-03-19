@@ -22,34 +22,28 @@
                 android:layout_gravity="center_horizontal"
                 app:civ_border_color="#EEEEEE"
                 app:civ_border_width="12dp"
+                android:src="@drawable/placeholder"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-        <me.tankery.lib.circularseekbar.CircularSeekBar
+        <com.savantech.seekarc.SeekArc
                 android:id="@+id/seekbar_audio"
                 android:layout_width="210dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="40dp"
-                android:scaleY="-1"
-                app:cs_circle_stroke_width="3dp"
-                app:cs_pointer_stroke_width="10dp"
-                app:cs_pointer_halo_width="6dp"
-                app:cs_negative_enabled="false"
-                app:cs_circle_style="round"
-                app:cs_circle_progress_color="@color/colorAccent"
-                app:cs_pointer_color="@color/colorAccent"
-                app:cs_pointer_halo_color_ontouch = "@color/colorAccent"
-                app:cs_circle_color = "@android:color/background_light"
-                app:cs_move_outside_circle="false"
-                app:cs_start_angle="180"
-                app:cs_end_angle="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:startAngle="180"
+                app:sweepAngle="180"
+                app:arcColor="@android:color/darker_gray"
+                app:progressColor="@android:color/holo_blue_dark"
+                app:thumbColor="@android:color/holo_blue_light"
+                app:arcWidth="5dp"
+                android:scaleY="-1"
+                app:roundCorner="true"
+                app:seekDirection="clockwise"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout

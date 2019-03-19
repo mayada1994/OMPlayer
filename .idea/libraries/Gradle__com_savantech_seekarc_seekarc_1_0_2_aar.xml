@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.savantech.seekarc:seekarc:1.0.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-seekarc-1.0.2.aar/dd8fc0455a8085071d6a32a9edca0e35/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-seekarc-1.0.2.aar/dd8fc0455a8085071d6a32a9edca0e35/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.savantech.seekarc/seekarc/1.0.2/3b437cf3910bc94b8c557266ab8525651fab5e54/seekarc-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

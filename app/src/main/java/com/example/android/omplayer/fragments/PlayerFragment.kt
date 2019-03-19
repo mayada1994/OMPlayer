@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.android.omplayer.R
 import com.example.android.omplayer.activities.MainActivity
 import com.example.android.omplayer.viewmodels.PlayerViewModel
+import com.savantech.seekarc.SeekArc
 import kotlinx.android.synthetic.main.fragment_player.*
 import me.tankery.lib.circularseekbar.CircularSeekBar
 
@@ -43,7 +44,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
-                seekbar_audio.max = metadata.duration.toFloat()
+                seekbar_audio.setMaxProgress(metadata.duration.toFloat())
                 initializeTrackInfo()
             }
         })
@@ -73,26 +74,20 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
 
     private fun initializeSeekbar() {
+        seekbar_audio.setThumbRadius(8)
 
-        seekbar_audio.setOnSeekBarChangeListener(object : CircularSeekBar.OnCircularSeekBarChangeListener {
-
+        seekbar_audio.setOnSeekArcChangeListener(object : SeekArc.OnSeekArcChangeListener {
             var userSelectedPosition = 0
-
-
-            override fun onStartTrackingTouch(seekBar: CircularSeekBar) {
-
+            override fun onStartTrackingTouch(seekArc: SeekArc?) {
             }
 
-            override fun onProgressChanged(circularSeekBar: CircularSeekBar, progress: Float, fromUser: Boolean) {
-                if (fromUser) {
-                    userSelectedPosition = progress.toInt()
-                }
+            override fun onProgressChanged(seekArc: SeekArc?, progress: Float) {
+                userSelectedPosition = progress.toInt()
             }
 
-            override fun onStopTrackingTouch(seekBar: CircularSeekBar) {
+            override fun onStopTrackingTouch(seekArc: SeekArc?) {
                 viewModel.onSeek(userSelectedPosition)
             }
-
         })
     }
 
