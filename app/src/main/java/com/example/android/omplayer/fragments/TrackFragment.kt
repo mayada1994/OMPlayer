@@ -14,7 +14,6 @@ import com.example.android.omplayer.utils.LibraryUtil
 
 class TrackFragment : Fragment() {
 
-
     var tracks = LibraryUtil.tracks
 
     override fun onCreateView(

@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.android.omplayer.R
+import com.example.android.omplayer.activities.MainActivity
 import com.example.android.omplayer.adapters.GenreAdapter
+import com.example.android.omplayer.db.entities.Track
 import com.example.android.omplayer.utils.LibraryUtil
 
 
@@ -34,11 +36,16 @@ class GenreFragment : Fragment() {
         layoutManager.orientation = RecyclerView.VERTICAL
 
         if (genres.isNotEmpty()) {
-            val itemAdapter = GenreAdapter(genres)
+            val itemAdapter = GenreAdapter(genres, this@GenreFragment)
 
             val genreList = activity!!.findViewById<RecyclerView>(R.id.genre_list_recycler_view)
             genreList.layoutManager = layoutManager
             genreList.adapter = itemAdapter
         }
+    }
+
+    fun selectGenre() {
+        val activity = activity as MainActivity
+        activity.selectGenre()
     }
 }

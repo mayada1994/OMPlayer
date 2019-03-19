@@ -9,6 +9,8 @@ import com.example.android.omplayer.stateMachine.Action
 
 object LibraryUtil {
     var selectedTrack = 0
+    var selectedGenre = 0
+    var selectedGenreTracklist = ArrayList<Track>()
     var tracklist = ArrayList<Track>()
     var genres = ArrayList<Genre>()
     var artists = ArrayList<Artist>()

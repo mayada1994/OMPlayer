@@ -1,6 +1,5 @@
 package com.example.android.omplayer.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +7,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.omplayer.R
 import com.example.android.omplayer.db.entities.Genre
+import com.example.android.omplayer.di.SingletonHolder
+import com.example.android.omplayer.fragments.GenreFragment
+import com.example.android.omplayer.utils.LibraryUtil
+import com.example.android.omplayer.viewmodels.GenreViewModel
 
 
-class GenreAdapter(val genres: List<Genre>) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
+class GenreAdapter(val genres: List<Genre>, val fragment:GenreFragment) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_genre, viewGroup, false)
@@ -32,7 +35,9 @@ class GenreAdapter(val genres: List<Genre>) : RecyclerView.Adapter<GenreAdapter.
 
         init {
             itemView.setOnClickListener {
-                Log.i("TAG!!!", genres[position].toString())
+                val viewModel = GenreViewModel(SingletonHolder.application)
+                LibraryUtil.selectedGenre = position
+                viewModel.loadGenreTracks(LibraryUtil.genres[position].id, fragment)
             }
         }
     }

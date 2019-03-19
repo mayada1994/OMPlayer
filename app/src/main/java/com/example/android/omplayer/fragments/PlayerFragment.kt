@@ -22,7 +22,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
-            .setActionBarTitle("Player Fragment")
+            .setActionBarTitle("Player")
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         return inflater.inflate(R.layout.fragment_player, container, false)
     }
@@ -44,6 +44,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
                 seekbar_audio.max = metadata.duration.toFloat()
+                initializeTrackInfo()
             }
         })
         viewModel.currentPosition.observe(this, Observer {
