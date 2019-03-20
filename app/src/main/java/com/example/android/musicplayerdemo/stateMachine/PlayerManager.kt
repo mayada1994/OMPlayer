@@ -112,7 +112,7 @@ class PlayerManager(override val context: Context) : PlayerContext {
     //endregion
 
     @MainThread
-    fun performAction(action: Action) {
+    private fun performAction(action: Action) {
         _currState.value = currState.value!!.handleAction(action)
     }
 
