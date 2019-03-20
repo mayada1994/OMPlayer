@@ -15,7 +15,7 @@ import com.example.android.omplayer.utils.LibraryUtil
 import com.example.android.omplayer.viewmodels.ArtistViewModel
 import kotlinx.android.synthetic.main.fragment_single_artist.*
 
-class SingleArtistFragment : Fragment() {
+class SingleArtistFragment : Fragment(), BaseAlbumFragment {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,5 +42,10 @@ class SingleArtistFragment : Fragment() {
             albumList.layoutManager = layoutManager
             albumList.adapter = itemAdapter
         }
+    }
+
+    override fun selectAlbum() {
+        val activity = activity as MainActivity
+        activity.selectAlbum()
     }
 }

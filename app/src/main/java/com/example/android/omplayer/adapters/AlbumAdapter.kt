@@ -1,21 +1,24 @@
 package com.example.android.omplayer.adapters
 
-import android.util.Log
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.android.omplayer.R
 import com.example.android.omplayer.db.entities.Album
-import com.bumptech.glide.Glide
-import android.net.Uri
-import android.widget.ImageView
-import com.bumptech.glide.request.RequestOptions
+import com.example.android.omplayer.di.SingletonHolder
+import com.example.android.omplayer.fragments.AlbumFragment
+import com.example.android.omplayer.utils.LibraryUtil
+import com.example.android.omplayer.viewmodels.AlbumViewModel
 import java.io.File
 
 
-class AlbumAdapter(val albums: List<Album>) : RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
+class AlbumAdapter(val albums: List<Album>, val fragment: AlbumFragment) : RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_album, viewGroup, false)
@@ -40,7 +43,10 @@ class AlbumAdapter(val albums: List<Album>) : RecyclerView.Adapter<AlbumAdapter.
 
         init {
             itemView.setOnClickListener {
-                Log.i("TAG!!!", albums[position].toString())
+                val viewModel = AlbumViewModel(SingletonHolder.application)
+                LibraryUtil.currentAlbumList = LibraryUtil.albums
+                LibraryUtil.selectedAlbum = position
+                viewModel.loadAlbumTracks(LibraryUtil.albums[position].id, fragment)
             }
         }
 

@@ -10,8 +10,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.android.omplayer.R
 import com.example.android.omplayer.db.entities.Album
+import com.example.android.omplayer.di.SingletonHolder
 import com.example.android.omplayer.fragments.SingleArtistFragment
 import com.example.android.omplayer.utils.LibraryUtil
+import com.example.android.omplayer.viewmodels.AlbumViewModel
 import com.mikhaellopez.circularimageview.CircularImageView
 import java.io.File
 
@@ -41,7 +43,10 @@ class SingleArtistAdapter(val albums: List<Album>, val fragment: SingleArtistFra
 
         init {
             itemView.setOnClickListener {
-                LibraryUtil.selectedArtist = position
+                val viewModel = AlbumViewModel(SingletonHolder.application)
+                LibraryUtil.selectedAlbum = position
+                LibraryUtil.currentAlbumList = LibraryUtil.selectedArtistAlbumList
+                viewModel.loadAlbumTracks(LibraryUtil.selectedArtistAlbumList[position].id, fragment)
             }
         }
 
@@ -52,7 +57,6 @@ class SingleArtistAdapter(val albums: List<Album>, val fragment: SingleArtistFra
             Glide.with(itemView).load(uri)
                 .apply(RequestOptions().placeholder(R.drawable.placeholder).error(R.drawable.placeholder))
                 .into(itemCover)
-
         }
     }
 }

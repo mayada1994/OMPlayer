@@ -2,11 +2,8 @@ package com.example.android.omplayer.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.android.omplayer.fragments.MainFragment
 import com.example.android.omplayer.R
-import com.example.android.omplayer.fragments.PlayerFragment
-import com.example.android.omplayer.fragments.SingleArtistFragment
-import com.example.android.omplayer.fragments.SingleGenreFragment
+import com.example.android.omplayer.fragments.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +39,12 @@ class MainActivity : AppCompatActivity() {
     fun selectArtist(){
         val playerTransaction = supportFragmentManager.beginTransaction()
         playerTransaction.replace(R.id.fragment_placeholder, SingleArtistFragment()).addToBackStack(null)
+        playerTransaction.commit()
+    }
+
+    fun selectAlbum(){
+        val playerTransaction = supportFragmentManager.beginTransaction()
+        playerTransaction.replace(R.id.fragment_placeholder, SingleAlbumFragment()).addToBackStack(null)
         playerTransaction.commit()
     }
 }

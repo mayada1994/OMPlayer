@@ -16,6 +16,7 @@ object LibraryUtil {
     var selectedGenreTracklist = ArrayList<Track>()
     var selectedArtistAlbumList = ArrayList<Album>()
     var selectedAlbumTracklist = ArrayList<Track>()
+    var currentAlbumList = ArrayList<Album>()
     var tracklist = ArrayList<Track>()
     var genres = ArrayList<Genre>()
     var artists = ArrayList<Artist>()

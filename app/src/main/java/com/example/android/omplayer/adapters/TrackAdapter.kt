@@ -11,7 +11,8 @@ import com.example.android.omplayer.fragments.TrackFragment
 import com.example.android.omplayer.stateMachine.Action
 import com.example.android.omplayer.utils.LibraryUtil
 
-class TrackAdapter(val tracks: List<Track>, val fragment: TrackFragment) : RecyclerView.Adapter<TrackAdapter.ViewHolder>() {
+class TrackAdapter(val tracks: List<Track>, val fragment: TrackFragment) :
+    RecyclerView.Adapter<TrackAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_track, viewGroup, false)
@@ -35,6 +36,7 @@ class TrackAdapter(val tracks: List<Track>, val fragment: TrackFragment) : Recyc
 
         init {
             itemView.setOnClickListener {
+                LibraryUtil.tracklist = LibraryUtil.tracks
                 LibraryUtil.selectedTrack = position
                 LibraryUtil.action = Action.Play()
                 fragment.openPlayer()
