@@ -1,23 +1,24 @@
 package com.example.android.musicplayerdemo.viewmodels
 
 import android.app.Application
-import android.os.Bundle
+import android.content.ComponentName
 import android.os.Handler
 import android.os.Looper
-import android.os.ResultReceiver
-import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.MediaBrowserCompat
+import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.android.musicplayerdemo.R
 import com.example.android.musicplayerdemo.di.SingletonHolder
 import com.example.android.musicplayerdemo.entities.TrackMetadata
 import com.example.android.musicplayerdemo.extensions.foreverObserver
 import com.example.android.musicplayerdemo.livedata.ForeverObserver
+import com.example.android.musicplayerdemo.services.playerService.PlayerService
 import com.example.android.musicplayerdemo.stateMachine.Action
 import com.example.android.musicplayerdemo.stateMachine.PlayerManager
 import com.example.android.musicplayerdemo.stateMachine.states.IdleState
 import com.example.android.musicplayerdemo.stateMachine.states.PlayingState
-import java.io.IOException
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.ScheduledFuture
@@ -26,6 +27,8 @@ import java.util.concurrent.TimeUnit
 class PlayerViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver {
 
     companion object {
+        val TAG: String = PlayerViewModel::class.java.simpleName
+
         const val MEDIA_RES_1 = R.raw.funky_town
         const val MEDIA_RES_2 = R.raw.the_man_who
         const val MEDIA_RES_3 = R.raw.country_roads
@@ -35,6 +38,26 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
 
+    //region MediaLibraryCompat
+
+    private val mediaControllerCompat: MediaControllerCompat by lazy {
+        MediaControllerCompat(
+            application,
+            playerManager.mediaSessionCompat.sessionToken
+        ).apply {
+            registerCallback(
+                object : MediaControllerCompat.Callback() {
+
+                    override fun onPlaybackStateChanged(state: PlaybackStateCompat?) {
+                        super.onPlaybackStateChanged(state)
+                        Log.d(TAG, "onPlaybackStateChanged: $state")
+                    }
+                }
+            )
+        }
+    }
+
+    //endregion
 
     //region LiveData
 
@@ -77,7 +100,6 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         super.onCleared()
         foreverObservers.forEach { it.release() }
     }
-    
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
@@ -88,7 +110,6 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     fun onStop() {
         stopUpdateSeekbar()
     }
-
 
     fun startUpdateSeekbar() {
         if (scheduledTask == null) {
@@ -108,17 +129,17 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     //region View interaction
 
-    fun onPlayClicked() = playerManager.performAction(Action.Play())
+    fun onPlayClicked() = mediaControllerCompat.transportControls.play()
 
-    fun onPauseClicked() =  playerManager.performAction(Action.Pause())
+    fun onPauseClicked() = mediaControllerCompat.transportControls.pause()
 
-    fun onNextClicked() =  playerManager.performAction(Action.Next())
+    fun onNextClicked() = mediaControllerCompat.transportControls.skipToNext()
 
-    fun onPrevClicked() = playerManager.performAction(Action.Prev())
+    fun onPrevClicked() = mediaControllerCompat.transportControls.skipToPrevious()
 
-    fun onStopClicked() = playerManager.performAction(Action.Stop())
+    fun onStopClicked() = mediaControllerCompat.transportControls.stop()
 
-    fun onSeek(position: Int) = playerManager.seekTo(position)
+    fun onSeek(position: Int) = mediaControllerCompat.transportControls.seekTo(position.toLong())
 
     //endregion
 

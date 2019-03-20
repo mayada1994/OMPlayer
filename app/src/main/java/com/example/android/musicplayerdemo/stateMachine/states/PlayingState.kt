@@ -1,5 +1,6 @@
 package com.example.android.musicplayerdemo.stateMachine.states
 
+import android.support.v4.media.session.PlaybackStateCompat
 import com.example.android.musicplayerdemo.entities.TrackMetadata
 import com.example.android.musicplayerdemo.stateMachine.Action
 import com.example.android.musicplayerdemo.stateMachine.Action.*
@@ -11,10 +12,12 @@ class PlayingState(context: PlayerContext, private var currentSong: Int) : State
         is Play -> this
         is Pause -> {
             context.mediaPlayer.pause()
+
             PausedState(context, currentSong)
         }
         is Stop -> {
             context.mediaPlayer.reset()
+
             IdleState(context)
         }
         is Next -> {
@@ -32,6 +35,8 @@ class PlayingState(context: PlayerContext, private var currentSong: Int) : State
             }
             context.updateMetadata(TrackMetadata(context.mediaPlayer.duration))
             context.mediaPlayer.start()
+            assetFileDescriptor.close()
+
             PlayingState(context,currentSong)
         }
         is Prev -> {
@@ -49,6 +54,8 @@ class PlayingState(context: PlayerContext, private var currentSong: Int) : State
             }
             context.updateMetadata(TrackMetadata(context.mediaPlayer.duration))
             context.mediaPlayer.start()
+            assetFileDescriptor.close()
+
             PlayingState(context,currentSong)
         }
     }
