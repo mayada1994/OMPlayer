@@ -12,7 +12,6 @@ import com.example.android.omplayer.activities.MainActivity
 import com.example.android.omplayer.viewmodels.PlayerViewModel
 import com.savantech.seekarc.SeekArc
 import kotlinx.android.synthetic.main.fragment_player.*
-import me.tankery.lib.circularseekbar.CircularSeekBar
 
 
 class PlayerFragment : Fragment(), View.OnClickListener {

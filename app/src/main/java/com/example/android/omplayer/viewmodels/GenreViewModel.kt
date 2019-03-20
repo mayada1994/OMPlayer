@@ -27,7 +27,6 @@ class GenreViewModel(application: Application) : AndroidViewModel(application) {
                 tracks = trackRepository.getTracksByGenreId(genreId) as ArrayList<Track>
                 withContext(Dispatchers.Main) {
                     LibraryUtil.selectedGenreTracklist = tracks
-                    //progressBar.visibility = View.GONE
                     fragment.selectGenre()
                 }
             }

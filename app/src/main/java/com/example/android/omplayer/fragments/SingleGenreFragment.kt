@@ -10,12 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.omplayer.R
 import com.example.android.omplayer.activities.MainActivity
 import com.example.android.omplayer.adapters.SingleGenreAdapter
-import com.example.android.omplayer.adapters.TrackAdapter
-import com.example.android.omplayer.db.entities.Track
 import com.example.android.omplayer.di.SingletonHolder
 import com.example.android.omplayer.utils.LibraryUtil
 import com.example.android.omplayer.viewmodels.GenreViewModel
-import kotlinx.android.synthetic.main.single_genre_fragment.*
+import kotlinx.android.synthetic.main.fragment_single_genre.*
 
 class SingleGenreFragment : Fragment() {
 
@@ -26,7 +24,7 @@ class SingleGenreFragment : Fragment() {
         (activity as MainActivity)
             .setActionBarTitle("Genres")
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        return inflater.inflate(R.layout.single_genre_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_single_genre, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

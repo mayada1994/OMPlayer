@@ -1,6 +1,5 @@
 package com.example.android.omplayer.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +7,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.omplayer.R
 import com.example.android.omplayer.db.entities.Artist
+import com.example.android.omplayer.di.SingletonHolder
+import com.example.android.omplayer.fragments.ArtistFragment
+import com.example.android.omplayer.utils.LibraryUtil
+import com.example.android.omplayer.viewmodels.ArtistViewModel
 
 
-class ArtistAdapter(val artists: List<Artist>) : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
+class ArtistAdapter(val artists: List<Artist>, val fragment: ArtistFragment) : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_artist, viewGroup, false)
@@ -32,7 +35,9 @@ class ArtistAdapter(val artists: List<Artist>) : RecyclerView.Adapter<ArtistAdap
 
         init {
             itemView.setOnClickListener {
-                Log.i("TAG!!!", artists[position].toString())
+                val viewModel = ArtistViewModel(SingletonHolder.application)
+                LibraryUtil.selectedArtist = position
+                viewModel.loadArtistAlbums(LibraryUtil.artists[position].id, fragment)
             }
         }
     }

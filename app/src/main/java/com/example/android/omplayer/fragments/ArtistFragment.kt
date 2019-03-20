@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.omplayer.R
+import com.example.android.omplayer.activities.MainActivity
 import com.example.android.omplayer.adapters.ArtistAdapter
 import com.example.android.omplayer.utils.LibraryUtil
 
@@ -15,10 +16,6 @@ import com.example.android.omplayer.utils.LibraryUtil
 class ArtistFragment : Fragment() {
 
     var artists = LibraryUtil.artists
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,11 +30,16 @@ class ArtistFragment : Fragment() {
         layoutManager.orientation = RecyclerView.VERTICAL
 
         if (artists.isNotEmpty()) {
-            val itemAdapter = ArtistAdapter(artists)
+            val itemAdapter = ArtistAdapter(artists, this@ArtistFragment)
 
             val artistList = activity!!.findViewById<RecyclerView>(R.id.artist_list_recycler_view)
             artistList.layoutManager = layoutManager
             artistList.adapter = itemAdapter
         }
+    }
+
+    fun selectArtist() {
+        val activity = activity as MainActivity
+        activity.selectArtist()
     }
 }
