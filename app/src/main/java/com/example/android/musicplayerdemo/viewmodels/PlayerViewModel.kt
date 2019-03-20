@@ -64,6 +64,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     private val _currentPosition = MutableLiveData<Int?>()
     val currentPosition: LiveData<Int?> = _currentPosition
 
+    val currState = SingletonHolder.playerManager.currState
+
     private val _metadata = MediatorLiveData<TrackMetadata?>().apply {
         addSource(playerManager.metadata) { value = it }
     }
