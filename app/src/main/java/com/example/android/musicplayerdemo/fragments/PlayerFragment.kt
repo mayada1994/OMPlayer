@@ -10,6 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.musicplayerdemo.R
 import com.example.android.musicplayerdemo.activities.MainActivity
+import com.example.android.musicplayerdemo.stateMachine.states.IdleState
+import com.example.android.musicplayerdemo.stateMachine.states.PausedState
+import com.example.android.musicplayerdemo.stateMachine.states.PlayingState
 import com.example.android.musicplayerdemo.utils.FormatUtils
 import com.example.android.musicplayerdemo.viewmodels.PlayerViewModel
 import kotlinx.android.synthetic.main.fragment_player.*
@@ -50,6 +53,18 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         viewModel.currentPosition.observe(this, Observer {
             seekbar_audio.setProgress(it ?: 0, true)
             timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
+        })
+        viewModel.currState.observe(this, Observer {
+            when (it) {
+                is PlayingState -> {
+                    button_play.setImageResource(R.drawable.pause)
+                    isPlaying = true
+                }
+                is PausedState -> {
+                    button_play.setImageResource(R.drawable.play)
+                   isPlaying = false
+                }
+            }
         })
 
     }

@@ -6,18 +6,22 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import androidx.media.app.NotificationCompat.MediaStyle
+import androidx.media.session.MediaButtonReceiver
 import com.example.android.musicplayerdemo.application.App.Companion.CHANNEL_ID
-import com.example.android.musicplayerdemo.R
 import com.example.android.musicplayerdemo.consts.Extra
 import com.example.android.musicplayerdemo.consts.RequestCodes
 import com.example.android.musicplayerdemo.di.SingletonHolder
 import com.example.android.musicplayerdemo.stateMachine.Action
 
 class PlayerService : Service() {
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
+    }
 
-    val playerManager = SingletonHolder.playerManager
+    private val playerManager = SingletonHolder.playerManager
 
-    val stopPendingIntent by lazy {
+    private val stopPendingIntent by lazy {
         PendingIntent.getBroadcast(
             this,
             RequestCodes.STOP.hashCode(),
@@ -27,7 +31,7 @@ class PlayerService : Service() {
         )
     }
 
-    val playPendingIntent by lazy {
+    private val playPendingIntent by lazy {
         PendingIntent.getBroadcast(
             this,
             RequestCodes.PLAY.hashCode(),
@@ -37,7 +41,7 @@ class PlayerService : Service() {
         )
     }
 
-    val pausePendingIntent by lazy {
+    private val pausePendingIntent by lazy {
         PendingIntent.getBroadcast(
             this,
             RequestCodes.PAUSE.hashCode(),
@@ -47,7 +51,7 @@ class PlayerService : Service() {
         )
     }
 
-    val nextPendingIntent by lazy {
+    private val nextPendingIntent by lazy {
         PendingIntent.getBroadcast(
             this,
             RequestCodes.NEXT.hashCode(),
@@ -57,7 +61,7 @@ class PlayerService : Service() {
         )
     }
 
-    val prevPendingIntent by lazy {
+    private val prevPendingIntent by lazy {
         PendingIntent.getBroadcast(
             this,
             RequestCodes.PREV.hashCode(),
@@ -67,36 +71,37 @@ class PlayerService : Service() {
         )
     }
 
-
-    override fun onBind(intent: Intent?): IBinder? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+
+        MediaButtonReceiver.handleIntent(playerManager.mediaSessionCompat, intent)
 
         val notification: Notification
 
         when (intent?.getSerializableExtra(Extra.ACTION)) {
             is Action.Play -> {
                 notification = NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.music_icon)
+                    .setSmallIcon(com.example.android.musicplayerdemo.R.drawable.music_icon)
                     .setContentTitle("Pass here song name")
                     .setContentText("Playing")
-                    .addAction(R.drawable.pause, "pause", pausePendingIntent)
-                    .addAction(R.drawable.next, "next", nextPendingIntent)
-                    .addAction(R.drawable.stop, "stop", stopPendingIntent)
+                    .addAction(com.example.android.musicplayerdemo.R.drawable.prev, "prev", prevPendingIntent)
+                    .addAction(com.example.android.musicplayerdemo.R.drawable.pause, "pause", pausePendingIntent)
+                    .addAction(com.example.android.musicplayerdemo.R.drawable.next, "next", nextPendingIntent)
+                    .addAction(com.example.android.musicplayerdemo.R.drawable.close, "close", stopPendingIntent)
+                    .setStyle(MediaStyle())
                     .build()!!
                 startForeground(1, notification)
             }
 
             is Action.Pause -> {
                 notification = NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.music_icon)
+                    .setSmallIcon(com.example.android.musicplayerdemo.R.drawable.music_icon)
                     .setContentTitle("Pass here song name")
                     .setContentText("Paused")
-                    .addAction(R.drawable.play, "play", playPendingIntent)
-                    .addAction(R.drawable.next, "next", nextPendingIntent)
-                    .addAction(R.drawable.stop, "stop", stopPendingIntent)
+                    .addAction(com.example.android.musicplayerdemo.R.drawable.prev, "prev", prevPendingIntent)
+                    .addAction(com.example.android.musicplayerdemo.R.drawable.play, "play", playPendingIntent)
+                    .addAction(com.example.android.musicplayerdemo.R.drawable.next, "next", nextPendingIntent)
+                    .addAction(com.example.android.musicplayerdemo.R.drawable.close, "close", stopPendingIntent)
+                    .setStyle(MediaStyle())
                     .build()!!
                 startForeground(1, notification)
             }
