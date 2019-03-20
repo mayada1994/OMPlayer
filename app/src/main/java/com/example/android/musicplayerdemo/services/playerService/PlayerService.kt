@@ -86,7 +86,7 @@ class PlayerService : Service() {
                     .addAction(com.example.android.musicplayerdemo.R.drawable.prev, "prev", prevPendingIntent)
                     .addAction(com.example.android.musicplayerdemo.R.drawable.pause, "pause", pausePendingIntent)
                     .addAction(com.example.android.musicplayerdemo.R.drawable.next, "next", nextPendingIntent)
-                    .addAction(com.example.android.musicplayerdemo.R.drawable.stop, "stop", stopPendingIntent)
+                    .addAction(com.example.android.musicplayerdemo.R.drawable.close, "close", stopPendingIntent)
                     .setStyle(MediaStyle())
                     .build()!!
                 startForeground(1, notification)
@@ -97,9 +97,10 @@ class PlayerService : Service() {
                     .setSmallIcon(com.example.android.musicplayerdemo.R.drawable.music_icon)
                     .setContentTitle("Pass here song name")
                     .setContentText("Paused")
+                    .addAction(com.example.android.musicplayerdemo.R.drawable.prev, "prev", prevPendingIntent)
                     .addAction(com.example.android.musicplayerdemo.R.drawable.play, "play", playPendingIntent)
                     .addAction(com.example.android.musicplayerdemo.R.drawable.next, "next", nextPendingIntent)
-                    .addAction(com.example.android.musicplayerdemo.R.drawable.stop, "stop", stopPendingIntent)
+                    .addAction(com.example.android.musicplayerdemo.R.drawable.close, "close", stopPendingIntent)
                     .setStyle(MediaStyle())
                     .build()!!
                 startForeground(1, notification)
