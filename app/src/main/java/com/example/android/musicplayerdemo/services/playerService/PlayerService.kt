@@ -4,6 +4,8 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
+import android.content.IntentFilter
+import android.media.AudioManager
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.media.app.NotificationCompat.MediaStyle
@@ -15,11 +17,11 @@ import com.example.android.musicplayerdemo.di.SingletonHolder
 import com.example.android.musicplayerdemo.stateMachine.Action
 
 class PlayerService : Service() {
-    override fun onBind(intent: Intent?): IBinder? {
-        return null
-    }
 
     private val playerManager = SingletonHolder.playerManager
+
+    private val becomingNoisyReceiver =
+        BecomingNoisyReceiver()
 
     private val stopPendingIntent by lazy {
         PendingIntent.getBroadcast(
@@ -71,6 +73,13 @@ class PlayerService : Service() {
         )
     }
 
+    override fun onCreate() {
+        super.onCreate()
+        //Handles headphones coming unplugged. cannot be done through a manifest receiver
+        val filter = IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
+        registerReceiver(becomingNoisyReceiver, filter)
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
         MediaButtonReceiver.handleIntent(playerManager.mediaSessionCompat, intent)
@@ -111,8 +120,13 @@ class PlayerService : Service() {
         return START_NOT_STICKY
     }
 
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        unregisterReceiver(becomingNoisyReceiver)
         stopForeground(STOP_FOREGROUND_DETACH)
     }
 
