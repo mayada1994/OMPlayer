@@ -12,6 +12,7 @@ object LibraryUtil {
     var selectedArtist = 0
     var selectedAlbum = 0
     var selectedTrack = 0
+    var selectedTrackVideoId = ""
 
     var selectedGenreTracklist = ArrayList<Track>()
     var selectedArtistAlbumList = ArrayList<Album>()

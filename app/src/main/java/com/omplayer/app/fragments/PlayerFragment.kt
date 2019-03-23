@@ -40,6 +40,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         button_reset.setOnClickListener(this)
         button_pause.setOnClickListener(this)
         button_play.setOnClickListener(this)
+        button_youtube_player.setOnClickListener(this)
 
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
@@ -65,7 +66,10 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 viewModel.onPrevClicked()
                 viewModel.loadTrackData(iv_track_cover, tv_track_title, tv_track_album, tv_track_artist, context!!)
             }
-            R.id.button_reset -> viewModel.onStopClicked()
+            R.id.button_reset -> {
+                viewModel.onStopClicked()
+            }
+            R.id.button_youtube_player -> playVideo()
         }
     }
 
@@ -97,4 +101,8 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
     //endregion
 
+    fun playVideo() {
+        val activity = activity as MainActivity
+        activity.playVideo()
+    }
 }

@@ -32,6 +32,8 @@ import java.util.concurrent.TimeUnit
 
 class PlayerViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver {
 
+    private val videoViewModel = VideoViewModel(application)
+
     private val playlist: MutableList<Track> = LibraryUtil.tracklist
     private val playerManager: PlayerManager = SingletonHolder.playerManager
 
@@ -112,6 +114,11 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
                 val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId)
                 val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentAlbum.artistId)
                 withContext(Dispatchers.Main) {
+                    videoViewModel.getVideoId(
+                        currentArtist.name,
+                        currentAlbum.title,
+                        currentTrack.title
+                    )
                     title.text = currentTrack.title
                     album.text = currentAlbum.title
                     artist.text = currentArtist.name

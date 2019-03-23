@@ -47,4 +47,10 @@ class MainActivity : AppCompatActivity() {
         playerTransaction.replace(R.id.fragment_placeholder, SingleAlbumFragment()).addToBackStack(null)
         playerTransaction.commit()
     }
+
+    fun playVideo(){
+        val playerTransaction = supportFragmentManager.beginTransaction()
+        playerTransaction.replace(R.id.fragment_placeholder, VideoFragment()).addToBackStack(null)
+        playerTransaction.commit()
+    }
 }

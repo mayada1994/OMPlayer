@@ -6,15 +6,20 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="TAG!!!" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e44e90e-bc91-4cd4-84f0-b5d1f82cf137" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/extensions/LiveDataExtensions.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/stateMachine/states/State.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/TrackViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileContent/fileContent.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle____local_aars____home_mayada_StudioProjects_GeekHubProject_OMPlayer_app_libs_YouTubeAndroidPlayerApi_jar_unspecified_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_retrofit_retrofit2_kotlin_coroutines_adapter_0_9_2_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/libs/YouTubeAndroidPlayerApi.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/VideoFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/repositories/YouTubeRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/services/YouTubeService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/VideoViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_video.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -26,73 +31,18 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_8_0_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OMPlayer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OMPlayer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/android/omplayer/ExampleInstrumentedTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/omplayer/app/ExampleInstrumentedTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/App.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/activities/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/activities/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/AlbumAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/adapters/AlbumAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/ArtistAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/adapters/ArtistAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/GenreAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/adapters/GenreAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/LibraryAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/adapters/LibraryAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/SingleAlbumAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/adapters/SingleAlbumAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/SingleArtistAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/adapters/SingleArtistAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/SingleGenreAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/adapters/SingleGenreAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/TrackAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/adapters/TrackAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/consts/Extra.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/consts/Extra.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/PlayerDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/db/PlayerDatabase.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/AlbumDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/db/dao/AlbumDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/ArtistDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/db/dao/ArtistDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/GenreDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/db/dao/GenreDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/TrackDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/db/dao/TrackDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/entities/Album.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/db/entities/Album.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/entities/Artist.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/db/entities/Artist.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/entities/Genre.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/db/entities/Genre.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/entities/Track.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/db/entities/Track.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/di/SingletonHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/di/SingletonHolder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/extensions/LiveDataExtensions.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/extensions/MapExtensions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/extensions/MapExtensions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/AlbumFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/AlbumFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/ArtistFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/ArtistFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/BaseAlbumFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/BaseAlbumFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/GenreFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/GenreFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/LibraryFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/LibraryFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/MainFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/MainFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/PlayerFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/PlayerFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/SingleAlbumFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/SingleAlbumFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/SingleArtistFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/SingleArtistFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/SingleGenreFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/SingleGenreFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/TrackFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/TrackFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/livedata/ForeverObserver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/livedata/ForeverObserver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/livedata/SingleLiveEvent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/livedata/SingleLiveEvent.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/livedata/ViewAction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/livedata/ViewAction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/AlbumRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/repositories/AlbumRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/ArtistRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/repositories/ArtistRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/GenreRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/repositories/GenreRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/LibraryRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/repositories/LibraryRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/TrackRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/repositories/TrackRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/services/playerService/PlayerBroadcastReciever.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/services/playerService/PlayerBroadcastReciever.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/services/playerService/PlayerService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/services/playerService/PlayerService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/services/playerService/PlayerServiceManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/services/playerService/PlayerServiceManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/Action.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/stateMachine/Action.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/PlayerContext.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/stateMachine/PlayerContext.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/PlayerManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/stateMachine/PlayerManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/IdleState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/stateMachine/states/IdleState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/PausedState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/stateMachine/states/PausedState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/PlayingState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/stateMachine/states/PlayingState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/State.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/LibraryUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/utils/LibraryUtil.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/PreferenceUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/utils/PreferenceUtil.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/AlbumViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/AlbumViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/ArtistViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/ArtistViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/GenreViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/GenreViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/LibraryViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/LibraryViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/PlayerViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/PlayerViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/TrackViewModel.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/android/omplayer/ExampleUnitTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/omplayer/app/ExampleUnitTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/activities/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/activities/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/PlayerFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/PlayerFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/utils/LibraryUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/utils/LibraryUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/PlayerViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/PlayerViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +77,7 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="1" />
-          <entry key="project.open.time.33" value="1" />
+          <entry key="project.open.time.33" value="2" />
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.37" value="2" />
           <entry key="project.open.time.38" value="3" />
@@ -138,50 +88,63 @@
           <entry key="project.open.time.49" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.84" value="1" />
-          <entry key="project.opened" value="15" />
+          <entry key="project.open.time.86" value="1" />
+          <entry key="project.opened" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="db" value="3" />
-          <entry key="gradle" value="2" />
+          <entry key="gradle" value="5" />
           <entry key="java" value="6" />
-          <entry key="kt" value="346" />
-          <entry key="xml" value="24" />
+          <entry key="kt" value="375" />
+          <entry key="xml" value="34" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Groovy" value="2" />
+          <entry key="Groovy" value="5" />
           <entry key="JAVA" value="6" />
-          <entry key="Kotlin" value="346" />
-          <entry key="XML" value="24" />
+          <entry key="Kotlin" value="375" />
+          <entry key="XML" value="34" />
           <entry key="YAML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="gradle" value="15" />
-          <entry key="kt" value="10324" />
-          <entry key="xml" value="1192" />
+          <entry key="gradle" value="17" />
+          <entry key="kt" value="11905" />
+          <entry key="xml" value="1415" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Groovy" value="15" />
-          <entry key="Kotlin" value="10324" />
-          <entry key="XML" value="1192" />
+          <entry key="Groovy" value="17" />
+          <entry key="Kotlin" value="11905" />
+          <entry key="XML" value="1415" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/utils/PreferenceUtil.kt">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/VideoFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+            <state>
+              <caret lean-forward="true" />
+              <folding>
+                <element signature="e#36#589#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="54" selection-start-line="54" selection-end-line="54" selection-end-column="87" />
             </state>
           </provider>
         </entry>
@@ -198,9 +161,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>TrackMetadata</find>
-      <find>updateMetadata</find>
-      <find>currentSo</find>
       <find>currentSong</find>
       <find>TrackAdapter</find>
       <find>onStopTrackingTouch</find>
@@ -224,14 +184,18 @@
       <find>Glide.with</find>
       <find>loadGenreTracks</find>
       <find>getAlbumArtist</find>
-      <find>TAG!!!</find>
       <find>LibraryUtil.selectedArtistAlbumList</find>
       <find>AlbumViewModel</find>
       <find>example</find>
+      <find>transaction.a</find>
+      <find>fragment:</find>
+      <find>streamUrl</find>
+      <find>TAG!!!</find>
     </findStrings>
     <replaceStrings>
       <replace>UNKNOWN</replace>
       <replace>LibraryUtil.selectedTrack</replace>
+      <replace>htmlBody</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/app/src/main/java/com/omplayer</dir>
@@ -2336,6 +2300,201 @@
                       </ExternalModuleBuildClasspathPojo>
                     </value>
                   </entry>
+                  <entry key="$PROJECT_DIR$/YouTubeAndroidPlayerApi">
+                    <value>
+                      <ExternalModuleBuildClasspathPojo>
+                        <option name="entries">
+                          <list>
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/3.3.1/55c1531122953aec31240edc7682e335961e19e5/gradle-3.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin/1.3.20/6092ad80fe7a9746d8d204c366f0ae1f5c4a69fe/kotlin-gradle-plugin-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/3.3.1/75a4cff6e4e639753f03956a8027503194aae44a/builder-3.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/crash/26.3.1/fc5b03fbcd960b00beb65561f121f3e31666741b/crash-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-gradle-api/26.3.1/6912019cbbd43f9410b24ba09d45170aa532c7f5/lint-gradle-api-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.databinding/databinding-compiler-common/3.3.1/2bb06b72b07adb8e97adbab42dfe50ab343fd682/databinding-compiler-common-3.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/transform-api/2.0.0-deprecated-use-gradle-api/f18536c1fe08673c69e869be170759616a9df16/transform-api-2.0.0-deprecated-use-gradle-api-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/6.0/66e3ec9f4ff0d70713868456142040111cc201c/asm-analysis-6.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-gradle/6.0.3/1ebac416b8402b16e02a470f41e73af880d0db0f/proguard-gradle-6.0.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build.jetifier/jetifier-processor/1.0.0-beta02/5b8f86fea035328fc9e8c660773037a3401ce25f/jetifier-processor-1.0.0-beta02-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-api/1.3.20/e279e6daf19a540110bc89a8f1e5f6d03ec57943/kotlin-gradle-plugin-api-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-model/1.3.20/a5e508224d21ecab30b252268b6a4bce85692a/kotlin-gradle-plugin-model-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-embeddable/1.3.20/5f53c9f3eecc1b89a64df5e6f10db25aa493f96d/kotlin-compiler-embeddable-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-annotation-processing-gradle/1.3.20/89370cbaf3eb6887fd2509a34c292f8a26a4ee3c/kotlin-annotation-processing-gradle-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.3.20/d78b2b6cd61af88a59d458071589e9cb34af8436/kotlin-android-extensions-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-runner/1.3.20/68b281f5b4b98fb38308646499cd43b46f47d3cc/kotlin-compiler-runner-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-compiler-embeddable/1.3.20/ae253083505346c0cd47d059b8fa38a3f98e86c0/kotlin-scripting-compiler-embeddable-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-model/3.3.1/9c82104a0068f4b4c134bfa60a764a8824a01c14/builder-model-3.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-test-api/3.3.1/306d03af12a126abfd53e60a078a3c0ce3a9c329/builder-test-api-3.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdklib/26.3.1/f6f71aea4ed124dbac59fcfd08c3f66fc0688391/sdklib-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdk-common/26.3.1/94e7cbe430cacfba80ae8b456bb6ee2251a01693/sdk-common-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/manifest-merger/26.3.1/73de8593cc9369ee7ce99b6e90e8f58a6d41b38c/manifest-merger-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/protos/26.3.1/3b0f959fb18d56935736820d7c344375d90a5364/protos-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/shared/26.3.1/180fbd30edf5f80be3221421fae0d8a53ff96a9c/shared-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/tracker/26.3.1/c911a49d662e4a982d0fac473181eaa30c57d567/tracker-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/apksig/3.3.1/ece9c0b3c962b7a7cad684beec9f08dc703f1e71/apksig-3.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/apkzlib/3.3.1/8cc8520a7c916dd25f783e392a56f6d8184f7c7e/apkzlib-3.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.5.0/1b2a0925ff06220c0261b6fd468183cd9e9a9a47/javawriter-2.5.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/6.0/66e3ec9f4ff0d70713868456142040111cc201c/asm-6.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/6.0/66e3ec9f4ff0d70713868456142040111cc201c/asm-tree-6.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/6.0/66e3ec9f4ff0d70713868456142040111cc201c/asm-commons-6.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/6.0/66e3ec9f4ff0d70713868456142040111cc201c/asm-util-6.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/7.2.0/a1a8e178d7813bb9596ee4e3d5e07b90ebe660af/fastutil-7.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.9/d965219b87f79e81b07116d451e684ab2f3acc27/jopt-simple-4.9-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.json-simple/json-simple/1.1/19c6d8dee6803c520d855ff7e8a8c3d97f1271ec/json-simple-1.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-api/3.3.1/93a8ed402c2e1cb3672888753ddd229eb949d6c8/gradle-api-3.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.databinding/databinding-common/3.3.1/93b840986c6757f8ad6ba6a3ed2cf419264278c2/databinding-common-3.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/3.3.1/6390267c5413cd0f990e667324b9071f3ea93ec4/baseLibrary-3.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4/4.5.3/e836b2a7348320a86c3bbd91a032486798e6ab98/antlr4-4.5.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/f2d8698c46d1167ff24b06a840a87d91a02db891/commons-io-2.4-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.juniversalchardet/juniversalchardet/1.0.3/77979eaa98f90806f984155f44f63cc1fb60ac25/juniversalchardet-1.0.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javapoet/1.8.0/499341a875fe72e8fcf4ba856ba15f498d348e38/javapoet-1.8.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build.jetifier/jetifier-core/1.0.0-beta02/fb5b468dad2d498062048e152c5714f9848954b5/jetifier-core-1.0.0-beta02-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-base/6.0.3/c1e9f79efdc3963b29920f8ec8f08e4c8652fa7f/proguard-base-6.0.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value/1.5.2/e96b1f4a9e6630a405434fca857c6b8f777163cf/auto-value-1.5.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java-util/3.4.0/6d5f8e6d209c309d9ef3e30aa81135ee94cc7d49/protobuf-java-util-3.4.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jdom/jdom2/2.0.6/3dcf8ba7582eeac3b67ed5155ee3659e16c8dadc/jdom2-2.0.6-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-native-utils/1.3.20/6c155c656d158c858e9ff79c101e16561e558700/kotlin-native-utils-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.3.20/4658da2e5aa0a238cb19ffaf2d786d0cdc4cfa63/kotlin-script-runtime-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.deps/trove4j/1.0.20181211/fff84a7f9b3215e7ef684672d0adf2853e20040a/trove4j-1.0.20181211-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-build-common/1.3.20/18d751b9e6059a8a30c80c8871e473b77a38015/kotlin-build-common-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-client/1.3.20/3148b050fff1cc801bcec70f307f80619a4be3ff/kotlin-daemon-client-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/annotations/26.3.1/6b1af5d039cd6933b3f4c366f1a16cfe6fe9bbcf/annotations-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.ddms/ddmlib/26.3.1/48f3303e9f889eb7786109a8f687a96669ad7334/ddmlib-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/26.3.1/2aa4afb31e55fdc30555fb00e23e6f0cb8dd1dc9/layoutlib-api-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/26.3.1/da3e02373fbdf90b5b44f9792039a585f176fe0b/dvlib-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/repository/26.3.1/8e404f9864a2b5ea01f51bbc50fa6e15114c5943/repository-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.0/baf95d8519fc1a11d388f8543cb40cd2bb9d66dc/gson-2.8.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpmime/4.5.2/ca23fd61a082eab682fc0ffd29e37d09eab07180/httpmime-4.5.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15on/1.56/118b4633c59394749b2b2f278138beb31c930663/bcpkix-jdk15on-1.56-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.3.20/d340386af5ad3475c3120925cf786492518d7de7/kotlin-reflect-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.4.0/c57c9f6bcbdb783260d00b80c455d82a6a8b02db/protobuf-java-3.4.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/a00123f261762a7c5e0ec916a2c7c8298d29c400/javax.inject-1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/common/26.3.1/b54b61c6d4f33daf6d4980710015bd1d24c8903c/common-26.3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/309cd2cff7260e465792fda3dcbb063b730d8050/kxml2-2.3.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.activation/javax.activation/1.2.0/5b034823866d38f38f02bdad7ed8a14e650c61b6/javax.activation-1.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.12/1fdd1a2fed15cdf08780ed564279c0ddbff46419/commons-compress-1.12-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-runtime/2.2.11/29441ae1840574f4ca07a72cd1785ea8a4b8457e/jaxb-runtime-2.2.11-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.jimfs/jimfs/1.1/a2e6f6d75b7fa7e8eedb3062e5bfd24cc9fe8591/jimfs-1.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.2/b9f9e3e5255b6ddc3bf21be05428c7a60d00e042/httpclient-4.5.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.56/93c7b191596378df51c31b7d8717f71b0aeee53c/bcprov-jdk15on-1.56-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/26.0-jre/2e35b51c759ae1a6edbb967b65c525105536d382/guava-26.0-jre-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.3.20/f25978a606a8f07e99f53797fa0376f34ef7476e/kotlin-stdlib-jdk8-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-core/2.2.11/57f27d326da0d4eddc4077933a4cc77cb50002d2/jaxb-core-2.2.11-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jvnet.staxex/stax-ex/1.7.7/555d23df1be863aeda3846afcb76444fa17880d2/stax-ex-1.7.7-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.xml.fastinfoset/FastInfoset/1.2.13/7e43a54348e59360ebcaa73d34f0ecb122f1c741/FastInfoset-1.2.13-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.5/542498265bc5a238dcb0275172b8070bd51e30af/httpcore-4.4.5-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.9/3f15fff45d57656685abfee9e8302bf14580044c/commons-codec-1.9-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/b19b5927c2c25b6c70f093767041e641ae0b1b35/jsr305-3.0.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/2.5.2/ebb8ebccd42218434674f3e1d9022c13df1c19f8/checker-qual-2.5.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.2.0/a8cd7823aa1dcd2fd6677c0c5988fdde9d1fb0a3/error_prone_annotations-2.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/dcd31de68a90e41e336f6b7afce0d39285c433d7/j2objc-annotations-1.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.14/886474da3f761d39fcbb723d97ecc5089e731f42/animal-sniffer-annotations-1.14-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.20/3a9a71152b278d5e36e7346554b4dbb03e565e30/kotlin-stdlib-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.3.20/5a49cbde078f91493083eb35b8b44138ccfea188/kotlin-stdlib-jdk7-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.xml.bind/jaxb-api/2.2.12-b140109.1041/d59f43002d3d07c6adaaeedd93e7944c273821d2/jaxb-api-2.2.12-b140109.1041-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/txw2/2.2.11/7745afc4dcc863b724f4a21fb3fc517cd5aaf891/txw2-2.2.11-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.istack/istack-commons-runtime/2.21/5d42dda44aa68ff87756e93ae0042cd66d2daa78/istack-commons-runtime-2.21-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.20/60070a2fbed969e9b73f214cb41072eabedf299a/kotlin-stdlib-common-1.3.20-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/5991ca87ef1fb5544943d9abc5a9a37583fabe03/annotations-13.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/3.3.1/7d642f14aa35443dd7aeecd0600c17da37d3bccc/gradle-3.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin/1.3.20/199951fd94dd98898c92838c1a542ac60cf65097/kotlin-gradle-plugin-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/3.3.1/e4d2ad1ef694fca700b3ab1f4df4b79313d17c98/builder-3.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/crash/26.3.1/46163f2cf0e16a1ba9be2ad6dddc39f1a1d6b613/crash-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-gradle-api/26.3.1/d55e1bcbe4e7c0bb97f5c385a003c4339e38d07f/lint-gradle-api-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.databinding/databinding-compiler-common/3.3.1/e96aa159e1ed5c5a3461d15adfc42ef5b1f68b59/databinding-compiler-common-3.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/transform-api/2.0.0-deprecated-use-gradle-api/47f6c56527c42425742fa9b56ffd3fd80763fe03/transform-api-2.0.0-deprecated-use-gradle-api.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/6.0/dd1cc1381a970800268160203aae2d3784da779b/asm-analysis-6.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-gradle/6.0.3/e5becf2356695a396b788110e386c38bad523bfc/proguard-gradle-6.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/bundletool/0.6.0/fb944be26f692e6ac937924ad5be7faa4093dd80/bundletool-0.6.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build.jetifier/jetifier-processor/1.0.0-beta02/624d187319c8dfd6bc8281b4afbab87c39bbb005/jetifier-processor-1.0.0-beta02.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-api/1.3.20/9490808c5b2c8a5e9f6a5bc7de665ef3ace11bd0/kotlin-gradle-plugin-api-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-model/1.3.20/af3f1bc03cf4e55031630f83964347cd4cda6854/kotlin-gradle-plugin-model-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-embeddable/1.3.20/ee2efe0fdd12b607e3ac01dd79da99a168ac85c5/kotlin-compiler-embeddable-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-annotation-processing-gradle/1.3.20/34b6ca42fa3beff47b58a972f32255e2594cdec3/kotlin-annotation-processing-gradle-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.3.20/b1016507a951b0cfaae431079ec0ac6847d56d8c/kotlin-android-extensions-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-runner/1.3.20/b2baea1f4f9a00035ef328e5c2689deba4aa5d72/kotlin-compiler-runner-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-compiler-embeddable/1.3.20/6be0a0ddbcadbb2e69e5065547aad19485b5cc7a/kotlin-scripting-compiler-embeddable-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-model/3.3.1/2c47cf0451da2eaad484ccd2d580a8cfd23fa064/builder-model-3.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-test-api/3.3.1/c1a1ce91c0f34c43a52c54c1a2f6fdbaafadd3da/builder-test-api-3.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdklib/26.3.1/85c3c1de8824ca1f5ff491690931256c23a7297b/sdklib-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdk-common/26.3.1/c9bed0f05024f919fe6168ef381afbe72074a272/sdk-common-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/manifest-merger/26.3.1/aa94f738e318fc73059d9207f433f13556072d05/manifest-merger-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/protos/26.3.1/f35a0accd93cfbb4306268ea748e1ac49920a0a8/protos-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/shared/26.3.1/3457faee7a68d84dcbd258889567153acfc731a2/shared-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/tracker/26.3.1/26248cad2525e003752322cfc6bd86182df7daac/tracker-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/apksig/3.3.1/5dc32667e573a18b05119685ac3f2b8c0f17182d/apksig-3.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/apkzlib/3.3.1/563a5b71668b4fe7da03a0a3054c9fdd973d3cf/apkzlib-3.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.5.0/81241ff7078ef14f42ea2a8995fa09c096256e6b/javawriter-2.5.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/6.0/bc6fa6b19424bb9592fe43bbc20178f92d403105/asm-6.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/6.0/a624f1a6e4e428dcd680a01bab2d4c56b35b18f0/asm-tree-6.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/6.0/f256fd215d8dd5a4fa2ab3201bf653de266ed4ec/asm-commons-6.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/6.0/430b2fc839b5de1f3643b528853d5cf26096c1de/asm-util-6.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/7.2.0/5ad3a2bb04143f70aa0765fc29fc29571a7d6b34/fastutil-7.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.9/ee9e9eaa0a35360dcfeac129ff4923215fd65904/jopt-simple-4.9.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.json-simple/json-simple/1.1/5e303a03d04e6788dddfa3655272580ae0fc13bb/json-simple-1.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-api/3.3.1/93aac19942998e480db4195212150fb30f7a78cd/gradle-api-3.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.databinding/databinding-common/3.3.1/45795e2f688474b219d37beb7f9f6756578e6454/databinding-common-3.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/3.3.1/702acc804e85563d3ae7b8ee49122e4f857dde83/baseLibrary-3.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4/4.5.3/f35db7e4b2446e4174ba6a73db7bd6b3e6bb5da1/antlr4-4.5.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.juniversalchardet/juniversalchardet/1.0.3/cd49678784c46aa8789c060538e0154013bb421b/juniversalchardet-1.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javapoet/1.8.0/e858dc62ef484048540d27d36f3ec2177a3fa9b1/javapoet-1.8.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build.jetifier/jetifier-core/1.0.0-beta02/fa93fdb83bdfd51e80e09a808fb2515a7134d406/jetifier-core-1.0.0-beta02.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-base/6.0.3/7135739d2d3834964c543ed21e2936ce34747aca/proguard-base-6.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value/1.5.2/1b94ab7ec707e2220a0d1a7517488d1843236345/auto-value-1.5.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2-proto/0.3.1/8311800abb3dcd84426a0de834a6b884a173d864/aapt2-proto-0.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java-util/3.4.0/96aba8ab71c16018c6adf66771ce15c6491bc0fe/protobuf-java-util-3.4.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jdom/jdom2/2.0.6/6f14738ec2e9dd0011e343717fa624a10f8aab64/jdom2-2.0.6.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-native-utils/1.3.20/c2ede1571d53c4d3d61ceb2d469a0a4e20b54d72/kotlin-native-utils-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.3.20/312febd3c42137fcc5477e6666d6eec16631b176/kotlin-script-runtime-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.deps/trove4j/1.0.20181211/216c2e14b070f334479d800987affe4054cd563f/trove4j-1.0.20181211.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-build-common/1.3.20/89f2699fabe02c08eb0339ec98f71f1336499e7a/kotlin-build-common-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-client/1.3.20/56178109e499350481c42befa1b49e1df20ed900/kotlin-daemon-client-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/annotations/26.3.1/3d46d5da6d5dd17df682a22b914cdc6b84677731/annotations-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.ddms/ddmlib/26.3.1/61ca2873fcce1012ba9782adf7e9b0e164fb6007/ddmlib-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/26.3.1/969ef3a7c0c3b245a3efe8aff7a2f6f15ff4e824/layoutlib-api-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/26.3.1/971430b6163a834656d07434c46fee64d109ad8e/dvlib-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/repository/26.3.1/fe4c713437ebfb8c68e95c717c063843bd63758/repository-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.0/c4ba5371a29ac9b2ad6129b1d39ea38750043eff/gson-2.8.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpmime/4.5.2/22b4c53dd9b6761024258de8f9240c3dce6ea368/httpmime-4.5.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15on/1.56/4648af70268b6fdb24674fb1fd7c1fcc73db1231/bcpkix-jdk15on-1.56.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.3.20/cd49eec32cf964333faf59e04b4085eac7008477/kotlin-reflect-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.4.0/b32aba0cbe737a4ca953f71688725972e3ee927c/protobuf-java-3.4.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/common/26.3.1/b0e3aa846dd94f9608018f7ef6501d1069f6488c/common-26.3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/ccbc77a5fd907ef863c29f3596c6f54ffa4e9442/kxml2-2.3.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.activation/javax.activation/1.2.0/bf744c1e2776ed1de3c55c8dac1057ec331ef744/javax.activation-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.12/84caa68576e345eb5e7ae61a0e5a9229eb100d7b/commons-compress-1.12.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-runtime/2.2.11/65510afc78679e347b0d774617a97fedac94f8/jaxb-runtime-2.2.11.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.jimfs/jimfs/1.1/8fbd0579dc68aba6186935cc1bee21d2f3e7ec1c/jimfs-1.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.2/733db77aa8d9b2d68015189df76ab06304406e50/httpclient-4.5.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.56/a153c6f9744a3e9dd6feab5e210e1c9861362ec7/bcprov-jdk15on-1.56.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/26.0-jre/6a806eff209f36f635f943e16d97491f00f6bfab/guava-26.0-jre.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.3.20/b1f3cb184c4ce4139741454df2f8fca5320f822d/kotlin-stdlib-jdk8-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-core/2.2.11/f5745049f5fb9cb9d9b5f513c207727f475983e9/jaxb-core-2.2.11.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jvnet.staxex/stax-ex/1.7.7/18bed5a0da27a6b43efe01282f2dc911b1cb3a72/stax-ex-1.7.7.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.xml.fastinfoset/FastInfoset/1.2.13/98f56b9354e27bd2941cc5d461344e240ae51ae/FastInfoset-1.2.13.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.5/e7501a1b34325abb00d17dde96150604a0658b54/httpcore-4.4.5.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.9/9ce04e34240f674bc72680f8b843b1457383161a/commons-codec-1.9.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/2.5.2/cea74543d5904a30861a61b4643a5f2bb372efc4/checker-qual-2.5.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.2.0/88e3c593e9b3586e1c6177f89267da6fc6986f0c/error_prone_annotations-2.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/976d8d30bebc251db406f2bdb3eb01962b5685b3/j2objc-annotations-1.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.14/775b7e22fb10026eed3f86e8dc556dfafe35f2d5/animal-sniffer-annotations-1.14.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.20/eb2a232734e09fcd1b958a5c7520a93c6de38b32/kotlin-stdlib-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.3.20/aa17d6fd473ce53061a7b2b9d2ae96f547cae93d/kotlin-stdlib-jdk7-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.xml.bind/jaxb-api/2.2.12-b140109.1041/7ed0e0d01198614194d56dfb03d9d95aa311824c/jaxb-api-2.2.12-b140109.1041.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/txw2/2.2.11/2df047d8c187a62f2177bf6013f1f9786cdfc8a2/txw2-2.2.11.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.istack/istack-commons-runtime/2.21/c969d8f15c467f0ef7d7b04889afbe7b5d48e22f/istack-commons-runtime-2.21.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.20/7d7934e26ce34da1a0a8d00e38038d7cf3375e89/kotlin-stdlib-common-1.3.20.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar" />
+                          </list>
+                        </option>
+                        <option name="path" value="$PROJECT_DIR$/YouTubeAndroidPlayerApi" />
+                      </ExternalModuleBuildClasspathPojo>
+                    </value>
+                  </entry>
                   <entry key="$PROJECT_DIR$/app">
                     <value>
                       <ExternalModuleBuildClasspathPojo>
@@ -2704,19 +2863,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/GenreRepository.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/AlbumRepository.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/ArtistRepository.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/TrackRepository.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/entities/Genre.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/db/dao/AlbumDao.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/LibraryFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/PreferenceUtil.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/utils/PermissionUtil.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/di/SingletonHolder.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/repositories/LibraryRepository.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/PlayerContext.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/consts/Extra.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/PlayingState.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/PausedState.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/stateMachine/states/IdleState.kt" />
@@ -2733,8 +2879,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/single_genre_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/GenreAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/fragments/SingleGenreFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/GenreViewModel.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/ArtistAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/ArtistViewModel.kt" />
@@ -2755,6 +2899,21 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/AlbumViewModel.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/SingleArtistAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/adapters/AlbumAdapter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/activities/MainActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/MainFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/utils/LibraryUtil.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/services/YouTubeService.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/PlayerViewModel.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_video.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/VideoFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/VideoViewModel.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/repositories/YouTubeRepository.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/PlayerFragment.kt" />
       </list>
     </option>
   </component>
@@ -2765,11 +2924,13 @@
     <option name="height" value="741" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <hideEmptyPackages ProjectPane="false" />
+    <navigator proportions="" version="1">
+      <hideEmptyPackages AndroidView="true" ProjectPane="false" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -2784,93 +2945,23 @@
             </path>
             <path>
               <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="omplayer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OMPlayer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="layout" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OMPlayer" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
             <path>
               <item name="OMPlayer" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="OMPlayer" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="OMPlayer" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="omplayer" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2887,6 +2978,9 @@
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/libs" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -2986,24 +3080,25 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.23703113" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.19313647" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
-      <window_info anchor="bottom" id="Run" order="0" weight="0.27406198" />
-      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49960095" weight="0.39477977" />
+      <window_info anchor="bottom" id="Run" order="0" weight="0.45676997" />
+      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49960095" visible="true" weight="0.35073408" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.32789558" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32357723" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5019952" side_tool="true" weight="0.25611746" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32626426" />
-      <window_info active="true" anchor="bottom" id="Build" order="7" sideWeight="0.4980048" visible="true" weight="0.17455138" />
-      <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4980048" weight="0.05872757" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32952693" />
       <window_info anchor="right" id="Device File Explorer" order="0" sideWeight="0.5033113" side_tool="true" weight="0.32960895" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -3018,92 +3113,20 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/services/playerService/PlayerServiceManager.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-311">
-          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/stateMachine/states/IdleState.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/stateMachine/PlayerManager.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="33" column="76" selection-start-line="33" selection-start-column="68" selection-end-line="33" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/services/playerService/PlayerService.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="97" column="47" lean-forward="true" selection-start-line="97" selection-start-column="47" selection-end-line="97" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/stateMachine/states/PlayingState.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_album.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/livedata/ViewAction.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/livedata/SingleLiveEvent.kt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_track.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_genre.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/TrackViewModel.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="42" lean-forward="true" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
-        </state>
-      </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/repositories/GenreRepository.kt">
       <provider selected="true" editor-type-id="text-editor">
@@ -3113,20 +3136,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/omplayer/viewmodels/SingleGenreViewModel.kt" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/LibraryViewModel.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="49" column="5" selection-start-line="33" selection-start-column="4" selection-end-line="49" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/MainFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="37" column="38" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/4.8.0/ffc2684f1c6436d3942d82d29a5344942792594/glide-4.8.0-sources.jar!/com/bumptech/glide/load/resource/bitmap/VideoDecoder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -3155,66 +3164,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/LibraryFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="22" selection-start-line="22" selection-end-line="24" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="43" column="38" selection-start-line="43" selection-start-column="38" selection-end-line="43" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="51" column="75" selection-start-line="51" selection-start-column="75" selection-end-line="51" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_single_genre.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="47" lean-forward="true" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/ArtistFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_track.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_single_album.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="52" lean-forward="true" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/ArtistViewModel.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/PlayerFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="48" column="10" lean-forward="true" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -3226,38 +3199,17 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_single_artist.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="48" lean-forward="true" selection-end-line="30" selection-end-column="15" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/activities/MainActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/GenreFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="43" column="22" lean-forward="true" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
-        </state>
-      </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/SingleGenreFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
           <caret line="50" column="1" lean-forward="true" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/GenreViewModel.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="23" column="23" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -3296,13 +3248,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/utils/LibraryUtil.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/AlbumViewModel.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -3311,20 +3256,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_single_album.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/adapters/SingleArtistAdapter.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/PlayerViewModel.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="26" column="19" lean-forward="true" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -3342,13 +3280,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/AlbumFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/SingleArtistFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -3360,6 +3291,185 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/LibraryFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="16" column="56" lean-forward="true" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/ArtistFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="80" selection-start-line="17" selection-start-column="80" selection-end-line="17" selection-end-column="80" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/AlbumFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/GenreFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="41" selection-start-line="41" selection-end-line="44" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/TrackViewModel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="42" lean-forward="true" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/LibraryViewModel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="105" selection-start-line="105" selection-end-line="108" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_player.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="84" column="40" lean-forward="true" selection-start-line="84" selection-start-column="40" selection-end-line="84" selection-end-column="40" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/MainFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="40" column="63" selection-start-line="40" selection-start-column="63" selection-end-line="40" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/GenreViewModel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/VideoViewModel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="27" column="41" lean-forward="true" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/activities/MainActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_video.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+          <folding>
+            <element signature="e#1036#1061#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/viewmodels/PlayerViewModel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
+          <folding>
+            <element signature="e#37#1173#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/services/YouTubeService.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+          <folding>
+            <element signature="e#35#136#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/repositories/YouTubeRepository.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+          <folding>
+            <element signature="e#39#162#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/utils/LibraryUtil.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/PlayerFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#36#536#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/omplayer/app/fragments/VideoFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+          <folding>
+            <element signature="e#36#589#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="54" selection-start-line="54" selection-end-line="54" selection-end-column="87" />
         </state>
       </provider>
     </entry>
