@@ -27,7 +27,7 @@ class VideoFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_video, container, false)
         (activity as MainActivity)
-            .setActionBarTitle("Video")
+            .setActionBarTitle(getString(R.string.action_bar_video))
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         return view
     }

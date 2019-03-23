@@ -17,4 +17,6 @@
 
     <string name="video_not_found">Video Not Found</string>
 
+    <string name="action_bar_video">Video</string>
+    <string name="action_bar_player">Player</string>
 </resources>

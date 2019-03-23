@@ -22,7 +22,7 @@ class SingleArtistFragment : Fragment(), BaseAlbumFragment {
         savedInstanceState: Bundle?
     ): View? {
         (activity as MainActivity)
-            .setActionBarTitle("Artists")
+            .setActionBarTitle(getString(R.string.artists))
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         return inflater.inflate(R.layout.fragment_single_artist, container, false)
     }

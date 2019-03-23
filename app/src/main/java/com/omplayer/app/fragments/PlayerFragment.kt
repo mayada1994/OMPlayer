@@ -22,7 +22,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
-            .setActionBarTitle("Player")
+            .setActionBarTitle(getString(R.string.action_bar_player))
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         return inflater.inflate(R.layout.fragment_player, container, false)
     }

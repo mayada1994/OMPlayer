@@ -22,7 +22,7 @@ class SingleGenreFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         (activity as MainActivity)
-            .setActionBarTitle("Genres")
+            .setActionBarTitle(getString(R.string.genres))
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         return inflater.inflate(R.layout.fragment_single_genre, container, false)
     }
