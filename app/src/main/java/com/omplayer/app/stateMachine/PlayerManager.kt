@@ -12,7 +12,7 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.media.session.MediaButtonReceiver
-import com.omplayer.app.entities.TrackMetadata
+import com.omplayer.app.db.entities.Track
 import com.omplayer.app.stateMachine.states.IdleState
 import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.stateMachine.states.State
@@ -25,7 +25,7 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
     override var mediaSessionCompat: MediaSessionCompat = MediaSessionCompat(context, TAG)
 
     override var mediaPlayer: MediaPlayer = MediaPlayer()
-    override val playlist: MutableList<Int> = ArrayList()
+    override val playlist: MutableList<Track> = ArrayList()
 
     //region LiveData
 
@@ -34,9 +34,8 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
     }
     val currState: LiveData<State> = _currState
 
-    private val _metadata = MutableLiveData<TrackMetadata>()
-    val metadata: LiveData<TrackMetadata> = _metadata
-
+    private val _metadata = MutableLiveData<Track>()
+    val metadata: LiveData<Track> = _metadata
     //endregion
 
     //region AudioManager
@@ -140,7 +139,7 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
     }
 
     @MainThread
-    fun setPlaylist(playlist: MutableList<Int>, action: Action? = Action.Play()) {
+    fun setPlaylist(playlist: MutableList<Track>, action: Action? = Action.Play()) {
         mediaPlayer.setOnCompletionListener {
             mediaSessionCallback.onSkipToNext()
         }
@@ -163,7 +162,7 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
     }
 
     @MainThread
-    override fun updateMetadata(metadata: TrackMetadata) {
+    override fun updateMetadata(metadata: Track) {
         _metadata.value = metadata
     }
 

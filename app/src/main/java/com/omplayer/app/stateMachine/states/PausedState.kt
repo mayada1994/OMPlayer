@@ -1,16 +1,16 @@
 package com.omplayer.app.stateMachine.states
 
 import android.support.v4.media.session.PlaybackStateCompat
-import com.omplayer.app.entities.TrackMetadata
 import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.stateMachine.PlayerContext
+import com.omplayer.app.utils.LibraryUtil
 
-class PausedState(context: PlayerContext, private var currentSong: Int) : State(context) {
+class PausedState(context: PlayerContext) : State(context) {
 
     override fun handleAction(action: Action): State {
         return when (action) {
             is Action.Play -> {
-                context.mediaPlayer.start()
+                context.mediaPlayer?.start()
 
                 val playbackStateBuilder = PlaybackStateCompat.Builder()
                 playbackStateBuilder.setActions(PlaybackStateCompat.ACTION_PLAY)
@@ -20,11 +20,11 @@ class PausedState(context: PlayerContext, private var currentSong: Int) : State(
 
                 context.mediaSessionCompat.setPlaybackState(playbackStateBuilder.build())
 
-                PlayingState(context,currentSong)
+                PlayingState(context)
             }
             is Action.Pause -> this
             is Action.Stop -> {
-                context.mediaPlayer.reset()
+                context.mediaPlayer?.reset()
 
                 val playbackStateBuilder = PlaybackStateCompat.Builder()
                 playbackStateBuilder.setActions(PlaybackStateCompat.ACTION_STOP)
@@ -37,44 +37,38 @@ class PausedState(context: PlayerContext, private var currentSong: Int) : State(
                 IdleState(context)
             }
             is Action.Next -> {
-                context.mediaPlayer.reset()
-                if (context.playlist.size -1 > currentSong) {
-                    currentSong += 1
+                context.mediaPlayer?.reset()
+                if (context.playlist.size -1 > LibraryUtil.selectedTrack) {
+                    LibraryUtil.selectedTrack += 1
                 }else {
-                    currentSong = 0
+                    LibraryUtil.selectedTrack = 0
                 }
-                val assetFileDescriptor = context.context.resources.openRawResourceFd(context.playlist[currentSong])
+
                 try {
-                    context.mediaPlayer.setDataSource(assetFileDescriptor.fileDescriptor, assetFileDescriptor.startOffset, assetFileDescriptor.declaredLength)
-                    context.mediaPlayer.prepare()
+                    context.mediaPlayer?.setDataSource(context.playlist[LibraryUtil.selectedTrack].path)
+                    context.mediaPlayer?.prepare()
                 } catch (e: Exception) {
                 }
-                context.updateMetadata(TrackMetadata(context.mediaPlayer.duration))
-                assetFileDescriptor.close()
-
-                PausedState(context,currentSong)
+                context.updateMetadata(context.playlist[LibraryUtil.selectedTrack])
+                PausedState(context)
             }
             is Action.Prev -> {
-                context.mediaPlayer.reset()
-                if (currentSong > 0) {
-                    currentSong -= 1
+                context.mediaPlayer?.reset()
+                if (LibraryUtil.selectedTrack > 0) {
+                    LibraryUtil.selectedTrack -= 1
                 }else {
-                    currentSong = 0
+                    LibraryUtil.selectedTrack = 0
                 }
-                val assetFileDescriptor = context.context.resources.openRawResourceFd(context.playlist[currentSong])
+
                 try {
-                    context.mediaPlayer.setDataSource(assetFileDescriptor.fileDescriptor, assetFileDescriptor.startOffset, assetFileDescriptor.declaredLength)
-                    context.mediaPlayer.prepare()
+                    context.mediaPlayer?.setDataSource(context.playlist[LibraryUtil.selectedTrack].path)
+                    context.mediaPlayer?.prepare()
                 } catch (e: Exception) {
                 }
-                context.updateMetadata(TrackMetadata(context.mediaPlayer.duration))
-                assetFileDescriptor.close()
-
-                PausedState(context,currentSong)
+                context.updateMetadata(context.playlist[LibraryUtil.selectedTrack])
+                PausedState(context)
             }
         }
-
-
 
     }
 }

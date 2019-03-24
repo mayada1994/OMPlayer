@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,6 +13,7 @@ import com.omplayer.app.stateMachine.states.PausedState
 import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.FormatUtils
 import com.omplayer.app.viewmodels.PlayerViewModel
+import com.savantech.seekarc.SeekArc
 import kotlinx.android.synthetic.main.fragment_player.*
 
 
@@ -28,7 +28,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
-            .setActionBarTitle("Player Fragment")
+            .setActionBarTitle(getString(R.string.action_bar_player))
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         return inflater.inflate(R.layout.fragment_player, container, false)
     }
@@ -39,18 +39,22 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
         initializeSeekbar()
 
+        initializeTrackInfo()
+
         button_previous.setOnClickListener(this)
         button_next.setOnClickListener(this)
         button_play.setOnClickListener(this)
+        button_youtube_player.setOnClickListener(this)
 
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
-                seekbar_audio.max = metadata.duration
+                seekbar_audio.setMaxProgress(metadata.duration.toFloat())
                 timer_total.text = FormatUtils.millisecondsToString(metadata.duration.toLong())
+                initializeTrackInfo()
             }
         })
         viewModel.currentPosition.observe(this, Observer {
-            seekbar_audio.progress = it ?: 0
+            seekbar_audio.progress = it?.toFloat() ?: (0).toFloat()
             timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
         })
         viewModel.currState.observe(this, Observer {
@@ -83,6 +87,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
             }
             R.id.button_next -> viewModel.onNextClicked()
             R.id.button_previous -> viewModel.onPrevClicked()
+            R.id.button_youtube_player -> playVideo()
         }
     }
 
@@ -90,28 +95,33 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
 
     private fun initializeSeekbar() {
-        seekbar_audio.setOnSeekBarChangeListener(
-            object : SeekBar.OnSeekBarChangeListener {
-                var userSelectedPosition = 0
+        seekbar_audio.setThumbRadius(8)
 
-                override fun onStartTrackingTouch(seekBar: SeekBar) {
-                    viewModel.stopUpdateSeekbar()
-                }
-
-                override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                    if (fromUser) {
-                        userSelectedPosition = progress
-                    }
-                }
-
-                override fun onStopTrackingTouch(seekBar: SeekBar) {
-                    viewModel.onSeek(userSelectedPosition)
-                    viewModel.startUpdateSeekbar()
+        seekbar_audio.setOnSeekArcChangeListener(object : SeekArc.OnSeekArcChangeListener {
+            var userSelectedPosition = 0
+            override fun onStartTrackingTouch(seekArc: SeekArc?) {
             }
-            })
+
+            override fun onProgressChanged(seekArc: SeekArc?, progress: Float) {
+                userSelectedPosition = progress.toInt()
+            }
+
+            override fun onStopTrackingTouch(seekArc: SeekArc?) {
+                viewModel.onSeek(userSelectedPosition)
+                viewModel.startUpdateSeekbar()
+            }
+        })
     }
+
+    fun initializeTrackInfo() {
+        viewModel.loadTrackData(iv_track_cover, tv_track_title, tv_track_album, tv_track_artist, context!!)
+    }
+
 
     //endregion
 
-
+    fun playVideo() {
+        val activity = activity as MainActivity
+        activity.playVideo()
+    }
 }
