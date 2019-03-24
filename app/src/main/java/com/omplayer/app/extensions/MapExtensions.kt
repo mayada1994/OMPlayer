@@ -1,4 +1,4 @@
-package com.omplayer.olya.homework3.extensions
+package com.omplayer.app.extensions
 
 
 import android.os.Bundle

@@ -19,4 +19,5 @@
 
     <string name="action_bar_video">Video</string>
     <string name="action_bar_player">Player</string>
+    <string name="zero_time">00:00</string>
 </resources>

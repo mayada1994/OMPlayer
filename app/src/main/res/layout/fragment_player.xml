@@ -27,6 +27,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
+        <TextView
+                android:id="@+id/timer_played"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/zero_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/seekbar_audio"
+                app:layout_constraintEnd_toStartOf="@id/seekbar_audio"/>
+
         <com.savantech.seekarc.SeekArc
                 android:id="@+id/seekbar_audio"
                 android:layout_width="210dp"
@@ -43,6 +54,17 @@
                 android:scaleY="-1"
                 app:roundCorner="true"
                 app:seekDirection="clockwise"/>
+
+        <TextView
+                android:id="@+id/timer_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/zero_time"
+                app:layout_constraintStart_toEndOf="@id/seekbar_audio"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/seekbar_audio"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -79,6 +101,7 @@
 
     </LinearLayout>
 
+
     <Button
             android:id="@+id/button_youtube_player"
             android:layout_width="wrap_content"
@@ -99,40 +122,29 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
-        <Button
+
+        <ImageButton
                 android:id="@+id/button_previous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/previous"/>
-
-        <Button
+                android:src="@drawable/prev"
+                android:contentDescription="@string/previous"/>
+        <ImageButton
                 android:id="@+id/button_play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/play"/>
+                android:src="@drawable/play"
+                android:contentDescription="@string/play"/>
 
-        <Button
+        <ImageButton
                 android:id="@+id/button_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/next"/>
-
-        <Button
-                android:id="@+id/button_pause"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/pause"/>
-
-        <Button
-                android:id="@+id/button_reset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/reset"/>
+                android:src="@drawable/next"
+                android:contentDescription="@string/next"/>
 
     </LinearLayout>
 

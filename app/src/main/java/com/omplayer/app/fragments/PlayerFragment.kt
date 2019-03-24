@@ -9,6 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.omplayer.app.R
 import com.omplayer.app.activities.MainActivity
+import com.omplayer.app.stateMachine.states.PausedState
+import com.omplayer.app.stateMachine.states.PlayingState
+import com.omplayer.app.utils.FormatUtils
 import com.omplayer.app.viewmodels.PlayerViewModel
 import com.savantech.seekarc.SeekArc
 import kotlinx.android.synthetic.main.fragment_player.*
@@ -19,6 +22,9 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     private val viewModel: PlayerViewModel by lazy {
         ViewModelProviders.of(this).get(PlayerViewModel::class.java)
     }
+
+
+    private var isPlaying = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
@@ -37,38 +43,50 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
         button_previous.setOnClickListener(this)
         button_next.setOnClickListener(this)
-        button_reset.setOnClickListener(this)
-        button_pause.setOnClickListener(this)
         button_play.setOnClickListener(this)
         button_youtube_player.setOnClickListener(this)
 
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
                 seekbar_audio.setMaxProgress(metadata.duration.toFloat())
+                timer_total.text = FormatUtils.millisecondsToString(metadata.duration.toLong())
                 initializeTrackInfo()
             }
         })
         viewModel.currentPosition.observe(this, Observer {
             seekbar_audio.progress = it?.toFloat() ?: (0).toFloat()
+            timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
+        })
+        viewModel.currState.observe(this, Observer {
+            when (it) {
+                is PlayingState -> {
+                    button_play.setImageResource(R.drawable.pause)
+                    isPlaying = true
+                }
+                is PausedState -> {
+                    button_play.setImageResource(R.drawable.play)
+                   isPlaying = false
+                }
+            }
         })
 
     }
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.button_play -> viewModel.onPlayClicked()
-            R.id.button_pause -> viewModel.onPauseClicked()
-            R.id.button_next -> {
-                viewModel.onNextClicked()
-                viewModel.loadTrackData(iv_track_cover, tv_track_title, tv_track_album, tv_track_artist, context!!)
+            R.id.button_play -> {
+                if (!isPlaying) {
+                    button_play.setImageResource(R.drawable.pause)
+                    viewModel.onPlayClicked()
+                    isPlaying = true
+                } else {
+                    button_play.setImageResource(R.drawable.play)
+                    viewModel.onPauseClicked()
+                    isPlaying = false
+                }
             }
-            R.id.button_previous -> {
-                viewModel.onPrevClicked()
-                viewModel.loadTrackData(iv_track_cover, tv_track_title, tv_track_album, tv_track_artist, context!!)
-            }
-            R.id.button_reset -> {
-                viewModel.onStopClicked()
-            }
+            R.id.button_next -> viewModel.onNextClicked()
+            R.id.button_previous -> viewModel.onPrevClicked()
             R.id.button_youtube_player -> playVideo()
         }
     }

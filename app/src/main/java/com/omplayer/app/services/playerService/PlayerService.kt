@@ -3,17 +3,23 @@ package com.omplayer.app.services.playerService
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.AudioManager
 import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import androidx.media.session.MediaButtonReceiver
+import androidx.media.app.NotificationCompat.MediaStyle
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.omplayer.app.consts.Extra
-import com.omplayer.app.App.Companion.CHANNEL_ID
+import com.omplayer.app.application.App.Companion.CHANNEL_ID
 import com.omplayer.app.R
+import com.omplayer.app.consts.RequestCodes
 import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.utils.LibraryUtil
@@ -26,70 +32,89 @@ import java.io.File
 
 class PlayerService : Service() {
 
-    val playerManager = SingletonHolder.playerManager
-    val serviceContext = this
+    private val playerManager = SingletonHolder.playerManager
+    private val serviceContext:Context = this
 
-    val stopPendingIntent by lazy {
+    private val becomingNoisyReceiver =
+        BecomingNoisyReceiver()
+
+    private val stopPendingIntent by lazy {
         PendingIntent.getBroadcast(
             this,
-            Extra.STOP.hashCode(),
+            RequestCodes.STOP.hashCode(),
             Intent(this, PlayerBroadcastReceiver::class.java)
                 .putExtra(Extra.ACTION, Action.Stop()),
             PendingIntent.FLAG_CANCEL_CURRENT
         )
     }
 
-    val playPendingIntent by lazy {
+    private val playPendingIntent by lazy {
         PendingIntent.getBroadcast(
             this,
-            1,
+            RequestCodes.PLAY.hashCode(),
             Intent(this, PlayerBroadcastReceiver::class.java)
                 .putExtra(Extra.ACTION, Action.Play()),
             PendingIntent.FLAG_CANCEL_CURRENT
         )
     }
 
-    val pausePendingIntent by lazy {
+    private val pausePendingIntent by lazy {
         PendingIntent.getBroadcast(
             this,
-            2,
+            RequestCodes.PAUSE.hashCode(),
             Intent(this, PlayerBroadcastReceiver::class.java)
                 .putExtra(Extra.ACTION, Action.Pause()),
             PendingIntent.FLAG_CANCEL_CURRENT
         )
     }
 
-    val nextPendingIntent by lazy {
+    private val nextPendingIntent by lazy {
         PendingIntent.getBroadcast(
             this,
-            3,
+            RequestCodes.NEXT.hashCode(),
             Intent(this, PlayerBroadcastReceiver::class.java)
                 .putExtra(Extra.ACTION, Action.Next()),
             PendingIntent.FLAG_CANCEL_CURRENT
         )
     }
 
+    private val prevPendingIntent by lazy {
+        PendingIntent.getBroadcast(
+            this,
+            RequestCodes.PREV.hashCode(),
+            Intent(this, PlayerBroadcastReceiver::class.java)
+                .putExtra(Extra.ACTION, Action.Prev()),
+            PendingIntent.FLAG_CANCEL_CURRENT
+        )
+    }
 
-    override fun onBind(intent: Intent?): IBinder? {
-        TODO("not impelemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onCreate() {
+        super.onCreate()
+        //Handles headphones coming unplugged. cannot be done through a manifest receiver
+        val filter = IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
+        registerReceiver(becomingNoisyReceiver, filter)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
+        MediaButtonReceiver.handleIntent(playerManager.mediaSessionCompat, intent)
+
+        val notification: Notification
+
         when (intent?.getSerializableExtra(Extra.ACTION)) {
             is Action.Play -> {
-                getNotification(R.drawable.pause, "pause", pausePendingIntent)
+                getNotification(R.drawable.pause, "pause", pausePendingIntent, "Playing")
             }
 
             is Action.Pause -> {
-                getNotification(R.drawable.play, "play", playPendingIntent)
+                getNotification(R.drawable.play, "play", playPendingIntent, "Paused")
             }
         }
 
         return START_NOT_STICKY
     }
 
-    private fun getNotification(icon: Int, text: String, intent: PendingIntent) {
+    private fun getNotification(icon: Int, text: String, intent: PendingIntent, status: String) {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(coroutineContext) {
                 val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
@@ -99,11 +124,13 @@ class PlayerService : Service() {
                     val notification: Notification = NotificationCompat.Builder(serviceContext, CHANNEL_ID)
                         .setLargeIcon(currentCover)
                         .setSmallIcon(R.drawable.music_icon)
-                        .setContentTitle(currentTrack.title)
+                        .setContentTitle(currentAlbum.title + " - " + currentTrack.title)
                         .setContentText(currentAlbum.title)
+                        .addAction(R.drawable.prev, "prev", prevPendingIntent)
                         .addAction(icon, text, intent)
                         .addAction(R.drawable.next, "next", nextPendingIntent)
-                        .addAction(R.drawable.stop, "stop", stopPendingIntent)
+                        .addAction(R.drawable.close, "close", stopPendingIntent)
+                        .setStyle(MediaStyle())
                         .build()!!
                     startForeground(1, notification)
                 }
@@ -128,8 +155,14 @@ class PlayerService : Service() {
         return BitmapFactory.decodeResource(serviceContext.resources, R.drawable.placeholder)
     }
 
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        unregisterReceiver(becomingNoisyReceiver)
         stopForeground(true)
     }
+
 }
