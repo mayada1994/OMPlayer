@@ -45,7 +45,7 @@ class PausedState(context: PlayerContext, private var currentSong: Int) : State(
                 }
                 val assetFileDescriptor = context.context.resources.openRawResourceFd(context.playlist[currentSong])
                 try {
-                    context.mediaPlayer.setDataSource(assetFileDescriptor)
+                    context.mediaPlayer.setDataSource(assetFileDescriptor.fileDescriptor, assetFileDescriptor.startOffset, assetFileDescriptor.declaredLength)
                     context.mediaPlayer.prepare()
                 } catch (e: Exception) {
                 }
@@ -63,7 +63,7 @@ class PausedState(context: PlayerContext, private var currentSong: Int) : State(
                 }
                 val assetFileDescriptor = context.context.resources.openRawResourceFd(context.playlist[currentSong])
                 try {
-                    context.mediaPlayer.setDataSource(assetFileDescriptor)
+                    context.mediaPlayer.setDataSource(assetFileDescriptor.fileDescriptor, assetFileDescriptor.startOffset, assetFileDescriptor.declaredLength)
                     context.mediaPlayer.prepare()
                 } catch (e: Exception) {
                 }

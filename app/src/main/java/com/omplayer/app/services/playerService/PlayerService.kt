@@ -127,7 +127,8 @@ class PlayerService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(becomingNoisyReceiver)
-        stopForeground(STOP_FOREGROUND_DETACH)
+        stopForeground(true)
+//        stopForeground(STOP_FOREGROUND_DETACH)
     }
 
 }

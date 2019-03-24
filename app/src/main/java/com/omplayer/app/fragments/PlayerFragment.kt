@@ -50,7 +50,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
             }
         })
         viewModel.currentPosition.observe(this, Observer {
-            seekbar_audio.setProgress(it ?: 0, true)
+            seekbar_audio.progress = it ?: 0
             timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
         })
         viewModel.currState.observe(this, Observer {
