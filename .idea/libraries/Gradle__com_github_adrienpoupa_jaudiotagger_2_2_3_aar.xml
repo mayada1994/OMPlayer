@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.adrienpoupa:jaudiotagger:2.2.3@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jaudiotagger-2.2.3.aar/5ad69fc50bdd7b0e90421c9047f46308/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jaudiotagger-2.2.3.aar/5ad69fc50bdd7b0e90421c9047f46308/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jaudiotagger-2.2.3.aar/16a166df40ca817dde7ea5caf40fa8ca/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jaudiotagger-2.2.3.aar/16a166df40ca817dde7ea5caf40fa8ca/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
