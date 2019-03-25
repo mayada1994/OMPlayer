@@ -19,6 +19,7 @@ class IdleState(context: PlayerContext) : State(context) {
             PlayingState(context)
         }
         else -> {
-            this}
+            this
+        }
     }
 }

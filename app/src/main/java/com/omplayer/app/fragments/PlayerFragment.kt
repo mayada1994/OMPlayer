@@ -65,7 +65,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 }
                 is PausedState -> {
                     button_play.setImageResource(R.drawable.play)
-                   isPlaying = false
+                    isPlaying = false
                 }
             }
         })
@@ -87,7 +87,12 @@ class PlayerFragment : Fragment(), View.OnClickListener {
             }
             R.id.button_next -> viewModel.onNextClicked()
             R.id.button_previous -> viewModel.onPrevClicked()
-            R.id.button_youtube_player -> playVideo()
+            R.id.button_youtube_player -> {
+                button_play.setImageResource(R.drawable.play)
+                viewModel.onPauseClicked()
+                isPlaying = false
+                playVideo()
+            }
         }
     }
 
@@ -100,6 +105,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         seekbar_audio.setOnSeekArcChangeListener(object : SeekArc.OnSeekArcChangeListener {
             var userSelectedPosition = 0
             override fun onStartTrackingTouch(seekArc: SeekArc?) {
+                viewModel.stopUpdateSeekbar()
             }
 
             override fun onProgressChanged(seekArc: SeekArc?, progress: Float) {
