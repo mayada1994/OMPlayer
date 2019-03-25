@@ -1,6 +1,6 @@
 package com.omplayer.app.repositories
 
-import com.omplayer.app.services.YouTubeService
+import com.omplayer.app.services.youTubeService.YouTubeService
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
