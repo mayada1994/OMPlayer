@@ -13,7 +13,7 @@ object SingletonHolder {
 
     lateinit var application: Application
     private val context: Context get() = application
-    lateinit var db:PlayerDatabase
+    lateinit var db: PlayerDatabase
 
     val playerManager by lazy {
         PlayerManager(context)

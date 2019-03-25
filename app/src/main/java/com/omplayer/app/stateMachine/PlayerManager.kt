@@ -42,6 +42,28 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
 
     private val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
+    override fun onAudioFocusChange(focusChange: Int) {
+        when (focusChange) {
+            AudioManager.AUDIOFOCUS_LOSS -> {
+                if (currState.value is PlayingState) {
+                    performAction(Action.Pause())
+                }
+            }
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
+                performAction(Action.Pause())
+            }
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
+                mediaPlayer.setVolume(0.3f, 0.3f)
+            }
+            AudioManager.AUDIOFOCUS_GAIN -> {
+                if (currState.value is IdleState) {
+                    performAction(Action.Pause())
+                }
+                mediaPlayer.setVolume(1.0f, 1.0f)
+            }
+        }
+    }
+
 
     //endregion
 
@@ -155,6 +177,7 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
         }
     }
 
+    //TODO Need to find out WHERE to release mediaPlayer and MediaSessionCompat
 
     fun release() {
         mediaPlayer.release()
@@ -166,25 +189,4 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
         _metadata.value = metadata
     }
 
-    override fun onAudioFocusChange(focusChange: Int) {
-        when (focusChange) {
-            AudioManager.AUDIOFOCUS_LOSS -> {
-                if (currState.value is PlayingState) {
-                    performAction(Action.Pause())
-                }
-            }
-            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
-                performAction(Action.Pause())
-            }
-            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
-                mediaPlayer.setVolume(0.3f, 0.3f)
-            }
-            AudioManager.AUDIOFOCUS_GAIN -> {
-                if (currState.value is IdleState) {
-                    performAction(Action.Pause())
-                }
-                mediaPlayer.setVolume(1.0f, 1.0f)
-            }
-        }
-    }
 }

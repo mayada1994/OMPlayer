@@ -44,6 +44,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     private val playerManager: PlayerManager = SingletonHolder.playerManager
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
+    private var firstInit = true
 
     //region MediaLibraryCompat
 
@@ -112,7 +113,11 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
         startUpdateSeekbar()
-        playerManager.setPlaylist(playlist, LibraryUtil.action)
+        if (firstInit) {
+            playerManager.setPlaylist(playlist, LibraryUtil.action)
+            firstInit = false
+        }
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

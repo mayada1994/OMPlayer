@@ -1,4 +1,4 @@
-package com.omplayer.app.services
+package com.omplayer.app.services.youTubeService
 
 import okhttp3.ResponseBody
 import retrofit2.Call
