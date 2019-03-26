@@ -5,7 +5,65 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorBackground"
         android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/info_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/button_youtube_player">
+
+        <TextView
+                android:id="@+id/tv_track_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center"
+                tools:text="Title"/>
+
+        <TextView
+                android:id="@+id/tv_track_album"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tv_track_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_track_title"
+                app:layout_constraintEnd_toEndOf="@id/tv_track_artist"
+                android:textColor="@color/colorText"
+                android:gravity="center"
+                tools:text="Album"/>
+
+        <TextView
+                android:id="@+id/tv_track_artist"
+                android:layout_width="match_parent"
+                app:layout_constraintStart_toEndOf="@id/tv_track_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_track_album"
+                app:layout_constraintEnd_toEndOf="@id/tv_track_artist"
+                android:layout_height="19dp"
+                android:textColor="@color/colorText"
+                android:gravity="center"
+                tools:text="Artist"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+            android:id="@+id/button_youtube_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/youtube_button"
+            android:contentDescription="Youtube"
+            android:background="@color/colorBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/info_container"
+            app:layout_constraintBottom_toTopOf="@id/cover_container"
+            app:layout_constraintHorizontal_bias="0.498"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cover_container"
@@ -13,15 +71,18 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toTopOf="@id/controls_container"
+            app:layout_constraintTop_toBottomOf="@+id/button_youtube_player"
+            android:layout_marginTop="16dp"
+            app:layout_constraintHorizontal_bias="0.492">
 
         <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/iv_track_cover"
-                android:layout_width="210dp"
-                android:layout_height="210dp"
+                android:layout_width="230dp"
+                android:layout_height="230dp"
                 android:layout_gravity="center_horizontal"
-                app:civ_border_color="#EEEEEE"
-                app:civ_border_width="12dp"
+                app:civ_border_color="@color/colorBorderSeekBar"
+                app:civ_border_width="6dp"
                 android:src="@drawable/placeholder"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="@string/zero_time"
+                android:textColor="@color/colorText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/seekbar_audio"
@@ -40,17 +102,18 @@
 
         <com.savantech.seekarc.SeekArc
                 android:id="@+id/seekbar_audio"
-                android:layout_width="210dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@id/iv_track_cover"
+                app:layout_constraintEnd_toEndOf="@id/iv_track_cover"
+                app:layout_constraintTop_toTopOf="@id/iv_track_cover"
+                app:layout_constraintBottom_toBottomOf="@id/iv_track_cover"
                 app:startAngle="180"
                 app:sweepAngle="180"
                 app:arcColor="@android:color/darker_gray"
-                app:progressColor="@android:color/holo_blue_dark"
-                app:thumbColor="@android:color/holo_blue_light"
-                app:arcWidth="5dp"
+                app:progressColor="@color/colorSeekBar"
+                app:thumbColor="@color/colorPrimary"
+                app:arcWidth="6dp"
                 android:scaleY="-1"
                 app:roundCorner="true"
                 app:seekDirection="clockwise"/>
@@ -61,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="@string/zero_time"
+                android:textColor="@color/colorText"
                 app:layout_constraintStart_toEndOf="@id/seekbar_audio"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/seekbar_audio"
@@ -68,49 +132,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-            android:id="@+id/info_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cover_container">
-
-        <TextView
-                android:id="@+id/tv_track_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                tools:text="Title"/>
-
-        <TextView
-                android:id="@+id/tv_track_album"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                tools:text="Album"/>
-
-        <TextView
-                android:id="@+id/tv_track_artist"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                tools:text="Artist"/>
-
-    </LinearLayout>
-
-
-    <Button
-            android:id="@+id/button_youtube_player"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/action_bar_video"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/controls_container"
-            app:layout_constraintTop_toBottomOf="@id/info_container"/>
 
     <LinearLayout
             android:id="@+id/controls_container"
@@ -126,24 +147,27 @@
         <ImageButton
                 android:id="@+id/button_previous"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/colorBackground"
                 android:layout_weight="1"
-                android:src="@drawable/prev"
+                android:src="@drawable/prev_large"
                 android:contentDescription="@string/previous"/>
         <ImageButton
                 android:id="@+id/button_play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/colorBackground"
                 android:layout_weight="1"
-                android:src="@drawable/play"
+                android:src="@drawable/play_circle"
                 android:contentDescription="@string/play"/>
 
         <ImageButton
                 android:id="@+id/button_next"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/colorBackground"
                 android:layout_weight="1"
-                android:src="@drawable/next"
+                android:src="@drawable/next_large"
                 android:contentDescription="@string/next"/>
 
     </LinearLayout>

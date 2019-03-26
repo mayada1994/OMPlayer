@@ -60,11 +60,11 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         viewModel.currState.observe(this, Observer {
             when (it) {
                 is PlayingState -> {
-                    button_play.setImageResource(R.drawable.pause)
+                    button_play.setImageResource(R.drawable.pause_circle)
                     isPlaying = true
                 }
                 is PausedState -> {
-                    button_play.setImageResource(R.drawable.play)
+                    button_play.setImageResource(R.drawable.play_circle)
                     isPlaying = false
                 }
             }
@@ -76,11 +76,11 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         when (view.id) {
             R.id.button_play -> {
                 if (!isPlaying) {
-                    button_play.setImageResource(R.drawable.pause)
+                    button_play.setImageResource(R.drawable.pause_circle)
                     viewModel.onPlayClicked()
                     isPlaying = true
                 } else {
-                    button_play.setImageResource(R.drawable.play)
+                    button_play.setImageResource(R.drawable.play_circle)
                     viewModel.onPauseClicked()
                     isPlaying = false
                 }
