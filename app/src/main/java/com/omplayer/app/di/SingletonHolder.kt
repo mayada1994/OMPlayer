@@ -24,7 +24,7 @@ object SingletonHolder {
 
     fun init(application: Application) {
         this.application = application
-        val playerServiceManager = PlayerServiceManager(context)
+        playerServiceManager
         playerManager.initMediaSession()
         playerManager.setPlaylist(LibraryUtil.tracklist, Action.Pause())
         db = PlayerDatabase.getDatabase(context)

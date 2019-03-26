@@ -109,7 +109,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         super.onCleared()
         foreverObservers.forEach { it.release() }
     }
-
+    //TODO remove firstInit boolean
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
         startUpdateSeekbar()
