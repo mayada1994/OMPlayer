@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#00897B</color>
+    <color name="colorPrimaryDark">#004D40</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorBackground">#212121</color>
+    <color name="colorLibraryButton">#002720</color>
+    <color name="colorFavoritesButton">#004D40</color>
+    <color name="colorPlaylistButton">#00695C</color>
+    <color name="colorSettingsButton">#26A69A</color>
+    <color name="colorSeekBar">#00796B</color>
+    <color name="colorBorderSeekBar">#757575</color>
+    <color name="colorText">#FFFFFF</color>
 </resources>
