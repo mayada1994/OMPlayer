@@ -18,6 +18,7 @@ import com.omplayer.app.db.entities.Track
 import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.extensions.foreverObserver
 import com.omplayer.app.livedata.ForeverObserver
+import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.stateMachine.PlayerManager
 import com.omplayer.app.stateMachine.states.IdleState
 import com.omplayer.app.stateMachine.states.PlayingState
@@ -109,12 +110,13 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         super.onCleared()
         foreverObservers.forEach { it.release() }
     }
+
     //TODO remove firstInit boolean
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
         startUpdateSeekbar()
         if (firstInit) {
-            playerManager.setPlaylist(playlist, LibraryUtil.action)
+            playerManager.setPlaylist(playlist, Action.Play())
             firstInit = false
         }
 
