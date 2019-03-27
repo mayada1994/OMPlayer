@@ -117,6 +117,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         startUpdateSeekbar()
         if (firstInit) {
             playerManager.setPlaylist(playlist, Action.Play())
+            mediaControllerCompat.transportControls.pause()
             firstInit = false
         }
 
