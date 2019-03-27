@@ -38,9 +38,9 @@ class LibraryFragment : Fragment() {
     private fun setupViewPager(viewPager: ViewPager) {
 
         val adapter = LibraryAdapter(childFragmentManager)
+        adapter.addFragment(TrackFragment(), getString(R.string.tracklist))
         adapter.addFragment(ArtistFragment(), getString(R.string.artists))
         adapter.addFragment(AlbumFragment(), getString(R.string.albums))
-        adapter.addFragment(TrackFragment(), getString(R.string.tracklist))
         adapter.addFragment(GenreFragment(), getString(R.string.genres))
 
         viewPager.adapter = adapter
