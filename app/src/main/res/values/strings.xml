@@ -10,7 +10,7 @@
 
     <string name="music_player">Music Player</string>
     <string name="library">Library</string>
-    <string name="tracklist">Tracklist</string>
+    <string name="tracklist">Songs</string>
     <string name="albums">Albums</string>
     <string name="artists">Artists</string>
     <string name="genres">Genres</string>
