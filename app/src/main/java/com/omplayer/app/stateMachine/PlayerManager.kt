@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.os.Build.VERSION_CODES.P
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.annotation.MainThread
@@ -106,6 +107,15 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
             super.onStop()
             performAction(Action.Stop())
         }
+
+        override fun onSetRepeatMode(repeatMode: Int) {
+            super.onSetRepeatMode(repeatMode)
+            when (repeatMode) {
+                0 -> mediaPlayer.isLooping = false
+                1 -> mediaPlayer.isLooping = true
+            }
+        }
+
 
         override fun onSeekTo(position: Long) {
             mediaPlayer.seekTo(position.toInt())

@@ -189,6 +189,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     fun onSeek(position: Int) = mediaControllerCompat.transportControls.seekTo(position.toLong())
 
+    fun onSetRepeatMode(mode: Int) = mediaControllerCompat.transportControls.setRepeatMode(mode)
+
     //endregion
 
 }

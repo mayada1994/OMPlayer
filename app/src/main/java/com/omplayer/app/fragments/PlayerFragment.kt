@@ -25,6 +25,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
 
     private var isPlaying = false
+    private var isLooped = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
@@ -45,6 +46,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         button_next.setOnClickListener(this)
         button_play.setOnClickListener(this)
         button_youtube_player.setOnClickListener(this)
+        button_shuffle.setOnClickListener(this)
 
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
@@ -60,11 +62,11 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         viewModel.currState.observe(this, Observer {
             when (it) {
                 is PlayingState -> {
-                    button_play.setImageResource(R.drawable.pause_circle)
+                    button_play.setImageResource(R.drawable.ic_pause_circle)
                     isPlaying = true
                 }
                 is PausedState -> {
-                    button_play.setImageResource(R.drawable.play_circle)
+                    button_play.setImageResource(R.drawable.ic_play_circle)
                     isPlaying = false
                 }
             }
@@ -76,11 +78,11 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         when (view.id) {
             R.id.button_play -> {
                 if (!isPlaying) {
-                    button_play.setImageResource(R.drawable.pause_circle)
+                    button_play.setImageResource(R.drawable.ic_pause_circle)
                     viewModel.onPlayClicked()
                     isPlaying = true
                 } else {
-                    button_play.setImageResource(R.drawable.play_circle)
+                    button_play.setImageResource(R.drawable.ic_play_circle)
                     viewModel.onPauseClicked()
                     isPlaying = false
                 }
@@ -88,16 +90,26 @@ class PlayerFragment : Fragment(), View.OnClickListener {
             R.id.button_next -> viewModel.onNextClicked()
             R.id.button_previous -> viewModel.onPrevClicked()
             R.id.button_youtube_player -> {
-                button_play.setImageResource(R.drawable.play)
                 viewModel.onPauseClicked()
-                isPlaying = false
-                playVideo()
+                (activity as MainActivity).playVideo()
+            }
+            R.id.button_shuffle -> {
+                if (isLooped) {
+                    viewModel.onSetRepeatMode(0)
+                    button_shuffle.setImageResource(R.drawable.ic_repeat)
+                    isLooped = false
+                } else {
+                    viewModel.onSetRepeatMode(1)
+                    button_shuffle.setImageResource(R.drawable.ic_repeat_one)
+                    isLooped = true
+
+                }
+
             }
         }
     }
 
     //region Initializing seekbar
-
 
     private fun initializeSeekbar() {
         seekbar_audio.setThumbRadius(8)
@@ -123,11 +135,5 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         viewModel.loadTrackData(iv_track_cover, tv_track_title, tv_track_album, tv_track_artist, context!!)
     }
 
-
     //endregion
-
-    fun playVideo() {
-        val activity = activity as MainActivity
-        activity.playVideo()
-    }
 }
