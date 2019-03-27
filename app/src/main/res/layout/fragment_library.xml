@@ -20,6 +20,7 @@
                     android:theme="@style/Theme.AppCompat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     app:tabMode="scrollable"/>
         </com.google.android.material.appbar.AppBarLayout>
 
