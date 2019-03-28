@@ -9,9 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.omplayer.app.R
 import com.omplayer.app.activities.MainActivity
+import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.stateMachine.states.PausedState
 import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.FormatUtils
+import com.omplayer.app.viewmodels.LyricsViewModel
 import com.omplayer.app.viewmodels.PlayerViewModel
 import com.savantech.seekarc.SeekArc
 import kotlinx.android.synthetic.main.fragment_player.*
@@ -22,7 +24,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     private val viewModel: PlayerViewModel by lazy {
         ViewModelProviders.of(this).get(PlayerViewModel::class.java)
     }
-
+    private val lyricsViewModel = LyricsViewModel(SingletonHolder.application)
 
     private var isPlaying = false
     private var isLooped = false
@@ -47,6 +49,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         button_play.setOnClickListener(this)
         button_youtube_player.setOnClickListener(this)
         button_shuffle.setOnClickListener(this)
+        button_lyrics.setOnClickListener(this)
 
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
@@ -106,6 +109,11 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 }
 
             }
+            R.id.button_lyrics -> lyricsViewModel.getSongLyrics(
+                tv_track_artist.text.toString(),
+                tv_track_title.text.toString(),
+                fragmentManager!!
+            )
         }
     }
 
