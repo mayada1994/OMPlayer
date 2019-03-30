@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "631497513042",
+    "firebase_url": "https://omplayer.firebaseio.com",
+    "project_id": "omplayer",
+    "storage_bucket": "omplayer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631497513042:android:8d2bccd2c6080d3f",
+        "android_client_info": {
+          "package_name": "com.omplayer.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631497513042-jot846u41hsg0g45fn7p5gl8kn81co4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.omplayer.app",
+            "certificate_hash": "31c698693130eb4d8f383312bbdbbafa8ff8b63a"
+          }
+        },
+        {
+          "client_id": "631497513042-olgfpk9v1220ivs938mlr76r4f8mkuvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAax75bfGDni-dCt7-HlO6GQDFBVvPruzQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631497513042-olgfpk9v1220ivs938mlr76r4f8mkuvq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

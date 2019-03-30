@@ -18,6 +18,7 @@ import com.omplayer.app.db.entities.Track
 import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.extensions.foreverObserver
 import com.omplayer.app.livedata.ForeverObserver
+import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.stateMachine.PlayerManager
 import com.omplayer.app.stateMachine.states.IdleState
 import com.omplayer.app.stateMachine.states.PlayingState
@@ -44,6 +45,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     private val playerManager: PlayerManager = SingletonHolder.playerManager
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
+    private var firstInit = true
 
     //region MediaLibraryCompat
 
@@ -109,10 +111,16 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         foreverObservers.forEach { it.release() }
     }
 
+    //TODO remove firstInit boolean
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
         startUpdateSeekbar()
-        playerManager.setPlaylist(playlist, LibraryUtil.action)
+        if (firstInit) {
+            playerManager.setPlaylist(playlist, Action.Play())
+            mediaControllerCompat.transportControls.pause()
+            firstInit = false
+        }
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -180,6 +188,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     fun onStopClicked() = mediaControllerCompat.transportControls.stop()
 
     fun onSeek(position: Int) = mediaControllerCompat.transportControls.seekTo(position.toLong())
+
+    fun onSetRepeatMode(mode: Int) = mediaControllerCompat.transportControls.setRepeatMode(mode)
 
     //endregion
 

@@ -160,7 +160,7 @@ class LibraryRepository(val context: Context) {
                     val artist = cursor.getString(1)
                     val path = cursor.getString(2)
                     val duration = cursor.getString(3)
-                    val position = cursor.getString(4)
+                    val position = cursor.getString(4).toInt()
                     val album = cursor.getString(5)
                     val year = if (cursor.getString(6) != null) cursor.getString(6) else UNKNOWN
                     val id = cursor.getString(7)
@@ -171,11 +171,11 @@ class LibraryRepository(val context: Context) {
                         genreUri,
                         arrayOf(MediaStore.Audio.Genres.NAME), null, null, null
                     )
-                    val genre_column_index = genresCursor.getColumnIndexOrThrow(MediaStore.Audio.Genres.NAME)
+                    val genreColumnIndex = genresCursor.getColumnIndexOrThrow(MediaStore.Audio.Genres.NAME)
 
                     if (genresCursor.moveToFirst()) {
                         do {
-                            genre = genresCursor.getString(genre_column_index)
+                            genre = genresCursor.getString(genreColumnIndex)
                         } while (genresCursor.moveToNext())
                     }
                     if (genresCursor != null) {

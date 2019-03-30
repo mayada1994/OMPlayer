@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // PlayerContext of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.example.omplayer", appContext.packageName)
+        assertEquals("com.omplayer.app", appContext.packageName)
     }
 }

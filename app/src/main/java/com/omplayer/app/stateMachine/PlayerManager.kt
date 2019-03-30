@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.os.Build.VERSION_CODES.P
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.annotation.MainThread
@@ -41,6 +42,28 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
     //region AudioManager
 
     private val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+    override fun onAudioFocusChange(focusChange: Int) {
+        when (focusChange) {
+            AudioManager.AUDIOFOCUS_LOSS -> {
+                if (currState.value is PlayingState) {
+                    performAction(Action.Pause())
+                }
+            }
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
+                performAction(Action.Pause())
+            }
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
+                mediaPlayer.setVolume(0.3f, 0.3f)
+            }
+            AudioManager.AUDIOFOCUS_GAIN -> {
+                if (currState.value is IdleState) {
+                    performAction(Action.Pause())
+                }
+                mediaPlayer.setVolume(1.0f, 1.0f)
+            }
+        }
+    }
 
 
     //endregion
@@ -84,6 +107,15 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
             super.onStop()
             performAction(Action.Stop())
         }
+
+        override fun onSetRepeatMode(repeatMode: Int) {
+            super.onSetRepeatMode(repeatMode)
+            when (repeatMode) {
+                0 -> mediaPlayer.isLooping = false
+                1 -> mediaPlayer.isLooping = true
+            }
+        }
+
 
         override fun onSeekTo(position: Long) {
             mediaPlayer.seekTo(position.toInt())
@@ -155,9 +187,7 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
         }
     }
 
-    fun seekTo(position: Int) {
-        mediaPlayer.seekTo(position)
-    }
+    //TODO Need to find out WHERE to release mediaPlayer and MediaSessionCompat
 
     fun release() {
         mediaPlayer.release()
@@ -169,25 +199,4 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
         _metadata.value = metadata
     }
 
-    override fun onAudioFocusChange(focusChange: Int) {
-        when (focusChange) {
-            AudioManager.AUDIOFOCUS_LOSS -> {
-                if (currState.value is PlayingState) {
-                    performAction(Action.Pause())
-                }
-            }
-            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
-                performAction(Action.Pause())
-            }
-            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
-                mediaPlayer.setVolume(0.3f, 0.3f)
-            }
-            AudioManager.AUDIOFOCUS_GAIN -> {
-                if (currState.value is IdleState) {
-                    performAction(Action.Pause())
-                }
-                mediaPlayer.setVolume(1.0f, 1.0f)
-            }
-        }
-    }
 }

@@ -13,7 +13,7 @@ object SingletonHolder {
 
     lateinit var application: Application
     private val context: Context get() = application
-    lateinit var db:PlayerDatabase
+    lateinit var db: PlayerDatabase
 
     val playerManager by lazy {
         PlayerManager(context)
@@ -24,7 +24,7 @@ object SingletonHolder {
 
     fun init(application: Application) {
         this.application = application
-        val playerServiceManager = PlayerServiceManager(context)
+        playerServiceManager
         playerManager.initMediaSession()
         playerManager.setPlaylist(LibraryUtil.tracklist, Action.Pause())
         db = PlayerDatabase.getDatabase(context)

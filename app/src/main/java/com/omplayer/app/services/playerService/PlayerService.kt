@@ -103,18 +103,18 @@ class PlayerService : Service() {
 
         when (intent?.getSerializableExtra(Extra.ACTION)) {
             is Action.Play -> {
-                getNotification(R.drawable.pause, "pause", pausePendingIntent, "Playing")
+                getNotification(R.drawable.ic_pause, "ic_pause", pausePendingIntent)
             }
 
             is Action.Pause -> {
-                getNotification(R.drawable.play, "play", playPendingIntent, "Paused")
+                getNotification(R.drawable.ic_play, "ic_play", playPendingIntent)
             }
         }
 
         return START_NOT_STICKY
     }
 
-    private fun getNotification(icon: Int, text: String, intent: PendingIntent, status: String) {
+    private fun getNotification(icon: Int, text: String, intent: PendingIntent) {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(coroutineContext) {
                 val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
@@ -123,13 +123,13 @@ class PlayerService : Service() {
                 withContext(Dispatchers.Main) {
                     val notification: Notification = NotificationCompat.Builder(serviceContext, CHANNEL_ID)
                         .setLargeIcon(currentCover)
-                        .setSmallIcon(R.drawable.music_icon)
-                        .setContentTitle(currentAlbum.title + " - " + currentTrack.title)
+                        .setSmallIcon(R.drawable.ic_note)
+                        .setContentTitle(currentTrack.title)
                         .setContentText(currentAlbum.title)
-                        .addAction(R.drawable.prev, "prev", prevPendingIntent)
+                        .addAction(R.drawable.ic_prev, "ic_prev", prevPendingIntent)
                         .addAction(icon, text, intent)
-                        .addAction(R.drawable.next, "next", nextPendingIntent)
-                        .addAction(R.drawable.close, "close", stopPendingIntent)
+                        .addAction(R.drawable.ic_next, "ic_next", nextPendingIntent)
+                        .addAction(R.drawable.ic_close, "ic_close", stopPendingIntent)
                         .setStyle(MediaStyle())
                         .build()!!
                     startForeground(1, notification)

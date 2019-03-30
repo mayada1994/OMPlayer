@@ -53,5 +53,4 @@ class PlayingState(context: PlayerContext) : State(context) {
         }
     }
 
-
 }

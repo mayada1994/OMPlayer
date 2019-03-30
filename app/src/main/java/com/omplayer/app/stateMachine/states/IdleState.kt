@@ -18,7 +18,6 @@ class IdleState(context: PlayerContext) : State(context) {
             context.mediaPlayer?.start()
             PlayingState(context)
         }
-        else -> {
-            this}
+        else -> this
     }
 }

@@ -3,16 +3,13 @@ package com.omplayer.app.viewmodels
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import com.omplayer.app.fragments.PlayerFragment
 import com.omplayer.app.repositories.YouTubeRepository
 import com.omplayer.app.utils.LibraryUtil
-import kotlinx.coroutines.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.regex.Pattern
-import kotlin.coroutines.CoroutineContext
 
 class VideoViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -51,7 +48,7 @@ class VideoViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.d("YouTubeResponse", "Profile not found")
+                Log.d("YouTubeResponse", "Video not found")
             }
         })
     }
@@ -61,7 +58,7 @@ class VideoViewModel(application: Application) : AndroidViewModel(application) {
         val currentArtist = artist.replace(" ", "+")
         val currentAlbum = album.replace(" ", "+")
         val currentTitle = song.replace(" ", "+")
-        return "$baseUrl$currentArtist/$currentAlbum/$currentTitle/"
+        return "$baseUrl$currentArtist/$currentAlbum/$currentTitle/".replace("#", "%23")
     }
 
     private fun getPattern(): Pattern{

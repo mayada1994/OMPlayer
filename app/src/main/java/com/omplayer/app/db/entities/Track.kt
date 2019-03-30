@@ -19,7 +19,7 @@ data class Track(
     @ColumnInfo(name = "title")
     var title: String = "",
     @ColumnInfo(name = "position")
-    var position: String = "",
+    var position: Int = 0,
     @ColumnInfo(name = "duration")
     var duration: Int = 0,
     @ColumnInfo(name = "album_id")
