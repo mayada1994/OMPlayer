@@ -15,6 +15,7 @@ import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.FormatUtils
 import com.omplayer.app.viewmodels.LyricsViewModel
 import com.omplayer.app.viewmodels.PlayerViewModel
+import com.omplayer.app.viewmodels.VideoViewModel
 import com.savantech.seekarc.SeekArc
 import kotlinx.android.synthetic.main.fragment_player.*
 
@@ -25,6 +26,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         ViewModelProviders.of(this).get(PlayerViewModel::class.java)
     }
     private val lyricsViewModel = LyricsViewModel(SingletonHolder.application)
+    private val videoViewModel = VideoViewModel(SingletonHolder.application)
 
     private var isPlaying = false
     private var isLooped = false
@@ -94,7 +96,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
             R.id.button_previous -> viewModel.onPrevClicked()
             R.id.button_youtube_player -> {
                 viewModel.onPauseClicked()
-                (activity as MainActivity).playVideo()
+                videoViewModel.playVideo(fragmentManager!!)
             }
             R.id.button_shuffle -> {
                 if (isLooped) {

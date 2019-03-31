@@ -2,7 +2,11 @@ package com.omplayer.app.viewmodels
 
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.AndroidViewModel
+import com.omplayer.app.di.SingletonHolder
+import com.omplayer.app.dialogFragments.VideoDialogFragment
 import com.omplayer.app.repositories.YouTubeRepository
 import com.omplayer.app.utils.LibraryUtil
 import okhttp3.ResponseBody
@@ -13,6 +17,8 @@ import java.util.regex.Pattern
 
 class VideoViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val VIDEO_ID = LibraryUtil.selectedTrackVideoId
+    private val VIDEO_NOT_FOUND = "Video Not Found"
     private val NOT_FOUND = "Not Found"
     private val YOUTUBE_BASE_URL = "https://www.youtube.com/watch?v="
 
@@ -61,7 +67,7 @@ class VideoViewModel(application: Application) : AndroidViewModel(application) {
         return "$baseUrl$currentArtist/$currentAlbum/$currentTitle/".replace("#", "%23")
     }
 
-    private fun getPattern(): Pattern{
+    private fun getPattern(): Pattern {
         return Pattern.compile(
             "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)"
                     + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
@@ -72,5 +78,14 @@ class VideoViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun extractVideoId(youTubeUrl: String): String {
         return youTubeUrl.replace(YOUTUBE_BASE_URL, "")
+    }
+
+    fun playVideo(fragmentManager: FragmentManager) {
+        if (VIDEO_ID != NOT_FOUND) {
+            val lyricsDialog = VideoDialogFragment.newInstance()
+            lyricsDialog.show(fragmentManager, "")
+        } else {
+            Toast.makeText(SingletonHolder.application, VIDEO_NOT_FOUND, Toast.LENGTH_LONG).show()
+        }
     }
 }
