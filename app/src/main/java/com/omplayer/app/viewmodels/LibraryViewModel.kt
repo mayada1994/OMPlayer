@@ -94,6 +94,18 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    suspend fun deleteAdditionalAlbums() {
+
+        val iterator = LibraryUtil.genres.iterator()
+        while (iterator.hasNext()) {
+            val genre = iterator.next()
+            val genreTracks = db.trackDao().getTracksByGenreId(genre.id)
+            if (genreTracks.isEmpty()) {
+                iterator.remove()
+            }
+        }
+    }
+
     fun emptyDb(): Boolean {
         var isEmptyDb: Boolean = false
         scope.launch {

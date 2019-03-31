@@ -21,11 +21,12 @@ class LibraryRepository(val context: Context) {
     var artists = ArrayList<Artist>()
     var albums = ArrayList<Album>()
     var tracks = ArrayList<Track>()
+    var containedAlbums: ArrayList<AlbumTag> = ArrayList()
     val db = SingletonHolder.db
     private val formats = arrayOf(".aac", ".mp3", ".wav", ".ogg", ".midi", ".3gp", ".m4a", ".amr", ".flac")
 
     @WorkerThread
-    suspend fun scanDeviceForGenres(): ArrayList<Genre> {
+    fun scanDeviceForGenres(): ArrayList<Genre> {
         val where: String? = null
 
         val columns = arrayOf(MediaStore.Audio.Genres.NAME)
@@ -56,7 +57,7 @@ class LibraryRepository(val context: Context) {
     }
 
     @WorkerThread
-    suspend fun scanDeviceForArtists(): ArrayList<Artist> {
+    fun scanDeviceForArtists(): ArrayList<Artist> {
         val where: String? = null
         val columns = arrayOf(
             MediaStore.Audio.Artists.ARTIST
@@ -102,7 +103,6 @@ class LibraryRepository(val context: Context) {
 
         var cursor: Cursor? = null
         try {
-            var containedAlbums: ArrayList<AlbumTag> = ArrayList()
             val uri = MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI
             cursor = context.contentResolver.query(uri, columns, where, null, sortOrder)
             if (cursor != null) {
@@ -159,14 +159,14 @@ class LibraryRepository(val context: Context) {
                     val title = cursor.getString(0)
                     val artist = cursor.getString(1)
                     val path = cursor.getString(2)
-                    val duration = cursor.getString(3)
-                    val position = cursor.getString(4).toInt()
+                    val duration = cursor.getInt(3)
+                    val position = cursor.getInt(4)
                     val album = cursor.getString(5)
                     val year = if (cursor.getString(6) != null) cursor.getString(6) else UNKNOWN
-                    val id = cursor.getString(7)
+                    val id = cursor.getInt(7)
                     var genre = ""
 
-                    val genreUri = MediaStore.Audio.Genres.getContentUriForAudioId("external", id.toInt())
+                    val genreUri = MediaStore.Audio.Genres.getContentUriForAudioId("external", id)
                     val genresCursor = context.contentResolver.query(
                         genreUri,
                         arrayOf(MediaStore.Audio.Genres.NAME), null, null, null
@@ -195,7 +195,7 @@ class LibraryRepository(val context: Context) {
                             Track(
                                 title,
                                 position,
-                                duration.toInt(),
+                                duration,
                                 albumId,
                                 artistId,
                                 genreId,
@@ -217,7 +217,7 @@ class LibraryRepository(val context: Context) {
     }
 
     @WorkerThread
-    private suspend fun supportedFormat(path: String): Boolean {
+    private fun supportedFormat(path: String): Boolean {
         for (format in formats) {
             if (path.endsWith(format)) {
                 return true
@@ -227,12 +227,12 @@ class LibraryRepository(val context: Context) {
     }
 
     @WorkerThread
-    private suspend fun getGenreId(name: String): Int {
+    private fun getGenreId(name: String): Int {
         return db.genreDao().getGenreByName(name).id
     }
 
     @WorkerThread
-    private suspend fun getArtistId(name: String): Int {
+    private fun getArtistId(name: String): Int {
         return db.artistDao().getArtistByName(name).id
     }
 
