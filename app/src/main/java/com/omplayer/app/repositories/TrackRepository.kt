@@ -50,6 +50,11 @@ class TrackRepository(private val trackDao: TrackDao) {
     }
 
     @WorkerThread
+    suspend fun getTracksByArtistId(id: Int): List<Track>? {
+        return trackDao.getTracksByArtistId(id)
+    }
+
+    @WorkerThread
     suspend fun getTracksByGenreId(id: Int): List<Track>? {
         return trackDao.getTracksByGenreId(id)
     }

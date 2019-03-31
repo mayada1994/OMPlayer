@@ -22,7 +22,7 @@ class LibraryRepository(val context: Context) {
     var albums = ArrayList<Album>()
     var tracks = ArrayList<Track>()
     val db = SingletonHolder.db
-    private val formats = arrayOf(".aac", ".mp3", ".wav", ".ogg", ".midi", ".3gp", ".mp4", ".m4a", ".amr", ".flac")
+    private val formats = arrayOf(".aac", ".mp3", ".wav", ".ogg", ".midi", ".3gp", ".m4a", ".amr", ".flac")
 
     @WorkerThread
     suspend fun scanDeviceForGenres(): ArrayList<Genre> {
@@ -188,6 +188,7 @@ class LibraryRepository(val context: Context) {
                             genre = UNKNOWN
                         }
                         val genreId = getGenreId(genre)
+                        val artistId = getArtistId(artist)
                         val albumId = getAlbumId(album, artist, year)
 
                         tracks.add(
@@ -196,6 +197,7 @@ class LibraryRepository(val context: Context) {
                                 position,
                                 duration.toInt(),
                                 albumId,
+                                artistId,
                                 genreId,
                                 path
                             )

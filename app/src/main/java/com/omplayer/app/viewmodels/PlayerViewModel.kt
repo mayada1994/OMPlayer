@@ -149,7 +149,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
             withContext(coroutineContext) {
                 val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
                 val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId)
-                val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentAlbum.artistId)
+                val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentTrack.artistId)
                 withContext(Dispatchers.Main) {
                     videoViewModel.getVideoId(
                         currentArtist.name,
