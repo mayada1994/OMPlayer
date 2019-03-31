@@ -39,6 +39,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
                 loadArtists()
                 loadAlbums()
                 loadTracks()
+                deleteAdditionalGenres()
 
                 withContext(Dispatchers.Main) {
                     PreferenceUtil.updateLibrary = false
@@ -81,6 +82,30 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
         LibraryUtil.tracklist = LibraryUtil.tracks
     }
 
+    suspend fun deleteAdditionalGenres() {
+
+        val iterator = LibraryUtil.genres.iterator()
+        while (iterator.hasNext()) {
+            val genre = iterator.next()
+            val genreTracks = db.trackDao().getTracksByGenreId(genre.id)
+            if (genreTracks.isEmpty()) {
+                iterator.remove()
+            }
+        }
+    }
+
+    suspend fun deleteAdditionalAlbums() {
+
+        val iterator = LibraryUtil.genres.iterator()
+        while (iterator.hasNext()) {
+            val genre = iterator.next()
+            val genreTracks = db.trackDao().getTracksByGenreId(genre.id)
+            if (genreTracks.isEmpty()) {
+                iterator.remove()
+            }
+        }
+    }
+
     fun emptyDb(): Boolean {
         var isEmptyDb: Boolean = false
         scope.launch {
@@ -94,10 +119,10 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     fun extractData() {
         scope.launch {
             withContext(coroutineContext) {
-                LibraryUtil.genres = db.genreDao().getAllGenres() as ArrayList<Genre>
-                LibraryUtil.artists = db.artistDao().getAllArtists() as ArrayList<Artist>
-                LibraryUtil.albums = db.albumDao().getAllAlbums() as ArrayList<Album>
-                LibraryUtil.tracks = db.trackDao().getAllTracks() as ArrayList<Track>
+                LibraryUtil.genres = genreRepository.getAllGenres() as ArrayList<Genre>
+                LibraryUtil.artists = artistRepository.getAllArtists() as ArrayList<Artist>
+                LibraryUtil.albums = albumRepository.getAllAlbums() as ArrayList<Album>
+                LibraryUtil.tracks = trackRepository.getAllTracks() as ArrayList<Track>
                 LibraryUtil.tracklist = LibraryUtil.tracks
             }
         }

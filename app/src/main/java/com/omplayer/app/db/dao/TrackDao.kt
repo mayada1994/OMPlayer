@@ -29,6 +29,9 @@ interface TrackDao {
     @Query("SELECT * from tracks WHERE album_id = :albumId ORDER BY position ASC")
     fun getTracksByAlbumId(albumId: Int): List<Track>
 
+    @Query("SELECT * from tracks WHERE artist_id = :artistId ORDER BY position ASC")
+    fun getTracksByArtistId(artistId: Int): List<Track>
+
     @Query("SELECT * from tracks WHERE genre_id = :genreId ORDER BY title ASC")
     fun getTracksByGenreId(genreId: Int): List<Track>
 }

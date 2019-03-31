@@ -50,7 +50,11 @@ class LyricsViewModel(application: Application) : AndroidViewModel(application) 
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("LyricsResponse", t.message)
-                Toast.makeText(this@LyricsViewModel.getApplication(), NOT_FOUND, Toast.LENGTH_LONG).show()
+                if (t.message!!.contains("443")) {
+                    Toast.makeText(this@LyricsViewModel.getApplication(), "Service Unavailable", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this@LyricsViewModel.getApplication(), NOT_FOUND, Toast.LENGTH_LONG).show()
+                }
             }
 
         })

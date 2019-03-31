@@ -11,6 +11,9 @@ import androidx.room.PrimaryKey
         entity = Album::class,
         parentColumns = ["id"], childColumns = ["album_id"]
     ), ForeignKey(
+        entity = Artist::class,
+        parentColumns = ["id"], childColumns = ["artist_id"]
+    ), ForeignKey(
         entity = Genre::class,
         parentColumns = ["id"], childColumns = ["genre_id"]
     )]
@@ -19,11 +22,13 @@ data class Track(
     @ColumnInfo(name = "title")
     var title: String = "",
     @ColumnInfo(name = "position")
-    var position: String = "",
+    var position: Int = 0,
     @ColumnInfo(name = "duration")
     var duration: Int = 0,
     @ColumnInfo(name = "album_id")
     var albumId: Int = 0,
+    @ColumnInfo(name = "artist_id")
+    var artistId: Int = 0,
     @ColumnInfo(name = "genre_id")
     var genreId: Int = 0,
     @ColumnInfo(name = "path")

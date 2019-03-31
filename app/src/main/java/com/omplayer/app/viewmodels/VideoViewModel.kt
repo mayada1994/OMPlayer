@@ -48,7 +48,7 @@ class VideoViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.d("YouTubeResponse", "Profile not found")
+                Log.d("YouTubeResponse", "Video not found")
             }
         })
     }
