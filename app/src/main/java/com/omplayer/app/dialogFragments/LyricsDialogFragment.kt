@@ -12,11 +12,11 @@ class LyricsDialogFragment : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val selectLanguageView = inflater.inflate(R.layout.lyrics_dialog, container, false)
-        val lyrics: TextView = selectLanguageView.findViewById(R.id.tv_lyrics)
+        val lyricsView = inflater.inflate(R.layout.lyrics_dialog, container, false)
+        val lyrics: TextView = lyricsView.findViewById(R.id.tv_lyrics)
         lyrics.text = arguments?.getString("content")
         dialog.setCanceledOnTouchOutside(true)
-        return selectLanguageView
+        return lyricsView
     }
 
     companion object {

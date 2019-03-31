@@ -1,10 +1,12 @@
-package com.omplayer.app.fragments
+package com.omplayer.app.dialogFragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.Nullable
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
@@ -15,20 +17,17 @@ import com.omplayer.app.utils.LibraryUtil
 import kotlinx.android.synthetic.main.fragment_video.*
 
 
-class VideoFragment : Fragment() {
+class VideoDialogFragment : DialogFragment() {
 
     private val YOUTUBE_API_KEY = "AIzaSyAcNnSv7GshAIBXOhYrXN_twsgMrt5J0Jc"
     private val VIDEO_ID = LibraryUtil.selectedTrackVideoId
-    private val NOT_FOUND = "Not Found"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_video, container, false)
-        (activity as MainActivity)
-            .setActionBarTitle(getString(R.string.action_bar_video))
-        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        dialog.setCanceledOnTouchOutside(true)
         return view
     }
 
@@ -52,6 +51,7 @@ class VideoFragment : Fragment() {
                 }
 
             }
+
             override fun onInitializationFailure(arg0: YouTubePlayer.Provider, arg1: YouTubeInitializationResult) {
 
 
@@ -63,12 +63,15 @@ class VideoFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if(VIDEO_ID != NOT_FOUND) {
-            initializeYoutubeFragment()
-        }else{
-            video_view.visibility = View.GONE
-            video_not_found.visibility = View.VISIBLE
+        initializeYoutubeFragment()
+    }
+
+    companion object {
+
+        fun newInstance(): VideoDialogFragment {
+            val videoDialogFragment = VideoDialogFragment()
+            videoDialogFragment.setStyle(STYLE_NO_TITLE, 0)
+            return videoDialogFragment
         }
     }
 }
