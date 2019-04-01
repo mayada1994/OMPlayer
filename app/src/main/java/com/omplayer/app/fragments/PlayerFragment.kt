@@ -15,6 +15,9 @@ import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.FormatUtils
 import com.omplayer.app.viewmodels.LyricsViewModel
 import com.omplayer.app.viewmodels.PlayerViewModel
+import com.omplayer.app.viewmodels.PlayerViewModel.Companion.LOOP_MODE
+import com.omplayer.app.viewmodels.PlayerViewModel.Companion.NORMAL_MODE
+import com.omplayer.app.viewmodels.PlayerViewModel.Companion.SHUFFLE_MODE
 import com.omplayer.app.viewmodels.VideoViewModel
 import com.savantech.seekarc.SeekArc
 import kotlinx.android.synthetic.main.fragment_player.*
@@ -29,7 +32,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     private val videoViewModel = VideoViewModel(SingletonHolder.application)
 
     private var isPlaying = false
-    private var isLooped = false
+    private var currMode = NORMAL_MODE
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
@@ -99,17 +102,28 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 videoViewModel.playVideo(fragmentManager!!)
             }
             R.id.button_shuffle -> {
-                if (isLooped) {
-                    viewModel.onSetRepeatMode(0)
-                    button_shuffle.setImageResource(R.drawable.ic_repeat)
-                    isLooped = false
-                } else {
-                    viewModel.onSetRepeatMode(1)
-                    button_shuffle.setImageResource(R.drawable.ic_repeat_one)
-                    isLooped = true
+                when (this.currMode) {
+                    NORMAL_MODE -> {
+                        viewModel.onSetRepeatShuffleMode(currMode!!)
+                        button_shuffle.setImageResource(R.drawable.ic_repeat)
+                        currMode = LOOP_MODE
+                    }
+                    LOOP_MODE -> {
+                        viewModel.onSetRepeatShuffleMode(currMode!!)
+                        button_shuffle.setImageResource(R.drawable.ic_repeat_one)
+                        button_previous.visibility = View.GONE
+                        button_next.visibility = View.GONE
+                        currMode = SHUFFLE_MODE
+                    }
+                    SHUFFLE_MODE -> {
+                        viewModel.onSetRepeatShuffleMode(currMode!!)
+                        button_shuffle.setImageResource(R.drawable.ic_shuffle)
+                        button_previous.visibility = View.VISIBLE
+                        button_next.visibility = View.VISIBLE
+                        currMode = NORMAL_MODE
 
+                    }
                 }
-
             }
             R.id.button_lyrics -> lyricsViewModel.getSongLyrics(
                 tv_track_artist.text.toString(),

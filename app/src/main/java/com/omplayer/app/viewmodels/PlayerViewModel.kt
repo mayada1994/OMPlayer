@@ -16,6 +16,7 @@ import com.mikhaellopez.circularimageview.CircularImageView
 import com.omplayer.app.R
 import com.omplayer.app.db.entities.Track
 import com.omplayer.app.di.SingletonHolder
+import com.omplayer.app.di.SingletonHolder.application
 import com.omplayer.app.extensions.foreverObserver
 import com.omplayer.app.livedata.ForeverObserver
 import com.omplayer.app.stateMachine.Action
@@ -37,6 +38,9 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     companion object {
         val TAG: String = PlayerViewModel::class.java.simpleName
+            const val NORMAL_MODE = 0
+            const val LOOP_MODE = 1
+            const val SHUFFLE_MODE = 2
     }
 
     private val videoViewModel = VideoViewModel(application)
@@ -45,7 +49,6 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     private val playerManager: PlayerManager = SingletonHolder.playerManager
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
-    private var firstInit = true
 
     //region MediaLibraryCompat
 
@@ -111,16 +114,24 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         foreverObservers.forEach { it.release() }
     }
 
-    //TODO remove firstInit boolean
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun onCreate() {
+        playerManager.setPlaylist(playlist, Action.Play())
+        when (LibraryUtil.action) {
+            is Action.Play -> {
+                onPlayClicked()
+            }
+            is Action.Pause -> {
+                onPauseClicked()
+            }
+        }
+
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
         startUpdateSeekbar()
-        if (firstInit) {
-            playerManager.setPlaylist(playlist, Action.Play())
-            mediaControllerCompat.transportControls.pause()
-            firstInit = false
-        }
-
+        onSetRepeatShuffleMode(NORMAL_MODE)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -189,7 +200,21 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     fun onSeek(position: Int) = mediaControllerCompat.transportControls.seekTo(position.toLong())
 
-    fun onSetRepeatMode(mode: Int) = mediaControllerCompat.transportControls.setRepeatMode(mode)
+    fun onSetRepeatShuffleMode(mode: Int)  {
+        when (mode) {
+            NORMAL_MODE -> {
+                mediaControllerCompat.transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_NONE)
+                mediaControllerCompat.transportControls.setShuffleMode(PlaybackStateCompat.SHUFFLE_MODE_NONE)
+            }
+            LOOP_MODE -> {
+                mediaControllerCompat.transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_ONE)
+            }
+            SHUFFLE_MODE -> {
+                mediaControllerCompat.transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_NONE)
+                mediaControllerCompat.transportControls.setShuffleMode(PlaybackStateCompat.SHUFFLE_MODE_ALL)
+            }
+        }
+    }
 
     //endregion
 

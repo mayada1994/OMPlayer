@@ -25,8 +25,8 @@ object SingletonHolder {
     fun init(application: Application) {
         this.application = application
         playerServiceManager
-        playerManager.initMediaSession()
-        playerManager.setPlaylist(LibraryUtil.tracklist, Action.Pause())
         db = PlayerDatabase.getDatabase(context)
+        playerManager.initMediaSession()
+
     }
 }
