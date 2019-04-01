@@ -81,9 +81,10 @@ class VideoViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun playVideo(fragmentManager: FragmentManager) {
+
         if (VIDEO_ID != NOT_FOUND) {
-            val lyricsDialog = VideoDialogFragment.newInstance()
-            lyricsDialog.show(fragmentManager, "")
+            val videoDialog = VideoDialogFragment.newInstance()
+            videoDialog.show(fragmentManager, "")
         } else {
             Toast.makeText(SingletonHolder.application, VIDEO_NOT_FOUND, Toast.LENGTH_LONG).show()
         }

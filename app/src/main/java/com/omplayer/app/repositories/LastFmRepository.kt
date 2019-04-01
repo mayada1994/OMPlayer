@@ -1,0 +1,46 @@
+package com.omplayer.app.repositories
+
+import com.omplayer.app.entities.LastFmSessionWrapper
+import com.omplayer.app.services.lastFmService.LastFmService
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+class LastFmRepository {
+
+    private val FORMAT = "json"
+
+    private val retrofit = Retrofit.Builder()
+        .baseUrl("https://ws.audioscrobbler.com/2.0/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    private val rawRetrofit = Retrofit.Builder()
+        .baseUrl("https://ws.audioscrobbler.com/2.0/")
+        .build()
+
+    private val lastFmService = retrofit.create(LastFmService::class.java)
+
+    private val rawLastFmService = rawRetrofit.create(LastFmService::class.java)
+
+    fun getLastFmSession(
+        apiKey: String,
+        password: String,
+        username: String,
+        api_sig: String
+    ): Call<LastFmSessionWrapper> {
+        return lastFmService.getSession(apiKey, password, username, api_sig, FORMAT)
+    }
+
+    fun updatePlayingTrack(
+        album: String,
+        artist: String,
+        track: String,
+        apiKey: String,
+        api_sig: String,
+        sk: String
+    ): Call<ResponseBody> {
+        return rawLastFmService.updatePlayingTrack(album, artist, track, apiKey, api_sig, sk, FORMAT)
+    }
+}
