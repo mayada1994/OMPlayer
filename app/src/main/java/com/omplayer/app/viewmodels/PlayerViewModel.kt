@@ -24,6 +24,9 @@ import com.omplayer.app.stateMachine.PlayerManager
 import com.omplayer.app.stateMachine.states.IdleState
 import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.LibraryUtil
+import com.omplayer.app.viewmodels.PlayerViewModel.Companion.LOOP_MODE
+import com.omplayer.app.viewmodels.PlayerViewModel.Companion.NORMAL_MODE
+import com.omplayer.app.viewmodels.PlayerViewModel.Companion.SHUFFLE_MODE
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -192,9 +195,14 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     fun onPauseClicked() = mediaControllerCompat.transportControls.pause()
 
-    fun onNextClicked() = mediaControllerCompat.transportControls.skipToNext()
+    fun onNextClicked() {
+        _currentPosition.value = 0
+        mediaControllerCompat.transportControls.skipToNext()}
 
-    fun onPrevClicked() = mediaControllerCompat.transportControls.skipToPrevious()
+    fun onPrevClicked() {
+        _currentPosition.value = 0
+        mediaControllerCompat.transportControls.skipToPrevious()
+    }
 
     fun onStopClicked() = mediaControllerCompat.transportControls.stop()
 
