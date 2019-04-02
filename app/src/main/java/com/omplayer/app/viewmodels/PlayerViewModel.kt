@@ -8,7 +8,6 @@ import android.os.Looper
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
-import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.*
 import com.bumptech.glide.Glide
@@ -17,7 +16,6 @@ import com.mikhaellopez.circularimageview.CircularImageView
 import com.omplayer.app.R
 import com.omplayer.app.db.entities.Track
 import com.omplayer.app.di.SingletonHolder
-import com.omplayer.app.di.SingletonHolder.application
 import com.omplayer.app.extensions.foreverObserver
 import com.omplayer.app.livedata.ForeverObserver
 import com.omplayer.app.stateMachine.Action
@@ -25,10 +23,6 @@ import com.omplayer.app.stateMachine.PlayerManager
 import com.omplayer.app.stateMachine.states.IdleState
 import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.LibraryUtil
-import com.omplayer.app.viewmodels.PlayerViewModel.Companion.LOOP_MODE
-import com.omplayer.app.viewmodels.PlayerViewModel.Companion.NORMAL_MODE
-import com.omplayer.app.viewmodels.PlayerViewModel.Companion.SHUFFLE_MODE
-import kotlinx.android.synthetic.main.fragment_player.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,9 +37,9 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     companion object {
         val TAG: String = PlayerViewModel::class.java.simpleName
-            const val NORMAL_MODE = 0
-            const val LOOP_MODE = 1
-            const val SHUFFLE_MODE = 2
+        const val NORMAL_MODE = 0
+        const val LOOP_MODE = 1
+        const val SHUFFLE_MODE = 2
     }
 
     private val videoViewModel = VideoViewModel(application)
@@ -84,7 +78,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     val currentPosition: LiveData<Int?> = _currentPosition
 
     private val _shuffleMode = MutableLiveData<Int?>()
-    val shuffleMode : LiveData<Int?> = _shuffleMode
+    val shuffleMode: LiveData<Int?> = _shuffleMode
 
     val currState = SingletonHolder.playerManager.currState
 
@@ -173,7 +167,6 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     }
 
 
-
     fun loadTrackData(cover: CircularImageView, title: TextView, album: TextView, artist: TextView, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(coroutineContext) {
@@ -217,14 +210,15 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     fun onNextClicked() {
         _currentPosition.value = 0
-        mediaControllerCompat.transportControls.skipToNext()}
+        mediaControllerCompat.transportControls.skipToNext()
+    }
 
     fun onPrevClicked() {
         _currentPosition.value = 0
         mediaControllerCompat.transportControls.skipToPrevious()
     }
 
-    fun onSetRepeatShuffleMode()  {
+    fun onSetRepeatShuffleMode() {
 
         when (mode) {
 

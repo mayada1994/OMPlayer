@@ -22,14 +22,16 @@ import com.omplayer.app.stateMachine.states.State
 class PlayerManager(override val context: Context) : PlayerContext, AudioManager.OnAudioFocusChangeListener {
 
 
-
     private val TAG = "PlayerManager"
 
     //region Context Implementation
+
     override var mediaSessionCompat: MediaSessionCompat = MediaSessionCompat(context, TAG)
-    override var isShuffle: Boolean = false
     override var mediaPlayer: MediaPlayer = MediaPlayer()
     override val playlist: MutableList<Track> = ArrayList()
+    override var isShuffle: Boolean = false
+    override var isLooping: Boolean = false
+
     //endregion
 
     //region LiveData
@@ -116,19 +118,24 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
             super.onSetRepeatMode(repeatMode)
             when (repeatMode) {
                 PlaybackStateCompat.REPEAT_MODE_ALL -> {
-                    mediaPlayer.isLooping = false
+                    isLooping = false
+                    mediaPlayer.isLooping = isLooping
                 }
                 PlaybackStateCompat.REPEAT_MODE_GROUP -> {
-                    mediaPlayer.isLooping = false
+                    isLooping = false
+                    mediaPlayer.isLooping = isLooping
                 }
                 PlaybackStateCompat.REPEAT_MODE_INVALID -> {
-                    mediaPlayer.isLooping = false
+                    isLooping = false
+                    mediaPlayer.isLooping = isLooping
                 }
                 PlaybackStateCompat.REPEAT_MODE_NONE -> {
-                    mediaPlayer.isLooping = false
+                    isLooping = false
+                    mediaPlayer.isLooping = isLooping
                 }
                 PlaybackStateCompat.REPEAT_MODE_ONE -> {
-                    mediaPlayer.isLooping = true
+                    isLooping = true
+                    mediaPlayer.isLooping = isLooping
                 }
             }
         }
@@ -208,6 +215,7 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
     @MainThread
     fun setPlaylist(playlist: MutableList<Track>, action: Action? = Action.Play()) {
         mediaPlayer.setOnCompletionListener {
+
             mediaSessionCallback.onSkipToNext()
         }
 

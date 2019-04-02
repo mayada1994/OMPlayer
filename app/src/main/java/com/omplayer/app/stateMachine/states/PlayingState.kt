@@ -35,6 +35,7 @@ class PlayingState(context: PlayerContext) : State(context) {
 
             }
 
+            context.mediaPlayer?.isLooping = context.isLooping
 
             try {
                 context.mediaPlayer?.setDataSource(context.playlist[LibraryUtil.selectedTrack].path)
@@ -60,6 +61,8 @@ class PlayingState(context: PlayerContext) : State(context) {
                     LibraryUtil.selectedTrack = 0
                 }
             }
+
+            context.mediaPlayer?.isLooping = context.isLooping
 
             try {
                 context.mediaPlayer?.setDataSource(context.playlist[LibraryUtil.selectedTrack].path)

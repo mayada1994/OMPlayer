@@ -11,6 +11,7 @@ interface PlayerContext {
     val playlist: MutableList<Track>
     val mediaSessionCompat : MediaSessionCompat
     var isShuffle : Boolean
+    var isLooping : Boolean
 
     fun updateMetadata(metadata: Track)
 }

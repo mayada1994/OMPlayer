@@ -10,6 +10,7 @@ class PausedState(context: PlayerContext) : State(context) {
     override fun handleAction(action: Action): State {
         return when (action) {
             is Action.Play -> {
+                context.mediaPlayer?.isLooping = context.isLooping
                 context.mediaPlayer?.start()
                 PlayingState(context)
             }
@@ -33,6 +34,8 @@ class PausedState(context: PlayerContext) : State(context) {
 
                 }
 
+                context.mediaPlayer?.isLooping = context.isLooping
+
                 try {
                     context.mediaPlayer?.setDataSource(context.playlist[LibraryUtil.selectedTrack].path)
                     context.mediaPlayer?.prepare()
@@ -53,6 +56,8 @@ class PausedState(context: PlayerContext) : State(context) {
                         LibraryUtil.selectedTrack = 0
                     }
                 }
+
+                context.mediaPlayer?.isLooping = context.isLooping
 
                 try {
                     context.mediaPlayer?.setDataSource(context.playlist[LibraryUtil.selectedTrack].path)
