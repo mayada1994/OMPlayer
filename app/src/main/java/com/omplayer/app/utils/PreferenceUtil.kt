@@ -10,6 +10,7 @@ object PreferenceUtil {
 
     private val context = SingletonHolder.application
     private const val UPDATE_DB: String = "need_to_update_db"
+    private const val SCROBBLE: String = "need_to_scrobble"
     private const val CURRENT_LAST_FM_SESSION: String = "current_last_fm_session"
     private const val APP_PREFERENCES = "com.omplayer.app.player_preferences"
     private val gson: Gson = Gson()
@@ -21,6 +22,10 @@ object PreferenceUtil {
     var updateLibrary: Boolean
         get() = sharedPreferences.getBoolean(UPDATE_DB, true)
         set(value) = sharedPreferences.edit().putBoolean(UPDATE_DB, value).apply()
+
+    var scrobble: Boolean
+        get() = sharedPreferences.getBoolean(SCROBBLE, true)
+        set(value) = sharedPreferences.edit().putBoolean(SCROBBLE, value).apply()
 
     var currentLastFmSession: LastFmSession?
         get() = gson.fromJson(sharedPreferences.getString(CURRENT_LAST_FM_SESSION, null), LastFmSession::class.java)

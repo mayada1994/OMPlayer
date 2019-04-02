@@ -1,6 +1,7 @@
 package com.omplayer.app.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.stateMachine.states.PausedState
 import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.FormatUtils
+import com.omplayer.app.utils.LastFmUtil
 import com.omplayer.app.viewmodels.LyricsViewModel
 import com.omplayer.app.viewmodels.PlayerViewModel
 import com.omplayer.app.viewmodels.VideoViewModel
@@ -30,6 +32,8 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
     private var isPlaying = false
     private var isLooped = false
+    private var isScrobbled = false
+    private var timestamp = "0"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
@@ -63,6 +67,13 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         viewModel.currentPosition.observe(this, Observer {
             seekbar_audio.progress = it?.toFloat() ?: (0).toFloat()
             timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
+            viewModel.updateLastFmTrack()
+            if (it != null) {
+                if (!isScrobbled && it > 35000) {
+                    viewModel.scrobbleTrack(timestamp)
+                    isScrobbled = true
+                }
+            }
         })
         viewModel.currState.observe(this, Observer {
             when (it) {
@@ -141,8 +152,10 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         })
     }
 
-    fun initializeTrackInfo() {
+    private fun initializeTrackInfo() {
         viewModel.loadTrackData(iv_track_cover, tv_track_title, tv_track_album, tv_track_artist, context!!)
+        timestamp = LastFmUtil.timestamp()
+        isScrobbled = false
     }
 
     //endregion

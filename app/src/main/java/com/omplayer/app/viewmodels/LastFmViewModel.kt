@@ -5,12 +5,12 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import com.omplayer.app.entities.LastFmSessionWrapper
 import com.omplayer.app.repositories.LastFmRepository
+import com.omplayer.app.utils.LastFmUtil.md5
 import com.omplayer.app.utils.PreferenceUtil
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.security.MessageDigest
 
 class LastFmViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -64,22 +64,28 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
         })
     }
 
-    private fun md5(s: String): String? {
-        val digest = MessageDigest.getInstance("MD5")
-        try {
-            val bytes = digest.digest(s.toByteArray(charset("UTF-8")))
-            val b = StringBuilder(32)
-            for (aByte in bytes) {
-                val hex = Integer.toHexString(aByte.toInt() and 0xFF)
-                if (hex.length == 1)
-                    b.append('0')
-                b.append(hex)
+    fun scrobble(album: String, artist: String, track: String, timestamp: String) {
+        val apiSignature: String =
+            "album" + album + "api_key" + API_KEY + "artist" + artist + "methodtrack.scrobble" + "sk" + PreferenceUtil.currentLastFmSession!!.key + "timestamp" + timestamp + "track" + track + SECRET
+        lastFmRepository.scrobbleTrack(
+            album,
+            artist,
+            track,
+            timestamp,
+            API_KEY,
+            md5(apiSignature)!!,
+            PreferenceUtil.currentLastFmSession!!.key
+        ).enqueue(object : Callback<ResponseBody> {
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                Log.d(TAG, response.body()!!.string())
             }
-            return b.toString()
-        } catch (e: Exception) {
-            Log.d(TAG, e.message)
-        }
-        return null
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.d(TAG, t.message)
+            }
+
+        })
     }
 
 }

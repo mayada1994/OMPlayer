@@ -43,4 +43,16 @@ class LastFmRepository {
     ): Call<ResponseBody> {
         return rawLastFmService.updatePlayingTrack(album, artist, track, apiKey, api_sig, sk, FORMAT)
     }
+
+    fun scrobbleTrack(
+        album: String,
+        artist: String,
+        track: String,
+        timestamp: String,
+        apiKey: String,
+        api_sig: String,
+        sk: String
+    ): Call<ResponseBody> {
+        return rawLastFmService.scrobbleTrack(album, artist, track, timestamp, apiKey, api_sig, sk, FORMAT)
+    }
 }

@@ -27,4 +27,16 @@ interface LastFmService {
         @Query("sk") sessionKey: String,
         @Query("format") format: String
     ): Call<ResponseBody>
+
+    @POST("?method=track.scrobble")
+    fun scrobbleTrack(
+        @Query("album") album: String,
+        @Query("artist") artist: String,
+        @Query("track") track: String,
+        @Query("timestamp") timestamp: String,
+        @Query("api_key") apiKey: String,
+        @Query("api_sig") api_sig: String,
+        @Query("sk") sessionKey: String,
+        @Query("format") format: String
+    ): Call<ResponseBody>
 }

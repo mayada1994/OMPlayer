@@ -23,6 +23,7 @@ import com.omplayer.app.stateMachine.PlayerManager
 import com.omplayer.app.stateMachine.states.IdleState
 import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.LibraryUtil
+import com.omplayer.app.utils.PreferenceUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,6 +40,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         val TAG: String = PlayerViewModel::class.java.simpleName
     }
 
+    private val lastFmViewModel = LastFmViewModel(application)
     private val videoViewModel = VideoViewModel(application)
 
     private val playlist: MutableList<Track> = LibraryUtil.tracklist
@@ -173,6 +175,30 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         Glide.with(context).load(uri)
             .apply(RequestOptions().placeholder(R.drawable.placeholder).error(R.drawable.placeholder))
             .into(cover)
+    }
+
+    fun updateLastFmTrack() {
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(coroutineContext) {
+                val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+                val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId).title
+                val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentTrack.artistId).name
+                lastFmViewModel.updatePlayingTrack(currentAlbum, currentArtist, currentTrack.title)
+            }
+        }
+    }
+
+    fun scrobbleTrack(timestamp: String) {
+        if (PreferenceUtil.scrobble) {
+            CoroutineScope(Dispatchers.IO).launch {
+                withContext(coroutineContext) {
+                    val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+                    val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId).title
+                    val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentTrack.artistId).name
+                    lastFmViewModel.scrobble(currentAlbum, currentArtist, currentTrack.title, timestamp)
+                }
+            }
+        }
     }
 
     //region View interaction
