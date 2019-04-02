@@ -32,6 +32,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     private val videoViewModel = VideoViewModel(SingletonHolder.application)
 
     private var isPlaying = false
+    private var isFavorite = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
@@ -54,6 +55,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         button_youtube_player.setOnClickListener(this)
         button_shuffle.setOnClickListener(this)
         button_lyrics.setOnClickListener(this)
+        button_favorites.setOnClickListener(this)
 
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
@@ -61,6 +63,11 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 timer_total.text = FormatUtils.millisecondsToString(metadata.duration.toLong())
                 initializeTrackInfo()
             }
+        })
+        viewModel.favoriteMode.observe(this, Observer {
+            isFavorite = it
+            if (it) { button_favorites.setImageResource(R.drawable.ic_favorite) }
+            else {button_favorites.setImageResource(R.drawable.ic_favorite_border)}
         })
 
         viewModel.currentPosition.observe(this, Observer {
@@ -114,6 +121,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 tv_track_title.text.toString(),
                 fragmentManager!!
             )
+            R.id.button_favorites -> viewModel.onFavoritesButtonClicked(isFavorite)
         }
     }
 

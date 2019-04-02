@@ -34,4 +34,7 @@ interface TrackDao {
 
     @Query("SELECT * from tracks WHERE genre_id = :genreId ORDER BY title ASC")
     fun getTracksByGenreId(genreId: Int): List<Track>
+
+    @Query("SELECT * from tracks WHERE favorite = :favStatus ORDER BY title ASC ")
+    fun getTracksByFavorite(favStatus : Boolean) : List<Track>
 }
