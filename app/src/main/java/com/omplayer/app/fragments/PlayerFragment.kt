@@ -32,7 +32,6 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     private val videoViewModel = VideoViewModel(SingletonHolder.application)
 
     private var isPlaying = false
-    private var currMode = NORMAL_MODE
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
@@ -63,10 +62,18 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 initializeTrackInfo()
             }
         })
+
         viewModel.currentPosition.observe(this, Observer {
             seekbar_audio.progress = it?.toFloat() ?: (0).toFloat()
             timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
         })
+
+        viewModel.shuffleMode.observe(this, Observer {
+            if (it != null) {
+                button_shuffle.setImageResource(it)
+            }
+        })
+
         viewModel.currState.observe(this, Observer {
             when (it) {
                 is PlayingState -> {
@@ -101,30 +108,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 viewModel.onPauseClicked()
                 videoViewModel.playVideo(fragmentManager!!)
             }
-            R.id.button_shuffle -> {
-                when (this.currMode) {
-                    NORMAL_MODE -> {
-                        viewModel.onSetRepeatShuffleMode(currMode!!)
-                        button_shuffle.setImageResource(R.drawable.ic_repeat)
-                        currMode = LOOP_MODE
-                    }
-                    LOOP_MODE -> {
-                        viewModel.onSetRepeatShuffleMode(currMode!!)
-                        button_shuffle.setImageResource(R.drawable.ic_repeat_one)
-                        button_previous.visibility = View.GONE
-                        button_next.visibility = View.GONE
-                        currMode = SHUFFLE_MODE
-                    }
-                    SHUFFLE_MODE -> {
-                        viewModel.onSetRepeatShuffleMode(currMode!!)
-                        button_shuffle.setImageResource(R.drawable.ic_shuffle)
-                        button_previous.visibility = View.VISIBLE
-                        button_next.visibility = View.VISIBLE
-                        currMode = NORMAL_MODE
-
-                    }
-                }
-            }
+            R.id.button_shuffle -> viewModel.onSetRepeatShuffleMode()
             R.id.button_lyrics -> lyricsViewModel.getSongLyrics(
                 tv_track_artist.text.toString(),
                 tv_track_title.text.toString(),

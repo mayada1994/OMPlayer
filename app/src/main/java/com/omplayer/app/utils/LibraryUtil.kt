@@ -1,4 +1,3 @@
-
 package com.omplayer.app.utils
 
 import com.omplayer.app.db.entities.Album

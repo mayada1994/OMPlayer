@@ -8,6 +8,7 @@ import android.os.Looper
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.*
 import com.bumptech.glide.Glide
@@ -27,6 +28,7 @@ import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.viewmodels.PlayerViewModel.Companion.LOOP_MODE
 import com.omplayer.app.viewmodels.PlayerViewModel.Companion.NORMAL_MODE
 import com.omplayer.app.viewmodels.PlayerViewModel.Companion.SHUFFLE_MODE
+import kotlinx.android.synthetic.main.fragment_player.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -53,6 +55,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
 
+    private var mode = NORMAL_MODE
+
     //region MediaLibraryCompat
 
     private val mediaControllerCompat: MediaControllerCompat by lazy {
@@ -78,6 +82,10 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     private val _currentPosition = MutableLiveData<Int?>()
     val currentPosition: LiveData<Int?> = _currentPosition
+
+    private val _shuffleMode = MutableLiveData<Int?>()
+    val shuffleMode : LiveData<Int?> = _shuffleMode
+
     val currState = SingletonHolder.playerManager.currState
 
     private val _metadata = MediatorLiveData<Track?>().apply {
@@ -86,6 +94,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     val metadata: LiveData<Track?> = _metadata
     //endregion
 
+    //region SeekBarUpdate
     private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
     private val seekbarPositionUpdateTask: () -> Unit = {
         Handler(Looper.getMainLooper()).post {
@@ -103,6 +112,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
                     }
                     is IdleState -> {
                         _currentPosition.value = 0
+
                     }
                     else -> {
                         stopUpdateSeekbar()
@@ -111,6 +121,25 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
             })
         )
     }
+
+
+    fun startUpdateSeekbar() {
+        if (scheduledTask == null) {
+            scheduledTask = executor.scheduleAtFixedRate(
+                seekbarPositionUpdateTask,
+                0,
+                1,
+                TimeUnit.SECONDS
+            )
+        }
+    }
+
+    fun stopUpdateSeekbar() {
+        scheduledTask?.cancel(true)
+        scheduledTask = null
+    }
+
+    //endregion
 
     override fun onCleared() {
         super.onCleared()
@@ -134,29 +163,16 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
         startUpdateSeekbar()
-        onSetRepeatShuffleMode(NORMAL_MODE)
+        onSetRepeatShuffleMode()
     }
+
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun onStop() {
         stopUpdateSeekbar()
     }
 
-    fun startUpdateSeekbar() {
-        if (scheduledTask == null) {
-            scheduledTask = executor.scheduleAtFixedRate(
-                seekbarPositionUpdateTask,
-                0,
-                1,
-                TimeUnit.SECONDS
-            )
-        }
-    }
 
-    fun stopUpdateSeekbar() {
-        scheduledTask?.cancel(true)
-        scheduledTask = null
-    }
 
     fun loadTrackData(cover: CircularImageView, title: TextView, album: TextView, artist: TextView, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -195,6 +211,10 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     fun onPauseClicked() = mediaControllerCompat.transportControls.pause()
 
+    fun onStopClicked() = mediaControllerCompat.transportControls.stop()
+
+    fun onSeek(position: Int) = mediaControllerCompat.transportControls.seekTo(position.toLong())
+
     fun onNextClicked() {
         _currentPosition.value = 0
         mediaControllerCompat.transportControls.skipToNext()}
@@ -204,23 +224,29 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         mediaControllerCompat.transportControls.skipToPrevious()
     }
 
-    fun onStopClicked() = mediaControllerCompat.transportControls.stop()
+    fun onSetRepeatShuffleMode()  {
 
-    fun onSeek(position: Int) = mediaControllerCompat.transportControls.seekTo(position.toLong())
-
-    fun onSetRepeatShuffleMode(mode: Int)  {
         when (mode) {
+
             NORMAL_MODE -> {
                 mediaControllerCompat.transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_NONE)
                 mediaControllerCompat.transportControls.setShuffleMode(PlaybackStateCompat.SHUFFLE_MODE_NONE)
+                _shuffleMode.value = R.drawable.ic_repeat
+                mode = LOOP_MODE
             }
             LOOP_MODE -> {
                 mediaControllerCompat.transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_ONE)
+                _shuffleMode.value = R.drawable.ic_repeat_one
+                mode = SHUFFLE_MODE
             }
             SHUFFLE_MODE -> {
                 mediaControllerCompat.transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_NONE)
                 mediaControllerCompat.transportControls.setShuffleMode(PlaybackStateCompat.SHUFFLE_MODE_ALL)
+                _shuffleMode.value = R.drawable.ic_shuffle
+                mode = NORMAL_MODE
+
             }
+
         }
     }
 
