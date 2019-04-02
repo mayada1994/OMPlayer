@@ -37,6 +37,9 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     companion object {
         val TAG: String = PlayerViewModel::class.java.simpleName
+        const val NORMAL_MODE = 0
+        const val LOOP_MODE = 1
+        const val SHUFFLE_MODE = 2
     }
 
     private val videoViewModel = VideoViewModel(application)
@@ -45,7 +48,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     private val playerManager: PlayerManager = SingletonHolder.playerManager
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
-    private var firstInit = true
+
+    private var mode = NORMAL_MODE
 
     //region MediaLibraryCompat
 
@@ -72,6 +76,10 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     private val _currentPosition = MutableLiveData<Int?>()
     val currentPosition: LiveData<Int?> = _currentPosition
+
+    private val _shuffleMode = MutableLiveData<Int?>()
+    val shuffleMode: LiveData<Int?> = _shuffleMode
+
     val currState = SingletonHolder.playerManager.currState
 
     private val _metadata = MediatorLiveData<Track?>().apply {
@@ -80,6 +88,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     val metadata: LiveData<Track?> = _metadata
     //endregion
 
+    //region SeekBarUpdate
     private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
     private val seekbarPositionUpdateTask: () -> Unit = {
         Handler(Looper.getMainLooper()).post {
@@ -97,6 +106,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
                     }
                     is IdleState -> {
                         _currentPosition.value = 0
+
                     }
                     else -> {
                         stopUpdateSeekbar()
@@ -106,27 +116,6 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         )
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        foreverObservers.forEach { it.release() }
-    }
-
-    //TODO remove firstInit boolean
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun onStart() {
-        startUpdateSeekbar()
-        if (firstInit) {
-            playerManager.setPlaylist(playlist, Action.Play())
-            mediaControllerCompat.transportControls.pause()
-            firstInit = false
-        }
-
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onStop() {
-        stopUpdateSeekbar()
-    }
 
     fun startUpdateSeekbar() {
         if (scheduledTask == null) {
@@ -143,6 +132,40 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         scheduledTask?.cancel(true)
         scheduledTask = null
     }
+
+    //endregion
+
+    override fun onCleared() {
+        super.onCleared()
+        foreverObservers.forEach { it.release() }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun onCreate() {
+        playerManager.setPlaylist(playlist, Action.Play())
+        when (LibraryUtil.action) {
+            is Action.Play -> {
+                onPlayClicked()
+            }
+            is Action.Pause -> {
+                onPauseClicked()
+            }
+        }
+
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onStart() {
+        startUpdateSeekbar()
+        onSetRepeatShuffleMode()
+    }
+
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onStop() {
+        stopUpdateSeekbar()
+    }
+
 
     fun loadTrackData(cover: CircularImageView, title: TextView, album: TextView, artist: TextView, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -181,15 +204,45 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     fun onPauseClicked() = mediaControllerCompat.transportControls.pause()
 
-    fun onNextClicked() = mediaControllerCompat.transportControls.skipToNext()
-
-    fun onPrevClicked() = mediaControllerCompat.transportControls.skipToPrevious()
-
     fun onStopClicked() = mediaControllerCompat.transportControls.stop()
 
     fun onSeek(position: Int) = mediaControllerCompat.transportControls.seekTo(position.toLong())
 
-    fun onSetRepeatMode(mode: Int) = mediaControllerCompat.transportControls.setRepeatMode(mode)
+    fun onNextClicked() {
+        _currentPosition.value = 0
+        mediaControllerCompat.transportControls.skipToNext()
+    }
+
+    fun onPrevClicked() {
+        _currentPosition.value = 0
+        mediaControllerCompat.transportControls.skipToPrevious()
+    }
+
+    fun onSetRepeatShuffleMode() {
+
+        when (mode) {
+
+            NORMAL_MODE -> {
+                mediaControllerCompat.transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_NONE)
+                mediaControllerCompat.transportControls.setShuffleMode(PlaybackStateCompat.SHUFFLE_MODE_NONE)
+                _shuffleMode.value = R.drawable.ic_repeat
+                mode = LOOP_MODE
+            }
+            LOOP_MODE -> {
+                mediaControllerCompat.transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_ONE)
+                _shuffleMode.value = R.drawable.ic_repeat_one
+                mode = SHUFFLE_MODE
+            }
+            SHUFFLE_MODE -> {
+                mediaControllerCompat.transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_NONE)
+                mediaControllerCompat.transportControls.setShuffleMode(PlaybackStateCompat.SHUFFLE_MODE_ALL)
+                _shuffleMode.value = R.drawable.ic_shuffle
+                mode = NORMAL_MODE
+
+            }
+
+        }
+    }
 
     //endregion
 

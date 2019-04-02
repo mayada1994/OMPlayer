@@ -15,9 +15,13 @@ class IdleState(context: PlayerContext) : State(context) {
             } catch (e: Exception) {
             }
             context.updateMetadata(context.playlist[LibraryUtil.selectedTrack])
+            context.mediaPlayer?.isLooping = context.isLooping
             context.mediaPlayer?.start()
             PlayingState(context)
         }
-        else -> this
+        else -> {
+            context.mediaPlayer?.pause()
+            this
+        }
     }
 }

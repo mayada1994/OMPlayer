@@ -21,11 +21,18 @@ import com.omplayer.app.stateMachine.states.State
 @Suppress("DEPRECATION")
 class PlayerManager(override val context: Context) : PlayerContext, AudioManager.OnAudioFocusChangeListener {
 
-    private val TAG = "PlayerManager"
-    override var mediaSessionCompat: MediaSessionCompat = MediaSessionCompat(context, TAG)
 
+    private val TAG = "PlayerManager"
+
+    //region Context Implementation
+
+    override var mediaSessionCompat: MediaSessionCompat = MediaSessionCompat(context, TAG)
     override var mediaPlayer: MediaPlayer = MediaPlayer()
     override val playlist: MutableList<Track> = ArrayList()
+    override var isShuffle: Boolean = false
+    override var isLooping: Boolean = false
+
+    //endregion
 
     //region LiveData
 
@@ -110,8 +117,44 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
         override fun onSetRepeatMode(repeatMode: Int) {
             super.onSetRepeatMode(repeatMode)
             when (repeatMode) {
-                0 -> mediaPlayer.isLooping = false
-                1 -> mediaPlayer.isLooping = true
+                PlaybackStateCompat.REPEAT_MODE_ALL -> {
+                    isLooping = false
+                    mediaPlayer.isLooping = isLooping
+                }
+                PlaybackStateCompat.REPEAT_MODE_GROUP -> {
+                    isLooping = false
+                    mediaPlayer.isLooping = isLooping
+                }
+                PlaybackStateCompat.REPEAT_MODE_INVALID -> {
+                    isLooping = false
+                    mediaPlayer.isLooping = isLooping
+                }
+                PlaybackStateCompat.REPEAT_MODE_NONE -> {
+                    isLooping = false
+                    mediaPlayer.isLooping = isLooping
+                }
+                PlaybackStateCompat.REPEAT_MODE_ONE -> {
+                    isLooping = true
+                    mediaPlayer.isLooping = isLooping
+                }
+            }
+        }
+
+        override fun onSetShuffleMode(shuffleMode: Int) {
+            super.onSetShuffleMode(shuffleMode)
+            when (shuffleMode) {
+                PlaybackStateCompat.SHUFFLE_MODE_ALL -> {
+                    isShuffle = true
+                }
+                PlaybackStateCompat.SHUFFLE_MODE_NONE -> {
+                    isShuffle = false
+                }
+                PlaybackStateCompat.SHUFFLE_MODE_GROUP -> {
+                    isShuffle = false
+                }
+                PlaybackStateCompat.SHUFFLE_MODE_INVALID -> {
+                    isShuffle = false
+                }
             }
         }
 
@@ -172,6 +215,7 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
     @MainThread
     fun setPlaylist(playlist: MutableList<Track>, action: Action? = Action.Play()) {
         mediaPlayer.setOnCompletionListener {
+
             mediaSessionCallback.onSkipToNext()
         }
 
@@ -186,7 +230,6 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
         }
     }
 
-    //TODO Need to find out WHERE to release mediaPlayer and MediaSessionCompat
 
     fun release() {
         mediaPlayer.release()

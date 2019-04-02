@@ -15,6 +15,9 @@ import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.FormatUtils
 import com.omplayer.app.viewmodels.LyricsViewModel
 import com.omplayer.app.viewmodels.PlayerViewModel
+import com.omplayer.app.viewmodels.PlayerViewModel.Companion.LOOP_MODE
+import com.omplayer.app.viewmodels.PlayerViewModel.Companion.NORMAL_MODE
+import com.omplayer.app.viewmodels.PlayerViewModel.Companion.SHUFFLE_MODE
 import com.omplayer.app.viewmodels.VideoViewModel
 import com.savantech.seekarc.SeekArc
 import kotlinx.android.synthetic.main.fragment_player.*
@@ -29,7 +32,6 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     private val videoViewModel = VideoViewModel(SingletonHolder.application)
 
     private var isPlaying = false
-    private var isLooped = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
@@ -60,10 +62,18 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 initializeTrackInfo()
             }
         })
+
         viewModel.currentPosition.observe(this, Observer {
             seekbar_audio.progress = it?.toFloat() ?: (0).toFloat()
             timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
         })
+
+        viewModel.shuffleMode.observe(this, Observer {
+            if (it != null) {
+                button_shuffle.setImageResource(it)
+            }
+        })
+
         viewModel.currState.observe(this, Observer {
             when (it) {
                 is PlayingState -> {
@@ -98,19 +108,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 viewModel.onPauseClicked()
                 videoViewModel.playVideo(fragmentManager!!)
             }
-            R.id.button_shuffle -> {
-                if (isLooped) {
-                    viewModel.onSetRepeatMode(0)
-                    button_shuffle.setImageResource(R.drawable.ic_repeat)
-                    isLooped = false
-                } else {
-                    viewModel.onSetRepeatMode(1)
-                    button_shuffle.setImageResource(R.drawable.ic_repeat_one)
-                    isLooped = true
-
-                }
-
-            }
+            R.id.button_shuffle -> viewModel.onSetRepeatShuffleMode()
             R.id.button_lyrics -> lyricsViewModel.getSongLyrics(
                 tv_track_artist.text.toString(),
                 tv_track_title.text.toString(),
