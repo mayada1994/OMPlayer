@@ -22,5 +22,6 @@ object LibraryUtil {
     var artists = ArrayList<Artist>()
     var albums = ArrayList<Album>()
     var tracks = ArrayList<Track>()
+    var favorites = ArrayList<Track>()
     var action: Action = Action.Pause()
 }

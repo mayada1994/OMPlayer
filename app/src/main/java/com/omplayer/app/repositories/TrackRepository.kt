@@ -58,4 +58,9 @@ class TrackRepository(private val trackDao: TrackDao) {
     suspend fun getTracksByGenreId(id: Int): List<Track>? {
         return trackDao.getTracksByGenreId(id)
     }
+
+    @WorkerThread
+    suspend fun getTracksByFavorite(favStatus : Boolean): List<Track>? {
+        return trackDao.getTracksByFavorite(favStatus)
+    }
 }

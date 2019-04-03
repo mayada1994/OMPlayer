@@ -8,6 +8,7 @@ import android.os.Looper
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.*
 import com.bumptech.glide.Glide
@@ -79,6 +80,9 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     private val _shuffleMode = MutableLiveData<Int?>()
     val shuffleMode: LiveData<Int?> = _shuffleMode
+
+    private val _favoriteMode = MutableLiveData<Boolean>()
+    val favoriteMode : LiveData<Boolean> = _favoriteMode
 
     val currState = SingletonHolder.playerManager.currState
 
@@ -182,6 +186,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
                     title.text = currentTrack.title
                     album.text = currentAlbum.title
                     artist.text = currentArtist.name
+                    _favoriteMode.value = currentTrack.favorite
                     loadImage(currentAlbum.cover, cover, context)
                 }
             }
@@ -241,6 +246,20 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
             }
 
+        }
+    }
+
+    fun onFavoritesButtonClicked (isFavorite : Boolean) {
+        var currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+        if (isFavorite) {
+            currentTrack.favorite = false
+            _favoriteMode.value = false
+        } else {
+            currentTrack.favorite = true
+            _favoriteMode.value = true
+        }
+        CoroutineScope(Dispatchers.IO).launch {
+            SingletonHolder.db.trackDao().update(currentTrack)
         }
     }
 

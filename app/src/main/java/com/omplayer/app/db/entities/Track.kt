@@ -32,7 +32,9 @@ data class Track(
     @ColumnInfo(name = "genre_id")
     var genreId: Int = 0,
     @ColumnInfo(name = "path")
-    var path: String = ""
+    var path: String = "",
+    @ColumnInfo(name = "favorite")
+    var favorite: Boolean = false
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
