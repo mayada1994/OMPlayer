@@ -39,6 +39,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
                 loadArtists()
                 loadAlbums()
                 loadTracks()
+                loadFavorites()
                 deleteAdditionalGenres()
 
                 withContext(Dispatchers.Main) {
@@ -82,19 +83,13 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
         LibraryUtil.tracklist = LibraryUtil.tracks
     }
 
-    suspend fun deleteAdditionalGenres() {
-
-        val iterator = LibraryUtil.genres.iterator()
-        while (iterator.hasNext()) {
-            val genre = iterator.next()
-            val genreTracks = db.trackDao().getTracksByGenreId(genre.id)
-            if (genreTracks.isEmpty()) {
-                iterator.remove()
-            }
-        }
+    suspend fun loadFavorites() {
+        val tracks = libraryRepository.scanDeviceForTracks()
+        trackRepository.getTracksByFavorite(true)
+        LibraryUtil.favorites = db.trackDao().getTracksByFavorite(true) as ArrayList<Track>
     }
 
-    suspend fun deleteAdditionalAlbums() {
+    suspend fun deleteAdditionalGenres() {
 
         val iterator = LibraryUtil.genres.iterator()
         while (iterator.hasNext()) {
@@ -123,6 +118,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
                 LibraryUtil.artists = artistRepository.getAllArtists() as ArrayList<Artist>
                 LibraryUtil.albums = albumRepository.getAllAlbums() as ArrayList<Album>
                 LibraryUtil.tracks = trackRepository.getAllTracks() as ArrayList<Track>
+                LibraryUtil.favorites = trackRepository.getTracksByFavorite(true) as ArrayList<Track>
                 LibraryUtil.tracklist = LibraryUtil.tracks
             }
         }
