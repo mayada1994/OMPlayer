@@ -40,7 +40,7 @@ class FavoritesAdapter(val tracks: List<Track>, val fragment: FavoritesFragment)
                 LibraryUtil.tracklist = LibraryUtil.favorites
                 LibraryUtil.selectedTrack = position
                 LibraryUtil.action = Action.Play()
-                fragment.openPlayer()
+                fragment.openPlayer(it)
             }
         }
     }

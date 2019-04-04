@@ -7,13 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.omplayer.app.R
 import com.omplayer.app.db.entities.Artist
-import com.omplayer.app.di.SingletonHolder
-import com.omplayer.app.fragments.ArtistFragment
 import com.omplayer.app.utils.LibraryUtil
-import com.omplayer.app.viewmodels.ArtistViewModel
 
 
-class ArtistAdapter(val artists: List<Artist>, val fragment: ArtistFragment) : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
+class ArtistAdapter(val artists: List<Artist>, private val callback: Callback) :
+    RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
+
+    interface Callback {
+        fun loadArtistAlbums(artistId: Int, view: View)
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_artist, viewGroup, false)
@@ -35,9 +37,8 @@ class ArtistAdapter(val artists: List<Artist>, val fragment: ArtistFragment) : R
 
         init {
             itemView.setOnClickListener {
-                val viewModel = ArtistViewModel(SingletonHolder.application)
                 LibraryUtil.selectedArtist = position
-                viewModel.loadArtistAlbums(LibraryUtil.artists[position].id, fragment)
+                callback.loadArtistAlbums(LibraryUtil.artists[position].id, it)
             }
         }
     }
