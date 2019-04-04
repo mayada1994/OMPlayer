@@ -24,7 +24,7 @@ object PreferenceUtil {
         set(value) = sharedPreferences.edit().putBoolean(UPDATE_DB, value).apply()
 
     var scrobble: Boolean
-        get() = sharedPreferences.getBoolean(SCROBBLE, true)
+        get() = sharedPreferences.getBoolean(SCROBBLE, false)
         set(value) = sharedPreferences.edit().putBoolean(SCROBBLE, value).apply()
 
     var currentLastFmSession: LastFmSession?

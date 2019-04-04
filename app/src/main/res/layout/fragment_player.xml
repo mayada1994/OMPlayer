@@ -59,9 +59,22 @@
             android:contentDescription="Lyrics"
             android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/button_youtube_player"
+            app:layout_constraintEnd_toStartOf="@id/button_lastfm_love"
             app:layout_constraintTop_toTopOf="@id/button_youtube_player"
             app:layout_constraintBottom_toBottomOf="@id/button_youtube_player"/>
+
+    <ImageButton
+            android:id="@+id/button_lastfm_love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_lastfm_logo"
+            android:contentDescription="LastFm"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toEndOf="@id/button_lyrics"
+            app:layout_constraintEnd_toStartOf="@id/button_youtube_player"
+            app:layout_constraintTop_toTopOf="@id/button_youtube_player"
+            app:layout_constraintBottom_toBottomOf="@id/button_youtube_player"
+            app:layout_constraintHorizontal_bias="@id/button_youtube_player"/>
 
     <ImageButton
             android:id="@+id/button_youtube_player"
@@ -70,7 +83,7 @@
             android:src="@drawable/ic_youtube"
             android:contentDescription="Youtube"
             android:background="@android:color/transparent"
-            app:layout_constraintStart_toEndOf="@id/button_lyrics"
+            app:layout_constraintStart_toEndOf="@id/button_lastfm_love"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/info_container"
             app:layout_constraintBottom_toTopOf="@id/cover_container"

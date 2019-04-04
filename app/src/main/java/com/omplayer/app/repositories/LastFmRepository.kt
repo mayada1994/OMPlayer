@@ -1,6 +1,7 @@
 package com.omplayer.app.repositories
 
 import com.omplayer.app.entities.LastFmSessionWrapper
+import com.omplayer.app.entities.LastFmUserWrapper
 import com.omplayer.app.services.lastFmService.LastFmService
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -55,4 +56,19 @@ class LastFmRepository {
     ): Call<ResponseBody> {
         return rawLastFmService.scrobbleTrack(album, artist, track, timestamp, apiKey, api_sig, sk, FORMAT)
     }
+
+    fun loveTrack(
+        artist: String,
+        track: String,
+        apiKey: String,
+        api_sig: String,
+        sk: String
+    ): Call<ResponseBody> {
+        return rawLastFmService.loveTrack(artist, track, apiKey, api_sig, sk, FORMAT)
+    }
+
+    fun getUserInfo(user: String, apiKey: String): Call<LastFmUserWrapper> {
+        return lastFmService.getUserInfo(user, apiKey, FORMAT)
+    }
+
 }

@@ -38,6 +38,9 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     companion object {
         val TAG: String = PlayerViewModel::class.java.simpleName
+        const val NORMAL_MODE = 0
+        const val LOOP_MODE = 1
+        const val SHUFFLE_MODE = 2
     }
 
     private val lastFmViewModel = LastFmViewModel(application)
@@ -47,7 +50,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     private val playerManager: PlayerManager = SingletonHolder.playerManager
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
-    private var firstInit = true
+
+    private var mode = NORMAL_MODE
 
     //region MediaLibraryCompat
 
@@ -74,6 +78,13 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     private val _currentPosition = MutableLiveData<Int?>()
     val currentPosition: LiveData<Int?> = _currentPosition
+
+    private val _shuffleMode = MutableLiveData<Int?>()
+    val shuffleMode: LiveData<Int?> = _shuffleMode
+
+    private val _favoriteMode = MutableLiveData<Boolean>()
+    val favoriteMode: LiveData<Boolean> = _favoriteMode
+
     val currState = SingletonHolder.playerManager.currState
 
     private val _metadata = MediatorLiveData<Track?>().apply {
@@ -82,6 +93,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     val metadata: LiveData<Track?> = _metadata
     //endregion
 
+    //region SeekBarUpdate
     private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
     private val seekbarPositionUpdateTask: () -> Unit = {
         Handler(Looper.getMainLooper()).post {
@@ -99,6 +111,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
                     }
                     is IdleState -> {
                         _currentPosition.value = 0
+
                     }
                     else -> {
                         stopUpdateSeekbar()
@@ -108,27 +121,6 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         )
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        foreverObservers.forEach { it.release() }
-    }
-
-    //TODO remove firstInit boolean
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun onStart() {
-        startUpdateSeekbar()
-        if (firstInit) {
-            playerManager.setPlaylist(playlist, Action.Play())
-            mediaControllerCompat.transportControls.pause()
-            firstInit = false
-        }
-
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onStop() {
-        stopUpdateSeekbar()
-    }
 
     fun startUpdateSeekbar() {
         if (scheduledTask == null) {
@@ -146,6 +138,40 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         scheduledTask = null
     }
 
+    //endregion
+
+    override fun onCleared() {
+        super.onCleared()
+        foreverObservers.forEach { it.release() }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun onCreate() {
+        playerManager.setPlaylist(playlist, Action.Play())
+        when (LibraryUtil.action) {
+            is Action.Play -> {
+                onPlayClicked()
+            }
+            is Action.Pause -> {
+                onPauseClicked()
+            }
+        }
+
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onStart() {
+        startUpdateSeekbar()
+        onSetRepeatShuffleMode()
+    }
+
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onStop() {
+        stopUpdateSeekbar()
+    }
+
+
     fun loadTrackData(cover: CircularImageView, title: TextView, album: TextView, artist: TextView, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(coroutineContext) {
@@ -161,6 +187,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
                     title.text = currentTrack.title
                     album.text = currentAlbum.title
                     artist.text = currentArtist.name
+                    _favoriteMode.value = currentTrack.favorite
                     loadImage(currentAlbum.cover, cover, context)
                 }
             }
@@ -178,12 +205,14 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     }
 
     fun updateLastFmTrack() {
-        CoroutineScope(Dispatchers.IO).launch {
-            withContext(coroutineContext) {
-                val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
-                val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId).title
-                val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentTrack.artistId).name
-                lastFmViewModel.updatePlayingTrack(currentAlbum, currentArtist, currentTrack.title)
+        if (PreferenceUtil.scrobble) {
+            CoroutineScope(Dispatchers.IO).launch {
+                withContext(coroutineContext) {
+                    val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+                    val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId).title
+                    val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentTrack.artistId).name
+                    lastFmViewModel.updatePlayingTrack(currentAlbum, currentArtist, currentTrack.title)
+                }
             }
         }
     }
@@ -207,16 +236,75 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     fun onPauseClicked() = mediaControllerCompat.transportControls.pause()
 
-    fun onNextClicked() = mediaControllerCompat.transportControls.skipToNext()
-
-    fun onPrevClicked() = mediaControllerCompat.transportControls.skipToPrevious()
-
     fun onStopClicked() = mediaControllerCompat.transportControls.stop()
 
     fun onSeek(position: Int) = mediaControllerCompat.transportControls.seekTo(position.toLong())
 
-    fun onSetRepeatMode(mode: Int) = mediaControllerCompat.transportControls.setRepeatMode(mode)
+    fun onNextClicked() {
+        _currentPosition.value = 0
+        mediaControllerCompat.transportControls.skipToNext()
+    }
+
+    fun onPrevClicked() {
+        _currentPosition.value = 0
+        mediaControllerCompat.transportControls.skipToPrevious()
+    }
+
+    fun onSetRepeatShuffleMode() {
+
+        when (mode) {
+
+            NORMAL_MODE -> {
+                mediaControllerCompat.transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_NONE)
+                mediaControllerCompat.transportControls.setShuffleMode(PlaybackStateCompat.SHUFFLE_MODE_NONE)
+                _shuffleMode.value = R.drawable.ic_repeat
+                mode = LOOP_MODE
+            }
+            LOOP_MODE -> {
+                mediaControllerCompat.transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_ONE)
+                _shuffleMode.value = R.drawable.ic_repeat_one
+                mode = SHUFFLE_MODE
+            }
+            SHUFFLE_MODE -> {
+                mediaControllerCompat.transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_NONE)
+                mediaControllerCompat.transportControls.setShuffleMode(PlaybackStateCompat.SHUFFLE_MODE_ALL)
+                _shuffleMode.value = R.drawable.ic_shuffle
+                mode = NORMAL_MODE
+
+            }
+
+        }
+    }
+
+    fun onFavoritesButtonClicked(isFavorite: Boolean) {
+        val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+        if (isFavorite) {
+            currentTrack.favorite = false
+            _favoriteMode.value = false
+        } else {
+            currentTrack.favorite = true
+            _favoriteMode.value = true
+        }
+        CoroutineScope(Dispatchers.IO).launch {
+            SingletonHolder.db.trackDao().update(currentTrack)
+        }
+    }
 
     //endregion
 
+    fun scrollableTrack(playedTime: Int): Boolean {
+        val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+        if (currentTrack.duration >= 30000) {
+            return if (currentTrack.duration / 2 > 400000) {
+                playedTime >= 400000
+            } else {
+                playedTime >= currentTrack.duration / 2
+            }
+        }
+        return false
+    }
+
+    fun loveTrack(artist: String, track: String){
+        lastFmViewModel.loveTrack(artist, track)
+    }
 }

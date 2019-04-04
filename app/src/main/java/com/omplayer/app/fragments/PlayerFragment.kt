@@ -1,7 +1,6 @@
 package com.omplayer.app.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,8 +30,6 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     private val videoViewModel = VideoViewModel(SingletonHolder.application)
 
     private var isPlaying = false
-    private var isLooped = false
-    private var isScrobbled = false
     private var timestamp = "0"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -56,6 +53,8 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         button_youtube_player.setOnClickListener(this)
         button_shuffle.setOnClickListener(this)
         button_lyrics.setOnClickListener(this)
+        button_favorites.setOnClickListener(this)
+        button_lastfm_love.setOnClickListener(this)
 
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
@@ -64,17 +63,36 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 initializeTrackInfo()
             }
         })
+        viewModel.favoriteMode.observe(this, Observer {
+            if (it) {
+                button_favorites.setImageResource(R.drawable.ic_favorite)
+            } else {
+                button_favorites.setImageResource(R.drawable.ic_favorite_border)
+            }
+        })
+
         viewModel.currentPosition.observe(this, Observer {
             seekbar_audio.progress = it?.toFloat() ?: (0).toFloat()
             timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
-            viewModel.updateLastFmTrack()
             if (it != null) {
-                if (!isScrobbled && it > 35000) {
+                if (it < 1000) {
+                    timestamp = LastFmUtil.timestamp()
+                    LastFmUtil.isScrobbled = false
+                    viewModel.updateLastFmTrack()
+                }
+                if (!LastFmUtil.isScrobbled && viewModel.scrollableTrack(it)) {
                     viewModel.scrobbleTrack(timestamp)
-                    isScrobbled = true
+                    LastFmUtil.isScrobbled = true
                 }
             }
         })
+
+        viewModel.shuffleMode.observe(this, Observer {
+            if (it != null) {
+                button_shuffle.setImageResource(it)
+            }
+        })
+
         viewModel.currState.observe(this, Observer {
             when (it) {
                 is PlayingState -> {
@@ -105,27 +123,18 @@ class PlayerFragment : Fragment(), View.OnClickListener {
             }
             R.id.button_next -> viewModel.onNextClicked()
             R.id.button_previous -> viewModel.onPrevClicked()
-            R.id.button_youtube_player -> {
-                viewModel.onPauseClicked()
-                videoViewModel.playVideo(fragmentManager!!)
-            }
-            R.id.button_shuffle -> {
-                if (isLooped) {
-                    viewModel.onSetRepeatMode(0)
-                    button_shuffle.setImageResource(R.drawable.ic_repeat)
-                    isLooped = false
-                } else {
-                    viewModel.onSetRepeatMode(1)
-                    button_shuffle.setImageResource(R.drawable.ic_repeat_one)
-                    isLooped = true
+            R.id.button_youtube_player -> videoViewModel.playVideo(fragmentManager!!)
 
-                }
-
-            }
+            R.id.button_shuffle -> viewModel.onSetRepeatShuffleMode()
             R.id.button_lyrics -> lyricsViewModel.getSongLyrics(
                 tv_track_artist.text.toString(),
                 tv_track_title.text.toString(),
                 fragmentManager!!
+            )
+            R.id.button_favorites -> viewModel.onFavoritesButtonClicked(viewModel.favoriteMode.value!!)
+            R.id.button_lastfm_love -> viewModel.loveTrack(
+                tv_track_artist.text.toString(),
+                tv_track_title.text.toString()
             )
         }
     }
@@ -154,8 +163,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
     private fun initializeTrackInfo() {
         viewModel.loadTrackData(iv_track_cover, tv_track_title, tv_track_album, tv_track_artist, context!!)
-        timestamp = LastFmUtil.timestamp()
-        isScrobbled = false
+        viewModel.updateLastFmTrack()
     }
 
     //endregion

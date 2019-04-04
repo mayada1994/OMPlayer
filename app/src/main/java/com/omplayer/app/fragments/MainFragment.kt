@@ -53,6 +53,8 @@ class MainFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         btn_player.setOnClickListener(this)
         btn_library.setOnClickListener(this)
+        btn_favorites.setOnClickListener(this)
+        btn_settings.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
@@ -77,6 +79,29 @@ class MainFragment : Fragment(), View.OnClickListener {
                         .replace(
                             R.id.fragment_placeholder,
                             LibraryFragment()
+                        )
+                        .addToBackStack(null)
+                        .commit()
+                }
+            }
+            R.id.btn_favorites -> {
+
+                fragmentManager?.apply {
+                    beginTransaction()
+                        .replace(
+                            R.id.fragment_placeholder,
+                            FavoritesFragment()
+                        )
+                        .addToBackStack(null)
+                        .commit()
+                }
+            }
+            R.id.btn_settings -> {
+                fragmentManager?.apply {
+                    beginTransaction()
+                        .replace(
+                            R.id.fragment_placeholder,
+                            SettingsFragment()
                         )
                         .addToBackStack(null)
                         .commit()

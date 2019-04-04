@@ -24,39 +24,43 @@ class VideoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getVideoId(artist: String, album: String, song: String) {
         LibraryUtil.selectedTrackVideoId = NOT_FOUND
-        val url = generateLastFmUrl(artist, album, song)
-        val youTubeRepository = YouTubeRepository(url)
-        youTubeRepository.getData().enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(
-                call: Call<ResponseBody>,
-                response: Response<ResponseBody>
-            ) {
-                try {
-                    val htmlBody = response.body()!!.string()
+        try {
+            val url = generateLastFmUrl(artist, album, song)
+            val youTubeRepository = YouTubeRepository(url)
+            youTubeRepository.getData().enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    try {
+                        val htmlBody = response.body()!!.string()
 
-                    val pattern = getPattern()
-                    val matcher = pattern.matcher(htmlBody)
-                    var matchStart = 0
-                    var matchEnd = 1
-                    while (matcher.find()) {
-                        matchStart = matcher.start(1)
-                        matchEnd = matcher.end()
+                        val pattern = getPattern()
+                        val matcher = pattern.matcher(htmlBody)
+                        var matchStart = 0
+                        var matchEnd = 1
+                        while (matcher.find()) {
+                            matchStart = matcher.start(1)
+                            matchEnd = matcher.end()
 
-                        val resultUrl = htmlBody.substring(matchStart, matchEnd)
-                        if (resultUrl.contains(YOUTUBE_BASE_URL)) {
-                            LibraryUtil.selectedTrackVideoId = extractVideoId(resultUrl)
+                            val resultUrl = htmlBody.substring(matchStart, matchEnd)
+                            if (resultUrl.contains(YOUTUBE_BASE_URL)) {
+                                LibraryUtil.selectedTrackVideoId = extractVideoId(resultUrl)
+                            }
                         }
+
+                    } catch (e: NullPointerException) {
+                        Log.e("YouTubeResponse", response.message())
                     }
-
-                } catch (e: NullPointerException) {
-                    Log.e("YouTubeResponse", response.message())
                 }
-            }
 
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.d("YouTubeResponse", "Video not found")
-            }
-        })
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.d("YouTubeResponse", "Video not found")
+                }
+            })
+        } catch (e: Exception) {
+            Log.e("YouTubeResponse", e.message)
+        }
     }
 
     private fun generateLastFmUrl(artist: String, album: String, song: String): String {

@@ -5,7 +5,10 @@ import java.security.MessageDigest
 
 object LastFmUtil {
 
+    var isScrobbled: Boolean = false
+
     fun timestamp(): String = (System.currentTimeMillis() / 1000).toString()
+
     fun md5(s: String): String? {
         val digest = MessageDigest.getInstance("MD5")
         try {
