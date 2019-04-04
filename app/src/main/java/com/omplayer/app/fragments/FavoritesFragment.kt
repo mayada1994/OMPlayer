@@ -39,6 +39,7 @@ class FavoritesFragment : Fragment() {
         }
     }
 
+
     fun openPlayer() {
         val activity = activity as MainActivity
         activity.openPlayerFragment()

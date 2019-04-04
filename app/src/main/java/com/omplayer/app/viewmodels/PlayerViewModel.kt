@@ -93,6 +93,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     //endregion
 
     //region SeekBarUpdate
+
     private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
     private val seekbarPositionUpdateTask: () -> Unit = {
         Handler(Looper.getMainLooper()).post {
