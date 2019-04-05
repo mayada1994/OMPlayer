@@ -20,6 +20,7 @@ import java.io.File
 class SingleArtistAdapter(val albums: List<Album>, val callback: Callback) :
     RecyclerView.Adapter<SingleArtistAdapter.ViewHolder>() {
 
+
     interface Callback {
         fun openAlbum(albumId: Int, view : View)
     }

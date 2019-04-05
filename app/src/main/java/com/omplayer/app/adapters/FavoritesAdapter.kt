@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.RecyclerView
 import com.omplayer.app.R
 import com.omplayer.app.db.entities.Track
@@ -12,8 +13,13 @@ import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.utils.LibraryUtil
 
 
-class FavoritesAdapter(val tracks: List<Track>, val fragment: FavoritesFragment) :
+class FavoritesAdapter(val tracks: List<Track>, val callback: Callback) :
     RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
+
+
+    interface Callback {
+        fun openPlayer(view: View)
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): FavoritesAdapter.ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_track, viewGroup, false)
@@ -32,6 +38,7 @@ class FavoritesAdapter(val tracks: List<Track>, val fragment: FavoritesFragment)
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+
         var itemName: TextView = itemView.findViewById(R.id.track_title)
         lateinit var path: String
 
@@ -40,7 +47,7 @@ class FavoritesAdapter(val tracks: List<Track>, val fragment: FavoritesFragment)
                 LibraryUtil.tracklist = LibraryUtil.favorites
                 LibraryUtil.selectedTrack = position
                 LibraryUtil.action = Action.Play()
-                fragment.openPlayer(it)
+                callback.openPlayer(it)
             }
         }
     }

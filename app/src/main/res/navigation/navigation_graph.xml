@@ -5,7 +5,8 @@
 
     <fragment android:id="@+id/mainFragment"
               android:name="com.omplayer.app.fragments.MainFragment"
-              android:label="MainFragment">
+              android:label="MainFragment"
+              tools:layout="@layout/fragment_main">
 
         <action android:id="@+id/action_mainFragment_to_favoritesFragment"
                 app:destination="@id/favoritesFragment"/>
@@ -21,7 +22,9 @@
     <fragment
             android:id="@+id/libraryFragment"
             android:name="com.omplayer.app.fragments.LibraryFragment"
-            android:label="LibraryFragment">
+            android:label="LibraryFragment"
+            tools:layout="@layout/fragment_library">
+
         <action android:id="@+id/action_libraryFragment_to_singleAlbumFragment"
                 app:destination="@id/singleAlbumFragment"/>
         <action android:id="@+id/action_libraryFragment_to_singleArtistFragment"
@@ -32,7 +35,8 @@
     </fragment>
     <fragment android:id="@+id/playerFragment"
               android:name="com.omplayer.app.fragments.PlayerFragment"
-              android:label="PlayerFragment">
+              android:label="PlayerFragment"
+              tools:layout="@layout/fragment_player">
 
         <action android:id="@+id/action_playerFragment_to_videoDialogFragment2"
                 app:destination="@id/videoDialogFragment2"/>
