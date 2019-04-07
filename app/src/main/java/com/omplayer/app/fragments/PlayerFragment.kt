@@ -87,6 +87,8 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         lifecycle.addObserver(viewModel)
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.scrobbleCachedTracks()
+
         initializeSeekbar()
 
         initializeTrackInfo()
@@ -134,6 +136,11 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 }
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.scrobbleCachedTracks()
     }
 
     override fun onClick(view: View) {

@@ -9,21 +9,26 @@ import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.mikhaellopez.circularimageview.CircularImageView
 import com.omplayer.app.R
+import com.omplayer.app.db.entities.ScrobbledTrack
 import com.omplayer.app.db.entities.Track
 import com.omplayer.app.di.SingletonHolder
+import com.omplayer.app.di.SingletonHolder.db
 import com.omplayer.app.extensions.foreverObserver
 import com.omplayer.app.livedata.ForeverObserver
+import com.omplayer.app.repositories.ScrobbledTrackRepository
 import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.stateMachine.PlayerManager
 import com.omplayer.app.stateMachine.states.IdleState
 import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.LastFmUtil
 import com.omplayer.app.utils.LibraryUtil
+import com.omplayer.app.utils.NetworkUtil.networkEnabled
 import com.omplayer.app.utils.PreferenceUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +51,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     private val lastFmViewModel = LastFmViewModel(application)
     private val videoViewModel = VideoViewModel(application)
+
+    private val scrobbledTrackRepository = ScrobbledTrackRepository(db.scrobbledTrackDao())
 
     private val playlist: MutableList<Track> = LibraryUtil.tracklist
     private val playerManager: PlayerManager = SingletonHolder.playerManager
@@ -196,7 +203,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     }
 
-    fun loadImage(albumArtUrl: String, cover: CircularImageView, context: Context) {
+    private fun loadImage(albumArtUrl: String, cover: CircularImageView, context: Context) {
         val file = File(albumArtUrl)
         val uri = Uri.fromFile(file)
 
@@ -206,7 +213,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     }
 
     fun updateLastFmTrack() {
-        if (PreferenceUtil.scrobble) {
+        if (PreferenceUtil.scrobble && networkEnabled) {
             CoroutineScope(Dispatchers.IO).launch {
                 withContext(coroutineContext) {
                     val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
@@ -225,7 +232,32 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
                     val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
                     val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId).title
                     val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentTrack.artistId).name
-                    lastFmViewModel.scrobble(currentAlbum, currentArtist, currentTrack.title, timestamp)
+                    if (networkEnabled) {
+                        lastFmViewModel.scrobble(currentAlbum, currentArtist, currentTrack.title, timestamp)
+                    } else {
+                        Log.d("LastFm", "cached")
+                        scrobbledTrackRepository.insertTrack(
+                            ScrobbledTrack(
+                                currentAlbum,
+                                currentArtist,
+                                currentTrack.title,
+                                timestamp
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun scrobbleCachedTracks() {
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(coroutineContext) {
+                scrobbledTrackRepository.getAllScrobbledTracks()?.forEach {
+                    if (networkEnabled) {
+                        lastFmViewModel.scrobble(it.albumTitle, it.artistTitle, it.title, it.timestamp)
+                        scrobbledTrackRepository.deleteTrack(it)
+                    }
                 }
             }
         }
@@ -305,7 +337,11 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         return false
     }
 
-    fun loveTrack(artist: String, track: String){
-        lastFmViewModel.loveTrack(artist, track)
+    fun loveTrack(artist: String, track: String) {
+        if (networkEnabled) {
+            lastFmViewModel.loveTrack(artist, track)
+        } else {
+            Toast.makeText(getApplication(), "No network connection", Toast.LENGTH_LONG).show()
+        }
     }
 }

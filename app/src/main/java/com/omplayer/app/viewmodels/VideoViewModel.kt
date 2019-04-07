@@ -9,6 +9,7 @@ import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.dialogFragments.VideoDialogFragment
 import com.omplayer.app.repositories.YouTubeRepository
 import com.omplayer.app.utils.LibraryUtil
+import com.omplayer.app.utils.NetworkUtil.networkEnabled
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -85,12 +86,16 @@ class VideoViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun playVideo(fragmentManager: FragmentManager) {
+        if (networkEnabled) {
 
-        if (VIDEO_ID != NOT_FOUND) {
-            val videoDialog = VideoDialogFragment.newInstance()
-            videoDialog.show(fragmentManager, "")
+            if (VIDEO_ID != NOT_FOUND) {
+                val videoDialog = VideoDialogFragment.newInstance()
+                videoDialog.show(fragmentManager, "")
+            } else {
+                Toast.makeText(SingletonHolder.application, VIDEO_NOT_FOUND, Toast.LENGTH_LONG).show()
+            }
         } else {
-            Toast.makeText(SingletonHolder.application, VIDEO_NOT_FOUND, Toast.LENGTH_LONG).show()
+            Toast.makeText(getApplication(), "No network connection", Toast.LENGTH_LONG).show()
         }
     }
 }

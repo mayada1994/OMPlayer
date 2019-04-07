@@ -5,9 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.omplayer.app.R
 import com.omplayer.app.fragments.*
+import android.net.wifi.WifiManager
+import android.content.IntentFilter
+import com.omplayer.app.utils.NetworkUtil.wifiBroadcastReceiver
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+
+    override fun onStart() {
+        super.onStart()
+        val intentFilter = IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION)
+        registerReceiver(wifiBroadcastReceiver, intentFilter)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +26,11 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.fragment_placeholder, MainFragment())
         transaction.commit()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(wifiBroadcastReceiver)
     }
 
     fun setActionBarTitle(title: String) {
