@@ -7,7 +7,7 @@ object LastFmUtil {
 
     var isScrobbled: Boolean = false
 
-    fun timestamp(): String = (System.currentTimeMillis() / 1000).toString()
+    fun timestamp(): Long = (System.currentTimeMillis() / 1000)
 
     fun md5(s: String): String? {
         val digest = MessageDigest.getInstance("MD5")

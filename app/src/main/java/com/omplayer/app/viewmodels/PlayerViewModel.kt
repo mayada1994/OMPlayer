@@ -22,6 +22,7 @@ import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.stateMachine.PlayerManager
 import com.omplayer.app.stateMachine.states.IdleState
 import com.omplayer.app.stateMachine.states.PlayingState
+import com.omplayer.app.utils.LastFmUtil
 import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.utils.PreferenceUtil
 import kotlinx.coroutines.CoroutineScope
@@ -292,13 +293,13 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     //endregion
 
-    fun scrollableTrack(playedTime: Int): Boolean {
+    fun scrollableTrack(playedTime: Int, timestamp: Long): Boolean {
         val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
         if (currentTrack.duration >= 30000) {
             return if (currentTrack.duration / 2 > 400000) {
-                playedTime >= 400000
+                (playedTime >= 400000) || (LastFmUtil.timestamp() - timestamp >= 240)
             } else {
-                playedTime >= currentTrack.duration / 2
+                (playedTime >= currentTrack.duration / 2) || (LastFmUtil.timestamp() - timestamp >= currentTrack.duration / 2)
             }
         }
         return false

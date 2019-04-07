@@ -99,8 +99,6 @@ class PlayerService : Service() {
 
         MediaButtonReceiver.handleIntent(playerManager.mediaSessionCompat, intent)
 
-        val notification: Notification
-
         when (intent?.getSerializableExtra(Extra.ACTION)) {
             is Action.Play -> {
                 getNotification(R.drawable.ic_pause, "ic_pause", pausePendingIntent)
@@ -138,7 +136,7 @@ class PlayerService : Service() {
         }
     }
 
-    fun loadImage(albumArtUrl: String): Bitmap {
+    private fun loadImage(albumArtUrl: String): Bitmap {
         try {
             val file = File(albumArtUrl)
             val uri = Uri.fromFile(file)

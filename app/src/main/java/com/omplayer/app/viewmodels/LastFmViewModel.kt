@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -17,6 +18,9 @@ import com.omplayer.app.entities.LastFmUserWrapper
 import com.omplayer.app.repositories.LastFmRepository
 import com.omplayer.app.utils.LastFmUtil.md5
 import com.omplayer.app.utils.PreferenceUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -84,27 +88,29 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun scrobble(album: String, artist: String, track: String, timestamp: String) {
-        val apiSignature: String =
-            "album" + album + "api_key" + API_KEY + "artist" + artist + "methodtrack.scrobble" + "sk" + PreferenceUtil.currentLastFmSession!!.key + "timestamp" + timestamp + "track" + track + SECRET
-        lastFmRepository.scrobbleTrack(
-            album,
-            artist,
-            track,
-            timestamp,
-            API_KEY,
-            md5(apiSignature)!!,
-            PreferenceUtil.currentLastFmSession!!.key
-        ).enqueue(object : Callback<ResponseBody> {
+        CoroutineScope(Dispatchers.IO).launch {
+            val apiSignature: String =
+                "album" + album + "api_key" + API_KEY + "artist" + artist + "methodtrack.scrobble" + "sk" + PreferenceUtil.currentLastFmSession!!.key + "timestamp" + timestamp + "track" + track + SECRET
+            lastFmRepository.scrobbleTrack(
+                album,
+                artist,
+                track,
+                timestamp,
+                API_KEY,
+                md5(apiSignature)!!,
+                PreferenceUtil.currentLastFmSession!!.key
+            ).enqueue(object : Callback<ResponseBody> {
 
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                Log.d(TAG, response.body()!!.string())
-            }
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    Log.d(TAG, response.body()!!.string())
+                }
 
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.d(TAG, t.message)
-            }
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.d(TAG, t.message)
+                }
 
-        })
+            })
+        }
     }
 
     fun loveTrack(artist: String, track: String) {
@@ -120,7 +126,8 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
         ).enqueue(object : Callback<ResponseBody> {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                Log.d(TAG, "Track added to loved   ${md5(apiSignature)}")
+                Log.d(TAG, response.message())
+                Toast.makeText(getApplication(), "Track added to loved", Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
