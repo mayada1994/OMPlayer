@@ -45,7 +45,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     private val videoViewModel = VideoViewModel(application)
 
-    private val playlist: MutableList<Track> = LibraryUtil.tracklist
+    private val playlist: List<Track> = LibraryUtil.tracklist
     private val playerManager: PlayerManager = SingletonHolder.playerManager
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()

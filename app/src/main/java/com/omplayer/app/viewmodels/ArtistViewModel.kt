@@ -8,10 +8,11 @@ import com.omplayer.app.adapters.ArtistAdapter
 import com.omplayer.app.db.entities.Album
 import com.omplayer.app.db.entities.Track
 import com.omplayer.app.di.SingletonHolder
-import com.omplayer.app.fragments.ArtistFragment
 import com.omplayer.app.repositories.AlbumRepository
 import com.omplayer.app.repositories.TrackRepository
 import com.omplayer.app.utils.LibraryUtil
+import com.omplayer.app.utils.LibraryUtil.albums
+import com.omplayer.app.utils.LibraryUtil.tracks
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -25,29 +26,20 @@ class ArtistViewModel(application: Application) : AndroidViewModel(application),
 
     private val albumRepository: AlbumRepository = AlbumRepository(db.albumDao())
     private val trackRepository: TrackRepository = TrackRepository(db.trackDao())
-    private var albums = ArrayList<Album>()
-    private var tracks = ArrayList<Track>()
 
-    private var _viewLiveData: MutableLiveData<View> = MutableLiveData()
-    var viewLiveData = _viewLiveData
+    private val _viewLiveData: MutableLiveData<View> = MutableLiveData()
+    val viewLiveData = _viewLiveData
 
     val itemAdapter = ArtistAdapter(LibraryUtil.artists, this)
 
 
     override fun loadArtistAlbums(artistId: Int, view: View) {
         scope.launch {
-            withContext(coroutineContext) {
-                tracks = trackRepository.getTracksByArtistId(artistId) as ArrayList<Track>
-                tracks.forEach { track ->
-                    val currentAlbum: Album = albumRepository.getAlbumById(track.albumId)!!
-                    if (!albums.contains(currentAlbum)) {
-                        albums.add(currentAlbum)
-                    }
-                }
-                albums.sortBy { it.year }
-            }
+            LibraryUtil.selectedArtistAlbumList = trackRepository.getTracksByArtistId(artistId).mapNotNull {
+                albumRepository.getAlbumById(it.albumId)
+            }.distinctBy { it.id }.sortedBy { it.year }
+
             withContext(Dispatchers.Main) {
-                LibraryUtil.selectedArtistAlbumList = albums
                 _viewLiveData.value = view
             }
         }

@@ -213,7 +213,7 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
     }
 
     @MainThread
-    fun setPlaylist(playlist: MutableList<Track>, action: Action? = Action.Play()) {
+    fun setPlaylist(playlist: List<Track>, action: Action? = Action.Play()) {
         mediaPlayer.setOnCompletionListener {
 
             mediaSessionCallback.onSkipToNext()
