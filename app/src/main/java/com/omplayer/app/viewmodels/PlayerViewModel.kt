@@ -37,7 +37,7 @@ import java.util.concurrent.TimeUnit
 class PlayerViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver {
 
     companion object {
-        val TAG: String = PlayerViewModel::class.java.simpleName
+        val TAG: String = "PlayerViewModel"
         const val NORMAL_MODE = 0
         const val LOOP_MODE = 1
         const val SHUFFLE_MODE = 2
@@ -154,7 +154,6 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
                 onPlayClicked()
             }
             is Action.Pause -> {
-                onPlayClicked()
                 onPauseClicked()
             }
         }
@@ -164,6 +163,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
         startUpdateSeekbar()
+        Log.d(TAG, LibraryUtil.selectedTrack.toString())
 }
 
 

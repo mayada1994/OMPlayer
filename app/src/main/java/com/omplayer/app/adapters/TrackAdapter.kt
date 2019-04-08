@@ -1,5 +1,6 @@
 package com.omplayer.app.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,10 @@ import com.omplayer.app.utils.LibraryUtil
 
 class TrackAdapter(val tracks: List<Track>, val callback: Callback) :
     RecyclerView.Adapter<TrackAdapter.ViewHolder>() {
+
+    companion object {
+        const val TAG = "TrackAdapter"
+    }
 
     interface Callback {
         fun openPlayer(view: View)
@@ -42,7 +47,9 @@ class TrackAdapter(val tracks: List<Track>, val callback: Callback) :
                 LibraryUtil.tracklist = LibraryUtil.tracks
                 LibraryUtil.selectedTrack = position
                 LibraryUtil.action = Action.Play()
+                Log.d(TAG,LibraryUtil.selectedTrack.toString())
                 callback.openPlayer(it)
+
             }
         }
     }
