@@ -67,7 +67,7 @@
             android:id="@+id/button_lastfm_love"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_lastfm_logo"
+            android:src="@drawable/ic_lastfm_love"
             android:contentDescription="LastFm"
             android:background="@android:color/transparent"
             app:layout_constraintStart_toEndOf="@id/button_lyrics"

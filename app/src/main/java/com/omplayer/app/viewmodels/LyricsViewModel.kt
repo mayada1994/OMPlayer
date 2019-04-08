@@ -27,7 +27,7 @@ class LyricsViewModel(application: Application) : AndroidViewModel(application) 
                 currentArtist = currentArtist.substring(3)
             }
             val lyricsRepository = LyricsRepository()
-            lyricsRepository.getLyrics("$currentArtist/$currentTitle.html").enqueue(object : Callback<ResponseBody> {
+            lyricsRepository.getLyrics(currentArtist, currentTitle).enqueue(object : Callback<ResponseBody> {
 
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     try {
