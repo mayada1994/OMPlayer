@@ -11,8 +11,12 @@ import com.omplayer.app.fragments.SingleAlbumFragment
 import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.utils.LibraryUtil
 
-class SingleAlbumAdapter(val tracks: List<Track>, val fragment: SingleAlbumFragment) :
+class SingleAlbumAdapter(val tracks: List<Track>, val callback : Callback) :
     RecyclerView.Adapter<SingleAlbumAdapter.ViewHolder>() {
+
+    interface Callback {
+        fun openPlayer(view : View)
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_track, viewGroup, false)
@@ -41,7 +45,7 @@ class SingleAlbumAdapter(val tracks: List<Track>, val fragment: SingleAlbumFragm
                 LibraryUtil.tracklist = LibraryUtil.selectedAlbumTracklist
                 LibraryUtil.selectedTrack = position
                 LibraryUtil.action = Action.Play()
-                fragment.openPlayer()
+                callback.openPlayer(it)
             }
         }
     }

@@ -12,13 +12,16 @@ import com.bumptech.glide.request.RequestOptions
 import com.omplayer.app.R
 import com.omplayer.app.db.entities.Album
 import com.omplayer.app.di.SingletonHolder
-import com.omplayer.app.fragments.AlbumFragment
 import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.viewmodels.AlbumViewModel
 import java.io.File
 
 
-class AlbumAdapter(val albums: List<Album>, val fragment: AlbumFragment) : RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
+class AlbumAdapter(val albums: List<Album>, val callback: Callback) : RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
+
+    interface Callback {
+       fun loadAlbumTracks(albumId :Int, view :View)
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_album, viewGroup, false)
@@ -43,10 +46,9 @@ class AlbumAdapter(val albums: List<Album>, val fragment: AlbumFragment) : Recyc
 
         init {
             itemView.setOnClickListener {
-                val viewModel = AlbumViewModel(SingletonHolder.application)
                 LibraryUtil.currentAlbumList = LibraryUtil.albums
                 LibraryUtil.selectedAlbum = position
-                viewModel.loadAlbumTracks(LibraryUtil.albums[position].id, fragment)
+                callback.loadAlbumTracks(LibraryUtil.albums[position].id, it)
             }
         }
 

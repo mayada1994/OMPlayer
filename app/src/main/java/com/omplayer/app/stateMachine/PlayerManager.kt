@@ -8,6 +8,7 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
 import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,6 +17,7 @@ import com.omplayer.app.db.entities.Track
 import com.omplayer.app.stateMachine.states.IdleState
 import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.stateMachine.states.State
+import com.omplayer.app.utils.LibraryUtil
 
 
 @Suppress("DEPRECATION")
@@ -52,7 +54,7 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
     override fun onAudioFocusChange(focusChange: Int) {
         when (focusChange) {
             AudioManager.AUDIOFOCUS_LOSS -> {
-                if (currState.value is PlayingState) {
+                if (_currState.value is PlayingState) {
                     performAction(Action.Pause())
                 }
             }
@@ -63,7 +65,7 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
                 mediaPlayer.setVolume(0.3f, 0.3f)
             }
             AudioManager.AUDIOFOCUS_GAIN -> {
-                if (currState.value is IdleState) {
+                if (_currState.value is IdleState) {
                     performAction(Action.Pause())
                 }
                 mediaPlayer.setVolume(1.0f, 1.0f)
@@ -208,12 +210,12 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
 //endregion
 
     @MainThread
-    private fun performAction(action: Action) {
-        _currState.value = currState.value!!.handleAction(action)
+    fun performAction(action: Action) {
+        _currState.value = _currState.value!!.handleAction(action)
     }
 
     @MainThread
-    fun setPlaylist(playlist: MutableList<Track>, action: Action? = Action.Play()) {
+    fun setPlaylist(playlist: List<Track>) {
         mediaPlayer.setOnCompletionListener {
 
             mediaSessionCallback.onSkipToNext()
@@ -224,10 +226,6 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
         mediaSessionCallback.onStop()
         this.playlist.clear()
         this.playlist.addAll(playlist)
-
-        action?.let {
-            performAction(action)
-        }
     }
 
 

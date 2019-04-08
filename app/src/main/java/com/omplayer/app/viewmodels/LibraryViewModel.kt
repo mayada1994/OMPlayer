@@ -90,14 +90,8 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     }
 
     suspend fun deleteAdditionalGenres() {
-
-        val iterator = LibraryUtil.genres.iterator()
-        while (iterator.hasNext()) {
-            val genre = iterator.next()
-            val genreTracks = db.trackDao().getTracksByGenreId(genre.id)
-            if (genreTracks.isEmpty()) {
-                iterator.remove()
-            }
+        LibraryUtil.genres = LibraryUtil.genres.filter {
+            db.trackDao().getTracksByGenreId(it.id).isEmpty()
         }
     }
 

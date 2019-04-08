@@ -13,15 +13,15 @@ object LibraryUtil {
     var selectedTrack = 0
     var selectedTrackVideoId = ""
 
-    var selectedGenreTracklist = ArrayList<Track>()
-    var selectedArtistAlbumList = ArrayList<Album>()
-    var selectedAlbumTracklist = ArrayList<Track>()
-    var currentAlbumList = ArrayList<Album>()
-    var tracklist = ArrayList<Track>()
-    var genres = ArrayList<Genre>()
-    var artists = ArrayList<Artist>()
-    var albums = ArrayList<Album>()
-    var tracks = ArrayList<Track>()
-    var favorites = ArrayList<Track>()
+    var selectedGenreTracklist: List<Track> = emptyList()
+    var selectedArtistAlbumList: List<Album> = emptyList()
+    var selectedAlbumTracklist: List<Track> = emptyList()
+    var currentAlbumList: List<Album> = emptyList()
+    var tracklist: List<Track> = emptyList()
+    var genres: List<Genre> = emptyList()
+    var artists: List<Artist> = emptyList()
+    var albums: List<Album> = emptyList()
+    var tracks: List<Track> = emptyList()
+    var favorites: List<Track> = emptyList()
     var action: Action = Action.Pause()
 }

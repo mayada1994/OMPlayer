@@ -12,15 +12,17 @@ import android.media.AudioManager
 import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import androidx.media.session.MediaButtonReceiver
 import androidx.media.app.NotificationCompat.MediaStyle
+import androidx.media.session.MediaButtonReceiver
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.omplayer.app.consts.Extra
-import com.omplayer.app.application.App.Companion.CHANNEL_ID
 import com.omplayer.app.R
+import com.omplayer.app.activities.MainActivity
+import com.omplayer.app.application.App.Companion.CHANNEL_ID
+import com.omplayer.app.consts.Extra
 import com.omplayer.app.consts.RequestCodes
 import com.omplayer.app.di.SingletonHolder
+import com.omplayer.app.fragments.PlayerFragment
 import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.utils.LibraryUtil
 import kotlinx.coroutines.CoroutineScope
@@ -33,10 +35,21 @@ import java.io.File
 class PlayerService : Service() {
 
     private val playerManager = SingletonHolder.playerManager
-    private val serviceContext:Context = this
+    private val serviceContext: Context = this
 
     private val becomingNoisyReceiver =
         BecomingNoisyReceiver()
+
+
+     private val activityIntent = Intent(SingletonHolder.application, MainActivity::class.java)
+
+    private val contentIntent by lazy {
+
+        PendingIntent.getActivity(this,
+            0,
+            activityIntent,
+            PendingIntent.FLAG_CANCEL_CURRENT)
+    }
 
     private val stopPendingIntent by lazy {
         PendingIntent.getBroadcast(
@@ -126,6 +139,7 @@ class PlayerService : Service() {
                         .setSmallIcon(R.drawable.ic_note)
                         .setContentTitle(currentTrack.title)
                         .setContentText(currentAlbum.title)
+                        .setContentIntent(contentIntent)
                         .addAction(R.drawable.ic_prev, "ic_prev", prevPendingIntent)
                         .addAction(icon, text, intent)
                         .addAction(R.drawable.ic_next, "ic_next", nextPendingIntent)

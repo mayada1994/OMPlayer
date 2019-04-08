@@ -37,7 +37,7 @@ import java.util.concurrent.TimeUnit
 class PlayerViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver {
 
     companion object {
-        val TAG: String = PlayerViewModel::class.java.simpleName
+        val TAG: String = "PlayerViewModel"
         const val NORMAL_MODE = 0
         const val LOOP_MODE = 1
         const val SHUFFLE_MODE = 2
@@ -45,7 +45,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     private val videoViewModel = VideoViewModel(application)
 
-    private val playlist: MutableList<Track> = LibraryUtil.tracklist
+    private val playlist: List<Track> = LibraryUtil.tracklist
     private val playerManager: PlayerManager = SingletonHolder.playerManager
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
@@ -93,6 +93,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     //endregion
 
     //region SeekBarUpdate
+
     private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
     private val seekbarPositionUpdateTask: () -> Unit = {
         Handler(Looper.getMainLooper()).post {
@@ -146,7 +147,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-        playerManager.setPlaylist(playlist, Action.Play())
+        onSetRepeatShuffleMode()
+        playerManager.setPlaylist(playlist)
         when (LibraryUtil.action) {
             is Action.Play -> {
                 onPlayClicked()
@@ -161,8 +163,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
         startUpdateSeekbar()
-        onSetRepeatShuffleMode()
-    }
+        Log.d(TAG, LibraryUtil.selectedTrack.toString())
+}
 
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
