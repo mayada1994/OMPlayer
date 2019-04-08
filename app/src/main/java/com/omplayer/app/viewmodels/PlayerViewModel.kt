@@ -147,12 +147,14 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-        playerManager.setPlaylist(playlist, Action.Play())
+        onSetRepeatShuffleMode()
+        playerManager.setPlaylist(playlist)
         when (LibraryUtil.action) {
             is Action.Play -> {
                 onPlayClicked()
             }
             is Action.Pause -> {
+                onPlayClicked()
                 onPauseClicked()
             }
         }
@@ -162,8 +164,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
         startUpdateSeekbar()
-        onSetRepeatShuffleMode()
-    }
+}
 
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
