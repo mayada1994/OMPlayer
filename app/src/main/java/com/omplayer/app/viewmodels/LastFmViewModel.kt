@@ -19,6 +19,7 @@ import com.omplayer.app.entities.LastFmSessionWrapper
 import com.omplayer.app.entities.LastFmSimilarTracksWrapper
 import com.omplayer.app.entities.LastFmUserWrapper
 import com.omplayer.app.fragments.PlayerFragment
+import com.omplayer.app.fragments.SettingsFragment
 import com.omplayer.app.repositories.LastFmRepository
 import com.omplayer.app.utils.ImageUtil.saveImage
 import com.omplayer.app.utils.LastFmUtil
@@ -46,7 +47,7 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
         activity.startActivity(browserIntent)
     }
 
-    fun logIn(username: String, password: String, dialog: LastFmLoginDialogFragment) {
+    fun logIn(username: String, password: String, dialog: LastFmLoginDialogFragment, fragment: SettingsFragment) {
         val apiSignature: String =
             "api_key" + API_KEY + "methodauth.getMobileSessionpassword" + password + "username" + username + SECRET
         lastFmRepository.getLastFmSession(API_KEY, password, username, md5(apiSignature)!!)
@@ -57,13 +58,20 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
                         PreferenceUtil.currentLastFmSession = response.body()!!.session
                         PreferenceUtil.scrobble = true
                         dialog.dismiss()
+                        fragment.initializeUserProfile()
                     } catch (e: Exception) {
-                        Log.d(TAG, response.body()?.session.toString())
+                        Log.d(TAG, response.message())
+                        if (response.message().contains("Forbidden")) {
+                            Toast.makeText(getApplication(), "Wrong username or password", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(getApplication(), "Error", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<LastFmSessionWrapper>, t: Throwable) {
                     Log.d(TAG, t.message)
+                    Toast.makeText(getApplication(), "Error", Toast.LENGTH_SHORT).show()
                 }
 
             })
@@ -120,7 +128,6 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun loveTrack(artist: String, track: String) {
-
         val apiSignature: String =
             "api_key" + API_KEY + "artist" + artist + "methodtrack.love" + "sk" + PreferenceUtil.currentLastFmSession!!.key + "track" + track + SECRET
         lastFmRepository.loveTrack(
@@ -214,12 +221,12 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
                 ) {
                     try {
                         val similarTracks = response.body()!!.similarTracks.similarTracksList
-                        if(similarTracks.isNotEmpty()){
+                        if (similarTracks.isNotEmpty()) {
                             LastFmUtil.similarTracks = similarTracks
                             LastFmUtil.originalTrack = title
-                            val trackViewModel = TrackViewModel(SingletonHolder.application, fragment)
-                            trackViewModel.goToFragment()
-                        }else{
+                            val trackViewModel = TrackViewModel(SingletonHolder.application)
+                            trackViewModel.goToFragment(fragment)
+                        } else {
                             Toast.makeText(getApplication(), "No similar tracks found", Toast.LENGTH_SHORT).show()
                         }
 
@@ -230,7 +237,7 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
 
                 override fun onFailure(call: Call<LastFmSimilarTracksWrapper>, t: Throwable) {
                     Log.d(TAG, t.message)
-                    if(t.message!!.contains("timeout")){
+                    if (t.message!!.contains("timeout")) {
                         Toast.makeText(getApplication(), "Server Timeout", Toast.LENGTH_SHORT).show()
                     }
                 }

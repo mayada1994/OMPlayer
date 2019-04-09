@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.omplayer.app.R
 import com.omplayer.app.activities.MainActivity
 import com.omplayer.app.di.SingletonHolder
@@ -37,7 +38,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     }
     private val lyricsViewModel = LyricsViewModel(SingletonHolder.application)
     private val videoViewModel = VideoViewModel(SingletonHolder.application)
-    private val trackViewModel = TrackViewModel(SingletonHolder.application, this@PlayerFragment)
+    private val trackViewModel = TrackViewModel(SingletonHolder.application)
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
 
     private var isPlaying = false
@@ -218,7 +219,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         scheduledTask = null
     }
 
-    fun openSimilarTracks(){
-        (activity as MainActivity).openSimilarTracksFragment()
+    fun openSimilarTracks() {
+        view!!.findNavController().navigate(R.id.action_playerFragment_to_similarTracksFragment)
     }
 }

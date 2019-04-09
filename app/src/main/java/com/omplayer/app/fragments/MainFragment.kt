@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.omplayer.app.R
 import com.omplayer.app.activities.MainActivity
 import com.omplayer.app.di.SingletonHolder
@@ -61,51 +62,17 @@ class MainFragment : Fragment(), View.OnClickListener {
         when (view.id) {
             R.id.btn_player -> {
                 LibraryUtil.action = Action.Pause()
-                fragmentManager?.apply {
-                    beginTransaction()
-                        .replace(
-                            R.id.fragment_placeholder,
-                            PlayerFragment()
-                        )
-                        .addToBackStack(null)
-                        .commit()
-                }
+                view.findNavController().navigate(R.id.action_mainFragment_to_playerFragment)
             }
 
             R.id.btn_library -> {
-
-                fragmentManager?.apply {
-                    beginTransaction()
-                        .replace(
-                            R.id.fragment_placeholder,
-                            LibraryFragment()
-                        )
-                        .addToBackStack(null)
-                        .commit()
-                }
+                view.findNavController().navigate(R.id.action_mainFragment_to_libraryFragment)
             }
             R.id.btn_favorites -> {
-
-                fragmentManager?.apply {
-                    beginTransaction()
-                        .replace(
-                            R.id.fragment_placeholder,
-                            FavoritesFragment()
-                        )
-                        .addToBackStack(null)
-                        .commit()
-                }
+                view.findNavController().navigate(R.id.action_mainFragment_to_favoritesFragment)
             }
             R.id.btn_settings -> {
-                fragmentManager?.apply {
-                    beginTransaction()
-                        .replace(
-                            R.id.fragment_placeholder,
-                            SettingsFragment()
-                        )
-                        .addToBackStack(null)
-                        .commit()
-                }
+                view.findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
             }
         }
     }

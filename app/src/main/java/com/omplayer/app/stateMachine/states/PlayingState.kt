@@ -1,5 +1,6 @@
 package com.omplayer.app.stateMachine.states
 
+import android.util.Log
 import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.stateMachine.Action.*
 import com.omplayer.app.stateMachine.PlayerContext
@@ -24,7 +25,7 @@ class PlayingState(context: PlayerContext) : State(context) {
             context.mediaPlayer?.reset()
 
             if (context.isShuffle) {
-                LibraryUtil.selectedTrack = Random().nextInt(LibraryUtil.tracklist.size - 1)
+                LibraryUtil.selectedTrack = Random().nextInt(LibraryUtil.tracklist.size)
             } else {
 
                 if (context.playlist.size - 1 > LibraryUtil.selectedTrack) {
@@ -35,7 +36,7 @@ class PlayingState(context: PlayerContext) : State(context) {
 
             }
 
-            context.mediaPlayer?.isLooping = context.isLooping
+            //context.mediaPlayer?.isLooping = context.isLooping
 
             try {
                 context.mediaPlayer?.setDataSource(context.playlist[LibraryUtil.selectedTrack].path)
@@ -51,7 +52,7 @@ class PlayingState(context: PlayerContext) : State(context) {
             context.mediaPlayer?.reset()
 
             if (context.isShuffle) {
-                LibraryUtil.selectedTrack = Random().nextInt(LibraryUtil.tracklist.size - 1)
+                LibraryUtil.selectedTrack = Random().nextInt(LibraryUtil.tracklist.size)
 
             } else {
 

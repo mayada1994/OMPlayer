@@ -1,5 +1,6 @@
 package com.omplayer.app.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,12 +8,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.omplayer.app.R
 import com.omplayer.app.db.entities.Track
-import com.omplayer.app.fragments.TrackFragment
 import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.utils.LibraryUtil
 
-class TrackAdapter(val tracks: List<Track>, val fragment: TrackFragment) :
+class TrackAdapter(val tracks: List<Track>, val callback: Callback) :
     RecyclerView.Adapter<TrackAdapter.ViewHolder>() {
+
+    companion object {
+        const val TAG = "TrackAdapter"
+    }
+
+    interface Callback {
+        fun openPlayer(view: View)
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_track, viewGroup, false)
@@ -39,7 +47,9 @@ class TrackAdapter(val tracks: List<Track>, val fragment: TrackFragment) :
                 LibraryUtil.tracklist = LibraryUtil.tracks
                 LibraryUtil.selectedTrack = position
                 LibraryUtil.action = Action.Play()
-                fragment.openPlayer()
+                Log.d(TAG,LibraryUtil.selectedTrack.toString())
+                callback.openPlayer(it)
+
             }
         }
     }

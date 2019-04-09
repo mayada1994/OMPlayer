@@ -18,6 +18,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_margin="10dp"
+                android:src="@drawable/ic_last_fm_placeholder"
                 app:civ_border_width="0dp"
                 app:civ_background_color="@color/colorLibraryButton"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +40,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/img_user_profile"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+            android:id="@+id/login_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+        <TextView
+                android:id="@+id/button_log"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:text="@string/last_fm_login"/>
+    </LinearLayout>
 
     <LinearLayout
             android:id="@+id/scrobble_container"

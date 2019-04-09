@@ -4,6 +4,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,8 +18,13 @@ import com.omplayer.app.viewmodels.AlbumViewModel
 import com.mikhaellopez.circularimageview.CircularImageView
 import java.io.File
 
-class SingleArtistAdapter(val albums: List<Album>, val fragment: SingleArtistFragment) :
+class SingleArtistAdapter(val albums: List<Album>, val callback: Callback) :
     RecyclerView.Adapter<SingleArtistAdapter.ViewHolder>() {
+
+
+    interface Callback {
+        fun openAlbum(albumId: Int, view : View)
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_single_album, viewGroup, false)
@@ -43,10 +49,9 @@ class SingleArtistAdapter(val albums: List<Album>, val fragment: SingleArtistFra
 
         init {
             itemView.setOnClickListener {
-                val viewModel = AlbumViewModel(SingletonHolder.application)
                 LibraryUtil.selectedAlbum = position
                 LibraryUtil.currentAlbumList = LibraryUtil.selectedArtistAlbumList
-                viewModel.loadAlbumTracks(LibraryUtil.selectedArtistAlbumList[position].id, fragment)
+                callback.openAlbum(LibraryUtil.selectedArtistAlbumList[position].id, it)
             }
         }
 

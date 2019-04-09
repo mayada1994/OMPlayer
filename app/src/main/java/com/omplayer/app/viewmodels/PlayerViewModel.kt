@@ -18,7 +18,6 @@ import com.omplayer.app.R
 import com.omplayer.app.db.entities.ScrobbledTrack
 import com.omplayer.app.db.entities.Track
 import com.omplayer.app.di.SingletonHolder
-import com.omplayer.app.di.SingletonHolder.db
 import com.omplayer.app.extensions.foreverObserver
 import com.omplayer.app.livedata.ForeverObserver
 import com.omplayer.app.repositories.ScrobbledTrackRepository
@@ -43,7 +42,7 @@ import java.util.concurrent.TimeUnit
 class PlayerViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver {
 
     companion object {
-        val TAG: String = PlayerViewModel::class.java.simpleName
+        val TAG: String = "PlayerViewModel"
         const val NORMAL_MODE = 0
         const val LOOP_MODE = 1
         const val SHUFFLE_MODE = 2
@@ -52,9 +51,9 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     private val lastFmViewModel = LastFmViewModel(application)
     private val videoViewModel = VideoViewModel(application)
 
-    private val scrobbledTrackRepository = ScrobbledTrackRepository(db.scrobbledTrackDao())
+    private val scrobbledTrackRepository = ScrobbledTrackRepository(SingletonHolder.db.scrobbledTrackDao())
 
-    private val playlist: MutableList<Track> = LibraryUtil.tracklist
+    private val playlist: List<Track> = LibraryUtil.tracklist
     private val playerManager: PlayerManager = SingletonHolder.playerManager
 
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
@@ -102,6 +101,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     //endregion
 
     //region SeekBarUpdate
+
     private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
     private val seekbarPositionUpdateTask: () -> Unit = {
         Handler(Looper.getMainLooper()).post {
@@ -155,7 +155,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-        playerManager.setPlaylist(playlist, Action.Play())
+        onSetRepeatShuffleMode()
+        playerManager.setPlaylist(playlist)
         when (LibraryUtil.action) {
             is Action.Play -> {
                 onPlayClicked()
@@ -170,8 +171,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
         startUpdateSeekbar()
-        onSetRepeatShuffleMode()
-    }
+        Log.d(TAG, LibraryUtil.selectedTrack.toString())
+}
 
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -203,7 +204,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     }
 
-    private fun loadImage(albumArtUrl: String, cover: CircularImageView, context: Context) {
+    fun loadImage(albumArtUrl: String, cover: CircularImageView, context: Context) {
         val file = File(albumArtUrl)
         val uri = Uri.fromFile(file)
 
@@ -339,7 +340,11 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     fun loveTrack(artist: String, track: String) {
         if (networkEnabled) {
-            lastFmViewModel.loveTrack(artist, track)
+            if(PreferenceUtil.currentLastFmSession!=null) {
+                lastFmViewModel.loveTrack(artist, track)
+            }else{
+                Toast.makeText(getApplication(), "Please login to Last.fm", Toast.LENGTH_LONG).show()
+            }
         } else {
             Toast.makeText(getApplication(), "No network connection", Toast.LENGTH_LONG).show()
         }

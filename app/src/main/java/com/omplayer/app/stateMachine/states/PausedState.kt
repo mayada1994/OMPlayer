@@ -23,7 +23,7 @@ class PausedState(context: PlayerContext) : State(context) {
                 context.mediaPlayer?.reset()
 
                 if (context.isShuffle) {
-                    LibraryUtil.selectedTrack = Random().nextInt(LibraryUtil.tracklist.size - 1)
+                    LibraryUtil.selectedTrack = Random().nextInt(LibraryUtil.tracklist.size)
                 } else {
 
                     if (context.playlist.size - 1 > LibraryUtil.selectedTrack) {
@@ -48,7 +48,7 @@ class PausedState(context: PlayerContext) : State(context) {
                 context.mediaPlayer?.reset()
 
                 if (context.isShuffle) {
-                    LibraryUtil.selectedTrack = Random().nextInt(LibraryUtil.tracklist.size - 1)
+                    LibraryUtil.selectedTrack = Random().nextInt(LibraryUtil.tracklist.size)
                 } else {
                     if (LibraryUtil.selectedTrack > 0) {
                         LibraryUtil.selectedTrack -= 1

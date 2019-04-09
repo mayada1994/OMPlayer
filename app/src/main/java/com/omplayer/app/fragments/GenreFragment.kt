@@ -5,18 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.omplayer.app.R
-import com.omplayer.app.activities.MainActivity
 import com.omplayer.app.adapters.GenreAdapter
 import com.omplayer.app.utils.LibraryUtil
+import com.omplayer.app.viewmodels.GenreViewModel
 
 
 class GenreFragment : Fragment() {
 
 
     var genres = LibraryUtil.genres
+
+    private val viewModel: GenreViewModel by lazy {
+        ViewModelProviders.of(this).get(GenreViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,16 +38,21 @@ class GenreFragment : Fragment() {
         layoutManager.orientation = RecyclerView.VERTICAL
 
         if (genres.isNotEmpty()) {
-            val itemAdapter = GenreAdapter(genres, this@GenreFragment)
 
             val genreList = activity!!.findViewById<RecyclerView>(R.id.genre_list_recycler_view)
             genreList.layoutManager = layoutManager
-            genreList.adapter = itemAdapter
+            genreList.adapter = viewModel.genreAdapter
         }
+
+        viewModel.viewLiveData.observe(this, Observer {
+            it.findNavController().navigate(R.id.action_libraryFragment_to_singleGenreFragment)
+        })
+
+
     }
 
-    fun selectGenre() {
-        val activity = activity as MainActivity
-        activity.selectGenre()
-    }
+//    fun selectGenre() {
+//        val activity = activity as MainActivity
+//        activity.selectGenre()
+//    }
 }

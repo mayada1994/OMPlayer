@@ -35,7 +35,7 @@ class TrackRepository(private val trackDao: TrackDao) {
     }
 
     @WorkerThread
-    suspend fun getAllTracks(): List<Track>? {
+    suspend fun getAllTracks(): List<Track> {
         return trackDao.getAllTracks()
     }
 
@@ -45,22 +45,22 @@ class TrackRepository(private val trackDao: TrackDao) {
     }
 
     @WorkerThread
-    suspend fun getTracksByAlbumId(id: Int): List<Track>? {
+    suspend fun getTracksByAlbumId(id: Int): List<Track> {
         return trackDao.getTracksByAlbumId(id)
     }
 
     @WorkerThread
-    suspend fun getTracksByArtistId(id: Int): List<Track>? {
+    suspend fun getTracksByArtistId(id: Int): List<Track> {
         return trackDao.getTracksByArtistId(id)
     }
 
     @WorkerThread
-    suspend fun getTracksByGenreId(id: Int): List<Track>? {
+    suspend fun getTracksByGenreId(id: Int): List<Track> {
         return trackDao.getTracksByGenreId(id)
     }
 
     @WorkerThread
-    suspend fun getTracksByFavorite(favStatus : Boolean): List<Track>? {
+    suspend fun getTracksByFavorite(favStatus: Boolean): List<Track> {
         return trackDao.getTracksByFavorite(favStatus)
     }
 }

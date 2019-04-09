@@ -7,13 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.omplayer.app.R
 import com.omplayer.app.db.entities.Genre
-import com.omplayer.app.di.SingletonHolder
-import com.omplayer.app.fragments.GenreFragment
 import com.omplayer.app.utils.LibraryUtil
-import com.omplayer.app.viewmodels.GenreViewModel
 
 
-class GenreAdapter(val genres: List<Genre>, val fragment:GenreFragment) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
+class GenreAdapter(val genres: List<Genre>, private val callback: Callback) :
+    RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
+
+    interface Callback {
+        fun loadGenreTracks(genreId: Int, view: View)
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_genre, viewGroup, false)
@@ -35,9 +37,8 @@ class GenreAdapter(val genres: List<Genre>, val fragment:GenreFragment) : Recycl
 
         init {
             itemView.setOnClickListener {
-                val viewModel = GenreViewModel(SingletonHolder.application)
                 LibraryUtil.selectedGenre = position
-                viewModel.loadGenreTracks(LibraryUtil.genres[position].id, fragment)
+                callback.loadGenreTracks(LibraryUtil.genres[position].id, it)
             }
         }
     }

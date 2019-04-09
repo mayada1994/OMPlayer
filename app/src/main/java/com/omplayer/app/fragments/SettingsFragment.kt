@@ -30,6 +30,15 @@ class SettingsFragment : Fragment() {
                 PreferenceUtil.scrobble = false
             }
         }
+
+        button_log.setOnClickListener {
+            if (PreferenceUtil.currentLastFmSession != null) {
+                PreferenceUtil.currentLastFmSession = null
+                initializeUserProfile()
+            }else{
+                settingsViewModel.login(this@SettingsFragment)
+            }
+        }
     }
 
     override fun onResume() {
@@ -41,18 +50,25 @@ class SettingsFragment : Fragment() {
         if (PreferenceUtil.currentLastFmSession != null) {
             PreferenceUtil.scrobble = true
         } else {
-            settingsViewModel.login(fragmentManager!!)
+            settingsViewModel.login(this@SettingsFragment)
             scrobble_switch.isChecked = false
         }
     }
 
     fun initializeUserProfile() {
         if (PreferenceUtil.currentLastFmSession != null) {
+            button_log.text = getString(R.string.last_fm_logout)
             scrobble_switch.isChecked = PreferenceUtil.scrobble == true
             val session = PreferenceUtil.currentLastFmSession
             val user = session!!.name
             user_username.text = user
             lastFmViewModel.getUserInfo(user, img_user_profile)
+        }else{
+            button_log.text = getString(R.string.last_fm_login)
+            user_username.text = getString(R.string.unauthorised_last_fm_user)
+            img_user_profile.setImageResource(R.drawable.ic_last_fm_placeholder)
+            PreferenceUtil.scrobble = false
+            scrobble_switch.isChecked = false
         }
     }
 

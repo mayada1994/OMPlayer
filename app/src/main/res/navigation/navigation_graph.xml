@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph"
+            app:startDestination="@id/mainFragment">
+
+    <fragment android:id="@+id/mainFragment"
+              android:name="com.omplayer.app.fragments.MainFragment"
+              android:label="MainFragment"
+              tools:layout="@layout/fragment_main">
+
+        <action android:id="@+id/action_mainFragment_to_favoritesFragment"
+                app:destination="@id/favoritesFragment"/>
+
+        <action android:id="@+id/action_mainFragment_to_libraryFragment"
+                app:destination="@id/libraryFragment"/>
+
+        <action android:id="@+id/action_mainFragment_to_playerFragment"
+                app:destination="@id/playerFragment"/>
+
+        <action android:id="@+id/action_mainFragment_to_settingsFragment"
+                app:destination="@id/settingsFragment"/>
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/libraryFragment"
+            android:name="com.omplayer.app.fragments.LibraryFragment"
+            android:label="LibraryFragment"
+            tools:layout="@layout/fragment_library">
+
+        <action android:id="@+id/action_libraryFragment_to_singleAlbumFragment"
+                app:destination="@id/singleAlbumFragment"/>
+        <action android:id="@+id/action_libraryFragment_to_singleArtistFragment"
+                app:destination="@id/singleArtistFragment"/>
+        <action android:id="@+id/action_libraryFragment_to_singleGenreFragment"
+                app:destination="@id/singleGenreFragment"/>
+        <action android:id="@+id/action_libraryFragment_to_playerFragment" app:destination="@id/playerFragment"/>
+    </fragment>
+    <fragment android:id="@+id/playerFragment"
+              android:name="com.omplayer.app.fragments.PlayerFragment"
+              android:label="PlayerFragment"
+              tools:layout="@layout/fragment_player">
+
+        <action android:id="@+id/action_playerFragment_to_videoDialogFragment2"
+                app:destination="@id/videoDialogFragment2"/>
+
+        <action android:id="@+id/action_playerFragment_to_lyricsDialogFragment"
+                app:destination="@id/lyricsDialogFragment"/>
+
+        <action android:id="@+id/action_playerFragment_to_similarTracksFragment"
+                app:destination="@id/similarTracksFragment"/>
+
+    </fragment>
+
+    <fragment android:id="@+id/favoritesFragment"
+              android:name="com.omplayer.app.fragments.FavoritesFragment"
+              android:label="FavoritesFragment">
+
+        <action android:id="@+id/action_favoritesFragment_to_playerFragment"
+                app:destination="@id/playerFragment"/>
+
+    </fragment>
+
+    <fragment android:id="@+id/settingsFragment"
+              android:name="com.omplayer.app.fragments.SettingsFragment"
+              android:label="SettingsFragment">
+
+    </fragment>
+
+    <fragment android:id="@+id/singleAlbumFragment"
+              android:name="com.omplayer.app.fragments.SingleAlbumFragment"
+              android:label="SingleAlbumFragment">
+
+        <action android:id="@+id/action_singleAlbumFragment_to_playerFragment"
+                app:destination="@id/playerFragment"/>
+
+    </fragment>
+
+    <fragment android:id="@+id/singleArtistFragment"
+              android:name="com.omplayer.app.fragments.SingleArtistFragment"
+              android:label="SingleArtistFragment">
+        <action android:id="@+id/action_singleArtistFragment_to_singleAlbumFragment"
+                app:destination="@id/singleAlbumFragment"/>
+    </fragment>
+
+    <fragment android:id="@+id/singleGenreFragment"
+              android:name="com.omplayer.app.fragments.SingleGenreFragment"
+              android:label="SingleGenreFragment">
+
+        <action android:id="@+id/action_singleGenreFragment_to_playerFragment"
+                app:destination="@id/playerFragment"/>
+    </fragment>
+
+    <fragment android:id="@+id/lyricsDialogFragment"
+              android:name="com.omplayer.app.dialogFragments.LyricsDialogFragment"
+              android:label="LyricsDialogFragment"/>
+
+    <fragment android:id="@+id/videoDialogFragment2"
+              android:name="com.omplayer.app.dialogFragments.VideoDialogFragment"
+              android:label="VideoDialogFragment"/>
+
+    <fragment android:id="@+id/similarTracksFragment"
+              android:name="com.omplayer.app.fragments.SimilarTracksFragment"
+              android:label="SimilarTracksFragment">
+        <action android:id="@+id/action_similarTracksFragment_to_videoDialogFragment2"
+                app:destination="@id/videoDialogFragment2"/>
+    </fragment>
+
+</navigation>

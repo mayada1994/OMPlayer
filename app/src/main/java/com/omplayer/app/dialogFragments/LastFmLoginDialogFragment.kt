@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import com.omplayer.app.R
 import com.omplayer.app.activities.MainActivity
 import com.omplayer.app.di.SingletonHolder
+import com.omplayer.app.fragments.SettingsFragment
 import com.omplayer.app.viewmodels.LastFmViewModel
 import kotlinx.android.synthetic.main.last_fm_login_dialog.*
 
@@ -35,7 +36,7 @@ class LastFmLoginDialogFragment : DialogFragment(), View.OnClickListener {
             login -> {
                 val username = username.text.toString()
                 val password = password.text.toString()
-                lastFmViewModel.logIn(username, password, this@LastFmLoginDialogFragment)
+                lastFmViewModel.logIn(username, password, this@LastFmLoginDialogFragment, targetFragment as SettingsFragment)
             }
 
             register -> lastFmViewModel.register(activity as MainActivity)
@@ -44,9 +45,10 @@ class LastFmLoginDialogFragment : DialogFragment(), View.OnClickListener {
 
     companion object {
 
-        fun newInstance(): LastFmLoginDialogFragment {
+        fun newInstance(fragment: SettingsFragment): LastFmLoginDialogFragment {
             val lastFmLoginDialogFragment = LastFmLoginDialogFragment()
             lastFmLoginDialogFragment.setStyle(STYLE_NO_TITLE, 0)
+            lastFmLoginDialogFragment.setTargetFragment(fragment, 0)
             return lastFmLoginDialogFragment
         }
     }
