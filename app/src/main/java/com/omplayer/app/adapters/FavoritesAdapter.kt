@@ -4,16 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.RecyclerView
 import com.omplayer.app.R
-import com.omplayer.app.db.entities.Track
-import com.omplayer.app.fragments.FavoritesFragment
 import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.utils.LibraryUtil
+import com.omplayer.app.utils.LibraryUtil.favorites
 
 
-class FavoritesAdapter(val tracks: List<Track>, val callback: Callback) :
+class FavoritesAdapter(val callback: Callback) :
     RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
 
 
@@ -27,13 +25,13 @@ class FavoritesAdapter(val tracks: List<Track>, val callback: Callback) :
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemName.text = tracks[position].title
-        viewHolder.path = tracks[position].path
+        viewHolder.itemName.text = favorites[position].title
+        viewHolder.path = favorites[position].path
     }
 
 
     override fun getItemCount(): Int {
-        return tracks.size
+        return favorites.size
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -32,7 +32,7 @@ class MainFragment : Fragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
-            .setActionBarTitle(getString(R.string.app_name))
+            .supportActionBar?.hide()
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         progressBar = view.findViewById(R.id.library_to_db_progress)
