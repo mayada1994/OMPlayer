@@ -55,7 +55,7 @@ class MainFragment : Fragment(), View.OnClickListener {
         btn_player.setOnClickListener(this)
         btn_library.setOnClickListener(this)
         btn_favorites.setOnClickListener(this)
-        
+        btn_settings.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
@@ -70,6 +70,9 @@ class MainFragment : Fragment(), View.OnClickListener {
             }
             R.id.btn_favorites -> {
                 view.findNavController().navigate(R.id.action_mainFragment_to_favoritesFragment)
+            }
+            R.id.btn_settings -> {
+                view.findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
             }
         }
     }

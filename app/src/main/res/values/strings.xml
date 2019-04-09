@@ -5,8 +5,6 @@
     <string name="reset">Reset</string>
     <string name="previous">Prev></string>
     <string name="next">Next</string>
-    <string name="test_player">Test Player</string>
-    <string name="mo_player">MO Player</string>
 
     <string name="music_player">Music Player</string>
     <string name="library">Library</string>
@@ -14,7 +12,9 @@
     <string name="albums">Albums</string>
     <string name="artists">Artists</string>
     <string name="genres">Genres</string>
+    <string name="similar_songs">Similar Songs</string>
     <string name="favorites">Favorites</string>
+    <string name="settings">Settings</string>
 
     <string name="video_not_found">Video Not Found</string>
 
@@ -22,4 +22,12 @@
     <string name="action_bar_player">Player</string>
     <string name="zero_time">00:00</string>
     <string name="repeat_mode">Repeat mode</string>
+    <string name="unauthorised_last_fm_user">Unauthorised</string>
+    <string name="scrobble_option">Scrobble</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="last_fm_login">Login</string>
+    <string name="last_fm_logout">Logout</string>
+    <string name="last_fm_register">Don\'t have an account? <u>Register</u>.</string>
+    <string name="songs_similar_to_original">Songs similar to:\n%s</string>
 </resources>

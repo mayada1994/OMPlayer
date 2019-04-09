@@ -13,7 +13,7 @@ class LyricsRepository {
 
     private val lyricsService = retrofit.create(LyricsService::class.java)
 
-    fun getLyrics(url: String): Call<ResponseBody> {
-        return lyricsService.getHtml(url)
+    fun getLyrics(artist: String, song: String): Call<ResponseBody> {
+        return lyricsService.getHtml(artist, song)
     }
 }

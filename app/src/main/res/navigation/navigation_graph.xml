@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph" app:startDestination="@id/mainFragment">
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph"
+            app:startDestination="@id/mainFragment">
 
     <fragment android:id="@+id/mainFragment"
               android:name="com.omplayer.app.fragments.MainFragment"
@@ -16,6 +17,9 @@
 
         <action android:id="@+id/action_mainFragment_to_playerFragment"
                 app:destination="@id/playerFragment"/>
+
+        <action android:id="@+id/action_mainFragment_to_settingsFragment"
+                app:destination="@id/settingsFragment"/>
 
     </fragment>
 
@@ -44,6 +48,9 @@
         <action android:id="@+id/action_playerFragment_to_lyricsDialogFragment"
                 app:destination="@id/lyricsDialogFragment"/>
 
+        <action android:id="@+id/action_playerFragment_to_similarTracksFragment"
+                app:destination="@id/similarTracksFragment"/>
+
     </fragment>
 
     <fragment android:id="@+id/favoritesFragment"
@@ -52,6 +59,12 @@
 
         <action android:id="@+id/action_favoritesFragment_to_playerFragment"
                 app:destination="@id/playerFragment"/>
+
+    </fragment>
+
+    <fragment android:id="@+id/settingsFragment"
+              android:name="com.omplayer.app.fragments.SettingsFragment"
+              android:label="SettingsFragment">
 
     </fragment>
 
@@ -86,5 +99,12 @@
     <fragment android:id="@+id/videoDialogFragment2"
               android:name="com.omplayer.app.dialogFragments.VideoDialogFragment"
               android:label="VideoDialogFragment"/>
+
+    <fragment android:id="@+id/similarTracksFragment"
+              android:name="com.omplayer.app.fragments.SimilarTracksFragment"
+              android:label="SimilarTracksFragment">
+        <action android:id="@+id/action_similarTracksFragment_to_videoDialogFragment2"
+                app:destination="@id/videoDialogFragment2"/>
+    </fragment>
 
 </navigation>

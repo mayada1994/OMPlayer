@@ -4,9 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.omplayer.app.db.PlayerDatabase
 import com.omplayer.app.services.playerService.PlayerServiceManager
-import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.stateMachine.PlayerManager
-import com.omplayer.app.utils.LibraryUtil
 
 
 object SingletonHolder {

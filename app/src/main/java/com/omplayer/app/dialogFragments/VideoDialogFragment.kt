@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -12,9 +11,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerSupportFragment
 import com.omplayer.app.R
-import com.omplayer.app.activities.MainActivity
 import com.omplayer.app.utils.LibraryUtil
-import kotlinx.android.synthetic.main.fragment_video.*
 
 
 class VideoDialogFragment : DialogFragment() {
@@ -46,6 +43,7 @@ class VideoDialogFragment : DialogFragment() {
             ) {
                 if (!wasRestored) {
                     mYoutubePlayer = player
+                    mYoutubePlayer!!.setManageAudioFocus(true)
                     mYoutubePlayer!!.setShowFullscreenButton(false)
                     mYoutubePlayer!!.cueVideo(VIDEO_ID)
                 }

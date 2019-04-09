@@ -1,14 +1,16 @@
 package com.omplayer.app.viewmodels
 
 import android.app.Application
-import android.content.Context
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.omplayer.app.adapters.TrackAdapter
+import com.omplayer.app.fragments.PlayerFragment
 import com.omplayer.app.utils.LibraryUtil
 
 class TrackViewModel(application: Application) : AndroidViewModel(application), TrackAdapter.Callback {
+
+    private val lastFmViewModel = LastFmViewModel(application)
 
     val itemAdapter = TrackAdapter(LibraryUtil.tracks, this)
 
@@ -19,5 +21,11 @@ class TrackViewModel(application: Application) : AndroidViewModel(application), 
         _viewLiveData.value = view
     }
 
+    fun loadSimilarTracks(title: String, artist: String, fragment: PlayerFragment){
+        lastFmViewModel.getSimilarTracks(title, artist, fragment)
+    }
 
+    fun goToFragment(fragment: PlayerFragment){
+        fragment.openSimilarTracks()
+    }
 }
