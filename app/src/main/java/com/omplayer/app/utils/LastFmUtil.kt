@@ -1,10 +1,13 @@
 package com.omplayer.app.utils
 
 import android.util.Log
+import com.omplayer.app.entities.LastFmSimilarTrack
 import java.security.MessageDigest
 
 object LastFmUtil {
 
+    var similarTracks = listOf<LastFmSimilarTrack>()
+    var originalTrack = ""
     var isScrobbled: Boolean = false
 
     fun timestamp(): Long = (System.currentTimeMillis() / 1000)

@@ -2,7 +2,7 @@ package com.omplayer.app.repositories
 
 import com.omplayer.app.entities.LastFmArtistWrapper
 import com.omplayer.app.entities.LastFmSessionWrapper
-import com.omplayer.app.entities.LastFmSimilarArtistsWrapper
+import com.omplayer.app.entities.LastFmSimilarTracksWrapper
 import com.omplayer.app.entities.LastFmUserWrapper
 import com.omplayer.app.services.lastFmService.LastFmService
 import okhttp3.ResponseBody
@@ -77,8 +77,8 @@ class LastFmRepository {
         return lastFmService.getArtistInfo(artist, apiKey, FORMAT)
     }
 
-    fun getSimilarArtists(artist: String, apiKey: String): Call<LastFmSimilarArtistsWrapper> {
-        return lastFmService.getSimilarArtists(artist, apiKey, FORMAT)
+    fun getSimilarTracks(track :String, artist: String, apiKey: String): Call<LastFmSimilarTracksWrapper> {
+        return lastFmService.getSimilarTracks(track, artist, apiKey, FORMAT)
     }
 
 }

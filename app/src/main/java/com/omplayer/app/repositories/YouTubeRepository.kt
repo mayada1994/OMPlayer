@@ -17,4 +17,8 @@ class YouTubeRepository {
         return youTubeService.getHtml(artist, album, song)
     }
 
+    fun getData(url :String): Call<ResponseBody> {
+        return youTubeService.getHtml(url)
+    }
+
 }

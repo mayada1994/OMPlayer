@@ -1,12 +1,12 @@
 package com.omplayer.app.activities
 
+import android.content.IntentFilter
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.omplayer.app.R
 import com.omplayer.app.fragments.*
-import android.net.wifi.WifiManager
-import android.content.IntentFilter
 import com.omplayer.app.utils.NetworkUtil.wifiBroadcastReceiver
 
 
@@ -63,6 +63,12 @@ class MainActivity : AppCompatActivity() {
     fun selectAlbum(){
         val playerTransaction = supportFragmentManager.beginTransaction()
         playerTransaction.replace(R.id.fragment_placeholder, SingleAlbumFragment()).addToBackStack(null)
+        playerTransaction.commit()
+    }
+
+    fun openSimilarTracksFragment(){
+        val playerTransaction = supportFragmentManager.beginTransaction()
+        playerTransaction.replace(R.id.fragment_placeholder, SimilarTracksFragment()).addToBackStack(null)
         playerTransaction.commit()
     }
 

@@ -5,8 +5,6 @@
     <string name="reset">Reset</string>
     <string name="previous">Prev></string>
     <string name="next">Next</string>
-    <string name="test_player">Test Player</string>
-    <string name="mo_player">MO Player</string>
 
     <string name="music_player">Music Player</string>
     <string name="library">Library</string>
@@ -29,4 +27,5 @@
     <string name="password">Password</string>
     <string name="last_fm_login">Login</string>
     <string name="last_fm_register">Don\'t have an account? <u>Register</u>.</string>
+    <string name="songs_similar_to_original">Songs similar to:\n%s</string>
 </resources>

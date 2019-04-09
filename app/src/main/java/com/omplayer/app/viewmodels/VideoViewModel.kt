@@ -68,6 +68,52 @@ class VideoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+
+    fun getVideoId(url: String, play:Boolean, fragmentManager: FragmentManager?) {
+        LibraryUtil.selectedTrackVideoId = NOT_FOUND
+        try {
+
+            val youTubeRepository = YouTubeRepository()
+            youTubeRepository.getData(url.replace("https://www.last.fm/music/", ""))
+                .enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        try {
+                            val htmlBody = response.body()!!.string()
+
+                            val pattern = getPattern()
+                            val matcher = pattern.matcher(htmlBody)
+                            var matchStart = 0
+                            var matchEnd = 1
+                            while (matcher.find()) {
+                                matchStart = matcher.start(1)
+                                matchEnd = matcher.end()
+
+                                val resultUrl = htmlBody.substring(matchStart, matchEnd)
+                                if (resultUrl.contains(YOUTUBE_BASE_URL)) {
+                                    LibraryUtil.selectedTrackVideoId = extractVideoId(resultUrl)
+                                }
+                            }
+                            if(play){
+                                playVideo(fragmentManager!!)
+                            }
+
+                        } catch (e: NullPointerException) {
+                            Log.e("YouTubeResponse", response.message())
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Log.d("YouTubeResponse", "Video not found")
+                    }
+                })
+        } catch (e: Exception) {
+            Log.e("YouTubeResponse", e.message)
+        }
+    }
+
     private fun getPattern(): Pattern {
         return Pattern.compile(
             "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)"
@@ -94,4 +140,5 @@ class VideoViewModel(application: Application) : AndroidViewModel(application) {
             Toast.makeText(getApplication(), "No network connection", Toast.LENGTH_LONG).show()
         }
     }
+
 }

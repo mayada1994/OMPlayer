@@ -16,9 +16,12 @@ import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.dialogFragments.LastFmLoginDialogFragment
 import com.omplayer.app.entities.LastFmArtistWrapper
 import com.omplayer.app.entities.LastFmSessionWrapper
+import com.omplayer.app.entities.LastFmSimilarTracksWrapper
 import com.omplayer.app.entities.LastFmUserWrapper
+import com.omplayer.app.fragments.PlayerFragment
 import com.omplayer.app.repositories.LastFmRepository
 import com.omplayer.app.utils.ImageUtil.saveImage
+import com.omplayer.app.utils.LastFmUtil
 import com.omplayer.app.utils.LastFmUtil.md5
 import com.omplayer.app.utils.PreferenceUtil
 import kotlinx.coroutines.CoroutineScope
@@ -199,6 +202,34 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
             })
         } catch (e: Exception) {
         }
+    }
+
+    fun getSimilarTracks(title: String, artist: String, fragment: PlayerFragment) {
+        lastFmRepository.getSimilarTracks(title, artist, API_KEY)
+            .enqueue(object : Callback<LastFmSimilarTracksWrapper> {
+
+                override fun onResponse(
+                    call: Call<LastFmSimilarTracksWrapper>,
+                    response: Response<LastFmSimilarTracksWrapper>
+                ) {
+                    try {
+                        LastFmUtil.similarTracks = response.body()!!.similarTracks.similarTracksList
+                        LastFmUtil.originalTrack = title
+                        val trackViewModel = TrackViewModel(SingletonHolder.application, fragment)
+                        trackViewModel.goToFragment()
+                    } catch (e: Exception) {
+                        Log.d(TAG, e.message)
+                    }
+                }
+
+                override fun onFailure(call: Call<LastFmSimilarTracksWrapper>, t: Throwable) {
+                    Log.d(TAG, t.message)
+                    if(t.message!!.contains("timeout")){
+                        Toast.makeText(getApplication(), "Server Timeout", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            })
     }
 
 }

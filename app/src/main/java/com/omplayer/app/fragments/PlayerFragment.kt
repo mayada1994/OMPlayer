@@ -20,6 +20,7 @@ import com.omplayer.app.utils.FormatUtils
 import com.omplayer.app.utils.LastFmUtil
 import com.omplayer.app.viewmodels.LyricsViewModel
 import com.omplayer.app.viewmodels.PlayerViewModel
+import com.omplayer.app.viewmodels.TrackViewModel
 import com.omplayer.app.viewmodels.VideoViewModel
 import com.savantech.seekarc.SeekArc
 import kotlinx.android.synthetic.main.fragment_player.*
@@ -36,6 +37,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     }
     private val lyricsViewModel = LyricsViewModel(SingletonHolder.application)
     private val videoViewModel = VideoViewModel(SingletonHolder.application)
+    private val trackViewModel = TrackViewModel(SingletonHolder.application, this@PlayerFragment)
     private val foreverObservers = mutableListOf<ForeverObserver<*>>()
 
     private var isPlaying = false
@@ -101,6 +103,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         button_lyrics.setOnClickListener(this)
         button_favorites.setOnClickListener(this)
         button_lastfm_love.setOnClickListener(this)
+        button_lastfm_similar.setOnClickListener(this)
 
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
@@ -171,6 +174,11 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 tv_track_artist.text.toString(),
                 tv_track_title.text.toString()
             )
+            R.id.button_lastfm_similar -> trackViewModel.loadSimilarTracks(
+                tv_track_title.text.toString(),
+                tv_track_artist.text.toString(),
+                this@PlayerFragment
+            )
         }
     }
 
@@ -208,5 +216,9 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         foreverObservers.forEach { it.release() }
         scheduledTask?.cancel(true)
         scheduledTask = null
+    }
+
+    fun openSimilarTracks(){
+        (activity as MainActivity).openSimilarTracksFragment()
     }
 }
