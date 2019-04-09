@@ -1,8 +1,10 @@
 package com.omplayer.app.services.lastFmService
 
-import okhttp3.ResponseBody
+import com.omplayer.app.entities.LastFmArtistWrapper
 import com.omplayer.app.entities.LastFmSessionWrapper
+import com.omplayer.app.entities.LastFmSimilarArtistsWrapper
 import com.omplayer.app.entities.LastFmUserWrapper
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -58,4 +60,19 @@ interface LastFmService {
         @Query("api_key") apiKey: String,
         @Query("format") format: String
     ): Call<LastFmUserWrapper>
+
+    @GET("?method=artist.getInfo")
+    fun getArtistInfo(
+        @Query("artist") artist: String,
+        @Query("api_key") apiKey: String,
+        @Query("format") format: String
+    ): Call<LastFmArtistWrapper>
+
+    @GET("?method=artist.getSimilar")
+    fun getSimilarArtists(
+        @Query("artist") artist: String,
+        @Query("api_key") apiKey: String,
+        @Query("format") format: String
+    ): Call<LastFmSimilarArtistsWrapper>
+
 }

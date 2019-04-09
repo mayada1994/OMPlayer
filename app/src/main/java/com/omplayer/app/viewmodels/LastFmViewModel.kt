@@ -9,13 +9,16 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.github.siyamed.shapeimageview.RoundedImageView
 import com.mikhaellopez.circularimageview.CircularImageView
 import com.omplayer.app.R
 import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.dialogFragments.LastFmLoginDialogFragment
+import com.omplayer.app.entities.LastFmArtistWrapper
 import com.omplayer.app.entities.LastFmSessionWrapper
 import com.omplayer.app.entities.LastFmUserWrapper
 import com.omplayer.app.repositories.LastFmRepository
+import com.omplayer.app.utils.ImageUtil.saveImage
 import com.omplayer.app.utils.LastFmUtil.md5
 import com.omplayer.app.utils.PreferenceUtil
 import kotlinx.coroutines.CoroutineScope
@@ -166,4 +169,36 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
         } catch (e: Exception) {
         }
     }
+
+
+    fun getArtistInfo(artist: String, artistImageView: RoundedImageView) {
+        try {
+            lastFmRepository.getArtistInfo(artist, API_KEY).enqueue(object : Callback<LastFmArtistWrapper> {
+
+                override fun onResponse(call: Call<LastFmArtistWrapper>, response: Response<LastFmArtistWrapper>) {
+                    try {
+                        val imageList = response.body()!!.artist.images
+                        imageList.forEach {
+                            if (it.size == "extralarge") {
+                                val imageUrl = it.url
+                                saveImage(imageUrl, artist)
+                                Glide.with(SingletonHolder.application).load(imageUrl)
+                                    .apply(RequestOptions().placeholder(R.drawable.ic_last_fm_placeholder).error(R.drawable.ic_last_fm_placeholder))
+                                    .into(artistImageView)
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Log.d(TAG, e.message)
+                    }
+                }
+
+                override fun onFailure(call: Call<LastFmArtistWrapper>, t: Throwable) {
+                    Log.d(TAG, t.message)
+                }
+
+            })
+        } catch (e: Exception) {
+        }
+    }
+
 }

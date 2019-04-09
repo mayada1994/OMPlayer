@@ -1,6 +1,7 @@
 package com.omplayer.app.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.omplayer.app.adapters.SingleArtistAdapter
 import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.viewmodels.ArtistViewModel
+import com.omplayer.app.viewmodels.LastFmViewModel
 import kotlinx.android.synthetic.main.fragment_single_artist.*
 
 class SingleArtistFragment : Fragment(), BaseAlbumFragment {
@@ -30,8 +32,15 @@ class SingleArtistFragment : Fragment(), BaseAlbumFragment {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val viewModel = ArtistViewModel(SingletonHolder.application)
+        val lastFmViewModel = LastFmViewModel(SingletonHolder.application)
         val layoutManager = GridLayoutManager(context, 2)
         layoutManager.orientation = RecyclerView.VERTICAL
+
+        if(viewModel.getArtistCover().isEmpty()) {
+            lastFmViewModel.getArtistInfo(viewModel.getArtistName(), single_artist_img)
+        }else{
+            viewModel.loadImage(single_artist_img)
+        }
 
         val albums = LibraryUtil.selectedArtistAlbumList
 
