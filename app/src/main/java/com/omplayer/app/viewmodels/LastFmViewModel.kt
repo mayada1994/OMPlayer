@@ -213,10 +213,16 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
                     response: Response<LastFmSimilarTracksWrapper>
                 ) {
                     try {
-                        LastFmUtil.similarTracks = response.body()!!.similarTracks.similarTracksList
-                        LastFmUtil.originalTrack = title
-                        val trackViewModel = TrackViewModel(SingletonHolder.application, fragment)
-                        trackViewModel.goToFragment()
+                        val similarTracks = response.body()!!.similarTracks.similarTracksList
+                        if(similarTracks.isNotEmpty()){
+                            LastFmUtil.similarTracks = similarTracks
+                            LastFmUtil.originalTrack = title
+                            val trackViewModel = TrackViewModel(SingletonHolder.application, fragment)
+                            trackViewModel.goToFragment()
+                        }else{
+                            Toast.makeText(getApplication(), "No similar tracks found", Toast.LENGTH_SHORT).show()
+                        }
+
                     } catch (e: Exception) {
                         Log.d(TAG, e.message)
                     }
