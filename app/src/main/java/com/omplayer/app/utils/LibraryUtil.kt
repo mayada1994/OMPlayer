@@ -1,5 +1,7 @@
 package com.omplayer.app.utils
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.omplayer.app.db.entities.Album
 import com.omplayer.app.db.entities.Artist
 import com.omplayer.app.db.entities.Genre
@@ -24,4 +26,5 @@ object LibraryUtil {
     var tracks: List<Track> = emptyList()
     var favorites: List<Track> = emptyList()
     var action: Action = Action.Pause()
+    var liveData : MutableLiveData<Track> = MutableLiveData()
 }

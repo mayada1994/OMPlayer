@@ -6,7 +6,7 @@
     <string name="previous">Prev></string>
     <string name="next">Next</string>
     <string name="test_player">Test Player</string>
-    <string name="mo_player">MO Player</string>
+    <string name="mo_player">OM Player</string>
 
     <string name="music_player">Music Player</string>
     <string name="library">Library</string>
@@ -24,4 +24,5 @@
     <string name="repeat_mode">Repeat mode</string>
     <string name="player">Player</string>
     <string name="settings">Settings</string>
+    <string name="now_playing">Now Playing</string>
 </resources>

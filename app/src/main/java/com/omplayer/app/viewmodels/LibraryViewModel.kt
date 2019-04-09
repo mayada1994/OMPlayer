@@ -107,14 +107,15 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
 
     fun extractData() {
         scope.launch {
-            withContext(coroutineContext) {
                 LibraryUtil.genres = genreRepository.getAllGenres() as ArrayList<Genre>
                 LibraryUtil.artists = artistRepository.getAllArtists() as ArrayList<Artist>
                 LibraryUtil.albums = albumRepository.getAllAlbums() as ArrayList<Album>
                 LibraryUtil.tracks = trackRepository.getAllTracks() as ArrayList<Track>
                 LibraryUtil.favorites = trackRepository.getTracksByFavorite(true) as ArrayList<Track>
                 LibraryUtil.tracklist = LibraryUtil.tracks
-            }
+                withContext(Dispatchers.Main) {
+                    LibraryUtil.liveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+                }
         }
     }
 

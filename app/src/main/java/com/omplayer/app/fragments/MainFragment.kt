@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +16,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.omplayer.app.R
 import com.omplayer.app.activities.MainActivity
 import com.omplayer.app.di.SingletonHolder
@@ -23,9 +28,15 @@ import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.utils.PreferenceUtil
 import com.omplayer.app.viewmodels.LibraryViewModel
+import com.omplayer.app.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
+import java.io.File
 
 class MainFragment : Fragment(), View.OnClickListener {
+
+    private val viewModel: MainViewModel by lazy {
+        ViewModelProviders.of(this).get(MainViewModel::class.java)
+    }
 
     private val EXTERNAL_STORAGE_PERMISSIONS_REQUEST = 123
     lateinit var progressBar: ProgressBar
@@ -34,7 +45,9 @@ class MainFragment : Fragment(), View.OnClickListener {
         (activity as MainActivity)
             .supportActionBar?.hide()
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+
         val view = inflater.inflate(R.layout.fragment_main, container, false)
+
         progressBar = view.findViewById(R.id.library_to_db_progress)
         val libraryViewModel = LibraryViewModel(SingletonHolder.application)
 
@@ -52,16 +65,31 @@ class MainFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btn_player.setOnClickListener(this)
+        img_album_cover.setOnClickListener(this)
         btn_library.setOnClickListener(this)
         btn_favorites.setOnClickListener(this)
+
+        viewModel.currentTrackName.observe(this, Observer {
+            txt_song_name.text = it
+        })
+        viewModel.currentTrackCover.observe(this, Observer {
+            val file = File(it)
+            val uri = Uri.fromFile(file)
+
+            Glide.with(this).load(uri)
+                .apply(RequestOptions().placeholder(R.drawable.placeholder).error(R.drawable.placeholder))
+                .into(img_album_cover)
+        })
+        viewModel.currentTrackArtist.observe(this, Observer {
+            txt_artist_name.text = it
+        })
         
     }
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.btn_player -> {
-                LibraryUtil.action = Action.Pause()
+            R.id.img_album_cover -> {
+                LibraryUtil.action = Action.Play()
                 view.findNavController().navigate(R.id.action_mainFragment_to_playerFragment)
             }
 
