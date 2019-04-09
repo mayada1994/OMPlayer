@@ -117,13 +117,14 @@ class PlayerService : Service() {
             withContext(coroutineContext) {
                 val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
                 val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId)
+                val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentTrack.artistId)
                 val currentCover = loadImage(currentAlbum.cover)
                 withContext(Dispatchers.Main) {
                     val notification: Notification = NotificationCompat.Builder(serviceContext, CHANNEL_ID)
                         .setLargeIcon(currentCover)
                         .setSmallIcon(R.drawable.ic_note)
                         .setContentTitle(currentTrack.title)
-                        .setContentText(currentAlbum.title)
+                        .setContentText(currentArtist.name)
                         .addAction(R.drawable.ic_prev, "ic_prev", prevPendingIntent)
                         .addAction(icon, text, intent)
                         .addAction(R.drawable.ic_next, "ic_next", nextPendingIntent)

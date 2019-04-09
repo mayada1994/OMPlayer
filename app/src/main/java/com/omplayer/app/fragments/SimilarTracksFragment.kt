@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.omplayer.app.R
+import com.omplayer.app.activities.MainActivity
 import com.omplayer.app.adapters.SimilarTrackAdapter
 import com.omplayer.app.utils.LastFmUtil
 import kotlinx.android.synthetic.main.fragment_similar_tracks.*
@@ -17,6 +18,9 @@ import kotlinx.android.synthetic.main.fragment_similar_tracks.*
 class SimilarTracksFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        (activity as MainActivity)
+            .setActionBarTitle(getString(R.string.similar_songs))
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         return inflater.inflate(R.layout.fragment_similar_tracks, container, false)
     }
 

@@ -12,6 +12,7 @@
     <string name="albums">Albums</string>
     <string name="artists">Artists</string>
     <string name="genres">Genres</string>
+    <string name="similar_songs">Similar Songs</string>
     <string name="favorites">Favorites</string>
     <string name="settings">Settings</string>
 
