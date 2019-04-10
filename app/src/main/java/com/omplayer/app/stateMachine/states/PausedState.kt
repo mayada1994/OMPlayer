@@ -42,6 +42,7 @@ class PausedState(context: PlayerContext) : State(context) {
                 } catch (e: Exception) {
                 }
                 context.updateMetadata(context.playlist[LibraryUtil.selectedTrack])
+                LibraryUtil.MainScreenLiveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
                 PausedState(context)
             }
             is Action.Prev -> {
@@ -65,6 +66,7 @@ class PausedState(context: PlayerContext) : State(context) {
                 } catch (e: Exception) {
                 }
                 context.updateMetadata(context.playlist[LibraryUtil.selectedTrack])
+                LibraryUtil.MainScreenLiveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
                 PausedState(context)
             }
         }

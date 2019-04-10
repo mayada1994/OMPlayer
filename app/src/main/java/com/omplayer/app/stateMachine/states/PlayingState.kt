@@ -45,6 +45,7 @@ class PlayingState(context: PlayerContext) : State(context) {
             }
             context.updateMetadata(context.playlist[LibraryUtil.selectedTrack])
             context.mediaPlayer?.start()
+            LibraryUtil.MainScreenLiveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
             PlayingState(context)
         }
 
@@ -72,6 +73,7 @@ class PlayingState(context: PlayerContext) : State(context) {
             }
             context.updateMetadata(context.playlist[LibraryUtil.selectedTrack])
             context.mediaPlayer?.start()
+            LibraryUtil.MainScreenLiveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
             PlayingState(context)
         }
     }
