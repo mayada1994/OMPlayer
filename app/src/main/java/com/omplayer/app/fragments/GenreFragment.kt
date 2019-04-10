@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.omplayer.app.R
 import com.omplayer.app.activities.MainActivity
-import com.omplayer.app.adapters.GenreAdapter
 import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.viewmodels.GenreViewModel
-
 
 class GenreFragment : Fragment() {
 

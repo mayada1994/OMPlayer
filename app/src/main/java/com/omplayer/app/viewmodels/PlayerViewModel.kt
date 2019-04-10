@@ -8,22 +8,27 @@ import android.os.Looper
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
-import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.mikhaellopez.circularimageview.CircularImageView
 import com.omplayer.app.R
+import com.omplayer.app.db.entities.ScrobbledTrack
 import com.omplayer.app.db.entities.Track
 import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.extensions.foreverObserver
 import com.omplayer.app.livedata.ForeverObserver
+import com.omplayer.app.repositories.ScrobbledTrackRepository
 import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.stateMachine.PlayerManager
 import com.omplayer.app.stateMachine.states.IdleState
 import com.omplayer.app.stateMachine.states.PlayingState
+import com.omplayer.app.utils.LastFmUtil
 import com.omplayer.app.utils.LibraryUtil
+import com.omplayer.app.utils.NetworkUtil.networkEnabled
+import com.omplayer.app.utils.PreferenceUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,7 +48,10 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         const val SHUFFLE_MODE = 2
     }
 
+    private val lastFmViewModel = LastFmViewModel(application)
     private val videoViewModel = VideoViewModel(application)
+
+    private val scrobbledTrackRepository = ScrobbledTrackRepository(SingletonHolder.db.scrobbledTrackDao())
 
     private val playlist: List<Track> = LibraryUtil.tracklist
     private val playerManager: PlayerManager = SingletonHolder.playerManager
@@ -82,7 +90,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     val shuffleMode: LiveData<Int?> = _shuffleMode
 
     private val _favoriteMode = MutableLiveData<Boolean>()
-    val favoriteMode : LiveData<Boolean> = _favoriteMode
+    val favoriteMode: LiveData<Boolean> = _favoriteMode
 
     val currState = SingletonHolder.playerManager.currState
 
@@ -205,6 +213,57 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
             .into(cover)
     }
 
+    fun updateLastFmTrack() {
+        if (PreferenceUtil.scrobble && networkEnabled) {
+            CoroutineScope(Dispatchers.IO).launch {
+                withContext(coroutineContext) {
+                    val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+                    val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId).title
+                    val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentTrack.artistId).name
+                    lastFmViewModel.updatePlayingTrack(currentAlbum, currentArtist, currentTrack.title)
+                }
+            }
+        }
+    }
+
+    fun scrobbleTrack(timestamp: String) {
+        if (PreferenceUtil.scrobble) {
+            CoroutineScope(Dispatchers.IO).launch {
+                withContext(coroutineContext) {
+                    val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+                    val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId).title
+                    val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentTrack.artistId).name
+                    if (networkEnabled) {
+                        lastFmViewModel.scrobble(currentAlbum, currentArtist, currentTrack.title, timestamp)
+                    } else {
+                        Log.d("LastFm", "cached")
+                        scrobbledTrackRepository.insertTrack(
+                            ScrobbledTrack(
+                                currentAlbum,
+                                currentArtist,
+                                currentTrack.title,
+                                timestamp
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun scrobbleCachedTracks() {
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(coroutineContext) {
+                scrobbledTrackRepository.getAllScrobbledTracks()?.forEach {
+                    if (networkEnabled) {
+                        lastFmViewModel.scrobble(it.albumTitle, it.artistTitle, it.title, it.timestamp)
+                        scrobbledTrackRepository.deleteTrack(it)
+                    }
+                }
+            }
+        }
+    }
+
     //region View interaction
 
     fun onPlayClicked() = mediaControllerCompat.transportControls.play()
@@ -251,8 +310,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
         }
     }
 
-    fun onFavoritesButtonClicked (isFavorite : Boolean) {
-        var currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+    fun onFavoritesButtonClicked(isFavorite: Boolean) {
+        val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
         if (isFavorite) {
             currentTrack.favorite = false
             _favoriteMode.value = false
@@ -267,4 +326,27 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     //endregion
 
+    fun scrollableTrack(playedTime: Int, timestamp: Long): Boolean {
+        val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+        if (currentTrack.duration >= 30000) {
+            return if (currentTrack.duration / 2 > 400000) {
+                (playedTime >= 400000) || (LastFmUtil.timestamp() - timestamp >= 240)
+            } else {
+                (playedTime >= currentTrack.duration / 2) || (LastFmUtil.timestamp() - timestamp >= currentTrack.duration / 2)
+            }
+        }
+        return false
+    }
+
+    fun loveTrack(artist: String, track: String) {
+        if (networkEnabled) {
+            if(PreferenceUtil.currentLastFmSession!=null) {
+                lastFmViewModel.loveTrack(artist, track)
+            }else{
+                Toast.makeText(getApplication(), "Please login to Last.fm", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            Toast.makeText(getApplication(), "No network connection", Toast.LENGTH_LONG).show()
+        }
+    }
 }

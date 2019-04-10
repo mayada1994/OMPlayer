@@ -112,8 +112,6 @@ class PlayerService : Service() {
 
         MediaButtonReceiver.handleIntent(playerManager.mediaSessionCompat, intent)
 
-        val notification: Notification
-
         when (intent?.getSerializableExtra(Extra.ACTION)) {
             is Action.Play -> {
                 getNotification(R.drawable.ic_pause, "ic_pause", pausePendingIntent)
@@ -132,13 +130,14 @@ class PlayerService : Service() {
             withContext(coroutineContext) {
                 val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
                 val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId)
+                val currentArtist = SingletonHolder.db.artistDao().getArtistById(currentTrack.artistId)
                 val currentCover = loadImage(currentAlbum.cover)
                 withContext(Dispatchers.Main) {
                     val notification: Notification = NotificationCompat.Builder(serviceContext, CHANNEL_ID)
                         .setLargeIcon(currentCover)
                         .setSmallIcon(R.drawable.ic_note)
                         .setContentTitle(currentTrack.title)
-                        .setContentText(currentAlbum.title)
+                        .setContentText(currentArtist.name)
                         .setContentIntent(contentIntent)
                         .addAction(R.drawable.ic_prev, "ic_prev", prevPendingIntent)
                         .addAction(icon, text, intent)
@@ -152,7 +151,7 @@ class PlayerService : Service() {
         }
     }
 
-    fun loadImage(albumArtUrl: String): Bitmap {
+    private fun loadImage(albumArtUrl: String): Bitmap {
         try {
             val file = File(albumArtUrl)
             val uri = Uri.fromFile(file)

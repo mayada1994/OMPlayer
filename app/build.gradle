@@ -65,6 +65,7 @@ dependencies {
     //Circular player view and seekbar implementation
     implementation 'com.mikhaellopez:circularimageview:3.2.0'
     implementation 'com.savantech.seekarc:seekarc:1.0.2'
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
 
     //Tests
     testImplementation 'junit:junit:4.12'

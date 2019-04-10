@@ -9,6 +9,7 @@ import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.dialogFragments.VideoDialogFragment
 import com.omplayer.app.repositories.YouTubeRepository
 import com.omplayer.app.utils.LibraryUtil
+import com.omplayer.app.utils.NetworkUtil.networkEnabled
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,47 +25,93 @@ class VideoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getVideoId(artist: String, album: String, song: String) {
         LibraryUtil.selectedTrackVideoId = NOT_FOUND
-        val url = generateLastFmUrl(artist, album, song)
-        val youTubeRepository = YouTubeRepository(url)
-        youTubeRepository.getData().enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(
-                call: Call<ResponseBody>,
-                response: Response<ResponseBody>
-            ) {
-                try {
-                    val htmlBody = response.body()!!.string()
+        try {
+            val currentArtist = artist.replace(" ", "+").replace("#", "%23")
+            val currentAlbum = album.replace(" ", "+").replace("#", "%23")
+            val currentTitle = song.replace(" ", "+").replace("#", "%23")
 
-                    val pattern = getPattern()
-                    val matcher = pattern.matcher(htmlBody)
-                    var matchStart = 0
-                    var matchEnd = 1
-                    while (matcher.find()) {
-                        matchStart = matcher.start(1)
-                        matchEnd = matcher.end()
+            val youTubeRepository = YouTubeRepository()
+            youTubeRepository.getData(currentArtist, currentAlbum, currentTitle)
+                .enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        try {
+                            val htmlBody = response.body()!!.string()
 
-                        val resultUrl = htmlBody.substring(matchStart, matchEnd)
-                        if (resultUrl.contains(YOUTUBE_BASE_URL)) {
-                            LibraryUtil.selectedTrackVideoId = extractVideoId(resultUrl)
+                            val pattern = getPattern()
+                            val matcher = pattern.matcher(htmlBody)
+                            var matchStart = 0
+                            var matchEnd = 1
+                            while (matcher.find()) {
+                                matchStart = matcher.start(1)
+                                matchEnd = matcher.end()
+
+                                val resultUrl = htmlBody.substring(matchStart, matchEnd)
+                                if (resultUrl.contains(YOUTUBE_BASE_URL)) {
+                                    LibraryUtil.selectedTrackVideoId = extractVideoId(resultUrl)
+                                }
+                            }
+
+                        } catch (e: NullPointerException) {
+                            Log.e("YouTubeResponse", response.message())
                         }
                     }
 
-                } catch (e: NullPointerException) {
-                    Log.e("YouTubeResponse", response.message())
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.d("YouTubeResponse", "Video not found")
-            }
-        })
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Log.d("YouTubeResponse", "Video not found")
+                    }
+                })
+        } catch (e: Exception) {
+            Log.e("YouTubeResponse", e.message)
+        }
     }
 
-    private fun generateLastFmUrl(artist: String, album: String, song: String): String {
-        val baseUrl = "https://www.last.fm/music/"
-        val currentArtist = artist.replace(" ", "+")
-        val currentAlbum = album.replace(" ", "+")
-        val currentTitle = song.replace(" ", "+")
-        return "$baseUrl$currentArtist/$currentAlbum/$currentTitle/".replace("#", "%23")
+
+    fun getVideoId(url: String, play:Boolean, fragmentManager: FragmentManager?) {
+        LibraryUtil.selectedTrackVideoId = NOT_FOUND
+        try {
+
+            val youTubeRepository = YouTubeRepository()
+            youTubeRepository.getData(url.replace("https://www.last.fm/music/", ""))
+                .enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        try {
+                            val htmlBody = response.body()!!.string()
+
+                            val pattern = getPattern()
+                            val matcher = pattern.matcher(htmlBody)
+                            var matchStart = 0
+                            var matchEnd = 1
+                            while (matcher.find()) {
+                                matchStart = matcher.start(1)
+                                matchEnd = matcher.end()
+
+                                val resultUrl = htmlBody.substring(matchStart, matchEnd)
+                                if (resultUrl.contains(YOUTUBE_BASE_URL)) {
+                                    LibraryUtil.selectedTrackVideoId = extractVideoId(resultUrl)
+                                }
+                            }
+                            if(play){
+                                playVideo(fragmentManager!!)
+                            }
+
+                        } catch (e: NullPointerException) {
+                            Log.e("YouTubeResponse", response.message())
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Log.d("YouTubeResponse", "Video not found")
+                    }
+                })
+        } catch (e: Exception) {
+            Log.e("YouTubeResponse", e.message)
+        }
     }
 
     private fun getPattern(): Pattern {
@@ -81,11 +128,17 @@ class VideoViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun playVideo(fragmentManager: FragmentManager) {
-        if (VIDEO_ID != NOT_FOUND) {
-            val lyricsDialog = VideoDialogFragment.newInstance()
-            lyricsDialog.show(fragmentManager, "")
+        if (networkEnabled) {
+
+            if (VIDEO_ID != NOT_FOUND) {
+                val videoDialog = VideoDialogFragment.newInstance()
+                videoDialog.show(fragmentManager, "")
+            } else {
+                Toast.makeText(SingletonHolder.application, VIDEO_NOT_FOUND, Toast.LENGTH_LONG).show()
+            }
         } else {
-            Toast.makeText(SingletonHolder.application, VIDEO_NOT_FOUND, Toast.LENGTH_LONG).show()
+            Toast.makeText(getApplication(), "No network connection", Toast.LENGTH_LONG).show()
         }
     }
+
 }

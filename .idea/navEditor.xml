@@ -82,8 +82,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="284" />
-                            <option name="y" value="65" />
+                            <option name="x" value="111" />
+                            <option name="y" value="120" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -99,6 +99,11 @@
                               </value>
                             </entry>
                             <entry key="action_mainFragment_to_playerFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_mainFragment_to_settingsFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -124,7 +129,45 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_playerFragment_to_similarTracksFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_playerFragment_to_videoDialogFragment2">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="settingsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="120" />
+                            <option name="y" value="-351" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="similarTracksFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1946" />
+                            <option name="y" value="-246" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_similarTracksFragment_to_videoDialogFragment2">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -202,8 +245,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1745" />
-                            <option name="y" value="130" />
+                            <option name="x" value="2121" />
+                            <option name="y" value="157" />
                           </Point>
                         </option>
                       </LayoutPositions>
