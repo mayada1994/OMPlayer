@@ -46,8 +46,8 @@ class SingleArtistFragment : Fragment() {
             it.findNavController().navigate(R.id.action_singleArtistFragment_to_singleAlbumFragment)
         })
 
-        if(viewModel.getArtistCover().isEmpty()) {
-            lastFmViewModel.getArtistInfo(viewModel.getArtistName(), single_artist_img)
+        if(viewModel.getArtist().image.isEmpty()) {
+            lastFmViewModel.getArtistInfo(viewModel.getArtist(), single_artist_img)
         }else{
             viewModel.loadImage(single_artist_img)
         }
@@ -55,7 +55,7 @@ class SingleArtistFragment : Fragment() {
         val albums = LibraryUtil.selectedArtistAlbumList
 
         if (albums.isNotEmpty()) {
-            single_artist_name.text = viewModel.getArtistName()
+            single_artist_name.text = viewModel.getArtist().name
             val albumList = activity!!.findViewById<RecyclerView>(R.id.single_artist_list_grid_view)
             albumList.layoutManager = layoutManager
             albumList.adapter = singleArtistViewModel.itemAdapter

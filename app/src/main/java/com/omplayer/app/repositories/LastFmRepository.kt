@@ -1,9 +1,6 @@
 package com.omplayer.app.repositories
 
-import com.omplayer.app.entities.LastFmArtistWrapper
-import com.omplayer.app.entities.LastFmSessionWrapper
-import com.omplayer.app.entities.LastFmSimilarTracksWrapper
-import com.omplayer.app.entities.LastFmUserWrapper
+import com.omplayer.app.entities.*
 import com.omplayer.app.services.lastFmService.LastFmService
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -79,6 +76,10 @@ class LastFmRepository {
 
     fun getSimilarTracks(track :String, artist: String, apiKey: String): Call<LastFmSimilarTracksWrapper> {
         return lastFmService.getSimilarTracks(track, artist, apiKey, FORMAT)
+    }
+
+    fun getTrackInfo(track :String, artist: String, apiKey: String): Call<LastFmTrackWrapper> {
+        return lastFmService.getTrackInfo(track, artist, apiKey, FORMAT)
     }
 
 }

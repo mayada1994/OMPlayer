@@ -12,18 +12,20 @@ import com.bumptech.glide.request.RequestOptions
 import com.github.siyamed.shapeimageview.RoundedImageView
 import com.mikhaellopez.circularimageview.CircularImageView
 import com.omplayer.app.R
+import com.omplayer.app.db.entities.Album
+import com.omplayer.app.db.entities.Artist
 import com.omplayer.app.di.SingletonHolder
+import com.omplayer.app.di.SingletonHolder.db
 import com.omplayer.app.dialogFragments.LastFmLoginDialogFragment
-import com.omplayer.app.entities.LastFmArtistWrapper
-import com.omplayer.app.entities.LastFmSessionWrapper
-import com.omplayer.app.entities.LastFmSimilarTracksWrapper
-import com.omplayer.app.entities.LastFmUserWrapper
+import com.omplayer.app.entities.*
 import com.omplayer.app.fragments.PlayerFragment
 import com.omplayer.app.fragments.SettingsFragment
 import com.omplayer.app.repositories.LastFmRepository
+import com.omplayer.app.utils.ImageUtil
 import com.omplayer.app.utils.ImageUtil.saveImage
 import com.omplayer.app.utils.LastFmUtil
 import com.omplayer.app.utils.LastFmUtil.md5
+import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.utils.PreferenceUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +34,7 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 
 class LastFmViewModel(application: Application) : AndroidViewModel(application) {
@@ -181,33 +184,42 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
     }
 
 
-    fun getArtistInfo(artist: String, artistImageView: RoundedImageView) {
-        try {
-            lastFmRepository.getArtistInfo(artist, API_KEY).enqueue(object : Callback<LastFmArtistWrapper> {
+    fun getArtistInfo(artist: Artist, artistImageView: RoundedImageView) {
+        if (artist.image.isEmpty()) {
+            try {
+                lastFmRepository.getArtistInfo(artist.name, API_KEY).enqueue(object : Callback<LastFmArtistWrapper> {
 
-                override fun onResponse(call: Call<LastFmArtistWrapper>, response: Response<LastFmArtistWrapper>) {
-                    try {
-                        val imageList = response.body()!!.artist.images
-                        imageList.forEach {
-                            if (it.size == "extralarge") {
-                                val imageUrl = it.url
-                                saveImage(imageUrl, artist)
-                                Glide.with(SingletonHolder.application).load(imageUrl)
-                                    .apply(RequestOptions().placeholder(R.drawable.ic_last_fm_placeholder).error(R.drawable.ic_last_fm_placeholder))
-                                    .into(artistImageView)
+                    override fun onResponse(call: Call<LastFmArtistWrapper>, response: Response<LastFmArtistWrapper>) {
+                        try {
+                            val imageList = response.body()!!.artist.images
+                            imageList.forEach {
+                                if (it.size == "extralarge") {
+                                    val imageUrl = it.url
+                                    saveImage(imageUrl, artist.name)
+                                    val path = SingletonHolder.application.filesDir.absolutePath
+                                    val file = File(path, "${artist.name}.jpg")
+                                    artist.image = file.absolutePath
+                                    CoroutineScope(Dispatchers.IO).launch {
+                                        db.artistDao().update(artist)
+                                    }
+                                    Glide.with(SingletonHolder.application).load(imageUrl)
+                                        .apply(RequestOptions().placeholder(R.drawable.ic_last_fm_placeholder).error(R.drawable.ic_last_fm_placeholder))
+                                        .into(artistImageView)
+
+                                }
                             }
+                        } catch (e: Exception) {
+                            Log.d(TAG, e.message)
                         }
-                    } catch (e: Exception) {
-                        Log.d(TAG, e.message)
                     }
-                }
 
-                override fun onFailure(call: Call<LastFmArtistWrapper>, t: Throwable) {
-                    Log.d(TAG, t.message)
-                }
+                    override fun onFailure(call: Call<LastFmArtistWrapper>, t: Throwable) {
+                        Log.d(TAG, t.message)
+                    }
 
-            })
-        } catch (e: Exception) {
+                })
+            } catch (e: Exception) {
+            }
         }
     }
 
@@ -243,6 +255,55 @@ class LastFmViewModel(application: Application) : AndroidViewModel(application) 
                 }
 
             })
+    }
+
+    fun getTrackInfo(
+        title: String,
+        artist: String,
+        album: String,
+        artistImageView: CircularImageView,
+        currentAlbum: Album,
+        load: Boolean
+    ) {
+        if (currentAlbum.cover.isEmpty() || load) {
+            try {
+                lastFmRepository.getTrackInfo(title, artist, API_KEY).enqueue(object : Callback<LastFmTrackWrapper> {
+
+                    override fun onResponse(call: Call<LastFmTrackWrapper>, response: Response<LastFmTrackWrapper>) {
+                        try {
+                            val imageList = response.body()!!.track.album.images
+                            imageList.forEach {
+                                if (it.size == "extralarge") {
+                                    val imageUrl = it.url
+                                    saveImage(imageUrl, album + "_" + artist)
+                                    val path = SingletonHolder.application.filesDir.absolutePath
+                                    val file = File(path, "${album + "_" + artist}.jpg")
+                                    currentAlbum.cover = file.absolutePath
+                                    LibraryUtil.currentAlbumList[LibraryUtil.selectedAlbum].cover = file.absolutePath
+                                    CoroutineScope(Dispatchers.IO).launch {
+                                        db.albumDao().update(currentAlbum)
+                                    }
+                                    Glide.with(SingletonHolder.application).load(imageUrl)
+                                        .apply(RequestOptions().placeholder(R.drawable.placeholder).error(R.drawable.placeholder))
+                                        .into(artistImageView)
+                                }
+                            }
+                        } catch (e: Exception) {
+                            Log.d(TAG, e.message)
+                            Toast.makeText(getApplication(), "Cover not found", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<LastFmTrackWrapper>, t: Throwable) {
+                        Log.d(TAG, t.message)
+                        Toast.makeText(getApplication(), "Cover not found", Toast.LENGTH_SHORT).show()
+                    }
+
+                })
+            } catch (e: Exception) {
+                Toast.makeText(getApplication(), "Cover not found", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 }
