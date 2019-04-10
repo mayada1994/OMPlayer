@@ -106,7 +106,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     private val seekbarPositionUpdateTask: () -> Unit = {
         Handler(Looper.getMainLooper()).post {
 
-            if (playerManager.mediaPlayer.currentPosition > 200000) {
+            if (playerManager.mediaPlayer.currentPosition > 20000000) {
                 _currentPosition.value = 0
             } else {
                 _currentPosition.value = playerManager.mediaPlayer.currentPosition

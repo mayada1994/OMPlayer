@@ -218,6 +218,7 @@ class PlayerManager(override val context: Context) : PlayerContext, AudioManager
     fun setPlaylist(playlist: List<Track>) {
         mediaPlayer.setOnCompletionListener {
             mediaSessionCallback.onSkipToNext()
+            LibraryUtil.MainScreenLiveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
         }
 
         mediaPlayer.setVolume(1.0f, 1.0f)

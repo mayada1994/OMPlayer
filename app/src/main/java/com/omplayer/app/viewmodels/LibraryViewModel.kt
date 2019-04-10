@@ -114,7 +114,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
                 LibraryUtil.favorites = trackRepository.getTracksByFavorite(true) as ArrayList<Track>
                 LibraryUtil.tracklist = LibraryUtil.tracks
                 withContext(Dispatchers.Main) {
-                    LibraryUtil.liveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+                    LibraryUtil.MainScreenLiveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
                 }
         }
     }

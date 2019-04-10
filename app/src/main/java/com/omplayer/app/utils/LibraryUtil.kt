@@ -26,5 +26,5 @@ object LibraryUtil {
     var tracks: List<Track> = emptyList()
     var favorites: List<Track> = emptyList()
     var action: Action = Action.Pause()
-    var liveData : MutableLiveData<Track> = MutableLiveData()
+    var MainScreenLiveData : MutableLiveData<Track> = MutableLiveData()
 }
