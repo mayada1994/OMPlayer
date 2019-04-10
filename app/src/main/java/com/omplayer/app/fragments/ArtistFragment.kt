@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.omplayer.app.R
+import com.omplayer.app.activities.MainActivity
 import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.viewmodels.ArtistViewModel
 
@@ -23,6 +24,7 @@ class ArtistFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         return inflater.inflate(R.layout.fragment_artist, container, false)
     }
 

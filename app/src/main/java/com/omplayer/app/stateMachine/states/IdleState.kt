@@ -1,6 +1,5 @@
 package com.omplayer.app.stateMachine.states
 
-import android.util.Log
 import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.stateMachine.PlayerContext
 import com.omplayer.app.utils.LibraryUtil

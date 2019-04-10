@@ -3,29 +3,31 @@ package com.omplayer.app.viewmodels
 import android.app.Application
 import android.view.View
 import android.widget.TextView
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.omplayer.app.adapters.SingleAlbumAdapter
-import com.omplayer.app.adapters.SingleGenreAdapter
-import com.omplayer.app.db.entities.Track
+import com.omplayer.app.adapters.TrackAdapter
 import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.repositories.ArtistRepository
-import com.omplayer.app.repositories.TrackRepository
+import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.utils.LibraryUtil
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
-class SingleAlbumViewModel(application: Application) : AndroidViewModel(application), SingleAlbumAdapter.Callback {
+class SingleAlbumViewModel(application: Application) : BaseViewModel(application), TrackAdapter.Callback {
 
-    val itemAdapter = SingleAlbumAdapter(LibraryUtil.selectedAlbumTracklist, this)
+    val itemAdapter = TrackAdapter(callback = this)
 
-    private var parentJob = Job()
-    private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.IO
-    private val scope = CoroutineScope(coroutineContext)
+    init {
+        launch {
+            val items = LibraryUtil.selectedAlbumTracklist.map {
+                TrackAdapter.Item(it, SingletonHolder.db.artistDao().getArtistById(it.artistId))
+            }
+            withContext(Dispatchers.Main) {
+                itemAdapter.items = items
+            }
+        }
+    }
+
     private val db = SingletonHolder.db
-
     private val artistRepository: ArtistRepository = ArtistRepository(db.artistDao())
 
     private val _viewLiveData: MutableLiveData<View> = MutableLiveData()
@@ -36,7 +38,7 @@ class SingleAlbumViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun getAlbumArtist(albumArtistName: TextView) {
-        scope.launch {
+        launch {
             withContext(coroutineContext) {
                 val albumArtist =
                     artistRepository.getArtistById(LibraryUtil.currentAlbumList[LibraryUtil.selectedAlbum].artistId)!!.name
@@ -55,12 +57,11 @@ class SingleAlbumViewModel(application: Application) : AndroidViewModel(applicat
         return LibraryUtil.currentAlbumList[LibraryUtil.selectedAlbum].cover
     }
 
-    override fun openPlayer(view: View) {
+    override fun openPlayer(position: Int, view: View) {
+        LibraryUtil.tracklist = LibraryUtil.selectedAlbumTracklist
+        LibraryUtil.selectedTrack = position
+        LibraryUtil.action = Action.Play()
         _viewLiveData.value = view
     }
-
-
-
-
 
 }

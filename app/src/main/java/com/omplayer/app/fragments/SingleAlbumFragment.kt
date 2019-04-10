@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.omplayer.app.R
 import com.omplayer.app.activities.MainActivity
-import com.omplayer.app.adapters.SingleAlbumAdapter
 import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.viewmodels.SingleAlbumViewModel
 import kotlinx.android.synthetic.main.fragment_single_album.*
@@ -33,7 +32,7 @@ class SingleAlbumFragment : Fragment() {
     ): View? {
         (activity as MainActivity)
             .setActionBarTitle(getString(R.string.albums))
-        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         return inflater.inflate(R.layout.fragment_single_album, container, false)
     }
 
