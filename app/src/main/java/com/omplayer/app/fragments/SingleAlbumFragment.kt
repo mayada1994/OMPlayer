@@ -2,7 +2,6 @@ package com.omplayer.app.fragments
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +24,11 @@ class SingleAlbumFragment : Fragment() {
 
     private val viewModel: SingleAlbumViewModel by lazy {
         ViewModelProviders.of(this).get(SingleAlbumViewModel::class.java)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
     }
 
     override fun onCreateView(

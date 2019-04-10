@@ -22,6 +22,10 @@ class FavoritesFragment : Fragment() {
         ViewModelProviders.of(this).get(FavoritesViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
 
     var tracks: List<Track> = LibraryUtil.favorites
 

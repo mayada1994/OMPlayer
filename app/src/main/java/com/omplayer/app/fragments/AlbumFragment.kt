@@ -22,6 +22,10 @@ open class AlbumFragment : Fragment() {
         ViewModelProviders.of(this).get(AlbumViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -22,6 +22,10 @@ class SingleGenreFragment : Fragment() {
         ViewModelProviders.of(this).get(SingleGenreViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
