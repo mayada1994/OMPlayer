@@ -12,12 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.omplayer.app.R
 import com.omplayer.app.activities.MainActivity
-import com.omplayer.app.adapters.SingleGenreAdapter
-import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.utils.LibraryUtil
-import com.omplayer.app.viewmodels.GenreViewModel
 import com.omplayer.app.viewmodels.SingleGenreViewModel
-import com.omplayer.app.viewmodels.TrackViewModel
 import kotlinx.android.synthetic.main.fragment_single_genre.*
 
 class SingleGenreFragment : Fragment() {
@@ -33,7 +29,7 @@ class SingleGenreFragment : Fragment() {
     ): View? {
         (activity as MainActivity)
             .setActionBarTitle(getString(R.string.genres))
-        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         return inflater.inflate(R.layout.fragment_single_genre, container, false)
     }
 

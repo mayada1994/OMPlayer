@@ -58,7 +58,8 @@
 
     <fragment android:id="@+id/favoritesFragment"
               android:name="com.omplayer.app.fragments.FavoritesFragment"
-              android:label="FavoritesFragment">
+              android:label="FavoritesFragment"
+              tools:layout="@layout/fragment_favorites">
 
         <action android:id="@+id/action_favoritesFragment_to_playerFragment"
                 app:destination="@id/playerFragment"/>
@@ -73,7 +74,8 @@
 
     <fragment android:id="@+id/singleAlbumFragment"
               android:name="com.omplayer.app.fragments.SingleAlbumFragment"
-              android:label="SingleAlbumFragment">
+              android:label="SingleAlbumFragment"
+              tools:layout="@layout/fragment_single_album">
 
         <action android:id="@+id/action_singleAlbumFragment_to_playerFragment"
                 app:destination="@id/playerFragment"/>
@@ -82,14 +84,17 @@
 
     <fragment android:id="@+id/singleArtistFragment"
               android:name="com.omplayer.app.fragments.SingleArtistFragment"
-              android:label="SingleArtistFragment">
+              android:label="SingleArtistFragment"
+              tools:layout="@layout/fragment_single_artist">
+
         <action android:id="@+id/action_singleArtistFragment_to_singleAlbumFragment"
                 app:destination="@id/singleAlbumFragment"/>
     </fragment>
 
     <fragment android:id="@+id/singleGenreFragment"
               android:name="com.omplayer.app.fragments.SingleGenreFragment"
-              android:label="SingleGenreFragment">
+              android:label="SingleGenreFragment"
+              tools:layout="@layout/fragment_single_genre">
 
         <action android:id="@+id/action_singleGenreFragment_to_playerFragment"
                 app:destination="@id/playerFragment"/>
@@ -97,7 +102,8 @@
 
     <fragment android:id="@+id/lyricsDialogFragment"
               android:name="com.omplayer.app.dialogFragments.LyricsDialogFragment"
-              android:label="LyricsDialogFragment"/>
+              android:label="LyricsDialogFragment"
+              tools:layout="@layout/lyrics_dialog"/>
 
     <fragment android:id="@+id/videoDialogFragment2"
               android:name="com.omplayer.app.dialogFragments.VideoDialogFragment"

@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.omplayer.app.R
+import com.omplayer.app.activities.MainActivity
 import com.omplayer.app.db.entities.Track
 import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.viewmodels.FavoritesViewModel
@@ -29,6 +30,11 @@ class FavoritesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as MainActivity)
+            .supportActionBar?.show()
+        (activity as MainActivity)
+            .setActionBarTitle(getString(R.string.favorites))
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 

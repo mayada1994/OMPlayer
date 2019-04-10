@@ -33,7 +33,7 @@ class SingleAlbumFragment : Fragment() {
     ): View? {
         (activity as MainActivity)
             .setActionBarTitle(getString(R.string.albums))
-        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         return inflater.inflate(R.layout.fragment_single_album, container, false)
     }
 

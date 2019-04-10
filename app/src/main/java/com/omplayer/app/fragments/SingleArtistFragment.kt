@@ -31,7 +31,7 @@ class SingleArtistFragment : Fragment() {
     ): View? {
         (activity as MainActivity)
             .setActionBarTitle(getString(R.string.artists))
-        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         return inflater.inflate(R.layout.fragment_single_artist, container, false)
     }
 

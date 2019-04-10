@@ -6,41 +6,107 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <Button
-            android:id="@+id/btn_player"
-            android:text="@string/music_player"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/btn_library"/>
+            app:layout_constraintBottom_toTopOf="@id/btn_library">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_album_cover"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:scaleType="center"
+                android:alpha="0.5"
+                android:background="@drawable/placeholder"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                    android:id="@+id/txt_now_playing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/now_playing"
+                    android:textSize="25sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/txt_song_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                    android:id="@+id/txt_song_name"
+                    android:layout_width="wrap_content"
+                    android:text="Song name"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/txt_now_playing"
+                    app:layout_constraintBottom_toTopOf="@id/txt_artist_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                    android:id="@+id/txt_artist_name"
+                    android:layout_width="wrap_content"
+                    android:text="Song Artist"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/txt_song_name"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
             android:id="@+id/btn_library"
             android:text="@string/library"
+            android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/btn_player"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-    <Button
-            android:id="@+id/btn_favorites"
-            android:text="@string/favorites"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/btn_library"
+            android:background="@drawable/layer_list_library"
+            android:textSize="25sp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_favorites"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+    <Button
+            android:id="@+id/btn_favorites"
+            android:text="@string/favorites"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layer_list_favorites"
+            android:textSize="25sp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_settings"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
     <Button
             android:id="@+id/btn_settings"
             android:text="@string/settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/btn_favorites"
+            android:background="@drawable/shape_setings"
+            android:textAllCaps="false"
+            android:textSize="25sp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
 
     <ProgressBar
             android:id="@+id/library_to_db_progress"

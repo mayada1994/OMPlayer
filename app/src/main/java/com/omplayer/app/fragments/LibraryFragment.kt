@@ -21,8 +21,10 @@ class LibraryFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
+            .supportActionBar?.show()
+        (activity as MainActivity)
             .setActionBarTitle(getString(R.string.library))
-        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val view = inflater.inflate(R.layout.fragment_library, container, false)
 
         // Setting ViewPager for each Tabs

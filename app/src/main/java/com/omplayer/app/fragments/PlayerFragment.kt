@@ -73,6 +73,8 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
+            .supportActionBar?.show()
+        (activity as MainActivity)
             .setActionBarTitle(getString(R.string.action_bar_player))
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         if (scheduledTask == null) {
