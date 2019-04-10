@@ -11,27 +11,26 @@ import java.io.IOException
 
 object ImageUtil {
 
-    fun saveImage(url: String, artist: String) {
+    fun saveImage(url: String, name: String) {
         Glide.with(SingletonHolder.application)
             .asBitmap()
             .load(url)
             .into(object : SimpleTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    write(artist, resource)
+                    write(name, resource)
                 }
             })
     }
 
     private fun write(fileName: String, bitmap: Bitmap) {
         val path = SingletonHolder.application.filesDir.absolutePath
-        val filePath = File(path, "$fileName.png")
+        val filePath = File(path, "$fileName.jpg")
         try {
             FileOutputStream(filePath).use { out ->
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
             }
         } catch (e: IOException) {
             e.printStackTrace()
         }
     }
-
 }

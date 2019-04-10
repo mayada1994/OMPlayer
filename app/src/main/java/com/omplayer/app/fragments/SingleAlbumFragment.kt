@@ -2,6 +2,7 @@ package com.omplayer.app.fragments
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.omplayer.app.R
 import com.omplayer.app.activities.MainActivity
-import com.omplayer.app.adapters.SingleAlbumAdapter
 import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.viewmodels.SingleAlbumViewModel
 import kotlinx.android.synthetic.main.fragment_single_album.*
@@ -59,7 +59,7 @@ class SingleAlbumFragment : Fragment() {
         }
     }
 
-    fun loadImage(albumArtUrl: String) {
+    private fun loadImage(albumArtUrl: String) {
         val file = File(albumArtUrl)
         val uri = Uri.fromFile(file)
 
@@ -68,8 +68,4 @@ class SingleAlbumFragment : Fragment() {
             .into(single_album_img)
     }
 
-//    fun openPlayer() {
-//        val activity = activity as MainActivity
-//        activity.openPlayerFragment()
-//    }
 }

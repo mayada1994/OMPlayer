@@ -19,16 +19,15 @@ import com.omplayer.app.stateMachine.states.PausedState
 import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.FormatUtils
 import com.omplayer.app.utils.LastFmUtil
-import com.omplayer.app.viewmodels.LyricsViewModel
-import com.omplayer.app.viewmodels.PlayerViewModel
-import com.omplayer.app.viewmodels.TrackViewModel
-import com.omplayer.app.viewmodels.VideoViewModel
+import com.omplayer.app.viewmodels.*
 import com.savantech.seekarc.SeekArc
 import kotlinx.android.synthetic.main.fragment_player.*
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
+
+
 
 
 class PlayerFragment : Fragment(), View.OnClickListener {
@@ -96,6 +95,18 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
         initializeTrackInfo()
 
+        button_edit_tags.setOnLongClickListener {
+            viewModel.loadCoverFromLastFm(
+                tv_track_title.text.toString(),
+                tv_track_artist.text.toString(),
+                tv_track_album.text.toString(),
+                iv_track_cover,
+                true
+            )
+            true
+        }
+
+
         button_previous.setOnClickListener(this)
         button_next.setOnClickListener(this)
         button_play.setOnClickListener(this)
@@ -105,6 +116,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         button_favorites.setOnClickListener(this)
         button_lastfm_love.setOnClickListener(this)
         button_lastfm_similar.setOnClickListener(this)
+        button_edit_tags.setOnClickListener(this)
 
         viewModel.metadata.observe(this, Observer {
             it?.let { metadata ->
@@ -179,6 +191,13 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 tv_track_title.text.toString(),
                 tv_track_artist.text.toString(),
                 this@PlayerFragment
+            )
+            R.id.button_edit_tags -> viewModel.loadCoverFromLastFm(
+                tv_track_title.text.toString(),
+                tv_track_artist.text.toString(),
+                tv_track_album.text.toString(),
+                iv_track_cover,
+                false
             )
         }
     }

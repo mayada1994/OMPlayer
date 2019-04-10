@@ -59,8 +59,4 @@ class SingleAlbumViewModel(application: Application) : AndroidViewModel(applicat
         _viewLiveData.value = view
     }
 
-
-
-
-
 }

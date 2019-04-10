@@ -51,6 +51,9 @@
         <action android:id="@+id/action_playerFragment_to_similarTracksFragment"
                 app:destination="@id/similarTracksFragment"/>
 
+        <action android:id="@+id/action_playerFragment_to_editTagsFragment"
+                app:destination="@id/editTagsFragment"/>
+
     </fragment>
 
     <fragment android:id="@+id/favoritesFragment"
@@ -105,6 +108,11 @@
               android:label="SimilarTracksFragment">
         <action android:id="@+id/action_similarTracksFragment_to_videoDialogFragment2"
                 app:destination="@id/videoDialogFragment2"/>
+    </fragment>
+
+    <fragment android:id="@+id/editTagsFragment"
+              android:name="com.omplayer.app.fragments.EditTagsFragment"
+              android:label="EditTagsFragment">
     </fragment>
 
 </navigation>

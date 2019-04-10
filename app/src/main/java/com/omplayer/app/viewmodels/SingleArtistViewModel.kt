@@ -43,9 +43,4 @@ class SingleArtistViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    fun getArtistName(): String {
-        return LibraryUtil.artists[LibraryUtil.selectedArtist].name
-    }
-
-
 }

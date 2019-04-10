@@ -204,7 +204,7 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
 
     }
 
-    fun loadImage(albumArtUrl: String, cover: CircularImageView, context: Context) {
+    private fun loadImage(albumArtUrl: String, cover: CircularImageView, context: Context) {
         val file = File(albumArtUrl)
         val uri = Uri.fromFile(file)
 
@@ -262,6 +262,20 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
                 }
             }
         }
+    }
+
+    fun loadCoverFromLastFm(title: String, artist: String, album: String, albumImageView: CircularImageView, load: Boolean) {
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(coroutineContext) {
+                val currentTrack = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+                val currentAlbum = SingletonHolder.db.albumDao().getAlbumById(currentTrack.albumId)
+                withContext(Dispatchers.Main) {
+                    if(currentAlbum.cover.isEmpty() || load)
+                    lastFmViewModel.getTrackInfo(title, artist, album, albumImageView, currentAlbum, load)
+                }
+            }
+        }
+
     }
 
     //region View interaction
