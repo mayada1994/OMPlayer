@@ -22,6 +22,11 @@ class TrackFragment : Fragment() {
         ViewModelProviders.of(this).get(TrackViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,8 +50,4 @@ class TrackFragment : Fragment() {
         } )
     }
 
-//    fun openPlayer() {
-//        val activity = activity as MainActivity
-//        activity.openPlayerFragment()
-//    }
 }

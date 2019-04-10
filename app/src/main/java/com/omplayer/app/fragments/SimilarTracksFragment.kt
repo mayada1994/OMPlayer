@@ -17,6 +17,11 @@ import kotlinx.android.synthetic.main.fragment_similar_tracks.*
 
 class SimilarTracksFragment : Fragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity)
             .setActionBarTitle(getString(R.string.similar_songs))

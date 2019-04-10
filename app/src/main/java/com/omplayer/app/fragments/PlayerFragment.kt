@@ -35,6 +35,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     private val viewModel: PlayerViewModel by lazy {
         ViewModelProviders.of(this).get(PlayerViewModel::class.java)
     }
+
     private val lyricsViewModel = LyricsViewModel(SingletonHolder.application)
     private val videoViewModel = VideoViewModel(SingletonHolder.application)
     private val trackViewModel = TrackViewModel(SingletonHolder.application)
@@ -69,6 +70,11 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 }
             }))
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

@@ -25,6 +25,11 @@ class SingleArtistFragment : Fragment() {
         ViewModelProviders.of(this).get(SingleArtistViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
