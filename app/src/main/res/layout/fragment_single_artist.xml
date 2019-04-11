@@ -9,14 +9,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <TextView
-            android:id="@+id/single_artist_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginBottom="20dp"
-            tools:text="Artist"/>
-
     <com.github.siyamed.shapeimageview.RoundedImageView
             android:id="@+id/single_artist_img"
             android:layout_width="150dp"
@@ -24,6 +16,16 @@
             android:layout_gravity="center"
             app:siRadius="6dp"
             app:siSquare="true"/>
+
+    <TextView
+            android:paddingTop="10dp"
+            android:id="@+id/single_artist_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            tools:text="Artist"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/single_artist_list_grid_view"

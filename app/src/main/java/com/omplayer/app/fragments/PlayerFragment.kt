@@ -33,38 +33,8 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     private val trackViewModel = TrackViewModel(SingletonHolder.application)
 
 
-//    private val foreverObservers = mutableListOf<ForeverObserver<*>>()
 
     private var isPlaying = false
-//    private var timestamp: Long = 0
-//    private var lastTrackUpdateTime: Long = 0
-//
-//    private var scheduledTask: ScheduledFuture<*>? = null
-//    private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
-//    private val observeTrackTimeTask = Runnable {
-//        Handler(Looper.getMainLooper()).post {
-//            foreverObservers.add(viewModel.currentPosition.foreverObserver(Observer {
-//                seekbar_audio.progress = it?.toFloat() ?: (0).toFloat()
-//                timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
-//                if (it != null && SingletonHolder.playerManager.currState.value is PlayingState) {
-//                    if (it < 1000) {
-//                        timestamp = LastFmUtil.timestamp()
-//                        LastFmUtil.isScrobbled = false
-//                        viewModel.updateLastFmTrack()
-//                        lastTrackUpdateTime = timestamp
-//                    }
-//                    if (LastFmUtil.timestamp() - lastTrackUpdateTime > 180) {
-//                        viewModel.updateLastFmTrack()
-//                        lastTrackUpdateTime = LastFmUtil.timestamp()
-//                    }
-//                    if (!LastFmUtil.isScrobbled && viewModel.scrollableTrack(it, timestamp)) {
-//                        viewModel.scrobbleTrack(timestamp.toString())
-//                        LastFmUtil.isScrobbled = true
-//                    }
-//                }
-//            }))
-//        }
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,14 +46,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
             .supportActionBar?.show()
         (activity as MainActivity)
             .setActionBarTitle(getString(R.string.action_bar_player))
-        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-//        if (scheduledTask == null) {
-//            scheduledTask = executor.schedule(
-//                observeTrackTimeTask,
-//                0,
-//                TimeUnit.SECONDS
-//            )
-//        }
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         return inflater.inflate(R.layout.fragment_player, container, false)
     }
 
