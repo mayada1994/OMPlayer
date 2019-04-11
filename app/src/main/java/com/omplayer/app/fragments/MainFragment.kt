@@ -185,4 +185,11 @@ class MainFragment : Fragment(), View.OnClickListener {
             )
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        if(LibraryUtil.tracks.isEmpty()){
+            progressBar.visibility = View.VISIBLE
+        }
+    }
 }

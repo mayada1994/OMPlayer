@@ -119,7 +119,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
             LibraryUtil.tracklist = LibraryUtil.tracks
             withContext(Dispatchers.Main) {
                 try {
-                    LibraryUtil.liveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+                    LibraryUtil.MainScreenLiveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
                 }catch (e: Exception){
 
                 }

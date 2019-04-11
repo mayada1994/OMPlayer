@@ -1,6 +1,5 @@
 package com.omplayer.app.utils
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.omplayer.app.db.entities.Album
 import com.omplayer.app.db.entities.Artist
