@@ -31,4 +31,5 @@
     <string name="last_fm_register">Don\'t have an account? <u>Register</u>.</string>
     <string name="songs_similar_to_original">Songs similar to:\n%s</string>
     <string name="settings">Settings</string>
+    <string name="favorite_message">You don\'t have any favorite tracks.</string>
 </resources>

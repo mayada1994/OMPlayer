@@ -15,6 +15,7 @@ import com.omplayer.app.activities.MainActivity
 import com.omplayer.app.db.entities.Track
 import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.viewmodels.FavoritesViewModel
+import kotlinx.android.synthetic.main.fragment_favorites.*
 
 class FavoritesFragment : Fragment() {
 
@@ -56,6 +57,10 @@ class FavoritesFragment : Fragment() {
             val trackList = activity!!.findViewById<RecyclerView>(R.id.track_list_recycler_view)
             trackList.layoutManager = layoutManager
             trackList.adapter = viewModel.itemAdapter
+        } else {
+            track_list_recycler_view.visibility = View.GONE
+            message_no_favorites.visibility = View.VISIBLE
+
         }
 
     }
