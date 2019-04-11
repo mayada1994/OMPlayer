@@ -188,7 +188,7 @@ class MainFragment : Fragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        if(LibraryUtil.tracks.isEmpty()){
+        if(LibraryUtil.tracks.isEmpty() && PreferenceUtil.updateLibrary){
             progressBar.visibility = View.VISIBLE
         }
     }
