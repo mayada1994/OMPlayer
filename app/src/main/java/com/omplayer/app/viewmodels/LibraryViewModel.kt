@@ -33,14 +33,18 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     fun loadDataToDb(progressBar: ProgressBar) {
         scope.launch {
             withContext(coroutineContext) {
+                try {
 
-                clearTables()
-                loadGenres()
-                loadArtists()
-                loadAlbums()
-                loadTracks()
-                loadFavorites()
-                deleteAdditionalGenres()
+                    clearTables()
+                    loadGenres()
+                    loadArtists()
+                    loadAlbums()
+                    loadTracks()
+                    loadFavorites()
+                    deleteAdditionalGenres()
+                } catch (e: Exception) {
+
+                }
 
                 withContext(Dispatchers.Main) {
                     PreferenceUtil.updateLibrary = false
@@ -107,15 +111,19 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
 
     fun extractData() {
         scope.launch {
-                LibraryUtil.genres = genreRepository.getAllGenres() as ArrayList<Genre>
-                LibraryUtil.artists = artistRepository.getAllArtists() as ArrayList<Artist>
-                LibraryUtil.albums = albumRepository.getAllAlbums() as ArrayList<Album>
-                LibraryUtil.tracks = trackRepository.getAllTracks() as ArrayList<Track>
-                LibraryUtil.favorites = trackRepository.getTracksByFavorite(true) as ArrayList<Track>
-                LibraryUtil.tracklist = LibraryUtil.tracks
-                withContext(Dispatchers.Main) {
-                    LibraryUtil.MainScreenLiveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+            LibraryUtil.genres = genreRepository.getAllGenres() as ArrayList<Genre>
+            LibraryUtil.artists = artistRepository.getAllArtists() as ArrayList<Artist>
+            LibraryUtil.albums = albumRepository.getAllAlbums() as ArrayList<Album>
+            LibraryUtil.tracks = trackRepository.getAllTracks() as ArrayList<Track>
+            LibraryUtil.favorites = trackRepository.getTracksByFavorite(true) as ArrayList<Track>
+            LibraryUtil.tracklist = LibraryUtil.tracks
+            withContext(Dispatchers.Main) {
+                try {
+                    LibraryUtil.liveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]
+                }catch (e: Exception){
+
                 }
+            }
         }
     }
 
