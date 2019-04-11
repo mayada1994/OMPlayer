@@ -1,8 +1,6 @@
 package com.omplayer.app.fragments
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,21 +11,15 @@ import androidx.navigation.findNavController
 import com.omplayer.app.R
 import com.omplayer.app.activities.MainActivity
 import com.omplayer.app.di.SingletonHolder
-import com.omplayer.app.extensions.foreverObserver
-import com.omplayer.app.livedata.ForeverObserver
 import com.omplayer.app.stateMachine.states.PausedState
 import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.FormatUtils
-import com.omplayer.app.utils.LastFmUtil
-import com.omplayer.app.viewmodels.*
+import com.omplayer.app.viewmodels.LyricsViewModel
+import com.omplayer.app.viewmodels.PlayerViewModel
+import com.omplayer.app.viewmodels.TrackViewModel
+import com.omplayer.app.viewmodels.VideoViewModel
 import com.savantech.seekarc.SeekArc
 import kotlinx.android.synthetic.main.fragment_player.*
-import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.ScheduledFuture
-import java.util.concurrent.TimeUnit
-
-
 
 
 class PlayerFragment : Fragment(), View.OnClickListener {
@@ -39,38 +31,40 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     private val lyricsViewModel = LyricsViewModel(SingletonHolder.application)
     private val videoViewModel = VideoViewModel(SingletonHolder.application)
     private val trackViewModel = TrackViewModel(SingletonHolder.application)
-    private val foreverObservers = mutableListOf<ForeverObserver<*>>()
+
+
+//    private val foreverObservers = mutableListOf<ForeverObserver<*>>()
 
     private var isPlaying = false
-    private var timestamp: Long = 0
-    private var lastTrackUpdateTime: Long = 0
-
-    private var scheduledTask: ScheduledFuture<*>? = null
-    private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
-    private val observeTrackTimeTask = Runnable {
-        Handler(Looper.getMainLooper()).post {
-            foreverObservers.add(viewModel.currentPosition.foreverObserver(Observer {
-                seekbar_audio.progress = it?.toFloat() ?: (0).toFloat()
-                timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
-                if (it != null && isPlaying) {
-                    if (it < 1000) {
-                        timestamp = LastFmUtil.timestamp()
-                        LastFmUtil.isScrobbled = false
-                        viewModel.updateLastFmTrack()
-                        lastTrackUpdateTime = timestamp
-                    }
-                    if (LastFmUtil.timestamp() - lastTrackUpdateTime > 180) {
-                        viewModel.updateLastFmTrack()
-                        lastTrackUpdateTime = LastFmUtil.timestamp()
-                    }
-                    if (!LastFmUtil.isScrobbled && viewModel.scrollableTrack(it, timestamp)) {
-                        viewModel.scrobbleTrack(timestamp.toString())
-                        LastFmUtil.isScrobbled = true
-                    }
-                }
-            }))
-        }
-    }
+//    private var timestamp: Long = 0
+//    private var lastTrackUpdateTime: Long = 0
+//
+//    private var scheduledTask: ScheduledFuture<*>? = null
+//    private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
+//    private val observeTrackTimeTask = Runnable {
+//        Handler(Looper.getMainLooper()).post {
+//            foreverObservers.add(viewModel.currentPosition.foreverObserver(Observer {
+//                seekbar_audio.progress = it?.toFloat() ?: (0).toFloat()
+//                timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
+//                if (it != null && SingletonHolder.playerManager.currState.value is PlayingState) {
+//                    if (it < 1000) {
+//                        timestamp = LastFmUtil.timestamp()
+//                        LastFmUtil.isScrobbled = false
+//                        viewModel.updateLastFmTrack()
+//                        lastTrackUpdateTime = timestamp
+//                    }
+//                    if (LastFmUtil.timestamp() - lastTrackUpdateTime > 180) {
+//                        viewModel.updateLastFmTrack()
+//                        lastTrackUpdateTime = LastFmUtil.timestamp()
+//                    }
+//                    if (!LastFmUtil.isScrobbled && viewModel.scrollableTrack(it, timestamp)) {
+//                        viewModel.scrobbleTrack(timestamp.toString())
+//                        LastFmUtil.isScrobbled = true
+//                    }
+//                }
+//            }))
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,13 +77,13 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         (activity as MainActivity)
             .setActionBarTitle(getString(R.string.action_bar_player))
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        if (scheduledTask == null) {
-            scheduledTask = executor.schedule(
-                observeTrackTimeTask,
-                0,
-                TimeUnit.SECONDS
-            )
-        }
+//        if (scheduledTask == null) {
+//            scheduledTask = executor.schedule(
+//                observeTrackTimeTask,
+//                0,
+//                TimeUnit.SECONDS
+//            )
+//        }
         return inflater.inflate(R.layout.fragment_player, container, false)
     }
 
@@ -159,6 +153,10 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                     isPlaying = false
                 }
             }
+        })
+        viewModel.currentPosition.observe(this, Observer {
+            seekbar_audio.progress = it?.toFloat() ?: (0).toFloat()
+            timer_played.text = it?.toLong()?.let { it1 -> FormatUtils.millisecondsToString(it1) }
         })
     }
 
@@ -241,9 +239,9 @@ class PlayerFragment : Fragment(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        foreverObservers.forEach { it.release() }
-        scheduledTask?.cancel(true)
-        scheduledTask = null
+//        foreverObservers.forEach { it.release() }
+//        scheduledTask?.cancel(true)
+//        scheduledTask = null
     }
 
     fun openSimilarTracks() {

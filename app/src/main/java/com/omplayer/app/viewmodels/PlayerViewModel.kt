@@ -105,7 +105,12 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
     private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
     private val seekbarPositionUpdateTask: () -> Unit = {
         Handler(Looper.getMainLooper()).post {
-            _currentPosition.value = playerManager.mediaPlayer.currentPosition
+
+            if (playerManager.mediaPlayer.currentPosition > 20000000) {
+                _currentPosition.value = 0
+            } else {
+                _currentPosition.value = playerManager.mediaPlayer.currentPosition
+            }
         }
     }
     private var scheduledTask: ScheduledFuture<*>? = null

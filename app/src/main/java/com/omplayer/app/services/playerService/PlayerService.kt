@@ -10,8 +10,12 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.AudioManager
 import android.net.Uri
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import androidx.core.app.NotificationCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.media.app.NotificationCompat.MediaStyle
 import androidx.media.session.MediaButtonReceiver
 import com.bumptech.glide.Glide
@@ -22,14 +26,26 @@ import com.omplayer.app.application.App.Companion.CHANNEL_ID
 import com.omplayer.app.consts.Extra
 import com.omplayer.app.consts.RequestCodes
 import com.omplayer.app.di.SingletonHolder
+import com.omplayer.app.extensions.foreverObserver
 import com.omplayer.app.fragments.PlayerFragment
+import com.omplayer.app.livedata.ForeverObserver
 import com.omplayer.app.stateMachine.Action
+import com.omplayer.app.stateMachine.states.PlayingState
+import com.omplayer.app.utils.FormatUtils
+import com.omplayer.app.utils.LastFmUtil
 import com.omplayer.app.utils.LibraryUtil
+import com.omplayer.app.viewmodels.LyricsViewModel
+import com.omplayer.app.viewmodels.PlayerViewModel
+import kotlinx.android.synthetic.main.fragment_player.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.ScheduledFuture
+import java.util.concurrent.TimeUnit
 
 
 class PlayerService : Service() {
@@ -37,10 +53,13 @@ class PlayerService : Service() {
     private val playerManager = SingletonHolder.playerManager
     private val serviceContext: Context = this
 
+    private val playerViewModel = PlayerViewModel(SingletonHolder.application)
+    private val foreverObservers = mutableListOf<ForeverObserver<*>>()
+
     private val becomingNoisyReceiver =
         BecomingNoisyReceiver()
 
-
+//region Intents init
      private val activityIntent = Intent(SingletonHolder.application, MainActivity::class.java)
 
     private val contentIntent by lazy {
@@ -101,11 +120,21 @@ class PlayerService : Service() {
         )
     }
 
+    //endregion
+
     override fun onCreate() {
         super.onCreate()
         //Handles headphones coming unplugged. cannot be done through a manifest receiver
         val filter = IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
         registerReceiver(becomingNoisyReceiver, filter)
+
+        if (scheduledTask == null) {
+            scheduledTask = executor.schedule(
+                observeTrackTimeTask,
+                0,
+                TimeUnit.SECONDS
+            )
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -124,6 +153,8 @@ class PlayerService : Service() {
 
         return START_NOT_STICKY
     }
+
+
 
     private fun getNotification(icon: Int, text: String, intent: PendingIntent) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -174,8 +205,40 @@ class PlayerService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        foreverObservers.forEach { it.release() }
+        scheduledTask?.cancel(true)
+        scheduledTask = null
         unregisterReceiver(becomingNoisyReceiver)
         stopForeground(true)
+    }
+
+    private var timestamp: Long = 0
+    private var lastTrackUpdateTime: Long = 0
+
+    private var scheduledTask: ScheduledFuture<*>? = null
+    private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
+
+    private val observeTrackTimeTask = Runnable {
+        Handler(Looper.getMainLooper()).post {
+            foreverObservers.add(playerViewModel.currentPosition.foreverObserver(Observer {
+                if (it != null && SingletonHolder.playerManager.currState.value is PlayingState) {
+                    if (it < 1000) {
+                        timestamp = LastFmUtil.timestamp()
+                        LastFmUtil.isScrobbled = false
+                        playerViewModel.updateLastFmTrack()
+                        lastTrackUpdateTime = timestamp
+                    }
+                    if (LastFmUtil.timestamp() - lastTrackUpdateTime > 180) {
+                        playerViewModel.updateLastFmTrack()
+                        lastTrackUpdateTime = LastFmUtil.timestamp()
+                    }
+                    if (!LastFmUtil.isScrobbled && playerViewModel.scrollableTrack(it, timestamp)) {
+                        playerViewModel.scrobbleTrack(timestamp.toString())
+                        LastFmUtil.isScrobbled = true
+                    }
+                }
+            }))
+        }
     }
 
 }

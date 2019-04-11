@@ -1,15 +1,11 @@
 package com.omplayer.app.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.omplayer.app.db.entities.Track
 import com.omplayer.app.di.SingletonHolder
-import com.omplayer.app.di.SingletonHolder.playerManager
 import com.omplayer.app.extensions.foreverObserver
 import com.omplayer.app.livedata.ForeverObserver
-import com.omplayer.app.stateMachine.states.IdleState
-import com.omplayer.app.stateMachine.states.PlayingState
 import com.omplayer.app.utils.LibraryUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +18,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application), L
 
     init {
         foreverObservers.add(
-            LibraryUtil.liveData.foreverObserver(Observer {
+            LibraryUtil.MainScreenLiveData.foreverObserver(Observer {
                 loadTrackData(it)
             })
         )
