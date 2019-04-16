@@ -15,12 +15,12 @@ import com.omplayer.app.utils.PreferenceUtil
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class LibraryViewModel(application: Application) : AndroidViewModel(application) {
+class LibraryViewModel(application: Application) : BaseViewModel(application) {
 
-    private var parentJob = Job()
-    private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.IO
-    private val scope = CoroutineScope(coroutineContext)
+//    private var parentJob = Job()
+//    private val coroutineContext: CoroutineContext
+//        get() = parentJob + Dispatchers.IO
+//    private val scope = CoroutineScope(coroutineContext)
     private val db = SingletonHolder.db
 
     private val libraryRepository: LibraryRepository = LibraryRepository(application.applicationContext)
@@ -31,7 +31,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
 
 
     fun loadDataToDb(progressBar: ProgressBar) {
-        scope.launch {
+        launch {
             withContext(coroutineContext) {
                 try {
 
@@ -101,7 +101,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
 
     fun emptyDb(): Boolean {
         var isEmptyDb: Boolean = false
-        scope.launch {
+        launch {
             withContext(coroutineContext) {
                 isEmptyDb = db.trackDao().getAllTracks().isEmpty()
             }
@@ -110,7 +110,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun extractData() {
-        scope.launch {
+        launch {
             LibraryUtil.genres = genreRepository.getAllGenres() as ArrayList<Genre>
             LibraryUtil.artists = artistRepository.getAllArtists() as ArrayList<Artist>
             LibraryUtil.albums = albumRepository.getAllAlbums() as ArrayList<Album>
@@ -125,10 +125,5 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
                 }
             }
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        parentJob.cancel()
     }
 }

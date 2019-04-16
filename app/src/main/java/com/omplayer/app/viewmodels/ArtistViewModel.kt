@@ -20,12 +20,12 @@ import kotlinx.coroutines.*
 import java.io.File
 import kotlin.coroutines.CoroutineContext
 
-class ArtistViewModel(application: Application) : AndroidViewModel(application), ArtistAdapter.Callback {
+class ArtistViewModel(application: Application) : BaseViewModel(application), ArtistAdapter.Callback {
 
-    private var parentJob = Job()
-    private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.IO
-    private val scope = CoroutineScope(coroutineContext)
+//    private var parentJob = Job()
+//    private val coroutineContext: CoroutineContext
+//        get() = parentJob + Dispatchers.IO
+//    private val scope = CoroutineScope(coroutineContext)
     private val db = SingletonHolder.db
 
     private val albumRepository: AlbumRepository = AlbumRepository(db.albumDao())
@@ -38,7 +38,7 @@ class ArtistViewModel(application: Application) : AndroidViewModel(application),
 
 
     override fun loadArtistAlbums(artistId: Int, view: View) {
-        scope.launch {
+        launch {
             LibraryUtil.selectedArtistAlbumList = trackRepository.getTracksByArtistId(artistId).mapNotNull {
                 albumRepository.getAlbumById(it.albumId)
             }.distinctBy { it.id }.sortedBy { it.year }

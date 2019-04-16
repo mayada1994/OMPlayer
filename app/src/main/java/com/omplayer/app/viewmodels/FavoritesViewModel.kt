@@ -1,7 +1,6 @@
 package com.omplayer.app.viewmodels
 
 import android.app.Application
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
 import com.omplayer.app.adapters.TrackAdapter
