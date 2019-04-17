@@ -22,10 +22,6 @@ import kotlin.coroutines.CoroutineContext
 
 class ArtistViewModel(application: Application) : BaseViewModel(application), ArtistAdapter.Callback {
 
-//    private var parentJob = Job()
-//    private val coroutineContext: CoroutineContext
-//        get() = parentJob + Dispatchers.IO
-//    private val scope = CoroutineScope(coroutineContext)
     private val db = SingletonHolder.db
 
     private val albumRepository: AlbumRepository = AlbumRepository(db.albumDao())

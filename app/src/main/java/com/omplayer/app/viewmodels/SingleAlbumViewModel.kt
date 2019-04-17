@@ -2,7 +2,6 @@ package com.omplayer.app.viewmodels
 
 import android.app.Application
 import android.view.View
-import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.omplayer.app.adapters.TrackAdapter
@@ -10,7 +9,9 @@ import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.repositories.ArtistRepository
 import com.omplayer.app.stateMachine.Action
 import com.omplayer.app.utils.LibraryUtil
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SingleAlbumViewModel(application: Application) : BaseViewModel(application), TrackAdapter.Callback {
 
@@ -33,18 +34,19 @@ class SingleAlbumViewModel(application: Application) : BaseViewModel(application
     private val _viewLiveData: MutableLiveData<View> = MutableLiveData()
     val viewLiveData: LiveData<View> = _viewLiveData
 
+    private val _albumArtistLiveData: MutableLiveData<String> = MutableLiveData()
+    val albumLiveData: LiveData<String> = _albumArtistLiveData
+
     fun getAlbumName(): String {
         return LibraryUtil.currentAlbumList[LibraryUtil.selectedAlbum].title
     }
 
-    fun getAlbumArtist(albumArtistName: TextView) {
+    fun getAlbumArtist() {
         launch {
-            withContext(coroutineContext) {
-                val albumArtist =
-                    artistRepository.getArtistById(LibraryUtil.currentAlbumList[LibraryUtil.selectedAlbum].artistId)!!.name
-                withContext(Dispatchers.Main) {
-                    albumArtistName.text = albumArtist
-                }
+            val albumArtist =
+                artistRepository.getArtistById(LibraryUtil.currentAlbumList[LibraryUtil.selectedAlbum].artistId)!!.name
+            withContext(Dispatchers.Main) {
+                _albumArtistLiveData.value = albumArtist
             }
         }
     }

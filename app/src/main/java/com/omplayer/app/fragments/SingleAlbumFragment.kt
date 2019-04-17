@@ -52,9 +52,13 @@ class SingleAlbumFragment : Fragment() {
             it.findNavController().navigate(R.id.action_singleAlbumFragment_to_playerFragment)
         })
 
+        viewModel.albumLiveData.observe(this, Observer {
+            single_album_artist.text = it
+        })
+
         if (tracks.isNotEmpty()) {
+            viewModel.getAlbumArtist()
             single_album_name.text = viewModel.getAlbumName()
-            viewModel.getAlbumArtist(single_album_artist)
             single_album_year.text = viewModel.getAlbumYear()
             loadImage(viewModel.getAlbumCoverUrl())
             val trackList = activity!!.findViewById<RecyclerView>(R.id.single_album_recycler_list)

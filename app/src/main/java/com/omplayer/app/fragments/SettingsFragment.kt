@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.omplayer.app.R
 import com.omplayer.app.di.SingletonHolder
+import com.omplayer.app.dialogFragments.LastFmLoginDialogFragment
 import com.omplayer.app.utils.PreferenceUtil
 import com.omplayer.app.viewmodels.LastFmViewModel
 import com.omplayer.app.viewmodels.SettingsViewModel
@@ -40,8 +41,9 @@ class SettingsFragment : Fragment() {
             if (PreferenceUtil.currentLastFmSession != null) {
                 PreferenceUtil.currentLastFmSession = null
                 initializeUserProfile()
-            }else{
-                settingsViewModel.login(this@SettingsFragment)
+            } else{
+                val lastFmLoginDialog = LastFmLoginDialogFragment.newInstance(this)
+                lastFmLoginDialog.show(this.fragmentManager, "")
             }
         }
     }
@@ -55,7 +57,8 @@ class SettingsFragment : Fragment() {
         if (PreferenceUtil.currentLastFmSession != null) {
             PreferenceUtil.scrobble = true
         } else {
-            settingsViewModel.login(this@SettingsFragment)
+            val lastFmLoginDialog = LastFmLoginDialogFragment.newInstance(this)
+            lastFmLoginDialog.show(this.fragmentManager, "")
             scrobble_switch.isChecked = false
         }
     }

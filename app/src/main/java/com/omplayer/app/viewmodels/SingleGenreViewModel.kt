@@ -15,6 +15,9 @@ import kotlinx.coroutines.withContext
 
 class SingleGenreViewModel(application: Application) : BaseViewModel(application), TrackAdapter.Callback {
 
+    private val _viewLiveData: MutableLiveData<View> = MutableLiveData()
+    val viewLiveData: LiveData<View> = _viewLiveData
+
     override fun openPlayer(position: Int, view: View) {
         LibraryUtil.tracklist = LibraryUtil.selectedGenreTracklist
         LibraryUtil.selectedTrack = position
@@ -35,9 +38,6 @@ class SingleGenreViewModel(application: Application) : BaseViewModel(application
         }
     }
 
-
-    private val _viewLiveData: MutableLiveData<View> = MutableLiveData()
-    val viewLiveData: LiveData<View> = _viewLiveData
 
     fun getGenreName():String{
         return LibraryUtil.genres[LibraryUtil.selectedGenre].name

@@ -17,10 +17,6 @@ import kotlin.coroutines.CoroutineContext
 
 class LibraryViewModel(application: Application) : BaseViewModel(application) {
 
-//    private var parentJob = Job()
-//    private val coroutineContext: CoroutineContext
-//        get() = parentJob + Dispatchers.IO
-//    private val scope = CoroutineScope(coroutineContext)
     private val db = SingletonHolder.db
 
     private val libraryRepository: LibraryRepository = LibraryRepository(application.applicationContext)

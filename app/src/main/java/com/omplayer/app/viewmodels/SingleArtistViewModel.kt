@@ -15,10 +15,6 @@ import kotlinx.coroutines.withContext
 
 class SingleArtistViewModel(application: Application) : BaseViewModel(application), SingleArtistAdapter.Callback {
 
-    //    private var parentJob = Job()
-//    private val coroutineContext: CoroutineContext
-//        get() = parentJob + Dispatchers.IO
-//    private val scope = CoroutineScope(coroutineContext)
     private val db = SingletonHolder.db
 
     private val trackRepository: TrackRepository = TrackRepository(db.trackDao())
