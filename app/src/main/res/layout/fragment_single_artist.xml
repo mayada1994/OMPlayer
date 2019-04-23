@@ -26,6 +26,38 @@
             android:layout_marginBottom="20dp"
             tools:text="Artist"/>
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="12dp">
+
+        <TextView
+                android:id="@+id/single_artist_songs_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Artist songs amount"/>
+
+        <TextView
+                android:id="@+id/single_artist_max_album_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Artist max year in albums"/>
+
+        <TextView
+                android:id="@+id/single_artist_max_album_year_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Artist max year album name"/>
+
+        <TextView
+                android:id="@+id/single_artist_avg_songs_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                tools:text="Artist avg year per album"/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/single_artist_list_grid_view"

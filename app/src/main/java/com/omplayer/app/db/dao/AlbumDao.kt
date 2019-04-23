@@ -40,4 +40,16 @@ interface AlbumDao {
 
     @Query("SELECT * from albums WHERE year BETWEEN :startYear AND :endYear")
     fun getAlbumsByYears(startYear: String, endYear: String): List<Album>
+
+    @Query("SELECT * from albums WHERE id IN (SELECT album_id from tracks WHERE artist_id = :artistId) ORDER BY year ASC")
+    fun getArtistAlbums(artistId: Int): List<Album>
+
+    @Query("SELECT MAX(year) from albums WHERE id IN (SELECT album_id from tracks WHERE artist_id = :artistId)")
+    fun getArtistAlbumsMaxYear(artistId: Int): String
+
+    @Query("SELECT * from albums WHERE year = (SELECT MAX(year) from albums WHERE id IN (SELECT album_id from tracks WHERE artist_id = :artistId)) AND artist_id = :artistId ORDER BY year ASC")
+    fun getArtistAlbumsWithMaxYear(artistId: Int): List<Album>
+
+    @Query("SELECT AVG(year) from albums WHERE id IN (SELECT album_id from tracks WHERE artist_id = :artistId)")
+    fun getArtistAlbumsAvgYear(artistId: Int): String
 }

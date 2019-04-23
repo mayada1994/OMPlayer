@@ -46,14 +46,20 @@ class SingleArtistFragment : Fragment() {
         val lastFmViewModel = LastFmViewModel(SingletonHolder.application)
         val layoutManager = GridLayoutManager(context, 2)
         layoutManager.orientation = RecyclerView.VERTICAL
+        viewModel.setArtistInfo(
+            single_artist_songs_number,
+            single_artist_max_album_year,
+            single_artist_max_album_year_name,
+            single_artist_avg_songs_number
+        )
 
         singleArtistViewModel.viewLiveData.observe(this, Observer {
             it.findNavController().navigate(R.id.action_singleArtistFragment_to_singleAlbumFragment)
         })
 
-        if(viewModel.getArtist().image.isEmpty()) {
+        if (viewModel.getArtist().image.isEmpty()) {
             lastFmViewModel.getArtistInfo(viewModel.getArtist(), single_artist_img)
-        }else{
+        } else {
             viewModel.loadImage(single_artist_img)
         }
 
