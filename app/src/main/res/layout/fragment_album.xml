@@ -1,12 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:id="@+id/filter_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/profile_background">
+
+        <ImageView
+                android:id="@+id/restore_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/ic_restore"/>
+
+        <EditText
+                android:id="@+id/filter_between"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:gravity="center_vertical"
+                android:inputType="number"
+                android:hint="between"/>
+
+        <EditText
+                android:id="@+id/filter_and"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:gravity="center_vertical"
+                android:inputType="number"
+                android:hint="and"/>
+
+        <ImageView
+                android:id="@+id/filter_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/ic_filter"/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/album_list_recycler_view"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -3,7 +3,6 @@ package com.omplayer.app.viewmodels
 import android.app.Application
 import android.view.View
 import android.widget.ProgressBar
-import androidx.lifecycle.AndroidViewModel
 import com.omplayer.app.db.entities.Album
 import com.omplayer.app.db.entities.Artist
 import com.omplayer.app.db.entities.Genre
@@ -12,8 +11,9 @@ import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.repositories.*
 import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.utils.PreferenceUtil
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LibraryViewModel(application: Application) : BaseViewModel(application) {
 
@@ -42,6 +42,7 @@ class LibraryViewModel(application: Application) : BaseViewModel(application) {
                     loadTracks()
                     loadFavorites()
                     deleteAdditionalGenres()
+
                 } catch (e: Exception) {
 
                 }
@@ -117,6 +118,8 @@ class LibraryViewModel(application: Application) : BaseViewModel(application) {
             LibraryUtil.tracks = trackRepository.getAllTracks() as ArrayList<Track>
             LibraryUtil.favorites = trackRepository.getTracksByFavorite(true) as ArrayList<Track>
             LibraryUtil.tracklist = LibraryUtil.tracks
+            LibraryUtil.albumYearsList = albumRepository.getAlbumYears()
+            LibraryUtil.currentAlbums = LibraryUtil.albums
             withContext(Dispatchers.Main) {
                 try {
                     LibraryUtil.MainScreenLiveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]

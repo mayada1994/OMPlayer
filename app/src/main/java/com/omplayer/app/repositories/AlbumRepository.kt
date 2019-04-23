@@ -53,4 +53,9 @@ class AlbumRepository(private val albumDao: AlbumDao) {
     suspend fun getAlbumByTrack(artistId: Int, albumTitle: String, albumYear: String): Album {
         return albumDao.getAlbumByTrack(artistId, albumTitle, albumYear)
     }
+
+    @WorkerThread
+    suspend fun getAlbumYears(): List<String> {
+        return albumDao.getAlbumYears()
+    }
 }

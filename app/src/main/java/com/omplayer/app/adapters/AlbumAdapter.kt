@@ -11,13 +11,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.omplayer.app.R
 import com.omplayer.app.db.entities.Album
-import com.omplayer.app.di.SingletonHolder
 import com.omplayer.app.utils.LibraryUtil
-import com.omplayer.app.viewmodels.AlbumViewModel
 import java.io.File
 
 
-class AlbumAdapter(val albums: List<Album>, val callback: Callback) : RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
+class AlbumAdapter(var albums: List<Album>, val callback: Callback) : RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
     interface Callback {
        fun loadAlbumTracks(albumId :Int, view :View)
@@ -46,9 +44,9 @@ class AlbumAdapter(val albums: List<Album>, val callback: Callback) : RecyclerVi
 
         init {
             itemView.setOnClickListener {
-                LibraryUtil.currentAlbumList = LibraryUtil.albums
+                LibraryUtil.currentAlbumList = LibraryUtil.currentAlbums
                 LibraryUtil.selectedAlbum = position
-                callback.loadAlbumTracks(LibraryUtil.albums[position].id, it)
+                callback.loadAlbumTracks(LibraryUtil.currentAlbums[position].id, it)
             }
         }
 

@@ -34,4 +34,10 @@ interface AlbumDao {
 
     @Query("SELECT * from albums WHERE artist_id = :artistId AND title = :albumTitle AND year = :albumYear")
     fun getAlbumByTrack(artistId: Int, albumTitle: String, albumYear: String): Album
+
+    @Query("SELECT year from albums WHERE year <> 'Unknown'")
+    fun getAlbumYears(): List<String>
+
+    @Query("SELECT * from albums WHERE year BETWEEN :startYear AND :endYear")
+    fun getAlbumsByYears(startYear: String, endYear: String): List<Album>
 }
