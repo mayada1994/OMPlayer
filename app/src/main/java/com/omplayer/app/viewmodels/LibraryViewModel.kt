@@ -1,6 +1,7 @@
 package com.omplayer.app.viewmodels
 
 import android.app.Application
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import com.omplayer.app.db.entities.Album
@@ -41,7 +42,7 @@ class LibraryViewModel(application: Application) : BaseViewModel(application) {
                     loadAlbums()
                     loadTracks()
                     loadFavorites()
-                    deleteAdditionalGenres()
+                    //deleteAdditionalGenres()
 
                 } catch (e: Exception) {
 
@@ -66,7 +67,7 @@ class LibraryViewModel(application: Application) : BaseViewModel(application) {
     suspend fun loadGenres() {
         val genres = libraryRepository.scanDeviceForGenres()
         genreRepository.insertAllGenres(genres)
-        LibraryUtil.genres = db.genreDao().getAllGenres() as ArrayList<Genre>
+        LibraryUtil.genres = db.genreDao().getGenresWithSongs() as ArrayList<Genre>
     }
 
     suspend fun loadArtists() {
@@ -112,7 +113,7 @@ class LibraryViewModel(application: Application) : BaseViewModel(application) {
 
     fun extractData() {
         launch {
-            LibraryUtil.genres = genreRepository.getAllGenres() as ArrayList<Genre>
+            LibraryUtil.genres = genreRepository.getAllNotEmptyGenres() as ArrayList<Genre>
             LibraryUtil.artists = artistRepository.getAllArtists() as ArrayList<Artist>
             LibraryUtil.albums = albumRepository.getAllAlbums() as ArrayList<Album>
             LibraryUtil.tracks = trackRepository.getAllTracks() as ArrayList<Track>

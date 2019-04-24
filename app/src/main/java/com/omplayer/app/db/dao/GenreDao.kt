@@ -28,4 +28,7 @@ interface GenreDao {
 
     @Query("SELECT * from genres WHERE name = :genreName")
     fun getGenreByName(genreName: String): Genre
+
+    @Query("SELECT * from genres WHERE EXISTS (SELECT * from tracks WHERE genre_id = genres.id) ORDER BY name ASC")
+    fun getGenresWithSongs(): List<Genre>
 }

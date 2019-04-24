@@ -40,6 +40,11 @@ class GenreRepository(private val genreDao: GenreDao) {
     }
 
     @WorkerThread
+    suspend fun getAllNotEmptyGenres(): List<Genre>? {
+        return genreDao.getGenresWithSongs()
+    }
+
+    @WorkerThread
     suspend fun getGenreById(id: Int): Genre? {
         return genreDao.getGenreById(id)
     }
