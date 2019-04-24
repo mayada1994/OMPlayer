@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.omplayer.app.R
 import com.omplayer.app.utils.LibraryUtil
 import com.omplayer.app.viewmodels.TrackViewModel
+import kotlinx.android.synthetic.main.fragment_track.*
 
-class TrackFragment : Fragment() {
+class TrackFragment : Fragment(), View.OnClickListener {
 
     var tracks = LibraryUtil.tracks
 
@@ -39,6 +40,9 @@ class TrackFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = RecyclerView.VERTICAL
 
+        search_list.setOnClickListener(this)
+        restore_list.setOnClickListener(this)
+
         if (tracks.isNotEmpty()) {
             val trackList = activity!!.findViewById<RecyclerView>(R.id.track_list_recycler_view)
             trackList.layoutManager = layoutManager
@@ -47,7 +51,20 @@ class TrackFragment : Fragment() {
 
         viewModel.viewLiveData.observe(this, Observer {
             it.findNavController().navigate(R.id.action_libraryFragment_to_playerFragment)
-        } )
+        })
     }
 
+    override fun onClick(v: View?) {
+        when (v) {
+            search_list -> {
+                viewModel.searchTracks(search.text.toString())
+            }
+            restore_list -> {
+                search.setText("")
+                LibraryUtil.searchedTracks = LibraryUtil.tracks
+                LibraryUtil.tracklist = LibraryUtil.tracks
+                viewModel.restoreTracks()
+            }
+        }
+    }
 }

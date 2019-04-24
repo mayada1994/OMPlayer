@@ -36,8 +36,11 @@ interface TrackDao {
     fun getTracksByGenreId(genreId: Int): List<Track>
 
     @Query("SELECT * from tracks WHERE favorite = :favStatus ORDER BY title ASC")
-    fun getTracksByFavorite(favStatus : Boolean) : List<Track>
+    fun getTracksByFavorite(favStatus: Boolean): List<Track>
 
     @Query("SELECT COUNT(*) from tracks WHERE artist_id = :artistId")
     fun getArtistTrackNumber(artistId: Int): Int
+
+    @Query("SELECT * from tracks WHERE title LIKE :query ORDER BY title ASC")
+    fun getSearchedTracks(query: String): List<Track>
 }

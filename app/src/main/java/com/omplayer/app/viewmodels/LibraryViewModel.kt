@@ -120,6 +120,7 @@ class LibraryViewModel(application: Application) : BaseViewModel(application) {
             LibraryUtil.tracklist = LibraryUtil.tracks
             LibraryUtil.albumYearsList = albumRepository.getAlbumYears()
             LibraryUtil.currentAlbums = LibraryUtil.albums
+            LibraryUtil.searchedTracks = LibraryUtil.tracks
             withContext(Dispatchers.Main) {
                 try {
                     LibraryUtil.MainScreenLiveData.value = LibraryUtil.tracklist[LibraryUtil.selectedTrack]

@@ -21,6 +21,7 @@ object LibraryUtil {
     var currentAlbums: List<Album> = emptyList()
     var filteredAlbumList: List<Album> = emptyList()
     var albumYearsList: List<String> = emptyList()
+    var searchedTracks: List<Track> = emptyList()
     var tracklist: List<Track> = emptyList()
     var genres: List<Genre> = emptyList()
     var artists: List<Artist> = emptyList()

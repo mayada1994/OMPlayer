@@ -5,11 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.youtube.player.internal.c
 import com.omplayer.app.R
 import com.omplayer.app.db.entities.Artist
 import com.omplayer.app.db.entities.Track
-import com.omplayer.app.utils.LibraryUtil.tracks
 
 class TrackAdapter(
     items: List<Item> = emptyList(),
