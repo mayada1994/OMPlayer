@@ -72,12 +72,16 @@ class ArtistViewModel(application: Application) : BaseViewModel(application), Ar
     }
 
     fun loadImage(imageView: RoundedImageView) {
-        val artist = getArtist()
-        val file = File(artist.image)
-        val uri = Uri.fromFile(file)
+        launch {
+            val artist = db.artistDao().getArtistById(getArtist().id)
+            withContext(Dispatchers.Main){
+                val file = File(artist.image)
+                val uri = Uri.fromFile(file)
 
-        Glide.with(application).load(uri)
-            .apply(RequestOptions().placeholder(R.drawable.placeholder).error(R.drawable.placeholder))
-            .into(imageView)
+                Glide.with(application).load(uri)
+                    .apply(RequestOptions().placeholder(R.drawable.placeholder).error(R.drawable.placeholder))
+                    .into(imageView)
+            }
+        }
     }
 }

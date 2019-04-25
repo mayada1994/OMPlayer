@@ -28,4 +28,7 @@ interface ArtistDao {
 
     @Query("SELECT * from artists WHERE name = :artistName")
     fun getArtistByName(artistName: String): Artist
+
+    @Query("UPDATE artists SET image = :imagePath WHERE id = :artistId")
+    fun updateArtistImage(artistId: Int, imagePath: String)
 }
